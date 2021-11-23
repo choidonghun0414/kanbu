@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+  
+  	<!-- config에서 sql 연결 작업(mybatis의 controller역할) -->
+  	<!-- mappers : SQL 작성하는 공간(파일) mybatis에서 사용하는 sql 파일은 모두 나열한다. -->
+  	<!-- typeAliases : testSQL의 resultType이 자주 사용될 타입을 지정하여 코드를 간단하게 줄일 수 있다. -->
+  	
+<configuration>
+	<typeAliases>
+		<typeAlias type="com.kanbu.dto.member.MemberDTO" alias="memberDTO"/>
+	</typeAliases>
+	
+	<!-- 매핑할 SQL.xml 파일 추가 -->
+	<mappers>
+		<mapper resource="/com/kanbu/sql/member/memberSQL.xml" />
+	</mappers>
+</configuration>  	

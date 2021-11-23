@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+ <mapper namespace="member">
+ 	<!-- id, pw를 받아 testkanbu 테이블에 회원 추가하는 sql문 -->
+ 	<insert id="insertMember" parameterType="memberDTO">
+ 		insert into testkanbu (id, pw) values (#{id}, #{pw})
+ 	</insert>
+ 
+ </mapper> 
