@@ -3,8 +3,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>      
 
-
-
 <!doctype html>
 <html class="no-js" lang="zxx">
 
@@ -64,6 +62,10 @@
                                             <li><a href="/kanbu/list.com">일정만들기</a></li>
                                             <li><a class="" href="/kanbu/place.com">여행지정보</a></li>
                                             <li><a>게시판 <i class="ti-angle-down"></i></a>
+                                            <li><a class="active" href="/kanbu/main.com">home</a></li>
+                                            <li><a href="about.html">일정만들기</a></li>
+                                            <li><a class="" href="travel_destination.html">여행지정보</a></li>
+                                            <li><a href="/kanbu/board/reviewList.com">게시판 <i class="ti-angle-down"></i></a>
                                                 <ul class="submenu">
                                                         <li><a href="/kanbu/board/reviewList.com">여행후기</a></li>
                                                         <li><a href="/kanbu/board/noticeList.com">공지사항</a></li>
