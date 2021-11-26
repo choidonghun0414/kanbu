@@ -62,6 +62,6 @@
 	<!-- 사용자 정의 약어 -->
 	<bean id="member" class="com.kanbu.dto.member.MemberDTO" />
 	<bean id="memberImpl" class="com.kanbu.service.member.MemberServiceImpl" />
-	   					   
+	  <!--dao, service에서 사용 --> 
 	   					   
 </beans>
