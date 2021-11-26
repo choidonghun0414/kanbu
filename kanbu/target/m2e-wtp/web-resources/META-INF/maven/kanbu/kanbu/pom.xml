@@ -146,6 +146,20 @@
 			<version>1</version>
 		</dependency>
 		
+
+		<dependency>
+			<groupId>javax.inject</groupId>
+			<artifactId>javax.inject</artifactId>
+			<version>1</version>
+		</dependency>
+		
+
+		<dependency>
+			<groupId>javax.inject</groupId>
+			<artifactId>javax.inject</artifactId>
+			<version>1</version>
+		</dependency>
+		
 		<!-- https://mvnrepository.com/artifact/taglibs/standard -->
 		<dependency>
 			<groupId>taglibs</groupId>
