@@ -11,6 +11,8 @@
 <configuration>
 	<typeAliases>
 		<typeAlias type="com.kanbu.dto.member.MemberDTO" alias="memberDTO"/>
+		<typeAlias type="com.kanbu.dto.info.PlaceDTO" alias="placeDTO"/>
+		<typeAlias type="com.kanbu.dto.info.Place_ReplyDTO" alias="place_replyDTO" />
 		<typeAlias type="com.kanbu.dto.board.BoardDTO" alias="boardDTO"/>
 	</typeAliases>
 	
@@ -18,6 +20,7 @@
 	<!-- 매핑할 SQL.xml 파일 추가 -->
 	<mappers>
 		<mapper resource="/com/kanbu/sql/member/memberSQL.xml" />
+		<mapper resource="/com/kanbu/sql/info/infoSQL.xml" />
 		<mapper resource="/com/kanbu/sql/board/boardSQL.xml" />
 	</mappers>
 </configuration>  	
