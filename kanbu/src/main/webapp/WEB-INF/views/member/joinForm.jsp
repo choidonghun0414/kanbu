@@ -35,6 +35,7 @@
 
     <link rel="stylesheet" href="resources/css/style.css">
     <!-- <link rel="stylesheet" href="css/responsive.css"> -->
+    <link rel="stylesheet" href="resources/css/joinpw.css">
 </head>
 
 <body>
@@ -111,56 +112,62 @@
             <div class="row justify-content-center">
                 <div class="col-lg-8 col-md-9">
                     <div class="contact_join">
-                        <form name="loginform" method="post" action="/kanbu/joinPro.com">
+                        <form name="loginform" method="post" action="/kanbu/joinPro.com" id="loginform">
                             <div class="row">
                                 <div class="col-lg-6 col-md-6">
                                     <div class="single_input">
-                                    	<h5>id(아이디)</h5>
-                                        <input type="text" name="id" placeholder="아이디를 입력해주세요" />
+                                       <h5>id(아이디)</h5>
+                                        <input type="text" name="id" id="id" placeholder="아이디를 입력해주세요" />
+                                        
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-6">
+                                    <div class="single_input">
+                                       <h5>&nbsp</h5>
+                                         <button class="genric-btn info circle" type="button"
+                                        id="idChk" value="N" onclick="fn_idChk();">중복체크</button>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-6">
+                                    <div class="single_input">
+                                       <h5>비밀번호</h5>
+                                        <input type="password" name="pw2" id="pw2" placeholder="비밀번호를 입력해주세요" />
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-6">
+                                    <div class="single_input">
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-6">
+                                    <div class="single_input">
+                                       <h5>비밀번호확인</h5>
+                                        <input type="password" name="pwck" id="pwck" placeholder="비밀번호를 입력해주세요" />
                                     </div>
                                 </div>
                                 <div class="col-lg-6 col-md-6">
                                     <div class="single_input">
                                     	<h5>&nbsp</h5>
-                                        <a href="#" class="genric-btn info circle">중복체크</a>
+										<font id="chkNotice" size="2.5"></font>
+									</div>
+                                </div>
+                                <div class="col-lg-6 col-md-6">
+                                    <div class="single_input">
+                                       <h5>닉네임</h5>
+                                        <input type="text" name="nick" id="nick" placeholder="닉네임을 입력해주세요" />
                                     </div>
                                 </div>
                                 <div class="col-lg-6 col-md-6">
                                     <div class="single_input">
-                                    	<h5>비밀번호</h5>
-                                        <input type="password" name="pw" placeholder="비밀번호를 입력해주세요" />
+                                       <h5>&nbsp</h5>
+                                        <!-- <a href="#" class="genric-btn info circle">중복체크</a> -->
+                                          <button class="genric-btn info circle" type="button"
+                                        id="nickChk" value="N" onclick="fn_nickChk();">중복체크</button>
                                     </div>
                                 </div>
                                 <div class="col-lg-6 col-md-6">
                                     <div class="single_input">
-                                    </div>
-                                </div>
-                                <div class="col-lg-6 col-md-6">
-                                    <div class="single_input">
-                                    	<h5>비밀번호확인</h5>
-                                        <input type="password" name="pwcheck" placeholder="비밀번호를 입력해주세요" />
-                                    </div>
-                                </div>
-                                <div class="col-lg-6 col-md-6">
-                                    <div class="single_input">
-                                    </div>
-                                </div>
-                                <div class="col-lg-6 col-md-6">
-                                    <div class="single_input">
-                                    	<h5>닉네임</h5>
-                                        <input type="password" name="nick" placeholder="닉네임을 입력해주세요" />
-                                    </div>
-                                </div>
-                                <div class="col-lg-6 col-md-6">
-                                    <div class="single_input">
-                                    	<h5>&nbsp</h5>
-                                        <a href="#" class="genric-btn info circle">중복체크</a>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6 col-md-6">
-                                    <div class="single_input">
-                                    	<h5>연락처</h5>
-                                        <input type="password" name="phone" placeholder="연락처를 입력해주세요(숫자만 입력)" />
+                                       <h5>연락처</h5>
+                                        <input type="text" name="phone" placeholder="연락처를 입력해주세요" id="phoneNum" maxlength="13"/>
                                     </div>
                                 </div>
                                 <div class="col-lg-6 col-md-6">
@@ -169,30 +176,56 @@
                                 </div>
                                 <div class="col-lg-6 col-md-6">
                                     <div class="single_input">
-                                    	<h5>이메일</h5>
-                                        <input type="password" name="mail" placeholder="이메일을 입력해주세요">
+                                       <h5>이메일</h5>
+                                        <input type="text" name="mail" placeholder="이메일을 입력해주세요">
                                     </div>
                                 </div>
-                                @
+
                                 <div class="col-lg-6 col-md-6">
                                     <div class="single_input">
-                                    	<h5>&nbsp</h5>
-                                    	<select name="domain">
-                                    		<option value="1">naver.com</option>
-                                    		<option value="2">google.com</option>
-                                    		<option value="3">daum.net</option>
-                                    	</select>
-                                    	
+                                    <h5>&nbsp</h5>
+                                    <div style=" float: left;">
+                              <p style="font-size: 16px;">@</p>
+                                    </div>
+                                    <div style="width: 88%; float: right;">   
+                                       <select name="domain">
+                                          <option value="1">naver.com</option>
+                                          <option value="2">google.com</option>
+                                          <option value="3">daum.net</option>
+                                       </select>
+                                    </div>   
                                     </div>
                                 </div>
+                                
+                                <div class="col-lg-6 col-md-6">
+                                    <div>
+                                    <h5>&nbsp</h5>
+                                    <input type="checkbox" name="privacy" id="privacy" value="1">
+                                    개인정보수집에 동의합니다.
+                                    <a href="privacyPopup.com" 
+                                    onclick="window.open(this.href, '_blank', 'width=800, height=600'); return false;" 
+                                    style="color: #3296FF;" >보기</a>
+                                    </div>
+                                </div>
+                        <div class="col-lg-6 col-md-6">
+                                    <div class="single_input">
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-6">
+                                    <div>
+                                    <h5>&nbsp</h5>
+                                     <input type="checkbox" name="agree" id="agree" value="1">
+                                    이용약관에 동의합니다.
+                                    <a href="agreePopup.com" 
+                                    onclick="window.open(this.href, '_blank', 'width=800, height=600'); return false;" 
+                                    style="color: #3296FF;">보기</a>
+                                    </div>
+                                </div>
+								<input type="hidden" name="status" value="1">
                                 <div class="col-lg-12">
-                                    <div class="single_input">
-                                        <textarea name="" id="" cols="30" rows="10"placeholder="Message" ></textarea>
-                                    </div>
-                                </div>
-                                <div class="col-lg-12">
+                                 <h5>&nbsp</h5>
                                     <div class="submit_btn">
-                                        <button class="boxed-btn4" type="submit">submit</button>
+                                        <button class="boxed-btn4" type="submit" id="optionModifyBtn">회원가입</button>
                                     </div>
                                 </div>
                             </div>
@@ -228,7 +261,7 @@
                                     </div>
                                     <div class="col-lg-3 col-md-4">
                                         <div class="newsletter_btn">
-                                            <button class="boxed-btn4 " type="submit" >Subscribe</button>
+                                            <button class="boxed-btn4" type="submit" >Subscribe</button>
                                         </div>
                                     </div>
                                 </div>
@@ -526,6 +559,159 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
          }
         });
     </script>
-</body>
+    <script> 
+    //전화번호 스크립트
+    var autoHypenPhone = function(str){
+        str = str.replace(/[^0-9]/g, '');
+        var tmp = '';
+        if( str.length < 4){
+            return str;
+        }else if(str.length < 7){
+            tmp += str.substr(0, 3);
+            tmp += '-';
+            tmp += str.substr(3);
+            return tmp;
+        }else if(str.length < 11){
+            tmp += str.substr(0, 3);
+            tmp += '-';
+            tmp += str.substr(3, 3);
+            tmp += '-';
+            tmp += str.substr(6);
+            return tmp;
+        }else{              
+            tmp += str.substr(0, 3);
+            tmp += '-';
+            tmp += str.substr(3, 4);
+            tmp += '-';
+            tmp += str.substr(7);
+            return tmp;
+        }
+    
+        return str;
+  }
 
+
+  var phoneNum = document.getElementById('phoneNum');
+
+  phoneNum.onkeyup = function(){
+    console.log(this.value);
+    this.value = autoHypenPhone( this.value ) ;  
+  }
+</script>
+<script>
+$(document).ready(function(){
+	$("#optionModifyBtn").on("click", function(){
+		if($("#id").val()==""){
+			alert("아이디를 입력해주세요.");
+			$("#id").focus();
+			return false;
+		}
+		if($("#pw2").val()==""){
+			alert("비밀번호를 입력해주세요.");
+			$("#pw2").focus();
+			return false;
+		}
+		if($("#pwck").val()==""){
+			alert("비밀번호를 확인해주세요.");
+			$("#pwck").focus();
+			return false;
+		}
+		if($("#nick").val()==""){
+			alert("닉네임을 입력해주세요.");
+			$("#nick").focus();
+			return false;
+		}
+		if($("#phone").val()==""){
+			alert("연락처를 입력해주세요.");
+			$("#nick").focus();
+			return false;
+		}
+		if($("#mail").val()==""){
+			alert("메일을 입력해주세요.");
+			$("#nick").focus();
+			return false;
+		}
+		if(!$("input:checked[id='privacy']").is(":checked")){
+			alert("개인정보에 동의해주세요.");
+			return false;
+		}
+		if(!$("input:checked[id='agree']").is(":checked")){
+			alert("이용약관에 동의해주세요.");
+			return false;
+		}
+
+		alert("회원가입 축하");
+	});
+})
+
+</script>
+<script>
+  function fn_idChk(){
+	  $.ajax({
+		url:"idChk.com",
+		type:"post",
+		dataType : "json",
+		data : {"id" : $("#id").val()},
+		success : function(data) {
+			if(data == 1) {
+				alert("중복된 아이디입니다.");
+				return false;
+			}else if(data == 0) {
+				if($("#id").val()==""){
+					alert("아이디를 입력해주세요.");
+					return false;
+					}
+				$("#idChk").attr("value", "Y");
+				alert("사용가능한 아이디입니다.");
+				return false;
+				
+			}
+		}
+	  })
+  }
+  </script>
+  <script>
+  $(function(){
+	    $('#pw2').keyup(function(){
+	      $('#chkNotice').html('');
+	    });
+
+	    $('#pwck').keyup(function(){
+
+	        if($('#pw2').val() != $('#pwck').val()){
+	          $('#chkNotice').html('비밀번호 일치하지 않음');
+	          $('#chkNotice').attr('color', '#FF4646');
+	        } else{
+	          $('#chkNotice').html('비밀번호 일치함');
+	          $('#chkNotice').attr('color', '#28A0FF');
+	        }
+
+	    });
+	});
+  </script>
+  <script>
+  function fn_nickChk(){
+	  $.ajax({
+		url:"nickChk.com",
+		type:"post",
+		dataType : "json",
+		data : {"nick" : $("#nick").val()},
+		success : function(data) {
+			if(data == 1) {
+				alert("중복된 닉네임입니다.");
+				return false;
+			}else if(data == 0) {
+				if($("#nick").val()==""){
+					alert("닉네임을 입력해주세요.");
+					return false;
+					}
+				$("#nickChk").attr("value", "Y");
+				alert("사용가능한 닉네임입니다.");
+				return false;
+			}
+		}
+	  })
+  }
+  </script>
+</body>
 </html>

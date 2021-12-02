@@ -3,15 +3,13 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>      
 
-
-
 <!doctype html>
 <html class="no-js" lang="zxx">
 
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Travelo</title>
+    <title>kanbu</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -51,7 +49,7 @@
                         <div class="row align-items-center">
                             <div class="col-xl-2 col-lg-2">
                                 <div class="logo">
-                                    <a href="index.html">
+                                    <a href="/kanbu/main.com">
                                         <img src="resources/img/logo.png" alt="">
                                     </a>
                                 </div>
@@ -60,14 +58,26 @@
                                 <div class="main-menu  d-none d-lg-block">
                                     <nav>
                                         <ul id="navigation">
-                                            <li><a class="active" href="index.html">home</a></li>
+                                            <li><a class="active" href="/kanbu/main.com">home</a></li>
+<<<<<<< HEAD
+=======
+                                            <li><a href="/kanbu/list.com">일정만들기</a></li>
+                                            <li><a class="" href="/kanbu/place.com">여행지정보</a></li>
+                                            <li><a>게시판 <i class="ti-angle-down"></i></a>
+                                            <li><a class="active" href="/kanbu/main.com">home</a></li>
+>>>>>>> refs/remotes/origin/main
                                             <li><a href="about.html">일정만들기</a></li>
-                                            <li><a class="" href="travel_destination.html">여행지정보</a></li>
+<<<<<<< HEAD
+                                            <li><a class="" href="/kanbu/place.com">여행지정보</a></li>
                                             <li><a href="#">게시판 <i class="ti-angle-down"></i></a>
+=======
+                                            <li><a class="" href="travel_destination.html">여행지정보</a></li>
+                                            <li><a href="/kanbu/board/reviewList.com">게시판 <i class="ti-angle-down"></i></a>
+>>>>>>> refs/remotes/origin/main
                                                 <ul class="submenu">
-                                                        <li><a href="destination_details.html">여행후기</a></li>
-                                                        <li><a href="elements.html">공지사항</a></li>
-                                                        <li><a href="elements.html">자주하는질문</a></li>
+                                                        <li><a href="/kanbu/board/reviewList.com">여행후기</a></li>
+                                                        <li><a href="/kanbu/board/noticeList.com">공지사항</a></li>
+                                                        <li><a href="/kanbu/board/questionList.com">자주하는질문</a></li>
                                                 </ul>
                                             </li>
                                         </ul>
@@ -78,8 +88,17 @@
                                 <div class="social_wrap d-flex align-items-center justify-content-end">
                                     <div class="social_links d-none d-xl-block">
                                         <ul>
+                                        	<c:if test="${sessionScope.status > 0}">
+                                        		<li><p>${sessionScope.nick}님 환영합니다.</p></li>
+                                        	</c:if>
                                             <li><a href="#"> <i class="fa fa-user"></i> </a></li>
-                                            <li><a href="#"> <i class="fa fa-lock"></i> </a></li>
+                                            <c:if test="${sessionScope.status > 0}">
+                                        		<li><a href="logout.com"> <i class="fa fa-unlock"></i> </a></li>
+                                        	</c:if>
+                                        	<c:if test="${empty(sessionScope.status)}">
+                                        		<li><a href="login.com"> <i class="fa fa-lock"></i> </a></li>
+                                        	</c:if>
+                                            
                                         </ul>
                                     </div>
                                 </div>
@@ -109,7 +128,7 @@
                     <div class="row align-items-center">
                         <div class="col-xl-12 col-md-12">
                             <div class="slider_text text-center">
-                                <h3>Indonesia</h3>
+                                <h3></h3>
                                 <p>Pixel perfect design with awesome contents</p>
                                 <a href="#" class="boxed-btn3">Explore Now</a>
                             </div>
