@@ -62,6 +62,8 @@
 	<!-- 사용자 정의 약어 -->
 	<bean id="member" class="com.kanbu.dto.member.MemberDTO" />
 	<bean id="memberImpl" class="com.kanbu.service.member.MemberServiceImpl" />
-	   					   
+	
+	<bean id="plan" class="com.kanbu.dto.plan.MyPlanDTO" />
+	<bean id="myPlanService" class="com.kanbu.service.plan.MyPlanServiceImpl" /> 
 	   					   
 </beans>
