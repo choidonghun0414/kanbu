@@ -103,7 +103,7 @@
     <!-- header-end -->
     <div class="destination_banner_wrap overlay">
         <div class="destination_text text-center">
-            <h3>Sign up</h3>
+            <h3>Join</h3>
         </div>
     </div>
 
@@ -177,7 +177,7 @@
                                 <div class="col-lg-6 col-md-6">
                                     <div class="single_input">
                                        <h5>이메일</h5>
-                                        <input type="text" name="mail" placeholder="이메일을 입력해주세요">
+                                        <input type="text" id="mail" name="mail" placeholder="이메일을 입력해주세요">
                                     </div>
                                 </div>
 
@@ -185,18 +185,28 @@
                                     <div class="single_input">
                                     <h5>&nbsp</h5>
                                     <div style=" float: left;">
-                              <p style="font-size: 16px;">@</p>
+                              			<p style="font-size: 16px;">@</p>
                                     </div>
                                     <div style="width: 88%; float: right;">   
-                                       <select name="domain">
+                                       <select name="domain" id="domain">
                                           <option value="1">naver.com</option>
-                                          <option value="2">google.com</option>
+                                          <option value="2">gmail.com</option>
                                           <option value="3">daum.net</option>
                                        </select>
                                     </div>   
                                     </div>
                                 </div>
-                                
+                                <div class="col-lg-6 col-md-6">
+                                    <div class="single_input">
+                                          <button class="genric-btn info circle" type="button"
+                                        id="mailChk" value="N" onclick="fn_mailChk();">중복체크</button>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-6">
+                                    <div class="single_input">
+                                       <h5>&nbsp</h5>
+                                    </div>
+                                </div>
                                 <div class="col-lg-6 col-md-6">
                                     <div>
                                     <h5>&nbsp</h5>
@@ -225,7 +235,7 @@
                                 <div class="col-lg-12">
                                  <h5>&nbsp</h5>
                                     <div class="submit_btn">
-                                        <button class="boxed-btn4" type="submit" id="optionModifyBtn">회원가입</button>
+                                        <button class="boxed-btn4" type="submit" id="optionModifyBtn" >회원가입</button>
                                     </div>
                                 </div>
                             </div>
@@ -623,12 +633,12 @@ $(document).ready(function(){
 		}
 		if($("#phone").val()==""){
 			alert("연락처를 입력해주세요.");
-			$("#nick").focus();
+			$("#phone").focus();
 			return false;
 		}
 		if($("#mail").val()==""){
 			alert("메일을 입력해주세요.");
-			$("#nick").focus();
+			$("#mail").focus();
 			return false;
 		}
 		if(!$("input:checked[id='privacy']").is(":checked")){
@@ -639,6 +649,28 @@ $(document).ready(function(){
 			alert("이용약관에 동의해주세요.");
 			return false;
 		}
+	      var idChkVal = $("#idChk").val();
+	      if(idChkVal == "N"){
+	         alert("아이디중복확인 버튼을 눌러주세요.");
+	         return false;
+	      }else if(idChkVal == "Y"){
+	         $("#loginform").submit();
+	      }
+	      
+	      var nickChk = $("#nickChk").val();
+	      if(nickChk == "N"){
+	         alert("닉네임중복확인 버튼을 눌러주세요.");
+	         return false;
+	      }else if(idChkVal == "Y"){
+	         $("#loginform").submit();
+	      }
+	      var mailChk = $("#mailChk").val();
+	      if(mailChk == "N"){
+	         alert("닉네임중복확인 버튼을 눌러주세요.");
+	         return false;
+	      }else if(mailChk == "Y"){
+	         $("#loginform").submit();
+	      }
 
 		alert("회원가입 축하");
 	});
@@ -712,6 +744,30 @@ $(document).ready(function(){
 		}
 	  })
   }
+  </script>
+   <script>
+  function fn_mailChk(){
+	  $.ajax({
+		url:"mailChk.com",
+		type:"post",
+		dataType : "json",
+		data : {"mail" : $("#mail").val() , "domain" : $("#domain").val()},
+		success : function(data) {
+			if(data == 1) {
+				alert("중복된 이메일입니다.");
+				return false;
+			}else if(data == 0) {
+				if($("#mail").val()==""){
+					alert("이메일을 입력해주세요.");
+					return false;
+					}
+				$("#mailChk").attr("value", "Y");
+				alert("사용가능한 이메일입니다.");
+				return false;
+			}
+		}
+	  })
+ }
   </script>
 </body>
 </html>

@@ -11,7 +11,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Sign In</title>
+    <title>Sign up</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -35,6 +35,8 @@
 
     <link rel="stylesheet" href="resources/css/style.css">
     <!-- <link rel="stylesheet" href="css/responsive.css"> -->
+    <link rel="stylesheet" href="resources/css/joinpw.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"> 
 </head>
 
 <body>
@@ -102,7 +104,7 @@
     <!-- header-end -->
     <div class="destination_banner_wrap overlay">
         <div class="destination_text text-center">
-            <h3>Login</h3>
+            <h3>Find ID</h3>
         </div>
     </div>
 
@@ -111,33 +113,47 @@
             <div class="row justify-content-center">
                 <div class="col-lg-8 col-md-9">
                     <div class="contact_join">
-                        <form name="loginform" method="post" action="/kanbu/loginPro.com">
+                        <form name="loginform" method="post" action="/kanbu/selectIdPro.com" id="loginform">
                             <div class="row">
+
                                 <div class="col-lg-6 col-md-6">
                                     <div class="single_input">
-                                       <h5>id(아이디)</h5>
-                                        <input type="text" name="id" placeholder="아이디를 입력해주세요" />
-                                        <a href="/kanbu/selectId.com" style="color: #3296FF;">아이디를 잊으셨나요?</a>
+                                       <h5>연락처</h5>
+                                        <input type="text" name="phone" placeholder="연락처를 입력해주세요" id="phoneNum" maxlength="13"/>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-6">
+                                    <div class="single_input">
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-6">
+                                    <div class="single_input">
+                                       <h5>이메일</h5>
+                                        <input type="text" name="mail" placeholder="이메일을 입력해주세요">
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-6 col-md-6">
+                                    <div class="single_input">
+                                    <h5>&nbsp</h5>
+                                    <div style=" float: left;">
+                              <p style="font-size: 16px;">@</p>
+                                    </div>
+                                    <div style="width: 88%; float: right;">   
+                                       <select name="domain">
+                                          <option value="1">naver.com</option>
+                                          <option value="2">google.com</option>
+                                          <option value="3">daum.net</option>
+                                       </select>
+                                    </div>   
                                     </div>
                                 </div>
                                 
-                                <div class="col-lg-6 col-md-6">
-                                    <div class="single_input">
-                                       <h5>비밀번호</h5>
-                                        <input type="password" name="pw2" placeholder="비밀번호를 입력해주세요" />
-                                         <a href="/kanbu/updatePw.com" style="color: #3296FF;">비밀번호를 잊으셨나요?</a>
-                                    </div>
-                                </div>
                                 <div class="col-lg-12">
                                  <h5>&nbsp</h5>
                                     <div class="submit_btn">
-                                        <button class="boxed-btn4" type="submit">로그인</button>
+                                        <button class="boxed-btn4" type="submit" id="optionModifyBtn">확인</button>
                                     </div>
-                                </div>
-                                <div class="col-lg-12">
-                                <h5>&nbsp</h5>
-                                <p>회원이 아니신가요?</p>
-                                <a href="/kanbu/join.com" style="color: #3296FF;">회원가입</a>
                                 </div>
                             </div>
                         </form>
@@ -172,7 +188,7 @@
                                     </div>
                                     <div class="col-lg-3 col-md-4">
                                         <div class="newsletter_btn">
-                                            <button class="boxed-btn4 " type="submit" >Subscribe</button>
+                                            <button class="boxed-btn4" type="submit" >Subscribe</button>
                                         </div>
                                     </div>
                                 </div>
@@ -470,6 +486,71 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
          }
         });
     </script>
-</body>
+    <script> 
+    //전화번호 스크립트
+    var autoHypenPhone = function(str){
+        str = str.replace(/[^0-9]/g, '');
+        var tmp = '';
+        if( str.length < 4){
+            return str;
+        }else if(str.length < 7){
+            tmp += str.substr(0, 3);
+            tmp += '-';
+            tmp += str.substr(3);
+            return tmp;
+        }else if(str.length < 11){
+            tmp += str.substr(0, 3);
+            tmp += '-';
+            tmp += str.substr(3, 3);
+            tmp += '-';
+            tmp += str.substr(6);
+            return tmp;
+        }else{              
+            tmp += str.substr(0, 3);
+            tmp += '-';
+            tmp += str.substr(3, 4);
+            tmp += '-';
+            tmp += str.substr(7);
+            return tmp;
+        }
+    
+        return str;
+  }
 
+
+  var phoneNum = document.getElementById('phoneNum');
+
+  phoneNum.onkeyup = function(){
+    console.log(this.value);
+    this.value = autoHypenPhone( this.value ) ;  
+  }
+</script>
+<script>
+$(document).ready(function(){
+	$("#optionModifyBtn").on("click", function(){
+
+		if($("#phone").val()==""){
+			alert("연락처를 입력해주세요.");
+			$("#phone").focus();
+			return false;
+		}
+		if($("#mail").val()==""){
+			alert("메일을 입력해주세요.");
+			$("#mail").focus();
+			return false;
+		}
+		if($("#domain").val()==""){
+			alert("메일을 입력해주세요.");
+			$("#domain").focus();
+			return false;
+		}
+
+	});
+})
+
+</script>
+
+
+
+</body>
 </html>

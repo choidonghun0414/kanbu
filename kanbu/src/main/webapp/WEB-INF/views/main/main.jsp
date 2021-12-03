@@ -59,10 +59,6 @@
                                     <nav>
                                         <ul id="navigation">
                                             <li><a class="active" href="/kanbu/main.com">home</a></li>
-                                            <li><a href="/kanbu/list.com">일정만들기</a></li>
-                                            <li><a class="" href="/kanbu/place.com">여행지정보</a></li>
-                                            <li><a>게시판 <i class="ti-angle-down"></i></a>
-                                            <li><a class="active" href="/kanbu/main.com">home</a></li>
                                             <li><a href="about.html">일정만들기</a></li>
                                             <li><a class="" href="travel_destination.html">여행지정보</a></li>
                                             <li><a href="/kanbu/board/reviewList.com">게시판 <i class="ti-angle-down"></i></a>
@@ -82,8 +78,8 @@
                                         <ul>
                                         	<c:if test="${sessionScope.status > 0}">
                                         		<li><p>${sessionScope.nick}님 환영합니다.</p></li>
+                                        		<li><a href="/kanbu/mypage.com"> <i class="fa fa-user"></i> </a></li>
                                         	</c:if>
-                                            <li><a href="#"> <i class="fa fa-user"></i> </a></li>
                                             <c:if test="${sessionScope.status > 0}">
                                         		<li><a href="logout.com"> <i class="fa fa-unlock"></i> </a></li>
                                         	</c:if>

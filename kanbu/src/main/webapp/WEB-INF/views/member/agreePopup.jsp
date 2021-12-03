@@ -7,7 +7,7 @@
 <title>이용약관동의</title>
 </head>
 <body>
-<h1 align="center">이용약관</h1>
+<h3 align="center">이용약관</h3>
 <pre>
 1. 목적: 여행정보 서비스, 온라인 회원 관리
 2. 수집항목
