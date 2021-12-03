@@ -117,23 +117,16 @@
 			<artifactId>jstl</artifactId>
 			<version>1.2</version>
 		</dependency>
-<<<<<<< HEAD
 
-=======
-		
->>>>>>> branch 'main' of https://github.com/choidonghun0414/kanbu.git
 		<!-- https://mvnrepository.com/artifact/taglibs/standard -->
 		<dependency>
 			<groupId>taglibs</groupId>
 			<artifactId>standard</artifactId>
 			<version>1.1.2</version>
 		</dependency>
-<<<<<<< HEAD
 
-=======
 
 		
->>>>>>> branch 'main' of https://github.com/choidonghun0414/kanbu.git
 		<!-- @Inject 의존성 추가 -->
 		<dependency>
 		    <groupId>javax.inject</groupId>
@@ -187,7 +180,7 @@
 			<groupId>com.fasterxml.jackson.core</groupId>
 			<artifactId>jackson-databind</artifactId>
 			<version>2.5.1</version>
-<<<<<<< HEAD
+
 		</dependency>
 	
 	<!-- https://mvnrepository.com/artifact/javax.mail/mail -->
@@ -216,10 +209,6 @@
 		<artifactId>hibernate-validator</artifactId>
 		<version>6.0.1.Final</version>
 	</dependency>
-=======
->>>>>>> branch 'main' of https://github.com/choidonghun0414/kanbu.git
-
-		</dependency>
 
 	</dependencies>
 </project>

@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+ <!-- 다른 mapper와 중복되지 않도록 네임스페이스 기재 -->
+ 
+ <mapper namespace="myPlan">
+ 	
+ 	<!-- 스케쥴 목록 -->
+ 	<select id="getAttach" parameterType="int" resultType="String">
+ 		select schedule
+ 		from mySplan_num
+ 		where list_num=#{list_num}
+ 	</select>
+ 	
+ 	<!-- 스케쥴 삭제 -->
+ 	<delete id="deleteMySplan_num" parameterType="int">
+ 		delete from mySplan_num
+ 		where schedule=#{schedule}
+ 	</delete>
+ 	
+ 	<!-- 나의 일정리스트 전체 조회 sql -->
+ 	<select id="view" resultType="myPlanDTO">
+ 		select index_num, reg_date, title from myplan_num
+ 		order by index_num desc
+ 	</select>	
+ 	
+ 	<!-- 나의 일정 추가 sql -->
+ 	<insert id="insert" parameterType="myPlanDTO">
+ 		insert into myplan_num
+ 		(index_num, title, startDay, arrivalDay, traffic, expense, reg_date, show)
+ 		values
+ 		(myplan_num_seq.nextval,#{title},#{startDay},#{arrivalDay},#{traffic},#{expense},sysdate,'Y')
+ 	</insert>
+ 	
+ 	<!-- 나의 일정 수정 sql -->
+ 	<update id="update" parameterType="myPlanDTO">
+ 		update myplan_num
+ 		set title=#{title}, startDay=#{startDay}, arrivalDay=#{arrivalDay}, traffic=#{traffic}, expense=#{expense}
+ 		where index_num=#{index_num}
+ 	</update>
+ 
+ 	<!-- 나의 일정 삭제 sql -->
+ 	<delete id="delete" parameterType="int">
+ 		delete from myplan_num
+ 		where index_num=#{index_num}
+ 	</delete>
+ 	
+ 	<!-- 나의 일정 상세화면 조회 -->
+ 	<select id="detail" parameterType="int" resultType="myPlanDTO">
+ 		select index_num, title, startDay, arrivalDay, traffic, expense
+ 		from myplan_num
+ 		where index_num=#{index_num}
+ 	</select>
+ 	
+ 	<!-- 레코드 갯수 계산(유효성 검사) -->
+ 	<select id="countArticle" resultType="int">
+ 		select count(*)
+ 		from myplan_num
+ 	</select>
+ 	
+ 	<!-- 나의 일정 검색 sql (제목으로만 검색) -->
+ 	<select id="search">
+ 		<choose>
+ 			<when test="search_option == 'all'">
+ 				where title and ( title like '%'||#{keyword}||'%' )
+ 			</when>
+ 			<otherwise>
+ 				where title and ${sarch_option} like '%'||#{keyword}||'%'
+ 			</otherwise>
+ 		</choose>
+ 	</select>
+ 
+ </mapper>
