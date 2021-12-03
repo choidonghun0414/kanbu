@@ -62,9 +62,20 @@
 	<!-- 사용자 정의 약어 -->
 	<bean id="member" class="com.kanbu.dto.member.MemberDTO" />
 	<bean id="memberImpl" class="com.kanbu.service.member.MemberServiceImpl" />
+	
+	<bean id="plan" class="com.kanbu.dto.plan.MyPlanDTO" />
+	<bean id="myPlanService" class="com.kanbu.service.plan.MyPlanServiceImpl" /> 
+
+	<bean id="member" class="com.kanbu.dto.member.MemberDTO"></bean>
+	<bean id="place" class="com.kanbu.dto.info.PlaceDTO" />
+	<bean id="place_reply" class="com.kanbu.dto.info.Place_ReplyDTO" />
+	
+	<bean id="memberImpl" class="com.kanbu.service.member.MemberServiceImpl" />
+	<bean id="infoImpl" class="com.kanbu.service.info.InfoServiceImpl" />					 
 
 	  <!--dao, service에서 사용 --> 
 	<bean id="board" class="com.kanbu.dto.board.BoardDTO" />
+<<<<<<< HEAD
 	<bean id="boardImpl" class="com.kanbu.service.board.BoardServiceImpl" />
 	
 	<!-- 메일 보내기  -->
@@ -93,4 +104,8 @@
 	<bean id="emailSender" class="com.kanbu.email.member.EmailSender">
 	</bean>
 		   
+=======
+	<bean id="boardImpl" class="com.kanbu.service.board.BoardServiceImpl" />
+	   					   
+>>>>>>> branch 'main' of https://github.com/choidonghun0414/kanbu.git
 </beans>
