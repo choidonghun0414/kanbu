@@ -8,7 +8,7 @@
 </head>
 <body>
 <h3 align="center">이용약관</h3>
-<pre>
+<p>
 1. 목적: 여행정보 서비스, 온라인 회원 관리
 2. 수집항목
 - 필수: 성명, 아이디, 비밀번호, 이메일, 휴대폰번호, 뉴스레터수신여부, SMS수신여부
@@ -18,6 +18,6 @@ DI (Duplication Information : 중복가입확인정보)
 CI (Connection information : 사용자 교유 식별자)
 3. 수집방법: 홈페이지 회원 가입
 4. 개인정보 보유·이용기간: 동의일로부터 동의철회(직권해지)시 까지
-</pre>
+</p>
 </body>
 </html>

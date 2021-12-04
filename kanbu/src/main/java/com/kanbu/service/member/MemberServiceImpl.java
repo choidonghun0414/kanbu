@@ -79,7 +79,7 @@ public class MemberServiceImpl implements MemberService{
 	}
 
 	@Override
-	public int deleteCheckPw(MemberDTO member) throws Exception {
+	public MemberDTO deleteCheckPw(MemberDTO member) throws Exception {
 		// TODO Auto-generated method stub
 		return dao.deleteCheckPw(member);
 	}

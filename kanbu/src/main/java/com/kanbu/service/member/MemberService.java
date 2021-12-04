@@ -27,6 +27,6 @@ public interface MemberService {
 
 	public void deleteMember(MemberDTO member) throws Exception;
 	
-	public int deleteCheckPw(MemberDTO member) throws Exception;
+	public MemberDTO deleteCheckPw(MemberDTO member) throws Exception;
 
 }

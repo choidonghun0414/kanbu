@@ -83,8 +83,8 @@
 	      <property name="host" value="smtp.gmail.com" />
 	      <property name="port" value="587" />
 	      <property name="defaultEncoding" value="utf-8"/>
-	      <property name="username" value="yygyung@gmail.com" /><!-- 관리자용 무조껀 지메일입력(구글에 smtp검색해서 기본설정필요) -->
-	      <property name="password" value="znxk1207" /><!-- 커밋할때 비번이랑 메일주소 없애고 하기(안하면 바로 해킹당함) -->
+	      <property name="username" value="@gmail.com" /><!-- 관리자용 무조껀 지메일입력(구글에 smtp검색해서 기본설정필요) -->
+	      <property name="password" value="" /><!-- 커밋할때 비번이랑 메일주소 없애고 하기(안하면 바로 해킹당함) -->
 	      
 	      <!-- email 요청시는 SMTP -->
 	      <property name="javaMailProperties">

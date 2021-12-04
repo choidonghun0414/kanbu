@@ -97,13 +97,12 @@
  	<delete id="deleteMember" parameterType="MemberDTO">
  		delete from member
  		where id = #{id}
- 
  	</delete>
  	
  	<!-- 비번체크(탈퇴) -->
- 	<select id="deleteCheckPw" resultType="int">
- 		select count(*)
+ 	<select id="deleteCheckPw" resultType="MemberDTO">
+ 		select pw2, id
  		from member
- 		where pw2 = fn_encrypt(#{pw2})
+		where id = #{id}
  	</select>
  </mapper> 

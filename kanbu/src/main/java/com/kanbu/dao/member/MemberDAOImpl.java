@@ -79,7 +79,7 @@ public class MemberDAOImpl implements MemberDAO{
 	}
 
 	@Override
-	public int deleteCheckPw(MemberDTO member) throws Exception {
+	public MemberDTO deleteCheckPw(MemberDTO member) throws Exception {
 
 		return mybatis.selectOne("member.deleteCheckPw",member);
 		

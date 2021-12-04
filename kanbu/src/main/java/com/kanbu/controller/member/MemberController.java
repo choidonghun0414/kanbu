@@ -13,9 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kanbu.dto.member.MemberDTO;
 import com.kanbu.email.member.Email;
@@ -270,31 +268,32 @@ public class MemberController {
 	}
 
 	
-	@RequestMapping(value="/member/deleteMember.com", method = RequestMethod.GET)
+	@RequestMapping(value="/deleteMember.com", method = RequestMethod.GET)
 	public String deleteMember() throws Exception{
 		return "/member/deleteForm";
 	}
 	
 	@RequestMapping(value="/deleteMemberPro.com", method = RequestMethod.POST)
-	public String deleteMemberPro( MemberDTO memberView, HttpSession session, HttpServletRequest request) throws Exception{
+	public String deleteMemberPro( MemberDTO memberView ,HttpSession session) throws Exception{
 		
-		// 입력비번
-		memberView.setPw2(request.getParameter("pw2"));
-		int result = memberImpl.deleteCheckPw(memberView);
-		
-		if(result > 0 ) {
-			memberImpl.deleteMember(member);
-			System.out.println("탈퇴성공");
-			session.invalidate();
-			return "redirect:/main.com";
+		session.getAttribute("id");
+		session.getAttribute("pw2");
+		boolean pwdChk  = bCryptPasswordEncoder.matches(memberView.getPw2(), (String) session.getAttribute("pw2"));
+	
+			if(pwdChk == true) {
+				memberImpl.deleteMember(memberView);
+				System.out.println("탈퇴성공");
+				session.invalidate();
+				return "/member/deleteMemberPro";
+			}
 			
-		}else {
 			System.out.println("탈퇴실패");
-			return "/member/deleteForm";
-			
-		}
+			return "redirect:/deleteMember.com" ;
+
 	}
-	
-	
-	
+
 }
+	
+	
+	
+
