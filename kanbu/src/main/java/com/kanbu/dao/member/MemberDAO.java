@@ -33,6 +33,5 @@ public interface MemberDAO {
 	
 	// 회원정보 변경하기
 	public void myInfoUpdate(MemberDTO member) throws Exception;
-	
 
 }

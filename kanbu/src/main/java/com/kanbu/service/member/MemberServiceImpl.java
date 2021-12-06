@@ -83,8 +83,6 @@ public class MemberServiceImpl implements MemberService{
 		return dao.deleteCheckPw(member);
 	}
 
-
-
 	// 회원별 회원정보 조회하기
 	@Override
 	public MemberDTO myInfo(int index_num) throws Exception {
@@ -96,6 +94,5 @@ public class MemberServiceImpl implements MemberService{
 	public void myInfoUpdate(MemberDTO member) throws Exception {
 		dao.myInfoUpdate(member);
 	}
-
 
 }

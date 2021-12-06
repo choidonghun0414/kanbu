@@ -59,9 +59,18 @@
                                     <nav>
                                         <ul id="navigation">
                                             <li><a class="active" href="/kanbu/main.com">home</a></li>
+<<<<<<< HEAD
                                             <li><a href="about.html">일정만들기</a></li>
+=======
+
+                                            <li><a href="/kanbu/list.com">일정만들기</a></li>
+>>>>>>> branch 'main' of https://github.com/choidonghun0414/kanbu.git
                                             <li><a class="" href="/kanbu/place.com">여행지정보</a></li>
                                             <li><a href="/kanbu/board/reviewList.com">게시판 <i class="ti-angle-down"></i></a>
+<<<<<<< HEAD
+=======
+
+>>>>>>> branch 'main' of https://github.com/choidonghun0414/kanbu.git
                                                 <ul class="submenu">
                                                         <li><a href="/kanbu/board/reviewList.com">여행후기</a></li>
                                                         <li><a href="/kanbu/board/noticeList.com">공지사항</a></li>
@@ -78,6 +87,7 @@
                                         <ul>
                                         	<c:if test="${sessionScope.status > 0}">
                                         		<li><p>${sessionScope.nick}님 환영합니다.</p></li>
+<<<<<<< HEAD
                                         		<c:if test="${sessionScope.status == 1}">
                                         			<li><a href="/kanbu/mypage.com"> <i class="fa fa-user"></i> </a></li>
                                         		</c:if>
@@ -85,6 +95,12 @@
                                         			<li><a href="/kanbu/admin.com"> <i class="fa fa-dashboard"></i> </a></li>
                                         		</c:if>
                                         		<li><a href="logout.com" onclick="logout();"> <i class="fa fa-unlock"></i> </a></li>
+=======
+                                        		<li><a href="/kanbu/mypage.com"> <i class="fa fa-user"></i> </a></li>
+                                        	</c:if>
+                                            <c:if test="${sessionScope.status > 0}">
+                                        		<li><a href="logout.com"> <i class="fa fa-unlock"></i> </a></li>
+>>>>>>> branch 'main' of https://github.com/choidonghun0414/kanbu.git
                                         	</c:if>
                                         	<c:if test="${empty(sessionScope.status)}">
                                         		<li><a href="login.com"> <i class="fa fa-lock"></i> </a></li>

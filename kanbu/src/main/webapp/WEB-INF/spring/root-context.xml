@@ -58,20 +58,50 @@
 		<constructor-arg ref="sqlSessionFactory" />
 	</bean>
 	
-	
+
 	<!-- 사용자 정의 약어 -->
-	<!--dao, service에서 사용 --> 
-	<bean id="member" class="com.kanbu.dto.member.MemberDTO"></bean>
+	<bean id="member" class="com.kanbu.dto.member.MemberDTO" />
 	<bean id="place" class="com.kanbu.dto.info.PlaceDTO" />
 	<bean id="place_reply" class="com.kanbu.dto.info.Place_ReplyDTO" />
 	<bean id="board" class="com.kanbu.dto.board.BoardDTO" />
 	<bean id="search" class="com.kanbu.dto.SearchDTO" />
+	<bean id="plan" class="com.kanbu.dto.plan.MyPlanDTO" />
 	
-	<bean id="mainImpl" class="com.kanbu.service.MainServiceImpl" />
 	<bean id="memberImpl" class="com.kanbu.service.member.MemberServiceImpl" />
+	<bean id="myPlanService" class="com.kanbu.service.plan.MyPlanServiceImpl" /> 
+	<bean id="mainImpl" class="com.kanbu.service.MainServiceImpl" />
 	<bean id="infoImpl" class="com.kanbu.service.info.InfoServiceImpl" />
 	<bean id="boardImpl" class="com.kanbu.service.board.BoardServiceImpl" />
 	<bean id="adminImpl" class="com.kanbu.service.admin.AdminServiceImpl" />
+	
+	<!-- 메일 보내기  -->
+	   <bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+	      <property name="host" value="smtp.gmail.com" />
+	      <property name="port" value="587" />
+	      <property name="defaultEncoding" value="utf-8"/>
+	      <property name="username" value="@gmail.com" /><!-- 관리자용 무조껀 지메일입력(구글에 smtp검색해서 기본설정필요) -->
+	      <property name="password" value="" /><!-- 커밋할때 비번이랑 메일주소 없애고 하기(안하면 바로 해킹당함) -->
+	      
+	      <!-- email 요청시는 SMTP -->
+	      <property name="javaMailProperties">
+	         <props>
+	            <prop key="mail.transport.protocol">smtp</prop>
+	            <prop key="mail.smtp.auth">true</prop>
+	            <prop key="mail.smtp.starttls.enable">true</prop>
+	            <prop key="mail.debug">true</prop>
+	            <prop key="mail.smtp.ssl.trust">smtp.gmail.com</prop>
+				<prop key="mail.smtp.ssl.protocols">TLSv1.2</prop>
+	         </props>
+	      </property>
+	   </bean>
+	<bean id="email" class="com.kanbu.email.member.Email">
+	</bean>
 
+	<bean id="emailSender" class="com.kanbu.email.member.EmailSender">
+	</bean>
+		   
+
+	
 	   					   
+
 </beans>

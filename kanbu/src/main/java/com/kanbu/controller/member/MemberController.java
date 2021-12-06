@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 import com.kanbu.dto.member.MemberDTO;
-
 import com.kanbu.email.member.Email;
 import com.kanbu.email.member.EmailSender;
 import com.kanbu.service.member.MemberService;
@@ -160,7 +159,6 @@ public class MemberController {
 				session.setAttribute("index_num", member.getIndex_num());
 
 				return "redirect:/main.com";
-				
 			}else {
 				return "/member/loginForm";
 			}
@@ -214,8 +212,6 @@ public class MemberController {
 	public String selectIdForm () throws Exception{
 		return "/member/findIdForm";
 	}
-	
-	
 	
 	@RequestMapping(value="/selectIdPro.com", method = RequestMethod.POST)
 	public String selectIdPro (HttpServletRequest request, Model model) throws Exception{

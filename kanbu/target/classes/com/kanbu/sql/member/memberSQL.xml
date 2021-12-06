@@ -114,12 +114,28 @@
  	</select>
  	
  	<update id="updateMember" parameterType="memberDTO">
- 		update member
+ 	update member
  		set pw2 = #{pw2}, nick = #{nick}, phone = #{phone},
  		mail = #{mail}
  		where id = #{id}
  	</update>
  	
+ 	<!-- 회원정보조회 -->
+	<select id="selectMember" parameterType="String" resultType="MemberDTO">
+		select * from member 
+		where mail = #{mail}
+		and domain = #{domain}
+	</select>
+ 	
+ 	<!-- 패스워드변경 -->
+ 	<update id="updatePw" parameterType="MemberDTO">
+ 		update member
+ 		set pw2 = #{pw2}
+ 		where id = #{id}
+ 		and mail = #{mail}
+ 		and domain = #{domain}
+ 		and phone = #{phone}
+ 	</update>
  	
  	<!-- 회원별 회원정보 조회하기 -->
  	<select id="myInfo" parameterType="int" resultType="memberDTO">
@@ -135,4 +151,26 @@
  		set nick=#{nick}, phone=#{phone}, mail=#{mail}, domain=#{domain}
 		where index_num=#{index_num} and id=#{id}
  	</update>
+
+ 	<!-- 패스워드변경 검사 -->
+ 	<select id="findPwChk" resultType="int">
+ 	 select count(*) from member
+ 	 where id = #{id}
+ 	 and mail = #{mail}
+ 	 and domain = #{domain}
+ 	 and phone = #{phone}
+ 	</select>
+ 	
+ 	<!-- 회원탈퇴 -->
+ 	<delete id="deleteMember" parameterType="MemberDTO">
+ 		delete from member
+ 		where id = #{id}
+ 	</delete>
+ 	
+ 	<!-- 비번체크(탈퇴) -->
+ 	<select id="deleteCheckPw" resultType="MemberDTO">
+ 		select pw2, id
+ 		from member
+		where id = #{id}
+ 	</select>
  </mapper> 
