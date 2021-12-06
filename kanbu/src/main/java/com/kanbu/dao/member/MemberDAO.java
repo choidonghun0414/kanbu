@@ -1,7 +1,5 @@
 package com.kanbu.dao.member;
 
-
-
 import com.kanbu.dto.member.MemberDTO;
 
 public interface MemberDAO {
@@ -18,12 +16,23 @@ public interface MemberDAO {
 
 	public int nickChk(MemberDTO member) throws Exception;
 	
+	public int mailChk(MemberDTO member) throws Exception; 
+	
+	public String selectId(MemberDTO member) throws Exception;
+	
+	public void updatePw(MemberDTO member) throws Exception;
+	
+	public int findPwChk(MemberDTO member) throws Exception;
+
+	public void deleteMember(MemberDTO member) throws Exception;
+	
+	public MemberDTO deleteCheckPw(MemberDTO member) throws Exception;
+	
 	// 회원별 회원정보 조회하기
 	public MemberDTO myInfo(int index_num) throws Exception;
 	
 	// 회원정보 변경하기
 	public void myInfoUpdate(MemberDTO member) throws Exception;
 	
-	
-	
+
 }
