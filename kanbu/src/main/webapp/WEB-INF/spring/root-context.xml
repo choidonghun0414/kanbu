@@ -60,17 +60,18 @@
 	
 	
 	<!-- 사용자 정의 약어 -->
+	<!--dao, service에서 사용 --> 
 	<bean id="member" class="com.kanbu.dto.member.MemberDTO"></bean>
 	<bean id="place" class="com.kanbu.dto.info.PlaceDTO" />
 	<bean id="place_reply" class="com.kanbu.dto.info.Place_ReplyDTO" />
+	<bean id="board" class="com.kanbu.dto.board.BoardDTO" />
+	<bean id="search" class="com.kanbu.dto.SearchDTO" />
 	
+	<bean id="mainImpl" class="com.kanbu.service.MainServiceImpl" />
 	<bean id="memberImpl" class="com.kanbu.service.member.MemberServiceImpl" />
 	<bean id="infoImpl" class="com.kanbu.service.info.InfoServiceImpl" />
-						 
-
-	  <!--dao, service에서 사용 --> 
-	<bean id="board" class="com.kanbu.dto.board.BoardDTO" />
 	<bean id="boardImpl" class="com.kanbu.service.board.BoardServiceImpl" />
+	<bean id="adminImpl" class="com.kanbu.service.admin.AdminServiceImpl" />
 
 	   					   
 </beans>

@@ -14,22 +14,20 @@ public class MemberDTO {
 	private int agree;
 	private int privacy;
 	private int status;
-	private Date date;
+	private Date reg_date;
+	private int startRow;
+	private int endRow;
 	
 	
 	public MemberDTO() {
 	}
 
-
-	
 	
 	public int getIndex_num() {
 		return index_num;
 	}
 
-
-
-
+	
 	public void setIndex_num(int index_num) {
 		this.index_num = index_num;
 	}
@@ -163,22 +161,43 @@ public class MemberDTO {
 
 
 
-	public Date getDate() {
-		return date;
+	public Date getReg_date() {
+		return reg_date;
 	}
 
 
 
 
-	public void setDate(Date date) {
-		this.date = date;
+	public void setReg_date(Date reg_date) {
+		this.reg_date = reg_date;
+	}
+
+	
+
+	// 시작 회원(페이징 처리)
+	public int getStartRow() {
+		return startRow;
 	}
 
 
+	public void setStartRow(int startRow) {
+		this.startRow = startRow;
+	}
+
+
+	// 마지막 회원(페이징 처리)
+	public int getEndRow() {
+		return endRow;
+	}
+
+
+	public void setEndRow(int endRow) {
+		this.endRow = endRow;
+	}
 
 
 	public MemberDTO(int index_num, String id, String pw2, String nick, String phone, String mail, String domain,
-			int agree, int privacy, int status, Date date) {
+			int agree, int privacy, int status, Date reg_date) {
 		super();
 		this.index_num = index_num;
 		this.id = id;
@@ -190,7 +209,7 @@ public class MemberDTO {
 		this.agree = agree;
 		this.privacy = privacy;
 		this.status = status;
-		this.date = date;
+		this.reg_date = reg_date;
 	}
 
 
@@ -200,7 +219,7 @@ public class MemberDTO {
 	public String toString() {
 		return "MemberDTO [index_num=" + index_num + ", id=" + id + ", pw2=" + pw2 + ", nick=" + nick + ", phone="
 				+ phone + ", mail=" + mail + ", domain=" + domain + ", agree=" + agree + ", privacy=" + privacy
-				+ ", status=" + status + ", date=" + date + "]";
+				+ ", status=" + status + ", reg_date=" + reg_date + "]";
 	}
 
 	

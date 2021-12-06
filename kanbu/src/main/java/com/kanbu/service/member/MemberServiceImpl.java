@@ -2,20 +2,17 @@ package com.kanbu.service.member;
 
 import javax.inject.Inject;
 
-import org.mybatis.spring.SqlSessionTemplate;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.kanbu.dao.member.MemberDAO;
 import com.kanbu.dto.member.MemberDTO;
-import com.kanbu.exception.LoginFailedException;
+
 
 @Service
 public class MemberServiceImpl implements MemberService{
 	
 	@Inject
 	MemberDAO dao;
-	
 	
 	// memberDTO를 받아 testkanbu 테이블에 회원가입 추가한다.
 	@Override
@@ -52,7 +49,18 @@ public class MemberServiceImpl implements MemberService{
 	public int idChkLogin(String id) throws Exception {
 		return dao.idChkLogin(id);
 	}
-	
-	
+
+	// 회원별 회원정보 조회하기
+	@Override
+	public MemberDTO myInfo(int index_num) throws Exception {
+		return dao.myInfo(index_num);
+	}
+
+	// 회원정보 변경하기
+	@Override
+	public void myInfoUpdate(MemberDTO member) throws Exception {
+		dao.myInfoUpdate(member);
+	}
+
 
 }

@@ -16,26 +16,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- <link rel="manifest" href="site.webmanifest"> -->
-    <link rel="shortcut icon" type="image/x-icon" href="resources/img/favicon.png">
+    <link rel="shortcut icon" type="image/x-icon" href="/kanbu/resources/img/favicon.png">
     <!-- Place favicon.ico in the root directory -->
 
     <!-- CSS here -->
-    <link rel="stylesheet" href="resources/css/bootstrap.min.css">
-    <link rel="stylesheet" href="resources/css/owl.carousel.min.css">
-    <link rel="stylesheet" href="resources/css/magnific-popup.css">
-    <link rel="stylesheet" href="resources/css/font-awesome.min.css">
-    <link rel="stylesheet" href="resources/css/themify-icons.css">
-    <link rel="stylesheet" href="resources/css/nice-select.css">
-    <link rel="stylesheet" href="resources/css/flaticon.css">
-    <link rel="stylesheet" href="resources/css/gijgo.css">
-    <link rel="stylesheet" href="resources/css/animate.css">
-    <link rel="stylesheet" href="resources/css/slick.css">
-    <link rel="stylesheet" href="resources/css/slicknav.css">
+    <link rel="stylesheet" href="/kanbu/resources/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/kanbu/resources/css/owl.carousel.min.css">
+    <link rel="stylesheet" href="/kanbu/resources/css/magnific-popup.css">
+    <link rel="stylesheet" href="/kanbu/resources/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/kanbu/resources/css/themify-icons.css">
+    <link rel="stylesheet" href="/kanbu/resources/css/nice-select.css">
+    <link rel="stylesheet" href="/kanbu/resources/css/flaticon.css">
+    <link rel="stylesheet" href="/kanbu/resources/css/gijgo.css">
+    <link rel="stylesheet" href="/kanbu/resources/css/animate.css">
+    <link rel="stylesheet" href="/kanbu/resources/css/slick.css">
+    <link rel="stylesheet" href="/kanbu/resources/css/slicknav.css">
     <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/themes/smoothness/jquery-ui.css">
 
-    <link rel="stylesheet" href="resources/css/style.css">
+    <link rel="stylesheet" href="/kanbu/resources/css/style.css">
     <!-- <link rel="stylesheet" href="css/responsive.css"> -->
-    <link rel="stylesheet" href="resources/css/joinpw.css">
+    <link rel="stylesheet" href="/kanbu/resources/css/joinpw.css">
 </head>
 
 <body>
@@ -43,7 +43,7 @@
             <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
         <![endif]-->
 
-    <!-- header-start -->
+     <!-- header-start -->
     <header>
         <div class="header-area ">
             <div id="sticky-header" class="main-header-area">
@@ -52,8 +52,8 @@
                         <div class="row align-items-center">
                             <div class="col-xl-2 col-lg-2">
                                 <div class="logo">
-                                    <a href="index.html">
-                                        <img src="resources/img/logo.png" alt="">
+                                    <a href="/kanbu/main.com">
+                                        <img src="/kanbu/resources/img/kanbulogo.png" alt="">
                                     </a>
                                 </div>
                             </div>
@@ -61,14 +61,14 @@
                                 <div class="main-menu  d-none d-lg-block">
                                     <nav>
                                         <ul id="navigation">
-                                            <li><a class="active" href="index.html">home</a></li>
+                                            <li><a class="active" href="/kanbu/main.com">home</a></li>
                                             <li><a href="about.html">일정만들기</a></li>
-                                            <li><a class="" href="travel_destination.html">여행지정보</a></li>
-                                            <li><a href="#">게시판<i class="ti-angle-down"></i></a>
+                                            <li><a class="" href="/kanbu/place.com">여행지정보</a></li>
+                                            <li><a href="/kanbu/board/reviewList.com">게시판 <i class="ti-angle-down"></i></a>
                                                 <ul class="submenu">
-                                                        <li><a href="destination_details.html">여행후기</a></li>
-                                                        <li><a href="elements.html">공지사항</a></li>
-                                                        <li><a href="elements.html">자주하는질문</a></li>
+                                                        <li><a href="/kanbu/board/reviewList.com">여행후기</a></li>
+                                                        <li><a href="/kanbu/board/noticeList.com">공지사항</a></li>
+                                                        <li><a href="/kanbu/board/questionList.com">자주하는질문</a></li>
                                                 </ul>
                                             </li>
                                         </ul>
@@ -79,8 +79,20 @@
                                 <div class="social_wrap d-flex align-items-center justify-content-end">
                                     <div class="social_links d-none d-xl-block">
                                         <ul>
-                                            <li><a href="#"> <i class="fa fa-user"></i> </a></li>
-                                            <li><a href="#"> <i class="fa fa-lock"></i> </a></li>
+                                        	<c:if test="${sessionScope.status > 0}">
+                                        		<li><p>${sessionScope.nick}님 환영합니다.</p></li>
+                                        		<c:if test="${sessionScope.status == 1}">
+                                        			<li><a href="/kanbu/mypage.com"> <i class="fa fa-user"></i> </a></li>
+                                        		</c:if>
+                                        		<c:if test="${sessionScope.status == 100}">
+                                        			<li><a href="/kanbu/admin.com"> <i class="fa fa-dashboard"></i> </a></li>
+                                        		</c:if>
+                                        		<li><a href="/kanbu/logout.com" onclick="logout();"> <i class="fa fa-unlock"></i> </a></li>
+                                        	</c:if>
+                                        	<c:if test="${empty(sessionScope.status)}">
+                                        		<li><a href="/kanbu/login.com"> <i class="fa fa-lock"></i> </a></li>
+                                        	</c:if>
+                                            
                                         </ul>
                                     </div>
                                 </div>
@@ -101,6 +113,7 @@
         </div>
     </header>
     <!-- header-end -->
+    
     <div class="destination_banner_wrap overlay">
         <div class="destination_text text-center">
             <h3>Sign up</h3>
@@ -221,7 +234,12 @@
                                     style="color: #3296FF;">보기</a>
                                     </div>
                                 </div>
-								<input type="hidden" name="status" value="1">
+                                <c:if test="${empty (sessionScope.status)}">
+									<input type="hidden" name="status" value="1">
+								</c:if>
+								<c:if test="${sessionScope.status == 100}">
+									<input type="hidden" name="status" value="100">
+								</c:if>	
                                 <div class="col-lg-12">
                                  <h5>&nbsp</h5>
                                     <div class="submit_btn">
@@ -287,7 +305,7 @@
                 <div class="col-lg-4 col-md-6">
                     <div class="single_place">
                         <div class="thumb">
-                            <img src="resources/img/place/1.png" alt="">
+                            <img src="/kanbu/resources/img/place/1.png" alt="">
                             <a href="#" class="prise">$500</a>
                         </div>
                         <div class="place_info">
@@ -313,7 +331,7 @@
                 <div class="col-lg-4 col-md-6">
                     <div class="single_place">
                         <div class="thumb">
-                            <img src="resources/img/place/2.png" alt="">
+                            <img src="/kanbu/resources/img/place/2.png" alt="">
                             <a href="#" class="prise">$500</a>
                         </div>
                         <div class="place_info">
@@ -339,7 +357,7 @@
                 <div class="col-lg-4 col-md-6">
                     <div class="single_place">
                         <div class="thumb">
-                            <img src="resources/img/place/3.png" alt="">
+                            <img src="/kanbu/resources/img/place/3.png" alt="">
                             <a href="#" class="prise">$500</a>
                         </div>
                         <div class="place_info">
@@ -374,7 +392,7 @@
                         <div class="footer_widget">
                             <div class="footer_logo">
                                 <a href="#">
-                                    <img src="resources/img/footer_logo.png" alt="">
+                                    <img src="/kanbu/resources/img/footer_logo.png" alt="">
                                 </a>
                             </div>
                             <p>5th flora, 700/D kings road, green <br> lane New York-1782 <br>
@@ -451,32 +469,32 @@
                             <div class="instagram_feed">
                                 <div class="single_insta">
                                     <a href="#">
-                                        <img src="resources/img/instagram/1.png" alt="">
+                                        <img src="/kanbu/resources/img/instagram/1.png" alt="">
                                     </a>
                                 </div>
                                 <div class="single_insta">
                                     <a href="#">
-                                        <img src="resources/img/instagram/2.png" alt="">
+                                        <img src="/kanbu/resources/img/instagram/2.png" alt="">
                                     </a>
                                 </div>
                                 <div class="single_insta">
                                     <a href="#">
-                                        <img src="resources/img/instagram/3.png" alt="">
+                                        <img src="/kanbu/resources/img/instagram/3.png" alt="">
                                     </a>
                                 </div>
                                 <div class="single_insta">
                                     <a href="#">
-                                        <img src="resources/img/instagram/4.png" alt="">
+                                        <img src="/kanbu/resources/img/instagram/4.png" alt="">
                                     </a>
                                 </div>
                                 <div class="single_insta">
                                     <a href="#">
-                                        <img src="resources/img/instagram/5.png" alt="">
+                                        <img src="/kanbu/resources/img/instagram/5.png" alt="">
                                     </a>
                                 </div>
                                 <div class="single_insta">
                                     <a href="#">
-                                        <img src="resources/img/instagram/6.png" alt="">
+                                        <img src="/kanbu/resources/img/instagram/6.png" alt="">
                                     </a>
                                 </div>
                             </div>
@@ -520,37 +538,37 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 
     <script src=" https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"> </script> -->
     <!-- JS here -->
-    <script src="resources/js/vendor/modernizr-3.5.0.min.js"></script>
-    <script src="resources/js/vendor/jquery-1.12.4.min.js"></script>
-    <script src="resources/js/popper.min.js"></script>
-    <script src="resources/js/bootstrap.min.js"></script>
-    <script src="resources/js/owl.carousel.min.js"></script>
-    <script src="resources/js/isotope.pkgd.min.js"></script>
-    <script src="resources/js/ajax-form.js"></script>
-    <script src="resources/js/waypoints.min.js"></script>
-    <script src="resources/js/jquery.counterup.min.js"></script>
-    <script src="resources/js/imagesloaded.pkgd.min.js"></script>
-    <script src="resources/js/scrollIt.js"></script>
-    <script src="resources/js/jquery.scrollUp.min.js"></script>
-    <script src="resources/js/wow.min.js"></script>
-    <script src="resources/js/nice-select.min.js"></script>
-    <script src="resources/js/jquery.slicknav.min.js"></script>
-    <script src="resources/js/jquery.magnific-popup.min.js"></script>
-    <script src="resources/js/plugins.js"></script>
-    <script src="resources/js/gijgo.min.js"></script>
-    <script src="resources/js/slick.min.js"></script>
+    <script src="/kanbu/resources/js/vendor/modernizr-3.5.0.min.js"></script>
+    <script src="/kanbu/resources/js/vendor/jquery-1.12.4.min.js"></script>
+    <script src="/kanbu/resources/js/popper.min.js"></script>
+    <script src="/kanbu/resources/js/bootstrap.min.js"></script>
+    <script src="/kanbu/resources/js/owl.carousel.min.js"></script>
+    <script src="/kanbu/resources/js/isotope.pkgd.min.js"></script>
+    <script src="/kanbu/resources/js/ajax-form.js"></script>
+    <script src="/kanbu/resources/js/waypoints.min.js"></script>
+    <script src="/kanbu/resources/js/jquery.counterup.min.js"></script>
+    <script src="/kanbu/resources/js/imagesloaded.pkgd.min.js"></script>
+    <script src="/kanbu/resources/js/scrollIt.js"></script>
+    <script src="/kanbu/resources/js/jquery.scrollUp.min.js"></script>
+    <script src="/kanbu/resources/js/wow.min.js"></script>
+    <script src="/kanbu/resources/js/nice-select.min.js"></script>
+    <script src="/kanbu/resources/js/jquery.slicknav.min.js"></script>
+    <script src="/kanbu/resources/js/jquery.magnific-popup.min.js"></script>
+    <script src="/kanbu/resources/js/plugins.js"></script>
+    <script src="/kanbu/resources/js/gijgo.min.js"></script>
+    <script src="/kanbu/resources/js/slick.min.js"></script>
    
 
     
     <!--contact js-->
-    <script src="resources/js/contact.js"></script>
-    <script src="resources/js/jquery.ajaxchimp.min.js"></script>
-    <script src="resources/js/jquery.form.js"></script>
-    <script src="resources/js/jquery.validate.min.js"></script>
-    <script src="resources/js/mail-script.js"></script>
+    <script src="/kanbu/resources/js/contact.js"></script>
+    <script src="/kanbu/resources/js/jquery.ajaxchimp.min.js"></script>
+    <script src="/kanbu/resources/js/jquery.form.js"></script>
+    <script src="/kanbu/resources/js/jquery.validate.min.js"></script>
+    <script src="/kanbu/resources/js/mail-script.js"></script>
 
 
-    <script src="resources/js/main.js"></script>
+    <script src="/kanbu/resources/js/main.js"></script>
     <script>
         $('#datepicker').datepicker({
             iconsLibrary: 'fontawesome',

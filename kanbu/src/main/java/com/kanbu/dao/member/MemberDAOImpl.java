@@ -46,12 +46,18 @@ public class MemberDAOImpl implements MemberDAO{
 		return mybatis.selectOne("member.idChkLogin", id);
 	}
 
+	// 회원별 회원정보 조회하기
+	@Override
+	public MemberDTO myInfo(int index_num) throws Exception {
+		return mybatis.selectOne("member.myInfo", index_num);
+	}
 
+	// 회원정보 변경하기
+	@Override
+	public void myInfoUpdate(MemberDTO member) throws Exception {
+		mybatis.update("member.myInfoUpdate", member);
+	}
+	
 
-	
-	
-	
-	
-	
 	
 }

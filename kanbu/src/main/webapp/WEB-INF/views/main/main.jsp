@@ -40,7 +40,7 @@
             <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
         <![endif]-->
 
-    <!-- header-start -->
+     <!-- header-start -->
     <header>
         <div class="header-area ">
             <div id="sticky-header" class="main-header-area">
@@ -50,7 +50,7 @@
                             <div class="col-xl-2 col-lg-2">
                                 <div class="logo">
                                     <a href="/kanbu/main.com">
-                                        <img src="resources/img/logo.png" alt="">
+                                        <img src="resources/img/kanbulogo.png" alt="">
                                     </a>
                                 </div>
                             </div>
@@ -59,21 +59,9 @@
                                     <nav>
                                         <ul id="navigation">
                                             <li><a class="active" href="/kanbu/main.com">home</a></li>
-<<<<<<< HEAD
-=======
-                                            <li><a href="/kanbu/list.com">일정만들기</a></li>
-                                            <li><a class="" href="/kanbu/place.com">여행지정보</a></li>
-                                            <li><a>게시판 <i class="ti-angle-down"></i></a>
-                                            <li><a class="active" href="/kanbu/main.com">home</a></li>
->>>>>>> refs/remotes/origin/main
                                             <li><a href="about.html">일정만들기</a></li>
-<<<<<<< HEAD
                                             <li><a class="" href="/kanbu/place.com">여행지정보</a></li>
-                                            <li><a href="#">게시판 <i class="ti-angle-down"></i></a>
-=======
-                                            <li><a class="" href="travel_destination.html">여행지정보</a></li>
                                             <li><a href="/kanbu/board/reviewList.com">게시판 <i class="ti-angle-down"></i></a>
->>>>>>> refs/remotes/origin/main
                                                 <ul class="submenu">
                                                         <li><a href="/kanbu/board/reviewList.com">여행후기</a></li>
                                                         <li><a href="/kanbu/board/noticeList.com">공지사항</a></li>
@@ -90,10 +78,13 @@
                                         <ul>
                                         	<c:if test="${sessionScope.status > 0}">
                                         		<li><p>${sessionScope.nick}님 환영합니다.</p></li>
-                                        	</c:if>
-                                            <li><a href="#"> <i class="fa fa-user"></i> </a></li>
-                                            <c:if test="${sessionScope.status > 0}">
-                                        		<li><a href="logout.com"> <i class="fa fa-unlock"></i> </a></li>
+                                        		<c:if test="${sessionScope.status == 1}">
+                                        			<li><a href="/kanbu/mypage.com"> <i class="fa fa-user"></i> </a></li>
+                                        		</c:if>
+                                        		<c:if test="${sessionScope.status == 100}">
+                                        			<li><a href="/kanbu/admin.com"> <i class="fa fa-dashboard"></i> </a></li>
+                                        		</c:if>
+                                        		<li><a href="logout.com" onclick="logout();"> <i class="fa fa-unlock"></i> </a></li>
                                         	</c:if>
                                         	<c:if test="${empty(sessionScope.status)}">
                                         		<li><a href="login.com"> <i class="fa fa-lock"></i> </a></li>
@@ -128,7 +119,7 @@
                     <div class="row align-items-center">
                         <div class="col-xl-12 col-md-12">
                             <div class="slider_text text-center">
-                                <h3></h3>
+                                <h3>Indonesia</h3>
                                 <p>Pixel perfect design with awesome contents</p>
                                 <a href="#" class="boxed-btn3">Explore Now</a>
                             </div>
@@ -812,14 +803,14 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
         </div>
     </footer>
 
-
+  <!-- 검색창 -->
   <!-- Modal -->
   <div class="modal fade custom_search_pop" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
       <div class="modal-content">
         <div class="serch_form">
-            <input type="text" placeholder="Search" >
-            <button type="submit">search</button>
+            <input type="text" name="keyword" id="keyword" placeholder="검색할 장소를 입력해주세요..." >
+            <button type="submit" onclick="search();">search</button>
         </div>
       </div>
     </div>
@@ -870,6 +861,20 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
          }
         });
     </script>
+    
+    <script type="text/javascript">
+    	function logOut(){
+    		alert("로그아웃 되었습니다.");
+    	}
+    </script>
+    
+    <script type="text/javascript">
+    	function search(){
+    		var place = document.getElementById('keyword').value
+    		window.location = '/kanbu/search.com?keyword='+place;
+    	}
+    </script>
+    
 </body>
 
 </html>
