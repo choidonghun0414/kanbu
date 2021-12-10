@@ -273,7 +273,7 @@ public class MemberController {
 			session.setAttribute("memberDTO", memberView);//세션에 저장
 			
 			System.out.println("비번 생성성공");
-			return "/member/findPassword";
+			return "redirect:/findPassword.com";
 		}
 	}
 	
@@ -291,7 +291,7 @@ public class MemberController {
 			System.out.println("새로운 비밀번호 " + memberView.getPw2() + " 입니다.");
 			System.out.println(memberView.getMail()+"@"+memberView.getDomain());
 			System.out.println("이메일 발송됐음");
-			return "/member/loginForm";
+			return "/member/findPassword";
 	}
 	
 	@ResponseBody

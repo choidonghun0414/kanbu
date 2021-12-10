@@ -533,11 +533,11 @@ $(document).ready(function(){
   </script>
   
   <script type="text/javascript">
-  	function fn_pwChange(){
+  	function fn_delete(){
   		var result = confirm("회원 탈퇴하시겠습니까?");
   		
   		if(result){
-  			location.href="/kanbu/delete.com?memberNum="+$("#index_num").val();
+  			location.href="/kanbu/deleteMember.com?memberNum="+$("#index_num").val();
   		}else{
   			return false;
   		}  		

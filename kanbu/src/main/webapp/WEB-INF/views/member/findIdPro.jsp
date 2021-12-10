@@ -39,7 +39,7 @@ p {
 			</p>
 			<div id="button" align="center">
 			<button class="boxed-btn4" type="button" id="optionModifyBtn"
-			onclick="location.href='/kanbu/updatePw.com'">로그인</button>
+			onclick="location.href='/kanbu/login.com'">로그인</button>
 			</div>
 		</div>
 	</div>
