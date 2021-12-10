@@ -3,6 +3,7 @@ package com.kanbu.controller.info;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -39,17 +40,19 @@ public class InfoController {
 		int currentPage = Integer.parseInt(pageNum);				// 현재 페이지번호
 		int startRow = (currentPage - 1) * pageSize + 1;			// 시작 번호
 		int endRow = currentPage * pageSize;						// 끝 번호
+		placeInfo.setStartRow(startRow);
+		placeInfo.setEndRow(endRow);
 		
-		List<PlaceDTO> placeList = null;							// 장소정보리스트
 		int placeCount = infoImpl.selectPlaceCount();				// 장소정보갯수
+		List<PlaceDTO> placeList = null;							// 장소정보리스트
 		
 		if(placeCount > 0) {
-			placeList = infoImpl.selectPlace();
+			placeList = infoImpl.selectPlace(placeInfo);
 		}
 		
 		request.setAttribute("currentPage", currentPage);
-		request.setAttribute("startRow", startRow);
-		request.setAttribute("endRow", endRow);
+		request.setAttribute("startRow", placeInfo.getStartRow());
+		request.setAttribute("endRow", placeInfo.getEndRow());
 		request.setAttribute("pageSize", pageSize);
 		request.setAttribute("pageNum", pageNum);
 
@@ -84,18 +87,21 @@ public class InfoController {
 		int currentPage = Integer.parseInt(pageNum);
 		int startRow = (currentPage - 1) * pageSize + 1;
 		int endRow = currentPage * pageSize;
+		place_reply.setStartRow(startRow);
+		place_reply.setEndRow(endRow);
+		place_reply.setPlace(index_num);
 		
 		// 해당 장소 댓글 조회
 		int reply_count = infoImpl.selectPlaceReplyCount(index_num);
 		List<Place_ReplyDTO> place_replyList = null;
 		
 		if(reply_count > 0) {
-			place_replyList = infoImpl.selectPlaceReply(index_num);
+			place_replyList = infoImpl.selectPlaceReply(place_reply);
 		}
 		
 		request.setAttribute("currentPage", currentPage);
-		request.setAttribute("startRow", startRow);
-		request.setAttribute("endRow", endRow);
+		request.setAttribute("startRow", place_reply.getStartRow());
+		request.setAttribute("endRow", place_reply.getEndRow());
 		request.setAttribute("pageSize", pageSize);
 		request.setAttribute("pageNum", pageNum);
 		
@@ -111,15 +117,30 @@ public class InfoController {
 	
 	// 해당 장소 댓글 등록
 	@RequestMapping(value="/info/reply.com", method = RequestMethod.POST)
-	public String replyWrite(HttpServletRequest request) throws Exception{
+	public String replyWrite(HttpServletRequest request, HttpSession session) throws Exception{
 		
-		place_reply.setWriter(1);	// 작성자 코드 변경(세션 이용하기)
+		int writer = (Integer)session.getAttribute("index_num");	// 세션으로 회원번호 가져오기			
+		place_reply.setWriter(writer);	
 		place_reply.setPlace(Integer.parseInt(request.getParameter("placeNum")));
 		place_reply.setContent(request.getParameter("content"));
 
 		infoImpl.insertPlaceReply(place_reply);
 		
 		return "redirect:/info.com?placeNum="+place_reply.getPlace();
+	}
+	
+	// 해당 장소 댓글 삭제
+	@RequestMapping(value="/info/replyDelete.com")
+	public String replyDelete(HttpServletRequest request) throws Exception{
+		int placeNum = Integer.parseInt(request.getParameter("placeNum"));
+		int replyNum = Integer.parseInt(request.getParameter("replyNum"));
+		
+		int deleteReplyCount = infoImpl.deletePlaceReplyCount(replyNum);
+		if(deleteReplyCount > 0) {
+			infoImpl.deletePlaceReply(replyNum);
+		}
+		
+		return "redirect:/info.com?placeNum="+placeNum;
 	}
 	
 	

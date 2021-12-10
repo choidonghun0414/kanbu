@@ -7,6 +7,7 @@ import javax.inject.Inject;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
+import com.kanbu.dto.SearchDTO;
 import com.kanbu.dto.info.PlaceDTO;
 
 @Repository
@@ -23,8 +24,20 @@ public class MainDAOImpl implements MainDAO{
 
 	// 키워드 입력하여 장소 검색결과
 	@Override
-	public List<PlaceDTO> selectKeywordPlaceNum(String keyword) throws Exception {
-		return mybatis.selectList("info.selectKeywordPlaceNum", keyword);
+	public List<PlaceDTO> selectKeywordPlaceNum(SearchDTO search) throws Exception {
+		return mybatis.selectList("info.selectKeywordPlaceNum", search);
+	}
+
+	// 최근 등록된 장소 갯수
+	@Override
+	public int recentPlaceCount() throws Exception {
+		return mybatis.selectOne("info.selectPlaceCount");
+	}
+
+	// 최근 등록된 장소 리스트 조회
+	@Override
+	public List<PlaceDTO> recentPlace(PlaceDTO place) throws Exception {
+		return mybatis.selectList("info.selectPlace", place);
 	}
 
 }

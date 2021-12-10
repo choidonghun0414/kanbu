@@ -1,10 +1,14 @@
 package com.kanbu.service.member;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
 
 import com.kanbu.dao.member.MemberDAO;
+import com.kanbu.dto.SearchDTO;
+import com.kanbu.dto.info.Place_ReplyDTO;
 import com.kanbu.dto.member.MemberDTO;
 
 @Service
@@ -93,6 +97,30 @@ public class MemberServiceImpl implements MemberService{
 	@Override
 	public void myInfoUpdate(MemberDTO member) throws Exception {
 		dao.myInfoUpdate(member);
+	}
+
+	// 내가 쓴 여행지 댓글 갯수
+	@Override
+	public int myPlaceReplyCount(int writer) throws Exception {
+		return dao.myPlaceReplyCount(writer);
+	}
+
+	// 내가 쓴 여행지 댓글 목록
+	@Override
+	public List<Place_ReplyDTO> myPlaceReply(Place_ReplyDTO place_reply) throws Exception {
+		return dao.myPlaceReply(place_reply);
+	}
+
+	// 여행지 내가 쓴 댓글 검색 갯수
+	@Override
+	public int myPlaceReplySearchCount(SearchDTO search) throws Exception {
+		return dao.myPlaceReplySearchCount(search);
+	}
+
+	// 여행지 내가 쓴 댓글 검색 결과
+	@Override
+	public List<Place_ReplyDTO> myPlaceReplySearch(SearchDTO search) throws Exception {
+		return dao.myPlaceReplySearch(search);
 	}
 
 }

@@ -1,5 +1,6 @@
 package com.kanbu.controller.member;
 
+import java.util.List;
 import java.util.Random;
 
 import javax.servlet.http.HttpServletRequest;
@@ -15,6 +16,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
+import com.kanbu.dto.SearchDTO;
+import com.kanbu.dto.info.Place_ReplyDTO;
 import com.kanbu.dto.member.MemberDTO;
 import com.kanbu.email.member.Email;
 import com.kanbu.email.member.EmailSender;
@@ -28,13 +31,16 @@ public class MemberController {
 	private MemberService memberImpl = null;
 	@Autowired
 	BCryptPasswordEncoder bCryptPasswordEncoder;
-	
 	@Autowired
 	private MemberDTO member = null;
 	@Autowired
 	private EmailSender emailSender;
 	@Autowired
 	private Email email;
+	@Autowired
+	private Place_ReplyDTO place_reply;
+	@Autowired
+	private SearchDTO search;
 	
 	@RequestMapping(value ="join.com", method = RequestMethod.GET)
 	public String join() throws Exception{
@@ -70,25 +76,19 @@ public class MemberController {
 		int result2 = memberImpl.nickChk(member);
 		int result3 = memberImpl.mailChk(member);	
 	
-	try {
-			
-			if(result == 1 || result2 ==1 || result3==1) {
+		if(result == 1 || result2 ==1 || result3==1) {
 				System.out.println("아디있어");
 				System.out.println("닉넴있어");
 				System.out.println("이메일있어");
 				return "/member/joinForm ";
 				
-			}else if (result == 0 && result2 ==0 && result3 ==0) {
+		}else if (result == 0 && result2 == 0 && result3 ==0) {
 				System.out.println("아디없어");
 				System.out.println("닉넴없어");
 				System.out.println("이메일없어");
 				memberImpl.insertMember(member);
-			}
-			
-		} catch (Exception e) {
-			throw new RuntimeException();
 		}
-			
+			 
 		return "redirect:/main.com";
 		
 	}
@@ -128,7 +128,7 @@ public class MemberController {
 		return "/member/agreePopup";
 	}
 	
-	@RequestMapping(value="login.com", method=RequestMethod.GET)
+	@RequestMapping(value="login.com")
 	public String login() throws Exception{
 		return "/member/loginForm";
 	}	
@@ -225,7 +225,7 @@ public class MemberController {
 		return "/member/findIdPro";
 	}
 	
-	@RequestMapping(value="/updatePw.com", method=RequestMethod.GET)
+	@RequestMapping(value="/updatePw.com")
 	public String updatePw() throws Exception{
 		return "/member/findPwForm";
 	}
@@ -273,7 +273,7 @@ public class MemberController {
 			session.setAttribute("memberDTO", memberView);//세션에 저장
 			
 			System.out.println("비번 생성성공");
-			return "/member/findPassword";
+			return "redirect:/findPassword.com";
 		}
 	}
 	
@@ -291,7 +291,7 @@ public class MemberController {
 			System.out.println("새로운 비밀번호 " + memberView.getPw2() + " 입니다.");
 			System.out.println(memberView.getMail()+"@"+memberView.getDomain());
 			System.out.println("이메일 발송됐음");
-			return "/member/loginForm";
+			return "/member/findPassword";
 	}
 	
 	@ResponseBody
@@ -302,7 +302,7 @@ public class MemberController {
 	}
 
 	
-	@RequestMapping(value="/deleteMember.com", method = RequestMethod.GET)
+	@RequestMapping(value="/deleteMember.com")
 	public String deleteMember() throws Exception{
 		return "/member/deleteForm";
 	}
@@ -324,6 +324,91 @@ public class MemberController {
 			System.out.println("탈퇴실패");
 			return "redirect:/deleteMember.com" ;
 
+	}
+	
+	// 마이페이지 내가 쓴 여행지 댓글 목록 페이지
+	@RequestMapping(value="/mypage/info/placeReply.com")
+	public String placeReplyInfo(HttpServletRequest request, HttpSession session, Model model) throws Exception{
+		int pageSize = 10;											// 한페이지에 보여줄 정보 갯수
+		String pageNum = request.getParameter("pageNum");			// view에서 넘어온 페이지번호
+		if(pageNum == null) {										// view에서 넘어온 페이지번호가 없으면 1로 대입
+			pageNum = "1";
+		}
+		
+		int currentPage = Integer.parseInt(pageNum);				// 현재 페이지번호
+		int startRow = (currentPage - 1) * pageSize + 1;			// 시작 번호
+		int endRow = currentPage * pageSize;						// 끝 번호
+		place_reply.setStartRow(startRow);
+		place_reply.setEndRow(endRow);
+		
+		int writer = (Integer)session.getAttribute("index_num");
+		int myPlaceReplyCount = 0;
+		List<Place_ReplyDTO> myPlaceReplyList = null;
+		if(writer > 0) {
+			place_reply.setWriter(writer);
+			myPlaceReplyCount = memberImpl.myPlaceReplyCount(writer);
+		}
+		if(myPlaceReplyCount > 0) {
+			myPlaceReplyList = memberImpl.myPlaceReply(place_reply);
+		}
+		
+		
+		request.setAttribute("currentPage", currentPage);
+		request.setAttribute("startRow", place_reply.getStartRow());
+		request.setAttribute("endRow", place_reply.getEndRow());
+		request.setAttribute("pageSize", pageSize);
+		request.setAttribute("pageNum", pageNum);
+		
+		model.addAttribute("myPlaceReplyCount", myPlaceReplyCount);
+		model.addAttribute("myPlaceReplyList", myPlaceReplyList);
+		
+		
+		return "/member/myPlaceReplyList";
+	}
+	
+	// 마이페이지 내가 쓴 여행지 댓글 검색 결과 목록 페이지
+	@RequestMapping("/mypage/info/placeReply/search.com")
+	public String myPlaceReplySearch(HttpServletRequest request, HttpSession session, Model model) throws Exception{
+		int pageSize = 10;											// 한페이지에 보여줄 정보 갯수
+		String pageNum = request.getParameter("pageNum");			// view에서 넘어온 페이지번호
+		if(pageNum == null) {										// view에서 넘어온 페이지번호가 없으면 1로 대입
+			pageNum = "1";
+		}
+		
+		int currentPage = Integer.parseInt(pageNum);				// 현재 페이지번호
+		int startRow = (currentPage - 1) * pageSize + 1;			// 시작 번호
+		int endRow = currentPage * pageSize;						// 끝 번호
+		search.setStartRow(startRow);
+		search.setEndRow(endRow);
+		
+		String thema = request.getParameter("thema");
+		String keyword = request.getParameter("keyword");
+		search.setThema(thema);
+		search.setKeyword(keyword);
+		
+		int writer = (Integer)session.getAttribute("index_num");
+		int myPlaceReplyCount = 0;
+		List<Place_ReplyDTO> myPlaceReplyList = null;
+
+		if(writer > 0) {
+			search.setWriter(writer);
+			myPlaceReplyCount = memberImpl.myPlaceReplySearchCount(search);
+		}
+	
+		if(myPlaceReplyCount > 0) {
+			myPlaceReplyList = memberImpl.myPlaceReplySearch(search);
+		}
+		
+		request.setAttribute("currentPage", currentPage);
+		request.setAttribute("startRow", place_reply.getStartRow());
+		request.setAttribute("endRow", place_reply.getEndRow());
+		request.setAttribute("pageSize", pageSize);
+		request.setAttribute("pageNum", pageNum);
+		
+		model.addAttribute("myPlaceReplyCount", myPlaceReplyCount);
+		model.addAttribute("myPlaceReplyList", myPlaceReplyList);
+
+		return "/member/myPlaceReplyList";
 	}
 
 }

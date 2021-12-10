@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import com.kanbu.dto.SearchDTO;
 import com.kanbu.dto.info.PlaceDTO;
+import com.kanbu.dto.info.Place_ReplyDTO;
 import com.kanbu.dto.member.MemberDTO;
 
 @Repository
@@ -63,6 +64,30 @@ public class AdminDAOImpl implements AdminDAO{
 	@Override
 	public List<PlaceDTO> selectKeywordPlace(SearchDTO search) throws Exception {
 		return mybatis.selectList("admin.selectKeywordPlace", search);
+	}
+
+	// 등록된 여행지 전체 댓글수 검색 
+	@Override
+	public int selectTotalPlaceReplyCount() throws Exception {
+		return mybatis.selectOne("admin.selectTotalPlaceReplyCount");
+	}
+
+	// 등록된 여행지 전체 댓글 검색
+	@Override
+	public List<Place_ReplyDTO> selectTotalPlaceReply(Place_ReplyDTO place_reply) throws Exception {
+		return mybatis.selectList("admin.selectTotalPlaceReply", place_reply);
+	}
+
+	// 등록된 여행지 댓글 입력 검색결과 갯수
+	@Override
+	public int selectKeywordPlaceReplyCount(SearchDTO search) throws Exception {
+		return mybatis.selectOne("admin.selectKeywordPlaceReplyCount", search);
+	}
+
+	// 등록된 여행지 댓글 입력 검색
+	@Override
+	public List<Place_ReplyDTO> selectKeywordPlaceReply(SearchDTO search) throws Exception {
+		return mybatis.selectList("admin.selectKeywordPlaceReply", search);
 	}
 
 

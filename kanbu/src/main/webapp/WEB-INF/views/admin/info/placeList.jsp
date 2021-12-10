@@ -170,8 +170,8 @@
             </a>
             <div class="collapse" id="auth">
               <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href="/kanbu/admin/memberInfo.com">조회/수정/탈퇴</a></li>
-                <li class="nav-item"> <a class="nav-link" href="/kanbu/admin/adminJoin.com">관리자 등록</a></li>
+                <li class="nav-item"> <a class="nav-link" href="/kanbu/admin/memberInfo.com">회원 조회</a></li>
+                <li class="nav-item"> <a class="nav-link" href="/kanbu/join.com">관리자 등록</a></li>
               </ul>
             </div>
           </li>
@@ -183,8 +183,9 @@
             </a>
             <div class="collapse" id="icons">
               <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href="/kanbu/admin/placeInfo.com">조회/수정/삭제</a></li>
+                <li class="nav-item"> <a class="nav-link" href="/kanbu/admin/placeInfo.com">조회/수정</a></li>
                 <li class="nav-item"> <a class="nav-link" href="/kanbu/admin/placeAdd.com">여행지 등록</a></li>
+                <li class="nav-item"> <a class="nav-link" href="/kanbu/admin/placeReply.com">여행지 댓글 관리</a></li>
               </ul>
             </div>
           </li>
@@ -236,7 +237,7 @@
                       <thead align="center">
                         <tr>
                           <th>No.</th>
-                          <th>장소명</th>
+                          <th>장소</th>
                           <th>주소</th>
                           <th>전화번호</th>
                           <th>어른요금</th>
@@ -245,6 +246,7 @@
                           <th>마감시간</th>
                           <th>좋아요</th>
                           <th>조회수</th>
+                          <th>수정</th>
                         </tr>
                       </thead>
                       <tbody align="center">
@@ -279,6 +281,12 @@
                           				</c:if></td>
                           			<td>${place.good}</td>
                          			<td>${place.views}</td>
+                         			<td>
+                         				<button type="button" class="btn btn-inverse-info btn-icon"
+                         						onclick="location.href='/kanbu/admin/placeInfo/edit.com?placeNum=${place.index_num}'">
+                        					<i class="typcn typcn-edit"></i>
+                      					</button>
+                      				</td>
                         		</tr>
                         	</c:forEach>
                         </c:if>
@@ -333,7 +341,7 @@
                 <form name="searchPlace" id="searchPlace" action="/kanbu/admin/search.com" method="post" style="text-align: center;">
 					<div class="form-group">
 						<select name="thema" id="thema" class="form-control-sm">
-                  	   		<option value="name" selected>장소명</option>
+                  	   		<option value="name" selected>장소</option>
                   	   	</select>
                   	   	<input type="text" name="keyword" id="keyword" class="form-control-sm"/>
                   	   	<button class="btn btn-sm btn-secondary" type="button" onclick="search();">검색</button>

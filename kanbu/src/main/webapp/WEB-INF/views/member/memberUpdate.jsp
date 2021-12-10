@@ -10,7 +10,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>mypage</title>
+    <title>mypage | 회원정보수정</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -82,12 +82,11 @@
                                         		<li><a href="/kanbu/mypage.com"> <i class="fa fa-user"></i> </a></li>
                                         	</c:if>
                                             <c:if test="${sessionScope.status > 0}">
-                                        		<li><a href="logout.com" onclick="logout();"> <i class="fa fa-unlock"></i> </a></li>
+                                        		<li><a href="/kanbu/logout.com" onclick="logout();"> <i class="fa fa-unlock"></i> </a></li>
                                         	</c:if>
                                         	<c:if test="${empty(sessionScope.status)}">
-                                        		<li><a href="login.com"> <i class="fa fa-lock"></i> </a></li>
-                                        	</c:if>
-                                            
+                                        		<li><a href="/kanbu/login.com"> <i class="fa fa-lock"></i> </a></li>
+                                        	</c:if>  
                                         </ul>
                                     </div>
                                 </div>
@@ -533,11 +532,11 @@ $(document).ready(function(){
   </script>
   
   <script type="text/javascript">
-  	function fn_pwChange(){
+  	function fn_delete(){
   		var result = confirm("회원 탈퇴하시겠습니까?");
   		
   		if(result){
-  			location.href="/kanbu/delete.com?memberNum="+$("#index_num").val();
+  			location.href="/kanbu/deleteMember.com?memberNum="+$("#index_num").val();
   		}else{
   			return false;
   		}  		

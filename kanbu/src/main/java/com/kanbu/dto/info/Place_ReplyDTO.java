@@ -7,20 +7,26 @@ import java.sql.Timestamp;
  * 
  * 	index_num : 댓글 고유 번호
  *  place : 장소 번호
+ *  name : 장소명
  *  writer : 작성자 번호
  *  nick : 닉네임
  *  content : 내용
  *  reg_date : 작성날짜
+ *  startRow : 시작댓글(페이징처리)
+ *  endRow : 마지막댓글(페이징처리)
  */
 
 public class Place_ReplyDTO {
 	
 	private int index_num;
 	private int place;
+	private String name;
 	private int writer;
 	private String nick;
 	private String content;
 	private Timestamp reg_date;
+	private int startRow;
+	private int endRow;
 	
 	
 	public int getIndex_num() {
@@ -35,6 +41,13 @@ public class Place_ReplyDTO {
 	}
 	public void setPlace(int place) {
 		this.place = place;
+	}
+	
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
 	}
 	
 	public int getWriter() {
@@ -63,6 +76,20 @@ public class Place_ReplyDTO {
 	}
 	public void setReg_date(Timestamp reg_date) {
 		this.reg_date = reg_date;
+	}
+	
+	public int getStartRow() {
+		return startRow;
+	}
+	public void setStartRow(int startRow) {
+		this.startRow = startRow;
+	}
+	
+	public int getEndRow() {
+		return endRow;
+	}
+	public void setEndRow(int endRow) {
+		this.endRow = endRow;
 	}
 	
 

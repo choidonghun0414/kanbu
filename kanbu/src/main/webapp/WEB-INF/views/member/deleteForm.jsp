@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c"%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %> 
 
 <!doctype html>
 <html class="no-js" lang="zxx">
@@ -45,7 +45,7 @@ div{ margin-top:15%; text-align: center;}
 					return false;
 				}
 				if(!$("input:checked[id='deletechk']").is(":checked")){
-					alert("이용약관에 동의해주세요.");
+					alert("안내사항 체크해주세요.");
 					$("#deletechk").focus();
 					return false;
 				}

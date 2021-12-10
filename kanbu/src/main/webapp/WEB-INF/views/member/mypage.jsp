@@ -148,13 +148,17 @@
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-6">
-                    <div class="single_travel text-center" style="cursor:pointer;">
+                    <div class="single_travel text-center">
                         <div class="icon">
                             <img src="resources/img/svg_icon/review.svg" alt="">
                         </div>
                         <h3>나의 게시판</h3>
-                        <p>후기글 조회</p>
-                        <p>댓글 조회</p>
+                        <a href="/kanbu/mypage/board/reviewInfo.com" class="genric-btn link" 
+                           style="font-size: 16px; width: 350px; height: 28px;">후기글 조회</a>
+                        <a href="/kanbu/mypage/board/reviewReplyInfo.com" class="genric-btn link" 
+                           style="font-size: 16px; width: 350px; height: 28px;">후기댓글 조회</a>
+                        <a href="/kanbu/mypage/info/placeReply.com" class="genric-btn link" 
+                           style="font-size: 16px; width: 350px; height: 28px;">여행지댓글 조회</a>
                     </div>
                 </div>
             </div>

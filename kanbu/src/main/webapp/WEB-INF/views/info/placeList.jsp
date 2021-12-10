@@ -63,11 +63,11 @@
                                             <li><a class="active" href="/kanbu/main.com">home</a></li>
                                             <li><a href="about.html">일정만들기</a></li>
                                             <li><a href="/kanbu/place.com">여행지정보</a></li>
-                                            <li><a href="#">게시판 <i class="ti-angle-down"></i></a>
+                                            <li><a href="/kanbu/board/reviewList.com">게시판 <i class="ti-angle-down"></i></a>
                                                 <ul class="submenu">
-                                                        <li><a href="destination_details.html">여행후기</a></li>
-                                                        <li><a href="elements.html">공지사항</a></li>
-                                                        <li><a href="elements.html">자주하는질문</a></li>
+                                                        <li><a href="/kanbu/board/reviewList.com">여행공유</a></li>
+                                                        <li><a href="/kanbu/board/noticeList.com">공지사항</a></li>
+                                                        <li><a href="/kanbu/board/questionList.com">자주하는질문</a></li>
                                                 </ul>
                                             </li>
                                         </ul>
@@ -154,7 +154,7 @@
                             		</div>
                         		</article>
                         	</c:forEach>
-                        </c:if>
+                       	</c:if>
                         
 						<!-- 페이지 번호 나타내기 -->
 						<c:if test="${placeCount > 0}">
@@ -168,54 +168,59 @@
 							<c:if test="${endPage > pageCount}">
 								<c:set var="endPage" value="${pageCount}" />
 							</c:if>			 
-						</c:if>
 						
-                        <nav class="blog-pagination justify-content-center d-flex">
-                        	<ul class="pagination">
-                        		<c:if test="${startPage > 5}">
-                               		<li class="page-item">
-                               			<a href="/kanbu/place.com?pageNum=${startPage-5}" class="page-link" aria-label="Previous">
-                                       		<i class="ti-angle-left"></i>
-                                   		</a>	
-                               		</li>
-                               	</c:if>
-                               	
-                               	<c:forEach var="i" begin="${startPage}" end="${endPage}">
-                               		<li class="page-item">
-                               			<a href="/kanbu/place.com?pageNum=${i}" class="page-link">${i}</a>
-                               		</li>
-                             	</c:forEach>
-                             	
-                             	<c:if test="${endPage < pageCount}">
-                               		<li class="page-item">
-                               			<a href="/kanbu/place.com?pageNum=${startPage+5}" class="page-link" aria-label="Next">
-                                       		<i class="ti-angle-right"></i>
-                                   		</a>
-                               		</li>
-                               	</c:if>
-                            </ul>
-                        </nav>
+	                        <nav class="blog-pagination justify-content-center d-flex">
+	                        	<ul class="pagination">
+	                        		<c:if test="${startPage > 5}">
+	                               		<li class="page-item">
+	                               			<a href="/kanbu/place.com?pageNum=${startPage-5}" class="page-link" aria-label="Previous">
+	                                       		<i class="ti-angle-left"></i>
+	                                   		</a>	
+	                               		</li>
+	                               	</c:if>
+	                               	
+	                               	<c:forEach var="i" begin="${startPage}" end="${endPage}">
+	                               		<li class="page-item">
+	                               			<a href="/kanbu/place.com?pageNum=${i}" class="page-link">${i}</a>
+	                               		</li>
+	                             	</c:forEach>
+	                             	
+	                             	<c:if test="${endPage < pageCount}">
+	                               		<li class="page-item">
+	                               			<a href="/kanbu/place.com?pageNum=${startPage+5}" class="page-link" aria-label="Next">
+	                                       		<i class="ti-angle-right"></i>
+	                                   		</a>
+	                               		</li>
+	                               	</c:if>
+	                            </ul>
+	                        </nav>
+                        </c:if>
                     </div>
                 </div>
+                
+                <!-- 사이드바 영역 -->
                 <div class="col-lg-4">
                     <div class="blog_right_sidebar">
+                    	<!-- 검색 영역 -->
                         <aside class="single_sidebar_widget search_widget">
-                            <form action="#">
+                            <form action="/kanbu/search.com" name="searchPlace" id="searchPlace" method="post">
                                 <div class="form-group">
                                     <div class="input-group mb-3">
-                                        <input type="text" class="form-control" placeholder='Search Keyword'
-                                            onfocus="this.placeholder = ''"
-                                            onblur="this.placeholder = 'Search Keyword'">
+                                        <input type="text" class="form-control" name="keyword" id="keyword"
+                                        	   placeholder='검색할 장소를 입력해주세요..'
+                                               onfocus="this.placeholder = ''"
+                                               onblur="this.placeholder = '검색할 장소를 입력해주세요..'">
                                         <div class="input-group-append">
                                             <button class="btn" type="button"><i class="ti-search"></i></button>
                                         </div>
                                     </div>
                                 </div>
                                 <button class="button rounded-0 primary-bg text-white w-100 btn_1 boxed-btn"
-                                    type="submit">Search</button>
+                                    	type="submit" onclick="return keywordValueChk();">Search</button>
                             </form>
                         </aside>
-
+						
+						<!-- 카테고리 영역 -->
                         <aside class="single_sidebar_widget post_category_widget">
                             <h4 class="widget_title">Category</h4>
                             <ul class="list cat-list">
@@ -257,45 +262,30 @@
                                 </li>
                             </ul>
                         </aside>
-
+						
+						<!-- 최근 등록된 장소 영역 -->
                         <aside class="single_sidebar_widget popular_post_widget">
-                            <h3 class="widget_title">Recent Post</h3>
-                            <div class="media post_item">
-                                <img src="resources/img/post/post_1.png" alt="post">
-                                <div class="media-body">
-                                    <a href="single-blog.html">
-                                        <h3>From life was you fish...</h3>
-                                    </a>
-                                    <p>January 12, 2019</p>
-                                </div>
-                            </div>
-                            <div class="media post_item">
-                                <img src="resources/img/post/post_2.png" alt="post">
-                                <div class="media-body">
-                                    <a href="single-blog.html">
-                                        <h3>The Amazing Hubble</h3>
-                                    </a>
-                                    <p>02 Hours ago</p>
-                                </div>
-                            </div>
-                            <div class="media post_item">
-                                <img src="resources/img/post/post_3.png" alt="post">
-                                <div class="media-body">
-                                    <a href="single-blog.html">
-                                        <h3>Astronomy Or Astrology</h3>
-                                    </a>
-                                    <p>03 Hours ago</p>
-                                </div>
-                            </div>
-                            <div class="media post_item">
-                                <img src="resources/img/post/post_4.png" alt="post">
-                                <div class="media-body">
-                                    <a href="single-blog.html">
-                                        <h3>Asteroids telescope</h3>
-                                    </a>
-                                    <p>01 Hours ago</p>
-                                </div>
-                            </div>
+                            <h3 class="widget_title">Recent Place</h3>
+                            <c:if test='${placeCount == 0}'>
+                            	<div class="media post_item">
+                                	<div class="media-body">
+                                    	<h3>최근 등록된 장소가 없습니다.</h3>
+                                	</div>
+                            	</div>
+                            </c:if>
+                            <c:if test='${placeCount > 0}'>
+                            	<c:forEach var="place" items="${placeList}" end="5">
+                            		<div class="media post_item">
+                                		<img width="80px" height="80px" src="${place.picture1}" alt="place">
+                                		<div class="media-body">
+                                    		<a href="/kanbu/info.com?placeNum=${place.index_num}">
+                                        		<h3>${place.name}</h3>
+                                    		</a>
+                                    		<p>${place.addr}</p>
+                                		</div>
+                            		</div>
+                            	</c:forEach>
+                            </c:if>
                         </aside>
                     </div>
                 </div>
@@ -498,6 +488,20 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
              rightIcon: '<span class="fa fa-caret-down"></span>'
          }
         });
+    </script>
+    
+    <script type="text/javascript">
+    	function keywordValueChk(){
+			var place = document.searchPlace.keyword.value;
+			console.log(place);
+    		
+    		if(place == null || place == ""){
+    			alert("검색할 장소를 입력해주세요.");
+    			return false;
+    		}else{
+    			window.location = '/kanbu/search.com?keyword='+place;
+    		}
+    	}
     </script>
 </body>
 

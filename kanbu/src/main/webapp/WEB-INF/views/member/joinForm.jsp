@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>    
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %> 
     
     
 
@@ -116,7 +116,12 @@
     
     <div class="destination_banner_wrap overlay">
         <div class="destination_text text-center">
-            <h3>Join</h3>
+        	<c:if test="${empty (sessionScope.status)}">
+            	<h3>Join</h3>
+            </c:if>
+            <c:if test="${sessionScope.status == 100}">
+            	<h3>Admin Join</h3>
+            </c:if>
         </div>
     </div>
 

@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.kanbu.dto.SearchDTO;
 import com.kanbu.dto.info.PlaceDTO;
 import com.kanbu.service.MainService;
 
@@ -20,6 +21,12 @@ public class MainController {
 	
 	@Autowired
 	private MainService mainImpl;
+	
+	@Autowired
+	private SearchDTO search;
+	
+	@Autowired
+	private PlaceDTO place;
 	
 	@RequestMapping("main.com")
 	public String main() throws Exception{
@@ -37,13 +44,23 @@ public class MainController {
 		int currentPage = Integer.parseInt(pageNum);				// 현재 페이지번호
 		int startRow = (currentPage - 1) * pageSize + 1;			// 시작 번호
 		int endRow = currentPage * pageSize;						// 끝 번호
+		search.setStartRow(startRow);
+		search.setEndRow(endRow);
+		place.setStartRow(startRow);
+		place.setEndRow(endRow);
 		
-		String place = request.getParameter("keyword");
-		int searchCount = mainImpl.selectKeywordCount(place);
+		String keyword = request.getParameter("keyword");
+		int searchCount = mainImpl.selectKeywordCount(keyword);
+		int recentPlaceCount = mainImpl.recentPlaceCount();
 		List<PlaceDTO> searchList = null;
+		List<PlaceDTO> recentPlaceList = null;
 		
 		if(searchCount > 0) {
-			searchList = mainImpl.selectKeywordPlaceNum(place);
+			search.setKeyword(keyword);
+			searchList = mainImpl.selectKeywordPlaceNum(search);
+		}
+		if(recentPlaceCount > 0) {
+			recentPlaceList = mainImpl.recentPlace(place);
 		}
 		
 		request.setAttribute("currentPage", currentPage);
@@ -54,7 +71,10 @@ public class MainController {
 		
 		model.addAttribute("searchCount", searchCount);
 		model.addAttribute("searchList", searchList);
-		model.addAttribute("place", place);
+		model.addAttribute("keyword", keyword);
+		
+		model.addAttribute("recentPlaceCount", recentPlaceCount);
+		model.addAttribute("recentPlaceList", recentPlaceList);
 		
 		return "/main/searchList";
 	}

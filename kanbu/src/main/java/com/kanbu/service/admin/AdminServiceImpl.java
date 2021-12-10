@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.kanbu.dao.admin.AdminDAO;
 import com.kanbu.dto.SearchDTO;
 import com.kanbu.dto.info.PlaceDTO;
+import com.kanbu.dto.info.Place_ReplyDTO;
 import com.kanbu.dto.member.MemberDTO;
 
 @Service
@@ -65,6 +66,29 @@ public class AdminServiceImpl implements AdminService{
 		return adminDAO.selectKeywordPlace(search);
 	}
 
+	// 등록된 여행지 전체 댓글수 검색 
+	@Override
+	public int selectTotalPlaceReplyCount() throws Exception {
+		return adminDAO.selectTotalPlaceReplyCount();
+	}
+
+	// 등록된 여행지 전체 댓글 검색
+	@Override
+	public List<Place_ReplyDTO> selectTotalPlaceReply(Place_ReplyDTO place_reply) throws Exception {
+		return adminDAO.selectTotalPlaceReply(place_reply);
+	}
+
+	// 등록된 여행지 댓글 입력 검색결과 갯수
+	@Override
+	public int selectKeywordPlaceReplyCount(SearchDTO search) throws Exception {
+		return adminDAO.selectKeywordPlaceReplyCount(search);
+	}
+
+	// 등록된 여행지 댓글 입력 검색
+	@Override
+	public List<Place_ReplyDTO> selectKeywordPlaceReply(SearchDTO search) throws Exception {
+		return adminDAO.selectKeywordPlaceReply(search);
+	}
 
 
 

@@ -7,6 +7,7 @@ package com.kanbu.dto;
  *  keyword : 검색어
  *  startRow : 처음검색결과(페이징처리)
  *  endRow : 마지막검색결과(페이징처리)
+ *  writer : 작성자번호
  */
 
 public class SearchDTO {
@@ -15,6 +16,7 @@ public class SearchDTO {
 	private String keyword;
 	private int startRow;
 	private int endRow;
+	private int writer;
 	
 	public String getThema() {
 		return thema;
@@ -43,6 +45,14 @@ public class SearchDTO {
 	public void setEndRow(int endRow) {
 		this.endRow = endRow;
 	}
+	
+	public int getWriter() {
+		return writer;
+	}
+	public void setWriter(int writer) {
+		this.writer = writer;
+	}
+	
 	
 	
 }

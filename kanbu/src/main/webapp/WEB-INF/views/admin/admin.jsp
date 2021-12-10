@@ -148,25 +148,24 @@
             
             <div class="row">
                 <div class="col-xl-3 col-md-6 col-lg-3">
-                    <div class="single_travel text-center" style="cursor:pointer;" 
-                         onclick="location.href ='/kanbu/admin/memberInfo.com'">
+                    <div class="single_travel text-center">
                         <div class="icon">
                             <img src="resources/img/svg_icon/accounts.svg" alt="">
                         </div>
                         <h3>회원 관리</h3>
-                        <p>조회/수정/탈퇴</p>
-                        <p>관리자 등록</p>
+                        <p onclick="location.href ='/kanbu/admin/memberInfo.com'" style="cursor:pointer;">회원 조회</p>
+                        <p onclick="location.href ='/kanbu/join.com'" style="cursor:pointer;">관리자 등록</p>
                     </div>
                 </div>
                 <div class="col-xl-3 col-md-6 col-lg-3">
-                    <div class="single_travel text-center" style="cursor:pointer;" 
-                         onclick="location.href ='/kanbu/admin/placeInfo.com'">
+                    <div class="single_travel text-center">
                         <div class="icon">
                             <img src="resources/img/svg_icon/place.svg" alt="">
                         </div>
                         <h3>여행지 관리</h3>
-                        <p>조회/수정/삭제</p>
-                        <p>여행지 등록</p>
+                        <p onclick="location.href ='/kanbu/admin/placeInfo.com'" style="cursor:pointer;">조회/수정</p>
+                        <p onclick="location.href ='/kanbu/admin/placeAdd.com'" style="cursor:pointer;">여행지 등록</p>
+                        <p onclick="location.href ='/kanbu/admin/placeReply.com'" style="cursor:pointer;">여행지 댓글 관리</p>
                     </div>
                 </div>
                 <div class="col-xl-3 col-md-6 col-lg-3">
