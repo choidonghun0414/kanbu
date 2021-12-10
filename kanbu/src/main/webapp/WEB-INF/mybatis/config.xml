@@ -16,7 +16,7 @@
 		<typeAlias type="com.kanbu.dto.info.PlaceDTO" alias="placeDTO"/>
 		<typeAlias type="com.kanbu.dto.info.Place_ReplyDTO" alias="place_replyDTO" />
 		<typeAlias type="com.kanbu.dto.board.BoardDTO" alias="boardDTO"/>
-
+		<typeAlias type="com.kanbu.dto.SearchDTO" alias="searchDTO"/>		
 	</typeAliases>
 	
 	
@@ -26,5 +26,6 @@
 		<mapper resource="/com/kanbu/sql/plan/myPlan.xml" />
 		<mapper resource="/com/kanbu/sql/info/infoSQL.xml" />
 		<mapper resource="/com/kanbu/sql/board/boardSQL.xml" />
+		<mapper resource="/com/kanbu/sql/admin/adminSQL.xml" />
 	</mappers>
 </configuration>  	
