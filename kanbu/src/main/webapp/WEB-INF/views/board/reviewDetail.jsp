@@ -9,22 +9,9 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>noticeUpdateForm</title>
-    
+    <title>ReviewDetail</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-  	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-	<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet"> 
-  	<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
-  	<script src=" https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.18/lang/summernote-ko-KR.min.js"></script>
-	<script src="../resources/js/summernote-lite.js"></script>
-	<script src="../resources/js/summernote-ko-KR.js"></script>
-	
-
-	
 
     <!-- <link rel="manifest" href="site.webmanifest"> -->
     <link rel="shortcut icon" type="image/x-icon" href="../resources/img/favicon.png">
@@ -33,6 +20,7 @@
     <!-- CSS here -->
     <link rel="stylesheet" href="../resources/css/bootstrap.min.css">
     <link rel="stylesheet" href="../resources/css/bootstrap1.min.css">
+    <link rel="stylesheet" href="../resources/css/bootstrap2.min.css">
     <link rel="stylesheet" href="../resources/css/owl.carousel.min.css">
     <link rel="stylesheet" href="../resources/css/magnific-popup.css">
     <link rel="stylesheet" href="../resources/css/font-awesome.min.css">
@@ -43,30 +31,16 @@
     <link rel="stylesheet" href="../resources/css/animate.css">
     <link rel="stylesheet" href="../resources/css/slicknav.css">
     <link rel="stylesheet" href="../resources/css/style.css">
-    <link rel="stylesheet" href="../resources/css/summernote-lite.css">
     <!-- <link rel="stylesheet" href="css/responsive.css"> -->
     
 <style>
-    /* 푸터 사이즈 조절, 컨텐츠와 간격 조절 */
-    .footer .footer_top {
-   		margin-top: 110px;
-   		padding-top: 50px;
-   		padding-bottom: 30px;
-	}
-	
-	/* 페이지 내부 게시판 제목 표시 (공지사항, 자주 하는 질문 등) */
-	h3.md-30 {
-    text-align: center;
-    margin-top: 60px;
-    margin-bottom: 60px;
-    font-size: 60px;
-	}
 
-	.progress-table .country {
-	    width: 300;
+	.logo {
+		width: 140px;
+		height: 56px;
 	}
 	
-	a {
+    a {
 	    color: #007bff;
 	    text-decoration: none;
 	    background-color: transparent;
@@ -74,23 +48,44 @@
 	    color: inherit;
 	}
 	
-	.search-form {
-		margin-top: 50px;
+	h3.md-30 {
+	    text-align: center;
+	    margin-top: 60px;
+	    margin-bottom: 60px;
+	    font-size: 35px;
 	}
 	
+	.mb_70 {
+    	margin-bottom: 30px;
+	}
+	
+	/* 검색 input창 서타일 */
+	input.form-control {
+		margin-bottom: 50px;
+		width: 300px;
+	}
 	
 	/* 버튼 왼쪽의 여백 */
 	.input-group-btn{
-		margin-top: 9px;
 		margin-left: 5px;
 	}
 	
-	.border {
-		width: 75%;
+	/* 푸터 사이즈 조절, 컨텐츠와 간격 조절 */
+    .footer .footer_top {
+   		margin-top: 110px;
+   		padding-top: 50px;
+   		padding-bottom: 30px;
+	}
+	
+	.notice-contents{
+		height: 100%;
+	}
+	
+	.notice-contents > td{
+		text-align: center;
+		padding: 30px;
 	}
 </style>
-
-
 </head>
 
 <body>
@@ -157,67 +152,63 @@
     </header>
     <!-- header-end -->
 
-    <!-- bradcam_area  -->
-    <div class="bradcam_area bradcam_bg_4">
-        <div class="container">
-            <div class="row">
-                <div class="col-xl-12">
-                    <div class="bradcam_text text-center">
-                        <h3>Any Where, Wherever</h3>
-                        <p></p>
-                        <p>Wherever You Want To Go, With Kanbu</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    
-    <!--/ bradcam_area  -->
-	<div class="container box_1170">
-		<h3 class="md-30">공지사항</h3>
-	</div>
 
-	<!-- ================== 게시글 등록 폼 =================== -->
-	<!-- ================== 게시글 등록 폼 =================== -->
-	<div class="container">
-		<!-- <form action="/kanbu/board/noticeUpdatePro.com" name="noticeForm" method="post"> -->
-		<form action="/kanbu/board/noticeUpdatePro.com?noticeNum=${noticeDetail.index_num}" method="post">
-			<table class="table table-write" id="add_mt">
-				<colgroup>
-					<col style="width:120px" />
-					<col style="width:*" />
-				</colgroup>
-				
-				<tr>
-					<th>제목</th>
-						<td>
-							<input value="${noticeDetail.title}" type="text" class="form-control"
-									id="title" name="title" required="required" />
-						</td>
-				</tr>
-			</table>
+    <!-- bradcam_area  -->
+	<div class="container box_1170">
+		<h3 class="md-30"> ${selectReview.nick}님의 여행 리뷰</h3>
+	</div>
 	
-			<textarea id="summernote" name="content">${noticeDetail.content}</textarea>
-			
-				<script>
-			 		//썸머노트에 값넣기
-					$('#summernote').summernote({
-						height : 500,
-						disableResizeEditor: true,
-						lang : "ko-KR",
-						focus: true,
-						
-					});
-				</script>
-				<!-- ============글 수정 완료 버튼 ============ -->
-			<div class="d-flex flex-row-reverse">
-				<span class="input-group-btn">		
-					<button type="submit" id="a_save_btn" 
-						    class="btn btn-secondary">수정 완료</button>
+	
+<!-- =================== 게시글 보기 =================== -->
+<div class="container">
+	<form action="/kanbu/board/reviewDetailPro.com" name="reviewForm" method="post">
+		<div class="row">
+			<div class="col-sm-12">
+        		<table class="table table-bordered table-condensed">
+		        	<colgroup>
+						<col width= "9%" />
+						<col width= "80%" />
+					</colgroup>
+		        		<thead>
+				        	<tr>
+				        		<td scope="col">제목</td>
+				        		<td scope="col" style="text-align: left;">&nbsp;&nbsp;&nbsp;${selectReview.title}</td>
+				        	</tr>
+				        	<tr>
+				        		<td scope="col">작성자</td>
+				        		<td scope="col" style="text-align: left;">&nbsp;&nbsp;&nbsp;${selectReview.nick}</td>
+				        	</tr>
+		        		</thead>
+		        			<tr class="notice-contents">
+	        					<td colspan="2" scope="colgroup">${selectReview.content}</td>
+	        				</tr>
+	        				<tr>
+	        					<td colspan="2" style="text-align: left;">
+	        						<c:forEach var="tag" items="${tagList}">
+	        							<c:if test="${selectReview.index_num == tag.index_num}">
+	        								#${tag.name}&nbsp;
+	        							</c:if>
+	        						</c:forEach>
+	        					</td>
+	        				</tr>
+	    		</table>
+        	</div>
+        	<!-- ================== 목록, 수정 버튼 ================== -->
+        	<div class="d-flex flex-row-reverse">
+				<span class="input-group-btn">
+					<a class="btn btn-secondary" href="/kanbu/board/noticeList.com" role="button">목록</a>
+					<a class="btn btn-secondary" href="/kanbu/board/noticeUpdateForm.com?noticeNum=${noticeDetail.index_num}" role="button">수정</a>
+					<a class="btn btn btn-danger" href="/kanbu/board/noticeDeletePro.com?noticeNum=${noticeDetail.index_num}" role="button"
+						onclick="alert('모든 내용이 삭제됩니다.');return alert('삭제되었습니다!');">삭제</a>
+						<!-- <button type="submit" id="a_save_btn"
+								class="btn btn-secondary">수정</button> -->
 				</span>
 			</div>
-		</form>
-	</div>
+    	</div>
+    </form>  
+</div>
+<!-- =================== 게시글 보기 끝 =================== -->
+
 
 
 
@@ -414,7 +405,7 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
         });
     </script>
     
-    	
+  
     </body>
     
     </html>

@@ -9,7 +9,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>noticeUpdateForm</title>
+    <title>reviewWrite</title>
     
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -17,9 +17,10 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
   	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  	
 	<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet"> 
   	<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
-  	<script src=" https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.18/lang/summernote-ko-KR.min.js"></script>
+  	<script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.18/lang/summernote-ko-KR.min.js"></script>
 	<script src="../resources/js/summernote-lite.js"></script>
 	<script src="../resources/js/summernote-ko-KR.js"></script>
 	
@@ -47,6 +48,12 @@
     <!-- <link rel="stylesheet" href="css/responsive.css"> -->
     
 <style>
+
+	.logo {
+		width: 140px;
+		height: 56px;
+	}
+
     /* 푸터 사이즈 조절, 컨텐츠와 간격 조절 */
     .footer .footer_top {
    		margin-top: 110px;
@@ -174,49 +181,44 @@
     
     <!--/ bradcam_area  -->
 	<div class="container box_1170">
-		<h3 class="md-30">공지사항</h3>
+		<h3 class="md-30">나만의 여행 리뷰</h3>
 	</div>
 
 	<!-- ================== 게시글 등록 폼 =================== -->
 	<!-- ================== 게시글 등록 폼 =================== -->
 	<div class="container">
-		<!-- <form action="/kanbu/board/noticeUpdatePro.com" name="noticeForm" method="post"> -->
-		<form action="/kanbu/board/noticeUpdatePro.com?noticeNum=${noticeDetail.index_num}" method="post">
+		<form action="/kanbu/board/reviewWritePro.com" name="reviewForm" method="post" enctype="multipart/form-data">
 			<table class="table table-write" id="add_mt">
 				<colgroup>
 					<col style="width:120px" />
 					<col style="width:*" />
 				</colgroup>
-				
 				<tr>
 					<th>제목</th>
 						<td>
-							<input value="${noticeDetail.title}" type="text" class="form-control"
-									id="title" name="title" required="required" />
+							<input type="text" class="form-control" id="title" name="title" placeholder="제목">
 						</td>
 				</tr>
 			</table>
-	
-			<textarea id="summernote" name="content">${noticeDetail.content}</textarea>
-			
-				<script>
-			 		//썸머노트에 값넣기
+			<textarea id="summernote" name="content"></textarea>
+				<script type="text/javascript">
 					$('#summernote').summernote({
 						height : 500,
 						disableResizeEditor: true,
 						lang : "ko-KR",
 						focus: true,
-						
+						placeholder: "내용을 입력해주세요."
 					});
 				</script>
-				<!-- ============글 수정 완료 버튼 ============ -->
-			<div class="d-flex flex-row-reverse">
-				<span class="input-group-btn">		
-					<button type="submit" id="a_save_btn" 
-						    class="btn btn-secondary">수정 완료</button>
-				</span>
-			</div>
-		</form>
+				<input type="file" class="form-control" name="uploadFile">
+				<!-- ============글 등록 버튼 (목록으로 돌아옴) ============ -->
+				<div class="d-flex flex-row-reverse">
+					<span class="input-group-btn">		
+						<button type="submit" id="a_save_btn" 
+							    class="btn btn-secondary">등록</button>
+					</span>
+				</div>
+			</form>
 	</div>
 
 
@@ -412,6 +414,25 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
          }
 
         });
+    </script>
+    <script type="text/javascript">
+   /*  function sendFile(file, el) {
+        var form_data = new FormData();
+        form_data.append('file', file);
+        $.ajax({
+          data: form_data,
+          type: "POST",
+          url: '/image',
+          cache: false,
+          contentType: false,
+          enctype: 'multipart/form-data',
+          processData: false,
+          success: function(url) {
+            $(el).summernote('editor.insertImage', url);
+            $('#imageBoard > ul').append('<li><img src="'+url+'" width="480" height="auto"/></li>');
+          }
+        });
+      } */
     </script>
     
     	

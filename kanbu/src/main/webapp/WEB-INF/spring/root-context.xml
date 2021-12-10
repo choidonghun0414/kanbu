@@ -28,6 +28,7 @@
 		<property name="defaultEncoding" value="UTF-8" />	  
 	</bean>
 	
+
 	<!-- mybatis 관한 설정 -->
 	<!-- DB연결 1,2단계 세팅을 추가 -->
 	<bean id="dataSource"
@@ -51,6 +52,7 @@
 		<property name="configLocation" value="/WEB-INF/mybatis/config.xml" />
 	</bean>
 	
+
 	<!-- destroy-method="clearCache" : 종료 시에 연결(저장)되어있던 모든 정보를 지운다. -->
 	<!-- sqlSession : 사용자의 객체 생성 -->
 	<!-- ref="sqlSessionFactory"를 참조 -->

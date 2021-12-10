@@ -48,6 +48,12 @@
     <!-- <link rel="stylesheet" href="css/responsive.css"> -->
     
 <style>
+
+	.logo {
+		width: 140px;
+		height: 56px;
+	}
+
     /* 푸터 사이즈 조절, 컨텐츠와 간격 조절 */
     .footer .footer_top {
    		margin-top: 110px;
@@ -113,8 +119,8 @@
                                     <nav>
                                         <ul id="navigation">
                                             <li><a class="active" href="/kanbu/main.com">home</a></li>
-                                            <li><a href="about.html">일정만들기</a></li>
-                                            <li><a class="" href="travel_destination.html">여행지정보</a></li>
+                                            <li><a href="/kanbu/list.com">일정만들기</a></li>
+                                            <li><a href="/kanbu/place.com">여행지정보</a></li>
                                             <li><a href="/kanbu/board/reviewList.com">게시판 <i class="ti-angle-down"></i></a>
                                                 <ul class="submenu">
                                                         <li><a href="/kanbu/board/reviewList.com">여행공유</a></li>

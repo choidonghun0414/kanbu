@@ -9,7 +9,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>noticeUpdateForm</title>
+    <title>reviewUpdateForm</title>
     
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -174,7 +174,7 @@
     
     <!--/ bradcam_area  -->
 	<div class="container box_1170">
-		<h3 class="md-30">공지사항</h3>
+		<h3 class="md-30"></h3>
 	</div>
 
 	<!-- ================== 게시글 등록 폼 =================== -->

@@ -52,8 +52,8 @@
                         <div class="row align-items-center">
                             <div class="col-xl-2 col-lg-2">
                                 <div class="logo">
-                                    <a href="index.html">
-                                        <img src="resources/img/logo.png" alt="">
+                                    <a href="/kanbu/main.com">
+                                        <img src="/kanbu/resources/img/kanbulogo.png" alt="">
                                     </a>
                                 </div>
                             </div>
@@ -61,14 +61,14 @@
                                 <div class="main-menu  d-none d-lg-block">
                                     <nav>
                                         <ul id="navigation">
-                                            <li><a class="active" href="index.html">home</a></li>
-                                            <li><a href="about.html">일정만들기</a></li>
-                                            <li><a class="" href="travel_destination.html">여행지정보</a></li>
-                                            <li><a href="#">게시판<i class="ti-angle-down"></i></a>
+                                            <li><a class="active" href="/kanbu/main.com">home</a></li>
+                                           <li><a href="/kanbu/list.com">일정만들기</a></li>
+                                            <li><a href="/kanbu/place.com">여행지정보</a></li>
+                                            <li><a href="/kanbu/board/reviewList.com">게시판 <i class="ti-angle-down"></i></a>
                                                 <ul class="submenu">
-                                                        <li><a href="destination_details.html">여행후기</a></li>
-                                                        <li><a href="elements.html">공지사항</a></li>
-                                                        <li><a href="elements.html">자주하는질문</a></li>
+                                                        <li><a href="/kanbu/board/reviewList.com">여행공유</a></li>
+                                                        <li><a href="/kanbu/board/noticeList.com">공지사항</a></li>
+                                                        <li><a href="/kanbu/board/questionList.com">자주하는질문</a></li>
                                                 </ul>
                                             </li>
                                         </ul>

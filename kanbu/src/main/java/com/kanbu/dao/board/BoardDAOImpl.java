@@ -21,6 +21,7 @@ public class BoardDAOImpl implements BoardDAO{
 		mybatis.insert("board.insertBoard", board);
 	}
 
+	//공지 목록
 	@Override
 	public List selectNotice(int writer) throws Exception {
 		return mybatis.selectList("board.selectNotice", writer);
@@ -51,6 +52,63 @@ public class BoardDAOImpl implements BoardDAO{
 		mybatis.delete("board.noticeDelete", index_num);
 		
 	}
+	
+	//리뷰 목록 갯수 
+	@Override
+	public int selectReviewCount() throws Exception {
+		return mybatis.selectOne("board.selectReviewCount");
+	}
+
+	//리뷰 목록
+	@Override
+	public List selectReview() throws Exception {
+		return mybatis.selectList("board.selectReview");
+	}
+	
+	//여행 리뷰 태그 리스트 갯수
+	@Override
+	public int selectReviewTagCount() throws Exception {
+		return mybatis.selectOne("board.selectReviewTagCount");
+	}
+
+	//여행 리뷰 태그 리스트
+	@Override
+	public List selectReviewTag() throws Exception {
+		return mybatis.selectList("board.selectReviewTag");
+	}
+
+	//리뷰 상세 내용
+	@Override
+	public BoardDTO selectReviewDetail(int index_num) throws Exception {
+		return mybatis.selectOne("board.selectReviewDetail", index_num);
+	}
+	
+	//리뷰 상세 태그
+	@Override
+	public List selectReviewDetailTag(int index_num) throws Exception {
+		return mybatis.selectList("board.selectReviewDetailTag", index_num);
+	}
+
+	@Override
+	public List selectMember() throws Exception {
+		return mybatis.selectList("board.selectMember");
+	}
+
+	//리뷰 작성
+	@Override
+	public void insertReview(BoardDTO board) throws Exception {
+		mybatis.insert("board.insertReview", board);
+		
+	}
+
+
+
+
+
+
+
+
+	
 	
 
 }
