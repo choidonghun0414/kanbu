@@ -12,7 +12,7 @@
 	<typeAliases>
 		<typeAlias type="com.kanbu.dto.member.MemberDTO" alias="memberDTO"/>
 		<typeAlias type="com.kanbu.dto.plan.MyPlanDTO" alias="myPlanDTO"/>
-		<typeAlias type="com.kanbu.dto.member.MemberDTO" alias="memberDTO"/>
+		<typeAlias type="com.kanbu.dto.plan.SPlanDTO" alias="mySPlanDTO"/>
 		<typeAlias type="com.kanbu.dto.info.PlaceDTO" alias="placeDTO"/>
 		<typeAlias type="com.kanbu.dto.info.Place_ReplyDTO" alias="place_replyDTO" />
 		<typeAlias type="com.kanbu.dto.board.BoardDTO" alias="boardDTO"/>
@@ -24,7 +24,6 @@
 	<mappers>
 		<mapper resource="/com/kanbu/sql/member/memberSQL.xml" />
 		<mapper resource="/com/kanbu/sql/plan/myPlan.xml" />
-		<mapper resource="/com/kanbu/sql/member/memberSQL.xml" />
 		<mapper resource="/com/kanbu/sql/info/infoSQL.xml" />
 		<mapper resource="/com/kanbu/sql/board/boardSQL.xml" />
 	</mappers>

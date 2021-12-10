@@ -64,13 +64,12 @@
 	<bean id="memberImpl" class="com.kanbu.service.member.MemberServiceImpl" />
 	
 	<bean id="plan" class="com.kanbu.dto.plan.MyPlanDTO" />
-	<bean id="myPlanService" class="com.kanbu.service.plan.MyPlanServiceImpl" /> 
+	<bean id="myPlanService" class="com.kanbu.service.plan.MyPlanServiceImpl" />
+	
+	<bean id="splan" class="com.kanbu.dto.plan.SPlanDTO" />
 
-	<bean id="member" class="com.kanbu.dto.member.MemberDTO"></bean>
 	<bean id="place" class="com.kanbu.dto.info.PlaceDTO" />
 	<bean id="place_reply" class="com.kanbu.dto.info.Place_ReplyDTO" />
-	
-	<bean id="memberImpl" class="com.kanbu.service.member.MemberServiceImpl" />
 	<bean id="infoImpl" class="com.kanbu.service.info.InfoServiceImpl" />					 
 
 	  <!--dao, service에서 사용 --> 

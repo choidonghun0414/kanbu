@@ -7,14 +7,19 @@ import java.sql.Date;
 public class MyPlanDTO {
 	private int index_num;	// 인덱스 번호
 	private String title;	// 여행 일정 제목
+	private int writer;		// 작성자번호
 	private Date startDay;	// 여행 시작일
 	private Date arrivalDay;	// 여행 마지막일
 	private String traffic;	// 이동수단 (드롭박스 선택)
 	private int expense;	// 비용 (input으로 처리)
 	private Timestamp reg_date;	// 게시판 생성일 (자동으로 처리)
-	private int days;	// 1일차, 2일차 ...
-	private int[] schedule;	// Array list 배열로 처리
-	private String show;	// 게시판list용 추가
+	private int place;	// 찜목록 저장 장소 ...
+	/*
+	 * private int[] schedule; // Array list 배열로 처리 private String show; // 게시판list용
+	 * 추가
+	 */
+	private int startRow;	// 시작번호(페이징처리)
+	private int endRow;		// 끝번호(페이징처리)
 	
 	public int getIndex_num() {
 		return index_num;
@@ -27,6 +32,12 @@ public class MyPlanDTO {
 	}
 	public void setTitle(String title) {
 		this.title = title;
+	}
+	public int getWriter() {
+		return writer;
+	}
+	public void setWriter(int writer) {
+		this.writer = writer;
 	}
 	public Date getStartDay() {
 		return startDay;
@@ -58,26 +69,32 @@ public class MyPlanDTO {
 	public void setReg_date(Timestamp reg_date) {
 		this.reg_date = reg_date;
 	}
-	public int getDays() {
-		return days;
+	public int getPlace() {
+		return place;
 	}
-	public void setDays(int days) {
-		this.days = days;
+	public void setPlace(int place) {
+		this.place = place;
 	}
-	public int[] getSchedule() {
-		return schedule;
+
+	/*
+	 * public int[] getSchedule() { return schedule; } public void setSchedule(int[]
+	 * schedule) { this.schedule = schedule; }
+	 * 
+	 * public String getShow() { return show; }
+	 * 
+	 * public void setShow(String show) { this.show = show; }
+	 */
+	public int getStartRow() {
+		return startRow;
 	}
-	public void setSchedule(int[] schedule) {
-		this.schedule = schedule;
+	public void setStartRow(int startRow) {
+		this.startRow = startRow;
 	}
-	
-	public String getShow() {
-		return show;
+	public int getEndRow() {
+		return endRow;
 	}
-	
-	public void setShow(String show) {
-		this.show = show;
+	public void setEndRow(int endRow) {
+		this.endRow = endRow;
 	}
-	
 
 }

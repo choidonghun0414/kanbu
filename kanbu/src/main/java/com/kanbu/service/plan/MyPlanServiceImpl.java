@@ -1,6 +1,5 @@
 package com.kanbu.service.plan;
 
-import java.util.Date;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -8,7 +7,9 @@ import javax.inject.Inject;
 import org.springframework.stereotype.Service;
 
 import com.kanbu.dao.plan.MyPlanDAO;
+import com.kanbu.dto.info.PlaceDTO;
 import com.kanbu.dto.plan.MyPlanDTO;
+import com.kanbu.dto.plan.SPlanDTO;
 
 @Service
 public class MyPlanServiceImpl implements MyPlanService {
@@ -25,6 +26,12 @@ public class MyPlanServiceImpl implements MyPlanService {
 	@Override
 	public List<String> getMySplan_num(int list_num) {
 		return myPlanDao.getMySplan_num(list_num);
+	}
+	
+	// 찜장소 등록
+	@Override
+	public void addPlace(MyPlanDTO plan) throws Exception {
+		myPlanDao.addPlace(plan);
 	}
 
 	// 일정 등록
@@ -43,8 +50,8 @@ public class MyPlanServiceImpl implements MyPlanService {
 
 	//나의 일정리스트 전체 조회
 	@Override
-	public List<MyPlanDTO> view() throws Exception {
-		return myPlanDao.view();
+	public List<MyPlanDTO> view(MyPlanDTO myplan) throws Exception {
+		return myPlanDao.view(myplan);
 	}
 
 	@Override
@@ -63,8 +70,8 @@ public class MyPlanServiceImpl implements MyPlanService {
 	}
 
 	@Override
-	public int countArticle() throws Exception {
-		return myPlanDao.countArticle();
+	public int countArticle(int writer) throws Exception {
+		return myPlanDao.countArticle(writer);
 	}
 
 	// 일정 상세화면 조회
@@ -83,6 +90,30 @@ public class MyPlanServiceImpl implements MyPlanService {
 	@Override
 	public void delete(int index_num) {
 		myPlanDao.delete(index_num);
+	}
+
+	// 장소 전체 갯수
+	@Override
+	public int selectPlaceCount() throws Exception {
+		return myPlanDao.selectPlaceCount();
+	}
+
+	// 장소 전체 리스트
+	@Override
+	public List<PlaceDTO> selectPlace() throws Exception {
+		return myPlanDao.selectPlace();
+	}
+
+	//장소 검색 갯수
+	@Override
+	public int placeSearchCount(String keyword) throws Exception {
+		return myPlanDao.placeSearchCount(keyword);
+	}
+
+	//장소 검색 리스트
+	@Override
+	public List<PlaceDTO> placeSearch(String keyword) throws Exception {
+		return myPlanDao.placeSearch(keyword);
 	}
 
 }

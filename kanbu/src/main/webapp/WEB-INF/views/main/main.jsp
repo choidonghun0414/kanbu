@@ -59,21 +59,9 @@
                                     <nav>
                                         <ul id="navigation">
                                             <li><a class="active" href="/kanbu/main.com">home</a></li>
-<<<<<<< HEAD
-=======
-                                            <li><a href="/kanbu/list.com">일정만들기</a></li>
+                                            <li><a href="/kanbu/mapView.com">일정만들기</a></li>
                                             <li><a class="" href="/kanbu/place.com">여행지정보</a></li>
-                                            <li><a>게시판 <i class="ti-angle-down"></i></a>
-                                            <li><a class="active" href="/kanbu/main.com">home</a></li>
->>>>>>> refs/remotes/origin/main
-                                            <li><a href="about.html">일정만들기</a></li>
-<<<<<<< HEAD
-                                            <li><a class="" href="/kanbu/place.com">여행지정보</a></li>
-                                            <li><a href="#">게시판 <i class="ti-angle-down"></i></a>
-=======
-                                            <li><a class="" href="travel_destination.html">여행지정보</a></li>
                                             <li><a href="/kanbu/board/reviewList.com">게시판 <i class="ti-angle-down"></i></a>
->>>>>>> refs/remotes/origin/main
                                                 <ul class="submenu">
                                                         <li><a href="/kanbu/board/reviewList.com">여행후기</a></li>
                                                         <li><a href="/kanbu/board/noticeList.com">공지사항</a></li>
