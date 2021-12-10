@@ -21,18 +21,44 @@
  	</delete>
  	
  	<!-- 나의 일정리스트 전체 조회 sql -->
- 	<select id="view" resultType="myPlanDTO">
- 		select index_num, reg_date, title from myplan_num
- 		order by index_num desc
+ 	<select id="view" parameterType="myPlanDTO" resultType="myPlanDTO">
+ 		select index_num, writer, reg_date, title, r
+		from (select index_num, writer, reg_date, title, rownum r
+      		  from (select index_num, writer, reg_date, title 
+            		from myplan_num
+            		where writer = #{writer}
+            		order by index_num desc)
+      		  order by index_num desc)
+		<where>
+		  <if test="startRow > 0"><![CDATA[r >= #{startRow}]]></if>
+          <if test="endRow > 0 and endRow > startRow"><![CDATA[and r <= #{endRow}]]></if>
+		</where> 
  	</select>	
  	
  	<!-- 나의 일정 추가 sql -->
- 	<insert id="insert" parameterType="myPlanDTO">
+ 	<insert id="insertMyplan" parameterType="myPlanDTO">
  		insert into myplan_num
- 		(index_num, title, startDay, arrivalDay, traffic, expense, reg_date, show)
+ 		(index_num, title, writer, startDay, arrivalDay, traffic, expense, reg_date)
  		values
- 		(myplan_num_seq.nextval,#{title},#{startDay},#{arrivalDay},#{traffic},#{expense},sysdate,'Y')
+ 		(myplan_num_seq.nextval,#{title}, #{writer}, #{startDay},#{arrivalDay},#{traffic},#{expense},sysdate)
+ 		insert into mySplan_num
+ 		(place)
+ 		values
+ 		(#{place})
  	</insert>
+ 	
+ 	<!-- 일정 리스트 최근 번호(최대값) -->
+ 	<select id="maxIndex" resultType="int">
+ 		select max(index_num) 
+		from myplan_num
+ 	</select>
+ 	
+ 	<!-- 나의 일정 스케줄 추가 -->
+<!--<insert id="insertMySplan" parameterType="mySPlanDTO">
+ 		insert into mySplan_num
+        (list_num, schedule, place) values (#{list_num},#{schedule},#{place})
+ 	</insert>
+ --> 
  	
  	<!-- 나의 일정 수정 sql -->
  	<update id="update" parameterType="myPlanDTO">
@@ -55,9 +81,10 @@
  	</select>
  	
  	<!-- 레코드 갯수 계산(유효성 검사) -->
- 	<select id="countArticle" resultType="int">
+ 	<select id="countArticle" parameterType="int" resultType="int">
  		select count(*)
  		from myplan_num
+ 		where writer = #{value}
  	</select>
  	
  	<!-- 나의 일정 검색 sql (제목으로만 검색) -->
@@ -70,6 +97,24 @@
  				where title and ${sarch_option} like '%'||#{keyword}||'%'
  			</otherwise>
  		</choose>
+ 	</select>
+ 	
+ 	<!-- 장소 검색 갯수 (장소이름으로만 검색)-->
+ 	<select id="placeSearchCount" parameterType="String" resultType="int">
+ 		select count(*) from place
+		where name like '%'|| #{value} || '%'
+ 	</select>
+ 	
+ 	<!-- 장소 검색 결과 리스트 (장소이름으로만 검색)-->
+ 	<select id="placeSearch" parameterType="String" resultType="placeDTO">
+ 		select * from place
+		where name like '%'|| #{value} || '%'
+ 	</select>
+ 	
+ 	<!-- 장소 상세보기 popup -->
+ 	<select id="placeDetail" parameterType="int" resultType="placeDTO">
+ 		select * from place
+ 		where index_num=#{index_num}
  	</select>
  
  </mapper>

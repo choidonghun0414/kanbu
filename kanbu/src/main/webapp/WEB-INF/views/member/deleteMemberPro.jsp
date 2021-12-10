@@ -14,7 +14,7 @@
 <link rel="stylesheet" href="resources/css/style.css">
 
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"> 
-<title>비밀번호발급 오류</title>
+<title>회원탈퇴</title>
 <style>
 @import
 	url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap')

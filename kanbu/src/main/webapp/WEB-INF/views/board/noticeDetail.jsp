@@ -34,6 +34,12 @@
     <!-- <link rel="stylesheet" href="css/responsive.css"> -->
     
 <style>
+
+	.logo {
+		width: 140px;
+		height: 56px;
+	}
+
     a {
 	    color: #007bff;
 	    text-decoration: none;
@@ -101,8 +107,8 @@
                                     <nav>
                                         <ul id="navigation">
                                             <li><a class="active" href="/kanbu/main.com">home</a></li>
-                                            <li><a href="about.html">일정만들기</a></li>
-                                            <li><a class="" href="travel_destination.html">여행지정보</a></li>
+                                            <li><a href="/kanbu/list.com">일정만들기</a></li>
+                                            <li><a href="/kanbu/place.com">여행지정보</a></li>
                                             <li><a href="/kanbu/board/reviewList.com">게시판 <i class="ti-angle-down"></i></a>
                                                 <ul class="submenu">
                                                         <li><a href="/kanbu/board/reviewList.com">여행공유</a></li>
@@ -182,8 +188,11 @@
         	<div class="d-flex flex-row-reverse">
 				<span class="input-group-btn">
 					<a class="btn btn-secondary" href="/kanbu/board/noticeList.com" role="button">목록</a>
-					<a class="btn btn-secondary" href="/kanbu/board/noticeUpdateForm.com?noticeNum=${noticeDetail.index_num}" role="button">수정</a>
-					<a class="btn btn btn-danger" href="/kanbu/board/noticeDeletePro.com?noticeNum=${noticeDetail.index_num}" role="button">삭제</a>
+					<c:if test="${sessionScope.status == 100}">
+						<a class="btn btn-secondary" href="/kanbu/board/noticeUpdateForm.com?noticeNum=${noticeDetail.index_num}" role="button">수정</a>
+						<a class="btn btn btn-danger" href="/kanbu/board/noticeDeletePro.com?noticeNum=${noticeDetail.index_num}" role="button"
+							onclick="alert('모든 내용이 삭제됩니다.');return alert('삭제되었습니다!');">삭제</a>
+					</c:if>
 						<!-- <button type="submit" id="a_save_btn"
 								class="btn btn-secondary">수정</button> -->
 				</span>
@@ -388,6 +397,8 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 
         });
     </script>
+    
+  
     </body>
     
     </html>

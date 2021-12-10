@@ -32,7 +32,7 @@ p {
 </head>
 <body>
 	<div  id="fulldiv">
-	<form action="/kanbu/findPassword.com" method="post">
+	<form action="/kanbu/main.com" method="get">
 		<div>
 			<span class="material-icons">email</span>
 			<p align="center">

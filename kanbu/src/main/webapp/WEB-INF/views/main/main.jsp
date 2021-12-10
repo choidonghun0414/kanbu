@@ -73,8 +73,8 @@
                                         <ul id="navigation">
                                             <li><a class="active" href="/kanbu/main.com">home</a></li>
                                             <li><a href="/kanbu/list.com">일정만들기</a></li>
-                                            <li><a class="active" href="/kanbu/place.com">여행지정보</a></li>
-                                            <li><a href="/kanbu/board/reviewList.com">게시판 <i class="ti-angle-down"></i></a>
+                                            <li><a href="/kanbu/place.com">여행지정보</a></li>
+                               		 		<li><a href="/kanbu/board/reviewList.com">게시판 <i class="ti-angle-down"></i></a>
                                                 <ul class="submenu">
                                                         <li><a href="/kanbu/board/reviewList.com">여행후기</a></li>
                                                         <li><a href="/kanbu/board/noticeList.com">공지사항</a></li>
@@ -101,8 +101,7 @@
                                         	</c:if>
                                         	<c:if test="${empty(sessionScope.status)}">
                                         		<li><a href="/kanbu/login.com"> <i class="fa fa-lock"></i> </a></li>
-                                        	</c:if>
-                                            
+                                        	</c:if>    
                                         </ul>
                                     </div>
                                 </div>
@@ -286,8 +285,7 @@
                             <img src="/kanbu/resources/img/destination/teddybearMuseum_3.png" alt="" style= "height: 100%; width: 100%;">
                         </div>
                         <div class="content">
-                            <p class="d-flex align-items-center" style="font-weight: 800; font-size: large;">테디베어뮤지엄 <a href="travel_destination.html">보러가기</a> </p>
-                            
+                            <p class="d-flex align-items-center" style="font-weight: 800; font-size: large;">테디베어뮤지엄 <a href="travel_destination.html">보러가기</a> </p> 
                         </div>
                     </div>
                 </div>
@@ -551,7 +549,7 @@
                 <div class="col-lg-4 col-md-6">
                     <div class="single_travel text-center">
                         <div class="icon">
-                            <img src="/kanbu/resources/img/svg_icon/community1.png" alt="">
+                            <img src="resources/img/svg_icon/community1.png" alt="">
                         </div>
                         <h3 style="font-weight: 600; font-size:large; color: black;">여행후기 커뮤니티</h3>
                         <p>여행후기 게시판을 통해 이용자들간에 <br>정보 공유 커뮤니티가 형성되어 있습니다.</p>

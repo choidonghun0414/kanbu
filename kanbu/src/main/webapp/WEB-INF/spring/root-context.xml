@@ -28,6 +28,7 @@
 		<property name="defaultEncoding" value="UTF-8" />	  
 	</bean>
 	
+
 	<!-- mybatis 관한 설정 -->
 	<!-- DB연결 1,2단계 세팅을 추가 -->
 	<bean id="dataSource"
@@ -51,6 +52,7 @@
 		<property name="configLocation" value="/WEB-INF/mybatis/config.xml" />
 	</bean>
 	
+
 	<!-- destroy-method="clearCache" : 종료 시에 연결(저장)되어있던 모든 정보를 지운다. -->
 	<!-- sqlSession : 사용자의 객체 생성 -->
 	<!-- ref="sqlSessionFactory"를 참조 -->
@@ -61,17 +63,18 @@
 
 	<!-- 사용자 정의 약어 -->
 	<bean id="member" class="com.kanbu.dto.member.MemberDTO" />
+	<bean id="plan" class="com.kanbu.dto.plan.MyPlanDTO" />
+	<bean id="splan" class="com.kanbu.dto.plan.SPlanDTO" />
 	<bean id="place" class="com.kanbu.dto.info.PlaceDTO" />
 	<bean id="place_reply" class="com.kanbu.dto.info.Place_ReplyDTO" />
 	<bean id="board" class="com.kanbu.dto.board.BoardDTO" />
 	<bean id="search" class="com.kanbu.dto.SearchDTO" />
-	<bean id="plan" class="com.kanbu.dto.plan.MyPlanDTO" />
 	
 	<bean id="memberImpl" class="com.kanbu.service.member.MemberServiceImpl" />
-	<bean id="myPlanService" class="com.kanbu.service.plan.MyPlanServiceImpl" /> 
-	<bean id="mainImpl" class="com.kanbu.service.MainServiceImpl" />
+	<bean id="myPlanService" class="com.kanbu.service.plan.MyPlanServiceImpl" />
 	<bean id="infoImpl" class="com.kanbu.service.info.InfoServiceImpl" />
 	<bean id="boardImpl" class="com.kanbu.service.board.BoardServiceImpl" />
+	<bean id="mainImpl" class="com.kanbu.service.MainServiceImpl" />
 	<bean id="adminImpl" class="com.kanbu.service.admin.AdminServiceImpl" />
 	
 	<!-- 메일 보내기  -->
@@ -100,8 +103,6 @@
 	<bean id="emailSender" class="com.kanbu.email.member.EmailSender">
 	</bean>
 		   
-
-	
 	   					   
 
 </beans>
