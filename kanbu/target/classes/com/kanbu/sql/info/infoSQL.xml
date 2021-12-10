@@ -66,5 +66,17 @@
 			<if test="index_num > 0"> index_num = #{index_num}</if>
 		</where>
  	</update>
+ 	
+ 	<!-- 키워드 입력하여 장소 검색결과 갯수 sql문 -->
+ 	<select id="selectKeywordCount" parameterType="String" resultType="int">
+ 		select count(*) from place
+		where name like '%' || #{value} || '%'
+ 	</select>
+ 	
+ 	<!-- 키워드 입력하여 장소 검색결과 sql문 -->
+ 	<select id="selectKeywordPlaceNum" parameterType="String" resultType="placeDTO">
+ 		select * from place
+		where name like '%' || #{value} || '%'
+ 	</select>
  
  </mapper> 

@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>    
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>  
     
     
 
@@ -125,7 +125,7 @@
                                     <div class="single_input">
                                        <h5>비밀번호</h5>
                                         <input type="password" name="pw2" placeholder="비밀번호를 입력해주세요" />
-                                         <a href="/kanbu/selectPw.com" style="color: #3296FF;">비밀번호를 잊으셨나요?</a>
+                                         <a href="/kanbu/updatePw.com" style="color: #3296FF;">비밀번호를 잊으셨나요?</a>
                                     </div>
                                 </div>
                                 <div class="col-lg-12">
