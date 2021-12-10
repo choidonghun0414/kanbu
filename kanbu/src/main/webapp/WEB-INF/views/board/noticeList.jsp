@@ -35,6 +35,11 @@
     
 <style>
 
+	.logo {
+		width: 140px;
+		height: 56px;
+	}
+
 	/* 푸터 사이즈 조절, 컨텐츠와 간격 조절 */
     .footer .footer_top {
    		margin-top: 110px;
@@ -84,7 +89,7 @@
                             <div class="col-xl-2 col-lg-2">
                                 <div class="logo">
                                     <a href="/kanbu/main.com">
-                                        <img src="../resources/img/logo.png" alt="">
+                                        <img src="../resources/img/logo.png">
                                     </a>
                                 </div>
                             </div>
@@ -93,8 +98,8 @@
                                     <nav>
                                         <ul id="navigation">
                                             <li><a class="active" href="/kanbu/main.com">home</a></li>
-                                            <li><a href="about.html">일정만들기</a></li>
-                                            <li><a class="" href="travel_destination.html">여행지정보</a></li>
+                                            <li><a href="/kanbu/list.com">일정만들기</a></li>
+                                            <li><a href="/kanbu/place.com">여행지정보</a></li>
                                             <li><a href="/kanbu/board/reviewList.com">게시판 <i class="ti-angle-down"></i></a>
                                                 <ul class="submenu">
                                                         <li><a href="/kanbu/board/reviewList.com">여행공유</a></li>
@@ -184,11 +189,13 @@
 		</table>
 	
 		<!-- ============글 등록 버튼 (( 관리자에게만 보이게 해야함...))============ -->
-		<div class="d-flex flex-row-reverse">
-			<span class="input-group-btn">
-				<a class="btn btn-secondary" href="/kanbu/board/noticeWrite.com" role="button">등록</a>
-			</span>
-		</div>
+		<c:if test="${sessionScope.status == 100}">
+			<div class="d-flex flex-row-reverse">
+				<span class="input-group-btn">
+					<a class="btn btn-secondary" href="/kanbu/board/noticeWrite.com" role="button">등록</a>
+				</span>
+			</div>
+		</c:if>
 	
 	
 		<!-- ============게시판 페이징 표시============ -->

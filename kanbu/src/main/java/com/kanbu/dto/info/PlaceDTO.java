@@ -21,6 +21,8 @@ package com.kanbu.dto.info;
  * 	picture5 : 장소 사진5
  * 	views : 조회수
  *  good : 좋아요수
+ *  startRow : 시작장소(페이징처리)
+ *  endRow : 마지막장소(페이징처리)
  * 
  */
 
@@ -46,6 +48,8 @@ public class PlaceDTO {
 	private String picture5;
 	private int views;
 	private int good;
+	private int startRow;
+	private int endRow;
 	
 	
 	public int getIndex_num() {
@@ -135,7 +139,7 @@ public class PlaceDTO {
 	public int getClosing() {
 		return closing;
 	}
-	public void setCloseing(int closing) {
+	public void setClosing(int closing) {
 		this.closing = closing;
 	}
 	
@@ -187,6 +191,20 @@ public class PlaceDTO {
 	public void setGood(int good) {
 		this.good = good;
 	}
-
+	
+	public int getStartRow() {
+		return startRow;
+	}
+	public void setStartRow(int startRow) {
+		this.startRow = startRow;
+	}
+	
+	public int getEndRow() {
+		return endRow;
+	}
+	public void setEndRow(int endRow) {
+		this.endRow = endRow;
+	}
+	
 
 }

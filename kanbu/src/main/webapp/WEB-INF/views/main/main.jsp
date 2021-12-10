@@ -71,17 +71,32 @@
                                 <div class="main-menu  d-none d-lg-block">
                                     <nav>
                                         <ul id="navigation">
+<<<<<<< HEAD
 
                                             <li><a class="active" href="/kanbu/main.com">home</a></li>
                                             <li><a href="/kanbu/list.com">일정만들기</a></li>
                                             <li><a href="/kanbu/place.com">여행지정보</a></li>
                                		 		<li><a href="/kanbu/board/reviewList.com">게시판 <i class="ti-angle-down"></i></a>
 
+=======
+<<<<<<< HEAD
+>>>>>>> branch 'main' of https://github.com/choidonghun0414/kanbu.git
+                                            <li><a class="active" href="/kanbu/main.com">home</a></li>
+                                            <li><a href="/kanbu/list.com">일정만들기</a></li>
+<<<<<<< HEAD
+                                            <li><a class="" href="/kanbu/place.com">여행지정보</a></li>
+                                            <li><a href="/kanbu/board/reviewList.com">게시판 <i class="ti-angle-down"></i></a>
+
+=======
+                                            <li><a href="/kanbu/place.com">여행지정보</a></li>
+                               		 		<li><a href="/kanbu/board/reviewList.com">게시판 <i class="ti-angle-down"></i></a>
+=======
                                             <li><a class="active" href="/kanbu/main.com">home</a></li>
                                             <li><a href="/kanbu/list.com">일정만들기</a></li>
                                             <li><a class="" href="/kanbu/place.com">여행지정보</a></li>
                                             <li><a href="/kanbu/board/reviewList.com">게시판 <i class="ti-angle-down"></i></a>
-
+>>>>>>> branch 'main' of https://github.com/choidonghun0414/kanbu.git
+>>>>>>> branch 'main' of https://github.com/choidonghun0414/kanbu.git
                                                 <ul class="submenu">
                                                         <li><a href="/kanbu/board/reviewList.com">여행후기</a></li>
                                                         <li><a href="/kanbu/board/noticeList.com">공지사항</a></li>

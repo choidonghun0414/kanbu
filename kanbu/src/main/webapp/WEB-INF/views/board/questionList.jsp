@@ -73,6 +73,9 @@
 		margin-left: 5px;
 	}
 	
+	.submenu > li > a:hover{
+	  background-color: #D3D3D3;
+	}
 </style>
 </head>
 
@@ -95,8 +98,8 @@
                                     <nav>
                                         <ul id="navigation">
                                             <li><a class="active" href="/kanbu/main.com">home</a></li>
-                                            <li><a href="about.html">일정만들기</a></li>
-                                            <li><a class="" href="travel_destination.html">여행지정보</a></li>
+                                            <li><a href="/kanbu/list.com">일정만들기</a></li>
+                                            <li><a href="/kanbu/place.com">여행지정보</a></li>
                                             <li><a href="/kanbu/board/reviewList.com">게시판 <i class="ti-angle-down"></i></a>
                                                 <ul class="submenu">
                                                         <li><a href="/kanbu/board/reviewList.com">여행공유</a></li>
@@ -233,15 +236,13 @@
 			</span>
 		</div>
 	
-		<!-- ========게시판 페이징 표시======== -->
+		<!-- ============ 게시판 페이징 표시 ============ -->
 		<nav class="blog-pagination d-flex justify-content-center">
 			<ul class="pagination">
 				<li class="page-item"><a href="#" class="page-link"
 					aria-label="Previous"> <i class="ti-angle-left"></i>
 				</a></li>
 				<li class="page-item"><a href="#" class="page-link">1</a></li>
-				<li class="page-item active"><a href="#" class="page-link">2</a>
-				</li>
 				<li class="page-item"><a href="#" class="page-link"
 					aria-label="Next"> <i class="ti-angle-right"></i>
 				</a></li>

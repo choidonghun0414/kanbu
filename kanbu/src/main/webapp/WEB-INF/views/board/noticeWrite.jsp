@@ -17,9 +17,10 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
   	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  	
 	<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet"> 
   	<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
-  	<script src=" https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.18/lang/summernote-ko-KR.min.js"></script>
+  	<script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.18/lang/summernote-ko-KR.min.js"></script>
 	<script src="../resources/js/summernote-lite.js"></script>
 	<script src="../resources/js/summernote-ko-KR.js"></script>
 	
@@ -47,6 +48,12 @@
     <!-- <link rel="stylesheet" href="css/responsive.css"> -->
     
 <style>
+
+	.logo {
+		width: 140px;
+		height: 56px;
+	}
+
     /* 푸터 사이즈 조절, 컨텐츠와 간격 조절 */
     .footer .footer_top {
    		margin-top: 110px;
@@ -112,8 +119,8 @@
                                     <nav>
                                         <ul id="navigation">
                                             <li><a class="active" href="/kanbu/main.com">home</a></li>
-                                            <li><a href="about.html">일정만들기</a></li>
-                                            <li><a class="" href="travel_destination.html">여행지정보</a></li>
+                                            <li><a href="/kanbu/list.com">일정만들기</a></li>
+                                            <li><a href="/kanbu/place.com">여행지정보</a></li>
                                             <li><a href="/kanbu/board/reviewList.com">게시판 <i class="ti-angle-down"></i></a>
                                                 <ul class="submenu">
                                                         <li><a href="/kanbu/board/reviewList.com">여행공유</a></li>

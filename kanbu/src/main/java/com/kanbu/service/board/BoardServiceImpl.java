@@ -23,6 +23,7 @@ public class BoardServiceImpl implements BoardService{
 		boardDAO.insertBoard(board);
 	}
 
+	//공지 목록
 	@Override
 	public List selectNotice(int writer) throws Exception {
 		return boardDAO.selectNotice(writer);
@@ -52,5 +53,60 @@ public class BoardServiceImpl implements BoardService{
 		boardDAO.noticeDelete(index_num);
 		
 	}
+	
+	// 리뷰 목록 갯수
+	@Override
+	public int selectReviewCount() throws Exception {
+		return boardDAO.selectReviewCount();
+	}
+
+	//리뷰 목록
+	@Override
+	public List selectReview() throws Exception {
+		return boardDAO.selectReview();
+	}
+	
+	//여행 리뷰 태그 리스트 갯수
+	@Override
+	public int selectReviewTagCount() throws Exception {
+		return boardDAO.selectReviewTagCount();
+	}
+
+	//여행 리뷰 태그 리스트
+	@Override
+	public List selectReviewTag() throws Exception {
+		return boardDAO.selectReviewTag();
+	}
+
+	//리뷰 상세
+	@Override
+	public BoardDTO selectReviewDetail(int index_num) throws Exception {
+		return boardDAO.selectReviewDetail(index_num);
+	}
+	
+	@Override
+	public List selectReviewDetailTag(int index_num) throws Exception {
+		return boardDAO.selectReviewDetailTag(index_num);
+	}
+
+	@Override
+	public List selectMember() throws Exception {
+		return boardDAO.selectMember();
+	}
+
+	//리뷰 작성
+	@Override
+	public void insertReview(BoardDTO board) throws Exception {
+		boardDAO.insertReview(board);
+		
+	}
+
+
+
+
+
+
+
+
 
 }

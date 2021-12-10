@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+ <mapper namespace="admin">
+ 
+ 	<!-- 전체회원수 검색 -->
+ 	<select id="selectTotalMemberCount" resultType="int">
+ 		select count(*) from member 
+ 	</select>
+ 	
+ 	<!-- 전체회원 정보 검색 -->
+ 	<select id="selectTotalMember" parameterType="memberDTO" resultType="memberDTO">
+ 		select index_num, id, nick, phone, mail, domain, status, reg_date, r
+ 		from (select index_num, id, nick, phone, mail, domain, status, reg_date, rownum r
+ 		   	  from (select index_num, id, nick, phone, mail, domain, status, reg_date from member order by reg_date desc)
+ 			  order by reg_date desc)
+ 		<where>
+ 			<if test="startRow > 0"><![CDATA[r >= #{startRow}]]></if>
+ 			<if test="endRow > 0 and endRow > startRow"><![CDATA[and r <= #{endRow}]]></if>
+ 		</where>	  
+ 	</select>
+ 	
+ 	<!-- 등록된 장소 전체 갯수 검색 -->
+ 	<select id="selectTotalPlaceCount" resultType="int">
+ 		select count(*) from place 
+ 	</select>
+ 	
+ 	<!-- 등록된 장소 전체 정보 검색 -->
+ 	<select id="selectTotalPlace" parameterType="placeDTO" resultType="placeDTO">
+ 		select index_num, name, addr, tel, fee1, fee2, opening, closing, good, views,r
+ 		from (select index_num, name, addr, tel, fee1, fee2, opening, closing, good, views, rownum r
+ 			  from (select index_num, name, addr, tel, fee1, fee2, opening, closing, good, views from place order by name asc)
+ 			  order by name asc)
+ 		<where>
+ 			<if test="startRow > 0"><![CDATA[r >= #{startRow}]]></if>
+ 			<if test="endRow > 0 and endRow > startRow"><![CDATA[and r <= #{endRow}]]></if>
+ 		</where>	  
+ 	</select>
+ 	
+ 	<!-- 관리자 회원 입력 검색결과 갯수 -->
+ 	<select id="selectKeywordMemberCount" parameterType="searchDTO" resultType="int">
+ 		select count(*) from member
+ 		where ${thema} like '%' || #{keyword} || '%'
+ 	</select>
+ 	
+ 	<!-- 관리자 회원 입력 검색 -->
+ 	<select id="selectKeywordMember" parameterType="searchDTO" resultType="memberDTO">
+ 		select index_num, id, nick, phone, mail, domain, status, reg_date, r
+ 		from (select index_num, id, nick, phone, mail, domain, status, reg_date, rownum r
+ 		   	  from (select index_num, id, nick, phone, mail, domain, status, reg_date from member 
+ 		   	  		where ${thema} like '%' || #{keyword} || '%' order by reg_date desc)
+ 			  order by reg_date desc)
+ 		<where>
+ 			<if test="startRow > 0"><![CDATA[r >= #{startRow}]]></if>
+ 			<if test="endRow > 0 and endRow > startRow"><![CDATA[and r <= #{endRow}]]></if>
+ 		</where>
+ 	</select>
+ 	
+ 	<!-- 관리자 장소 입력 검색결과 갯수 -->
+ 	<select id="selectKeywordPlaceCount" parameterType="searchDTO" resultType="int">
+ 		select count(*) from place
+ 		where ${thema} like '%' || #{keyword} || '%'
+ 	</select>
+ 	
+ 	<!-- 관리자 장소 입력 검색 -->
+ 	<select id="selectKeywordPlace" parameterType="searchDTO" resultType="placeDTO">
+ 		select index_num, name, addr, tel, fee1, fee2, opening, closing, good, views,r
+ 		from (select index_num, name, addr, tel, fee1, fee2, opening, closing, good, views, rownum r
+ 			  from (select index_num, name, addr, tel, fee1, fee2, opening, closing, good, views from place 
+ 			  		where ${thema} like '%' || #{keyword} || '%' order by name asc)
+ 			  order by name asc)
+ 		<where>
+ 			<if test="startRow > 0"><![CDATA[r >= #{startRow}]]></if>
+ 			<if test="endRow > 0 and endRow > startRow"><![CDATA[and r <= #{endRow}]]></if>
+ 		</where> 
+ 	</select>
+ 
+	
+ 
+ </mapper> 

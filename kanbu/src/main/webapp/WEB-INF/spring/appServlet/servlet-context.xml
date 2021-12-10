@@ -17,11 +17,24 @@
 		<property name="suffix" value=".jsp" />
 	</bean>
 
+	<!-- 파일 업로드 객체 설정 -->
+	<bean id="multipartResolver"
+		  class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<property name="maxUploadSize" value="10485760"/>
+	<!-- 10MB -->
+	</bean>
+	
+	<bean id = "uploadPath" class="java.lang.String">
+		<constructor-arg value="D:/repository/project0/kanbu/kanbu/src/main/webapp/WEB-INF/upload">
+		</constructor-arg>
+	</bean>
+
 
 
 	<!-- controller 사용할 패키지 설정 -->
 	<context:component-scan base-package="com.kanbu" />
 
+	<!-- json 설정(ajax) -->
 	<bean
 		class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">
 		<property name="messageConverters">
@@ -38,6 +51,5 @@
 			</list>
 		</property>
 	</bean>
-
 
 </beans>

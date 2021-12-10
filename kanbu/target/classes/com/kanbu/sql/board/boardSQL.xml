@@ -23,8 +23,14 @@
 		where status = 100
 	</select>
 	
+	<!-- 사용자 고유번호 검색 -->
+	<select id="selectMember"  resultType="boardDTO" >
+		select index_num
+		from member
+		where status = 1
+	</select>
 	
-	<!-- 공지 등록 -->
+	<!-- 공지 작성 -->
  	<insert id="insertBoard" parameterType="boardDTO">
  		insert into notice (index_num, title, writer, content, reg_date) 
  		values (NOTICE_SEQ.nextval, #{title}, #{writer}, #{content}, sysdate)
@@ -35,7 +41,8 @@
 	<select id="selectNoticeDetail" parameterType="int" resultType="boardDTO">
 	 	select n.index_num, n.title, m.nick, n.content
 		from notice n, member m
-		where n.index_num = #{index_num}
+		where n.writer = m.index_num  
+		and n.index_num = #{index_num}
 	</select>
 	
 	
@@ -54,5 +61,63 @@
 		where index_num = #{index_num}
 	</delete>
 	
+	<!-- 여행 리뷰 리스트 갯수 -->
+	<select id="selectReviewCount" resultType="int">
+		select count(*) from plan_review
+	</select>
+	
+	<!-- 여행 리뷰 리스트 -->
+ 	<select id="selectReview" resultType="boardDTO">
+	 	select p.index_num, p.title, m.nick, p.content, p.views, p.reg_date
+		from plan_review p, member m
+		where m.index_num = p.writer
+		order by p.index_num desc
+	</select>
+	
+	<!-- 여행 리뷰 태그 리스트 갯수 -->
+	<select id="selectReviewTagCount" resultType="int">
+		select count(*)
+		from plan_review p, plan_review_tag pt, tag t
+		where p.index_num = pt.review
+		and pt.tag = t.index_num
+	</select>
+	
+	<!-- 여행 리뷰 태그 리스트 -->
+	<select id="selectReviewTag" resultType="boardDTO">
+		select p.index_num, p.title, t.name
+		from plan_review p, plan_review_tag pt, tag t
+		where p.index_num = pt.review
+		and pt.tag = t.index_num
+	</select>
+	
+	
+	<!-- 여행 리뷰 상세 보기 -->
+ 	<select id="selectReviewDetail" parameterType="int" resultType="boardDTO">
+	 	select p.index_num, p.title, m.nick, p.content
+		from plan_review p, member m
+		where p.writer = m.index_num
+		and p.index_num = #{index_num}
+	</select>
+	
+	<!-- 여행 리뷰 상세 보기 태그 -->
+	<select id="selectReviewDetailTag" parameterType="int" resultType="boardDTO">
+		select p.index_num, p.title, t.name
+		from plan_review p, plan_review_tag pt, tag t
+		where p.index_num = pt.review
+		and pt.tag = t.index_num
+		and p.index_num = #{index_num}
+	</select>
+ 
+ 
+ 	<!-- 여행 리뷰 작성 -->
+ 	<insert id="insertReview" parameterType="boardDTO">
+	 	insert into plan_review (index_num, title, writer, content, reg_date) 
+ 		values (plan_review_SEQ.nextval, #{title}, #{writer}, #{content}, sysdate)
+	</insert>
+	
+	<!-- 공지사항 조회수  -->
+ 	<update id="updateViews" parameterType="Integer">
+    	update notice set views=views+1 where index_num=#{index_num}
+ 	</update>
  
  </mapper> 

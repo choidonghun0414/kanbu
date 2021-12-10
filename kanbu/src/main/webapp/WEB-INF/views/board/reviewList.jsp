@@ -33,6 +33,12 @@
     <!-- <link rel="stylesheet" href="css/responsive.css"> -->
     
 <style>
+	
+	.logo {
+		width: 140px;
+		height: 56px;
+	}
+
     a {
 	    color: #007bff;
 	    text-decoration: none;
@@ -51,10 +57,6 @@
 		width: 300px;
 	}
 	
-	/* 버튼 왼쪽의 여백 */
-	.input-group-btn{
-		margin-left: 5px;
-	}
 	
 	/* 푸터 사이즈 조절, 컨텐츠와 간격 조절 */
     .footer .footer_top {
@@ -80,7 +82,7 @@
                             <div class="col-xl-2 col-lg-2">
                                 <div class="logo">
                                     <a href="/kanbu/main.com">
-                                        <img src="../resources/img/logo.png" alt="">
+                                        <img class="logo" src="../resources/img/logo.png" alt="">
                                     </a>
                                 </div>
                             </div>
@@ -89,8 +91,8 @@
                                     <nav>
                                         <ul id="navigation">
                                             <li><a class="active" href="/kanbu/main.com">home</a></li>
-                                            <li><a href="about.html">일정만들기</a></li>
-                                            <li><a class="" href="travel_destination.html">여행지정보</a></li>
+                                            <li><a href="/kanbu/list.com">일정만들기</a></li>
+                                            <li><a href="/kanbu/place.com">여행지정보</a></li>
                                             <li><a href="/kanbu/board/reviewList.com">게시판 <i class="ti-angle-down"></i></a>
                                                 <ul class="submenu">
                                                         <li><a href="/kanbu/board/reviewList.com">여행공유</a></li>
@@ -168,80 +170,49 @@
             
             <!--======== 여행 리뷰 게시판 목록 ========  -->
             <div class="row">
-                <div class="col-lg-4 col-md-6">
-                    <div class="single_place">
-                        <div class="thumb">
-                            <img src="../resources/img/place/1.png" alt="">
-                        </div>
-                        <div class="place_info">
-                            <a href="#"><h3>여행 제목</h3></a>
-                            <p>#먹방 #돼지 #우정</p>
-                            <div class="rating_days d-flex justify-content-between">
-                                <span class="d-flex justify-content-center align-items-center">
-                                     <a href="#">20 Review</a>
-                                </span>
-                                <div class="days">
-                                    <i class="fa fa-clock-o"></i>
-                                    <a href="#">5 Days</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6">
-                    <div class="single_place">
-                        <div class="thumb">
-                            <img src="../resources/img/place/2.png" alt="">
-                        </div>
-                        <div class="place_info">
-                            <a href="#"><h3>여행 제목2</h3></a>
-                            <p>#태그 #태그 #태그</p>
-                            <div class="rating_days d-flex justify-content-between">
-                                <span class="d-flex justify-content-center align-items-center">
-                                     <i class="fa fa-star"></i> 
-                                     <i class="fa fa-star"></i> 
-                                     <i class="fa fa-star"></i> 
-                                     <i class="fa fa-star"></i> 
-                                     <i class="fa fa-star"></i>
-                                     <a href="#">별 둘지 말지 고민</a>
-                                </span>
-                                <div class="days">
-                                    <i class="fa fa-clock-o"></i>
-                                    <a href="#">5 Days</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6">
-                    <div class="single_place">
-                        <div class="thumb">
-                            <img src="../resources/img/place/3.png" alt="">
-                            <a href="#" class="prise">이것도 고민</a>
-                        </div>
-                        <div class="place_info">
-                            <a href="#"><h3>여행 제목3</h3></a>
-                            <p>#태그 #태그 #태그</p>
-                            <div class="rating_days d-flex justify-content-between">
-                                <span class="d-flex justify-content-center align-items-center">
-                                     <i class="fa fa-star"></i> 
-                                     <i class="fa fa-star"></i> 
-                                     <i class="fa fa-star"></i> 
-                                     <i class="fa fa-star"></i> 
-                                     <i class="fa fa-star"></i>
-                                     <a href="#">[20]</a>
-                                </span>
-                                <div class="days">
-                                    <i class="fa fa-clock-o"></i>
-                                    <a href="#">5 Days</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            <c:if test="${reviewCount == 0}">
+            	등록된 게시글이 없습니다.
+            </c:if>
+            <c:if test="${reviewCount > 0}">
+	            <c:forEach var="review" items="${reviewList}">
+	                <div class="col-lg-4 col-md-6">
+	                    <div class="single_place">
+	                        <div class="thumb">
+	                            <img src="../resources/img/place/1.png" alt="">
+	                            <a href="#" class="prise">${review.views}</a>
+	                        </div>
+	                        <div class="place_info">
+	                            <a href="/kanbu/board/reviewDetail.com?reviewNum=${review.index_num}"><h3>${review.title}</h3></a>
+	                            <c:if test="${reviewTagCount > 0}">
+	                            	<c:forEach var="reviewTag" items="${reviewTagList}">
+	                            		<c:if test="${review.index_num == reviewTag.index_num}">
+	                            			#${reviewTag.name}&nbsp
+	                            		</c:if>
+	                            	</c:forEach>
+	                            </c:if>
+	                            <div class="rating_days d-flex justify-content-between">
+	                                <span class="d-flex justify-content-center align-items-center">
+	                                     <a href="/kanbu/board/reviewDetail.com">${review.nick}</a>
+	                                </span>
+	                                <div class="days">
+	                                    <i class="fa fa-clock-o"></i>
+	                                    <a href="/kanbu/board/reviewDetail.com"><fmt:formatDate value="${review.reg_date}" type="date"/></a>
+	                                </div>
+	                            </div>
+	                        </div>
+	                    </div>
+	                </div>
+	               </c:forEach>
+               </c:if>
             </div>
+            <!-- =============== 등록 버튼 =============== -->
+            <div class="d-flex justify-content-center">
+			<span class="input-group-btn">
+				<a class="btn btn-primary btn-lg" href="/kanbu/board/reviewWrite.com" role="button">나만의 여행 리뷰 등록하기</a>
+			</span>
+		</div>
         </div>
-		<div class="d-flex justify-content-center">
+		<div class="d-flex justify-content-center" style="margin-top: 50px;">
 			<ul class="pagination">
 				<li class="page-item disabled">
 					<a class="page-link" href="#">&laquo;</a>
@@ -266,6 +237,7 @@
 				</li>
 			</ul>
 		</div>
+		
 	</div>
 
 	

@@ -51,15 +51,61 @@
  		SELECT COUNT(*) FROM MEMBER
 		WHERE nick = #{nick}
  	</select>
- 	
+ 	<!-- 이메일 중복 체크 -->
+ 	<select id="mailChk" resultType="int">
+ 		SELECT COUNT(*) FROM MEMBER
+ 		WHERE mail = #{mail}
+ 		and domain = #{domain}
+ 	</select>
+ 	<!--아이디 찾기-->
  	<select id="selectId" parameterType="MemberDTO" resultType="String" >
  		select id
  		from member
  		where phone = #{phone}
  		and mail = #{mail}
+ 		and domain = #{domain}
  	</select>
  	
- 	<select id="selectPw" resultType="java.lang.String" parameterType="MemberDTO">
+ 	<!-- 회원정보조회 -->
+	<select id="selectMember" parameterType="String" resultType="MemberDTO">
+		select * from member 
+		where mail = #{mail}
+		and domain = #{domain}
+	</select>
+	
+	<!-- 패스워드변경 -->
+ 	<update id="updatePw" parameterType="MemberDTO">
+ 		update member
+ 		set pw2 = #{pw2}
+ 		where id = #{id}
+ 		and mail = #{mail}
+ 		and domain = #{domain}
+ 		and phone = #{phone}
+ 	</update>
+ 	
+ 	<!-- 패스워드변경 검사 -->
+ 	<select id="findPwChk" resultType="int">
+ 	 select count(*) from member
+ 	 where id = #{id}
+ 	 and mail = #{mail}
+ 	 and domain = #{domain}
+ 	 and phone = #{phone}
+ 	</select>
+ 	
+ 	<!-- 회원탈퇴 -->
+ 	<delete id="deleteMember" parameterType="MemberDTO">
+ 		delete from member
+ 		where id = #{id}
+ 	</delete>
+ 	
+ 	<!-- 비번체크(탈퇴) -->
+ 	<select id="deleteCheckPw" resultType="MemberDTO">
+ 		select pw2, id
+ 		from member
+		where id = #{id}
+ 	</select>
+ 	
+ 	<select id="selectPw" resultType="java.lang.String" parameterType="memberDTO">
  		select pw2
  		from member
  		where id = #{id}
@@ -67,16 +113,27 @@
  		and mail = #{mail}
  	</select>
  	
- 	<update id="updateMember" parameterType="MemberDTO">
- 		update member
+ 	<update id="updateMember" parameterType="memberDTO">
+ 	update member
  		set pw2 = #{pw2}, nick = #{nick}, phone = #{phone},
  		mail = #{mail}
  		where id = #{id}
  	</update>
  	
- 	<delete id="deleteMember" parameterType="MemberDTO">
- 		delete from member
- 		where id = #{id}
- 		
- 	</delete>
+ 	
+ 	<!-- 회원별 회원정보 조회하기 -->
+ 	<select id="myInfo" parameterType="int" resultType="memberDTO">
+ 		select * from member
+ 		<where>
+ 			<if test="index_num > 0">index_num = #{index_num}</if>
+ 		</where>
+ 	</select>
+ 	
+ 	<!-- 회원정보 변경하기 -->
+ 	<update id="myInfoUpdate" parameterType="memberDTO">
+ 		update member 
+ 		set nick=#{nick}, phone=#{phone}, mail=#{mail}, domain=#{domain}
+		where index_num=#{index_num} and id=#{id}
+ 	</update>
+
  </mapper> 
