@@ -222,25 +222,47 @@
 				<ul class="pagination">
 					<c:if test="${startPage > 5}">
 	                	<li class="page-item">
-	                    	<a href="/kanbu/mypage/info/placeReply.com?pageNum=${startPage-5}" 
-	                    	   class="page-link" aria-label="Previous">
-	                        	<i class="ti-angle-left"></i>
-	                        </a>	
+	                		<c:if test="${searchCount != 1}">
+	                    		<a href="/kanbu/mypage/info/placeReply.com?pageNum=${startPage-5}" 
+	                    	   	   class="page-link" aria-label="Previous">
+	                        		<i class="ti-angle-left"></i>
+	                        	</a>
+	                        </c:if>
+	                        <c:if test="${searchCount == 1}">
+	                        	<a href="/kanbu/mypage/info/placeReply/search.com?thema=${search.thema}&keyword=${search.keyword}&pageNum=${startPage-5}" 
+	                    	   	   class="page-link" aria-label="Previous">
+	                        		<i class="ti-angle-left"></i>
+	                        	</a>
+	                        </c:if>	
 	                    </li>
 	                </c:if>
 	                               	
 	                <c:forEach var="i" begin="${startPage}" end="${endPage}">
 	                	<li class="page-item">
-	                    	<a href="/kanbu/mypage/info/placeReply.com?pageNum=${i}" class="page-link">${i}</a>
+	                		<c:if test="${searchCount != 1}">
+	                    		<a href="/kanbu/mypage/info/placeReply.com?pageNum=${i}" class="page-link">${i}</a>
+	                    	</c:if>
+	                    	<c:if test="${searchCount == 1}">
+	                    		<a href="/kanbu/mypage/info/placeReply/search.com?thema=${search.thema}&keyword=${search.keyword}&pageNum=${i}" 
+	                    		   class="page-link">${i}</a>
+	                    	</c:if>
 	                    </li>
 	                </c:forEach>
 	                             	
 	                <c:if test="${endPage < pageCount}">
 	                    <li class="page-item">
-	                        <a href="/kanbu/mypage/info/placeReply.com?pageNum=${startPage+5}" 
-	                           class="page-link" aria-label="Next">
-	                        	<i class="ti-angle-right"></i>
-	                        </a>
+	                    	<c:if test="${searchCount != 1}">
+	                        	<a href="/kanbu/mypage/info/placeReply.com?pageNum=${startPage+5}" 
+	                           	   class="page-link" aria-label="Next">
+	                        		<i class="ti-angle-right"></i>
+	                       	 	</a>
+	                       	</c:if>
+	                       	<c:if test="${searchCount == 1}">
+	                       		<a href="/kanbu/mypage/info/placeReply/search.com?thema=${search.thema}&keyword=${search.keyword}&pageNum=${startPage+5}" 
+	                           	   class="page-link" aria-label="Next">
+	                        		<i class="ti-angle-right"></i>
+	                       	 	</a>
+	                       	 </c:if>
 	                    </li>
 	                </c:if>
 				</ul>

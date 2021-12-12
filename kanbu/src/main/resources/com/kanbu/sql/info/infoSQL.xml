@@ -62,9 +62,6 @@
  		<where>
  			<if test="startRow > 0"><![CDATA[r >= #{startRow}]]></if>
  			<if test="endRow > 0 and endRow > startRow"><![CDATA[and r <= #{endRow}]]></if>
- 		</where>	 	  
- 			pr.writer = m.index_num
- 			<if test="place > 0">and pr.place = #{value}</if>
  		</where>
  	</select>
  	

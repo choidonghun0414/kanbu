@@ -3,6 +3,7 @@ package com.kanbu.service.member;
 import java.util.List;
 
 import com.kanbu.dto.SearchDTO;
+import com.kanbu.dto.board.BoardDTO;
 import com.kanbu.dto.info.Place_ReplyDTO;
 import com.kanbu.dto.member.MemberDTO;
 
@@ -38,6 +39,39 @@ public interface MemberService {
 	
 	// 회원정보 변경하기
 	public void myInfoUpdate(MemberDTO member) throws Exception;
+	
+	// 내가 쓴 리뷰 갯수
+	public int myReviewCount(int writer) throws Exception;
+	
+	// 내가 쓴 리뷰 리스트
+	public List<BoardDTO> myReview(BoardDTO board) throws Exception;
+	
+	// 내가 쓴 리뷰 태그 갯수
+	public int myReviewTagCount(int writer) throws Exception;
+	
+	// 내가 쓴 리뷰 태그 리스트
+	public List<BoardDTO> myReviewTag(int writer) throws Exception;
+	
+	// 내가 쓴 리뷰제목 검색 갯수
+	public int searchTitleMyReviewCount(SearchDTO search) throws Exception;
+	
+	// 내가 쓴 리뷰제목 검색 결과 리스트
+	public List<BoardDTO> searchTitleMyReview(SearchDTO search) throws Exception;
+		
+	// 내가 쓴 리뷰제목 검색 태그 갯수
+	public int searchTitleMyReviewTagCount(SearchDTO search) throws Exception;
+		
+	// 내가 쓴 리뷰제목 검색 태그 결과 리스트
+	public List<BoardDTO> searchTitleMyReviewTag(SearchDTO search) throws Exception;
+	
+	// 내가 쓴 리뷰 태그검색 리스트 갯수
+//	public int searchTagMyReviewCount(SearchDTO search) throws Exception;
+	
+	// 내가 쓴 리뷰번호 태그검색 리스트
+//	public List<SearchDTO> searchTagMyReviewNum(SearchDTO search) throws Exception;
+	
+	// 내가 쓴 리뷰 태그검색 리스트
+//	public List<BoardDTO> searchTagMyReview(List<SearchDTO> myReviewNumList) throws Exception;
 	
 	// 내가 쓴 여행지 댓글 갯수
 	public int myPlaceReplyCount(int writer) throws Exception;

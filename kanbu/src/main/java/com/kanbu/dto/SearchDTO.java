@@ -1,5 +1,7 @@
 package com.kanbu.dto;
 
+import java.util.List;
+
 /*
  * 	SearchDTO(검색DTO)
  * 
@@ -8,6 +10,7 @@ package com.kanbu.dto;
  *  startRow : 처음검색결과(페이징처리)
  *  endRow : 마지막검색결과(페이징처리)
  *  writer : 작성자번호
+ *  index_num : 글번호
  */
 
 public class SearchDTO {
@@ -17,6 +20,7 @@ public class SearchDTO {
 	private int startRow;
 	private int endRow;
 	private int writer;
+	private int index_num;
 	
 	public String getThema() {
 		return thema;
@@ -53,6 +57,11 @@ public class SearchDTO {
 		this.writer = writer;
 	}
 	
-	
+	public int getIndex_num() {
+		return index_num;
+	}
+	public void setIndex_num(int index_num) {
+		this.index_num = index_num;
+	}
 	
 }

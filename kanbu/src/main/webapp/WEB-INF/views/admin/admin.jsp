@@ -185,7 +185,7 @@
                         </div>
                         <h3>게시판 관리</h3>
                         <p onclick="location.href ='/kanbu/admin/board/reviewInfo.com'" style="cursor:pointer;">후기게시판</p>
-                        <p onclick="location.href ='/kanbu/admin/board/noticeInfo.com'" style="cursor:pointer;">공지사항</p>
+                        <p onclick="location.href ='/kanbu/board/noticeList.com'" style="cursor:pointer;">공지사항</p>
                         <p onclick="location.href ='/kanbu/admin/board/qaInfo.com'" style="cursor:pointer;">자주하는질문</p>
                     </div>
                 </div>

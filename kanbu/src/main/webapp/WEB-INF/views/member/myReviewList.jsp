@@ -9,7 +9,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>REVIEW</title>
+    <title>mypage | 나의 후기</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -32,48 +32,53 @@
     <link rel="stylesheet" href="/kanbu/resources/css/style.css">
     <!-- <link rel="stylesheet" href="css/responsive.css"> -->
     
-<style>
+    <c:if test="${empty (sessionScope.status)}">
+    	<script type="text/javascript">
+    		alert("로그인 후 이용가능합니다.");
+    		window.loaction = "/kanbu/login.com";
+    	</script>
+    </c:if>
+    
+	<style>
+		.logo {
+			width: 140px;
+			height: 56px;
+		}
 	
-	.logo {
-		width: 140px;
-		height: 56px;
-	}
-
-    a {
-	    color: #007bff;
-	    text-decoration: none;
-	    background-color: transparent;
-	    -webkit-text-decoration-skip: objects;
-	    color: inherit;
-	}
-	
-	.mb_70 {
-    	margin-bottom: 30px;
-	}
-	
-	/* 검색 input창 서타일 */
-	input.form-control {
-		margin-bottom: 50px;
-		width: 300px;
-	}
-	
-	
-	/* 푸터 사이즈 조절, 컨텐츠와 간격 조절 */
-    .footer .footer_top {
-   		margin-top: 110px;
-   		padding-top: 50px;
-   		padding-bottom: 30px;
-	}
-	
-	.pagination-button {
-		text-align: center;
-	}
-	
-</style>
+	    a {
+		    color: #007bff;
+		    text-decoration: none;
+		    background-color: transparent;
+		    -webkit-text-decoration-skip: objects;
+		    color: inherit;
+		}
+		
+		.mb_70 {
+	    	margin-bottom: 30px;
+		}
+		
+		/* 검색 input창 서타일 */
+		input.form-control {
+			margin-bottom: 50px;
+			width: 300px;
+		}
+		
+		
+		/* 푸터 사이즈 조절, 컨텐츠와 간격 조절 */
+	    .footer .footer_top {
+	   		margin-top: 110px;
+	   		padding-top: 50px;
+	   		padding-bottom: 30px;
+		}
+		
+		.pagination-button {
+			text-align: center;
+		}
+	</style>
 </head>
 
 <body>
-  <!-- header-start -->
+    <!-- header-start -->
     <header>
         <div class="header-area ">
             <div id="sticky-header" class="main-header-area">
@@ -143,7 +148,6 @@
     </header>
     <!-- header-end -->
 
-
     <!-- bradcam_area  -->
     <div class="bradcam_area bradcam_bg_4">
         <div class="container">
@@ -165,12 +169,19 @@
             <div class="row justify-content-center">
                 <div class="col-lg-6">
                     <div class="section_title text-center mb_70">
-                        <h3>어떤 여행을 떠나시나요?</h3>
+                        <h3>나의 여행 후기</h3>
                     </div>
                     <div class="d-flex justify-content-center">
-						<input type="text" class="form-control" placeholder="검색어 입력">
+                    	<select name="thema" id="thema">
+                    		<option value="select" selected>선택</option>
+                    		<option value="p.title">제목</option>
+                       <!-- <option value="t.name">태그</option>  -->
+                    	</select>
+						<input type="text" class="form-control" id="keyword"
+							   placeholder="검색어를 입력해주세요..">
 						<span class="input-group-btn">
-							<button class="btn btn-secondary" type="button">검색</button>
+							<button class="btn btn-secondary" type="button"
+									onclick="return searchReviewChk();">검색</button>
 						</span>
 					</div>
                 </div>
@@ -178,33 +189,36 @@
             
             <!--======== 여행 리뷰 게시판 목록 ========  -->
             <div class="row">
-            <c:if test="${reviewCount == 0}">
-            	등록된 게시글이 없습니다.
+            <c:if test="${myReviewCount == 0}">
+            	<p align="center">등록된 게시글이 없습니다.</p>
             </c:if>
-            <c:if test="${reviewCount > 0}">
-	            <c:forEach var="review" items="${reviewList}">
-	                <div class="col-lg-4 col-md-6">
+            <c:if test="${myReviewCount > 0}">
+	            <c:forEach var="myReview" items="${myReviewList}">
+	                <div class="col-lg-4 col-md-6" style="cursor: pointer;"
+	                	 onclick="window.location='/kanbu/board/reviewDetail.com?reviewNum=${myReview.index_num}'">
 	                    <div class="single_place">
 	                        <div class="thumb">
-	                            <img src="../resources/img/place/1.png" alt="">
-	                            <a href="#" class="prise">${review.views}</a>
+	                            <img src="/kanbu/resources/img/place/1.png" alt="">
+	                            <a class="prise">${myReview.views}</a>
 	                        </div>
 	                        <div class="place_info">
-	                            <a href="/kanbu/board/reviewDetail.com?reviewNum=${review.index_num}"><h3>${review.title}</h3></a>
-	                            <c:if test="${reviewTagCount > 0}">
-	                            	<c:forEach var="reviewTag" items="${reviewTagList}">
-	                            		<c:if test="${review.index_num == reviewTag.index_num}">
-	                            			#${reviewTag.name}&nbsp
-	                            		</c:if>
-	                            	</c:forEach>
+	                            <h3>${myReview.title}</h3>
+	                            <c:if test="${myReviewTagCount > 0}">
+	                            	<p>
+	                            		<c:forEach var="myReviewTag" items="${myReviewTagList}">
+	                            			<c:if test="${myReview.index_num == myReviewTag.index_num}">
+	                            				#${myReviewTag.name}&nbsp
+	                            			</c:if>
+	                            		</c:forEach>
+	                            	</p>
 	                            </c:if>
 	                            <div class="rating_days d-flex justify-content-between">
 	                                <span class="d-flex justify-content-center align-items-center">
-	                                     <a href="/kanbu/board/reviewDetail.com">${review.nick}</a>
+	                                     <a>${myReview.nick}</a>
 	                                </span>
 	                                <div class="days">
 	                                    <i class="fa fa-clock-o"></i>
-	                                    <a href="/kanbu/board/reviewDetail.com"><fmt:formatDate value="${review.reg_date}" type="date"/></a>
+	                                    <a><fmt:formatDate value="${myReview.reg_date}" type="date"/></a>
 	                                </div>
 	                            </div>
 	                        </div>
@@ -220,10 +234,11 @@
 			</span>
 		</div>
         </div>
+        
         <!-- 페이지 번호 나타내기 -->
-		<c:if test="${reviewCount > 0}">
+		<c:if test="${myReviewCount > 0}">
 			<fmt:parseNumber var="pageCount" 
-							 value="${reviewCount / pageSize + (reviewCount %  pageSize == 0 ? 0 : 1)}"
+							 value="${myReviewCount / pageSize + (myReviewCount %  pageSize == 0 ? 0 : 1)}"
 							 integerOnly="true" />
 			<c:set var="pageBlock" value="${5}" />
 			<fmt:parseNumber var="result" value="${currentPage/5}" integerOnly="true"/>
@@ -231,56 +246,50 @@
 			<c:set var="endPage" value="${startPage + pageBlock - 1}" />
 			<c:if test="${endPage > pageCount}">
 				<c:set var="endPage" value="${pageCount}" />
-			</c:if>			 
-		
-			<!-- ========게시판 페이징 표시======== -->
+			</c:if>		
+        
+        	<!-- 페이지 번호 -->
 			<div class="d-flex justify-content-center" style="margin-top: 50px;">
 				<ul class="pagination">
 					<c:if test="${startPage > 5}">
-	                	<li class="page-item disabled">
-	                		<c:if test="${searchCount != 1}">
-	                    		<a href="/kanbu/board/reviewList.com?pageNum=${startPage-5}" 
-	                    	   	   class="page-link">
-	                        		&laquo;
-	                        	</a>
-	                        </c:if>
-	                        <c:if test="${searchCount == 1}">
-	                        	<a href="/kanbu/board/review/search.com?thema=${search.thema}&keyword=${search.keyword}&pageNum=${startPage-5}" 
-	                    	   	   class="page-link">
-	                        		&laquo;
-	                        	</a>
-	                        </c:if>	
-	                    </li>
-	                </c:if>
-	                               	
-	                <c:forEach var="i" begin="${startPage}" end="${endPage}">
-	                	<li class="page-item">
-	                		<c:if test="${searchCount != 1}">
-	                    		<a href="/kanbu/board/reviewList.com?pageNum=${i}" class="page-link">${i}</a>
-	                    	</c:if>
-	                    	<c:if test="${searchCount == 1}">
-	                    		<a href="/kanbu/board/review/search.com?thema=${search.thema}&keyword=${search.keyword}&pageNum=${i}" 
-	                    		   class="page-link">${i}</a>
-	                    	</c:if>
-	                    </li>
-	                </c:forEach>
-	                             	
-	                <c:if test="${endPage < pageCount}">
-	                    <li class="page-item">
-	                    	<c:if test="${searchCount != 1}">
-	                        	<a href="/kanbu/board/reviewList.com?pageNum=${startPage+5}" 
-	                           	   class="page-link">
-	                        		&raquo;
-	                       	 	</a>
-	                       	</c:if>
-	                       	<c:if test="${searchCount == 1}">
-	                       		<a href="/kanbu/board/review/search.com?thema=${search.thema}&keyword=${search.keyword}&pageNum=${startPage+5}" 
-	                           	   class="page-link">
-	                        		&raquo;
-	                       	 	</a>
-	                       	 </c:if>
-	                    </li>
-	                </c:if>
+						<li class="page-item disabled">
+							<c:if test="${searchCount == 1}">
+								<a href="/kanbu/mypage/board/review/search.com?thema=${search.thema}&keyword=${search.keyword}&pageNum=${startPage-5}" 
+								   class="page-link" >&laquo;</a>
+							</c:if>
+							<c:if test="${searchCount != 1}">
+								<a class="page-link" href="/kanbu/mypage/board/review.com?pageNum=${startPage-5}">&laquo;</a>
+							</c:if>
+						</li>
+					</c:if>
+					
+					<c:forEach var="i" begin="${startPage}" end="${endPage}">
+						<c:if test="${searchCount == 1}">
+							<li class="page-item">
+								<a class="page-link" 
+								   href="/kanbu/mypage/board/review/search.com?thema=${search.thema}&keyword=${search.keyword}&pageNum=${i}">${i}</a>
+							</li>
+						</c:if>	
+						<c:if test="${searchCount != 1}">
+							<li class="page-item">
+								<a class="page-link" href="/kanbu/mypage/board/review.com?pageNum=${i}">${i}</a>
+							</li>
+						</c:if>
+					</c:forEach>
+					
+					<c:if test="${endPage < pageCount}">
+						<c:if test="${searchCount == 1}">
+							<li class="page-item">
+								<a class="page-link" 
+								   href="/kanbu/mypage/board/review/search.com?thema=${search.thema}&keyword=${search.keyword}&pageNum=${startPage+5}">&raquo;</a>
+							</li>
+						</c:if>
+						<c:if test="${searchCount != 1}">
+							<li class="page-item">
+								<a class="page-link" href="/kanbu/mypage/board/review.com?pageNum=${startPage+5}">&raquo;</a>
+							</li>
+						</c:if>
+					</c:if>
 				</ul>
 			</div>
 		</c:if>
@@ -465,7 +474,6 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 	<script src="/kanbu/resources/js/jquery.form.js"></script>
 	<script src="/kanbu/resources/js/jquery.validate.min.js"></script>
 	<script src="/kanbu/resources/js/mail-script.js"></script>
-
 	<script src="/kanbu/resources/js/main.js"></script>
     <script>
         $('#datepicker').datepicker({
@@ -482,6 +490,28 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 
         });
     </script>
+    
+    <script type="text/javascript">
+    	function searchReviewChk(){
+    		var target = document.getElementById("thema");
+  			var thema = target.options[target.selectedIndex].value;
+  			var keyword = document.getElementById('keyword').value;
+  			
+  			if(thema != null && thema != "" && thema !="select"){
+  				if(keyword != null && keyword != ""){
+  					window.location = '/kanbu/mypage/board/review/search.com?thema='+thema+'&keyword='+keyword;
+  				}else{
+  					alert("검색어를 입력해주세요.");
+  					return false;
+  				}
+  			}else{
+  				alert("검색 테마를 선택해주세요.");
+  				return false;
+  			}
+    	}
+    </script>
+    
+    
     </body>
     
 </html>

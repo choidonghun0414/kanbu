@@ -10,7 +10,7 @@
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <title>Member Administration</title>
+  <title>Place Reply Administration</title>
   <!-- base:css -->
   <link rel="stylesheet" href="/kanbu/resources/admin/vendors/typicons.font/font/typicons.css">
   <link rel="stylesheet" href="/kanbu/resources/admin/vendors/css/vendor.bundle.base.css">
@@ -147,7 +147,7 @@
               <div class="tiles default border"></div>
             </div>
           </div>
-      </div>
+        </div>
         
         
       <!-- 사이드 관리자 전용 카테고리 영역 -->
@@ -228,57 +228,60 @@
             <div class="col-lg-12 grid-margin stretch-card">
               <div class="card">
                 <div class="card-body">
-                  <h4 class="card-title">회원 조회</h4>
-                  <div class="table-responsive">
-                  	<c:if test="${memberCount == 0}">
-                  		<p>등록된 회원이 없습니다.</p>
+                  <h4 class="card-title">여행후기글 조회</h4>
+                  <c:if test="${reviewCount == 0}">
+                  		<p>등록된 후기가 없습니다.</p>
                   	</c:if>
-                  	<c:if test="${memberCount > 0}">
-                    	<table class="table table-hover">
-                      		<thead align="center">
+                  <div class="table-responsive">
+                    <table class="table table-hover">
+                      <thead align="center">
+                        <tr>
+                          <th>No.</th>
+                          <th>제목</th>
+                          <th>작성자</th>
+                          <th>태그</th>
+                          <th>댓글수</th>
+                          <th>조회수</th>                          
+                          <th>작성시간</th>
+                        </tr>
+                      </thead>
+                      <tbody align="center">
+                      	<c:if test="${reviewCount > 0}">
+                        	<c:forEach var="review" items="${reviewList}">
                         		<tr>
-                          			<th>No.</th>
-                          			<th>아이디</th>
-                          			<th>닉네임</th>
-                          			<th>전화번호</th>
-                          			<th>이메일</th>
-                          			<th>회원상태</th>
-                          			<th>가입날짜</th>
+                          			<td>${review.index_num}</td>
+                          			<td>
+                          				<button type="button" class="btn btn-link btn-fw" 
+                          					    onclick="location.href='/kanbu/board/reviewDetail.com?reviewNum=${review.index_num}'">
+                          					${review.title}
+                          				</button>
+                          			</td>
+                          			<td>${review.nick}</td>
+                          			<td>
+                          				<c:if test="${reviewTagCount > 0}">
+	                            			<c:forEach var="reviewTag" items="${reviewTagList}">
+	                            				<c:if test="${review.index_num == reviewTag.index_num}">
+	                            					#${reviewTag.name}&nbsp
+	                            				</c:if>
+	                            			</c:forEach>
+	                            		</c:if>
+                          			</td>
+                          			<td>0</td>
+                          			<td>${review.views}</td>
+                          			<td><fmt:formatDate value="${review.reg_date}" pattern="yyyy-MM-dd" /></td>
                         		</tr>
-                      		</thead>
-                      		<tbody align="center">
-                      			<c:forEach var="member" items="${memberList}">
-                        			<tr>
-                          				<td>${member.index_num}</td>
-                          				<td>${member.id}</td>
-                          				<td>${member.nick}</td>
-                          				<td>${member.phone}</td>
-                          				<td>
-                          					${member.mail} @
-                          					<c:choose>
-                          						<c:when test="${member.domain eq '1'}">naver.com</c:when>
-                          						<c:when test="${member.domain eq '2'}">google.com</c:when>
-                          						<c:when test="${member.domain eq '3'}">daum.net</c:when>
-                          					</c:choose>
-                          				</td>
-                          				<td>
-                          					<c:if test="${empty (member.status)}">비회원</c:if>
-                          					<c:if test="${member.status eq 1}">회원</c:if>
-                          					<c:if test="${member.status eq 100}">관리자</c:if>
-                          				</td>
-                          				<td><fmt:formatDate value="${member.reg_date}" pattern="yyyy-MM-dd" /></td>
-                        			</tr>
-                        		</c:forEach>
-                      		</tbody>
-                    	</table>
-                  	 </c:if>
-                  </div> 	
+                        	</c:forEach>
+                        </c:if>
+                      </tbody>
+                    </table>
+                  </div>
                 </div>
                 
+                
                 <!-- 페이지 번호 나타내기 -->
-				<c:if test="${memberCount > 0}">
+				<c:if test="${reviewCount > 0}">
 					<fmt:parseNumber var="pageCount" 
-									 value="${memberCount / pageSize + (memberCount %  pageSize == 0 ? 0 : 1)}"
+									 value="${reviewCount / pageSize + (reviewCount %  pageSize == 0 ? 0 : 1)}"
 									 integerOnly="true" />
 					<c:set var="pageBlock" value="${5}" />
 					<fmt:parseNumber var="result" value="${currentPage/5}" integerOnly="true"/>
@@ -287,13 +290,13 @@
 						<c:if test="${endPage > pageCount}">
 							<c:set var="endPage" value="${pageCount}" />
 						</c:if>			 
-					
-                	<nav class="blog-pagination justify-content-center d-flex">
+				
+					<nav class="blog-pagination justify-content-center d-flex">
                 		<ul class="pagination">
                     		<c:if test="${startPage > 5}">
                         		<li class="page-item">
                         			<c:if test="${searchCount != 1}">
-                            			<a href="/kanbu/admin/memberInfo.com?pageNum=${startPage-5}" 
+                            			<a href="/kanbu/admin/board/reviewInfo.com?pageNum=${startPage-5}" 
                             			   class="page-link" aria-label="Previous">
                                 			<i class="mdi mdi-arrow-left"></i>
                                 		</a>
@@ -310,21 +313,19 @@
                         	<c:forEach var="i" begin="${startPage}" end="${endPage}">
                         		<li class="page-item">
                         			<c:if test="${searchCount != 1}">
-                            			<a href="/kanbu/admin/memberInfo.com?pageNum=${i}" 
-                            		   	   class="page-link">${i}</a>
+                            			<a href="/kanbu/admin/board/reviewInfo.com?pageNum=${i}" class="page-link">${i}</a>
                             		</c:if>
                             		<c:if test="${searchCount == 1}">
                             			<a href="/kanbu/admin/search.com?thema=${thema}&keyword=${keyword}&pageNum=${i}" 
                             		   	   class="page-link">${i}</a>
-                            		</c:if>
+                                	</c:if>	
                             	</li>
                         	</c:forEach>
                              	
                         	<c:if test="${endPage < pageCount}">
                         		<li class="page-item">
                         			<c:if test="${searchCount != 1}">
-                            			<a href="/kanbu/admin/memberInfo.com?pageNum=${startPage+5}" 
-                            			   class="page-link" aria-label="Next">
+                            			<a href="/kanbu/admin/board/reviewInfo.com?pageNum=${startPage+5}" class="page-link" aria-label="Next">
                              				<i class="mdi mdi-arrow-right"></i>
                                 		</a>
                                 	</c:if>
@@ -337,22 +338,24 @@
                             	</li>
                         	</c:if>
                     	</ul>
-                	</nav>
+                	</nav> 
                 </c:if>
-                        
-                <!-- 검색 form 영역 -->
-                <form name="searchMember" id="searchMember" action="/kanbu/admin/search.com" method="post" style="text-align: center;">
+                
+                
+               	<!-- 검색 form 영역 -->
+                <form name="searchPlace" id="searchPlace" action="/kanbu/admin/search.com" method="post" style="text-align: center;">
 					<div class="form-group">
-                  		<select name="thema" id="thema" class="form-control-sm">
-                  	   		<option value="select" selected>선택</option>
-                  	   		<option value="id">아이디</option>
-                  	   		<option value="nick">닉네임</option>
+						<select name="thema" id="thema" class="form-control-sm">
+							<option value="select" selected>선택</option>
+                  	   		<option value="p.title">제목</option>
+                  	   		<option value="m.nick">작성자</option>
+                  	   		<option value="t.tag">태그</option>
                   	   	</select>
                   	   	<input type="text" name="keyword" id="keyword" class="form-control-sm"/>
                   	   	<button class="btn btn-sm btn-secondary" type="button" onclick="search();">검색</button>
                   	</div>
-                </form>  
-              </div>     
+                </form>  	
+              </div>
             </div>
             
         <!-- footer 영역 -->
@@ -370,7 +373,6 @@
     <!-- page-body-wrapper ends -->
   </div>
   </div>
-
   <!-- container-scroller -->
   <!-- base:js -->
   <script src="/kanbu/resources/admin/vendors/js/vendor.bundle.base.js"></script>
@@ -388,6 +390,8 @@
   <!-- End plugin js for this page -->
   <!-- Custom js for this page-->
   <!-- End custom js for this page-->
+  
+  
 </body>
 
 	<!-- 장소 검색 기능 -->
@@ -395,7 +399,7 @@
   		function search(){
   			var target = document.getElementById("thema");
   			var thema = target.options[target.selectedIndex].value;
-  			var keyword = document.getElementById('keyword').value;
+  			var keyword = document.getElementById('keyword').value
   			
   			if(thema != null && thema != "" && thema !="select"){
   				if(keyword != null && keyword != ""){

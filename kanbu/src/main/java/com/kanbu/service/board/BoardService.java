@@ -9,7 +9,11 @@ public interface BoardService {
 	// 공지 등록
 	public void insertBoard(BoardDTO board) throws Exception;
 	
-	public List<BoardDTO> selectNotice() throws Exception;
+	// 공지 목록 갯수
+	public int selectNoticeCount() throws Exception;
+	
+	//공지 목록
+	public List<BoardDTO> selectNotice(BoardDTO board) throws Exception;
 	
 	//관리자고유번호 검색
 	public int selectAdmin() throws Exception;
@@ -30,7 +34,7 @@ public interface BoardService {
 	public int selectReviewCount() throws Exception;
 	
 	//리뷰 목록
-	public List selectReview() throws Exception;
+	public List selectReview(BoardDTO board) throws Exception;
 	
 	//여행 리뷰 태그 리스트 갯수
 	public int selectReviewTagCount() throws Exception;

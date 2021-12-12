@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.kanbu.dto.SearchDTO;
+import com.kanbu.dto.board.BoardDTO;
 import com.kanbu.dto.info.PlaceDTO;
 import com.kanbu.dto.info.Place_ReplyDTO;
 import com.kanbu.dto.member.MemberDTO;
@@ -40,6 +41,9 @@ public class AdminController {
 	
 	@Autowired
 	private Place_ReplyDTO place_reply;
+	
+	@Autowired
+	private BoardDTO board;
 	
 	// 관리자 페이지
 	@RequestMapping("admin.com")
@@ -180,6 +184,50 @@ public class AdminController {
 		return "/admin/info/placeReplyList";
 	}
 	
+	// 관리자 여행후기 조회 페이지
+	@RequestMapping("/admin/board/reviewInfo.com")
+	public String adminReview(HttpServletRequest request, Model model) throws Exception{
+		// 페이징 처리
+		int pageSize = 10;											// 한페이지에 보여줄 정보 갯수
+		String pageNum = request.getParameter("pageNum");			// view에서 넘어온 페이지번호
+		if(pageNum == null) {										// view에서 넘어온 페이지번호가 없으면 1로 대입
+			pageNum = "1";
+		}
+						
+		int currentPage = Integer.parseInt(pageNum);				// 현재 페이지번호
+		int startRow = (currentPage - 1) * pageSize + 1;			// 시작 번호
+		int endRow = currentPage * pageSize;						// 끝 번호
+		board.setStartRow(startRow);
+		board.setEndRow(endRow);
+		
+		int reviewCount = adminImpl.selectReviewCount();
+		int reviewTagCount = adminImpl.selectReviewTagCount();
+		List reviewList = null;
+		List reviewTagList = null;
+		
+		if(reviewCount > 0) {
+			reviewList = adminImpl.selectReview(board);
+		}
+		if(reviewTagCount > 0) {
+			reviewTagList = adminImpl.selectReviewTag();
+		}
+		
+		
+		request.setAttribute("currentPage", currentPage);
+		request.setAttribute("startRow", board.getStartRow());
+		request.setAttribute("endRow", board.getEndRow());
+		request.setAttribute("pageSize", pageSize);
+		request.setAttribute("pageNum", pageNum);
+		
+		model.addAttribute("reviewCount", reviewCount);
+		model.addAttribute("reviewList", reviewList);
+		model.addAttribute("reviewTagCount", reviewTagCount);
+		model.addAttribute("reviewTagList", reviewTagList);
+		
+		
+		return "/admin/board/reviewList";
+	}
+	
 	// 관리자 검색 기능
 	@RequestMapping("/admin/search.com")
 	public String adminSearch(HttpServletRequest request, Model model) throws Exception{
@@ -198,6 +246,7 @@ public class AdminController {
 		int currentPage = Integer.parseInt(pageNum);				// 현재 페이지번호
 		int startRow = (currentPage - 1) * pageSize + 1;			// 시작 번호
 		int endRow = currentPage * pageSize;						// 끝 번호
+		int searchCount = 1;
 		search.setStartRow(startRow);
 		search.setEndRow(endRow);
 		
@@ -206,6 +255,10 @@ public class AdminController {
 		request.setAttribute("endRow", search.getEndRow());
 		request.setAttribute("pageSize", pageSize);
 		request.setAttribute("pageNum", pageNum);
+		
+		model.addAttribute("searchCount", searchCount);
+		model.addAttribute("thema", search.getThema());
+		model.addAttribute("keyword", search.getKeyword());
 		
 		// 테마별 검색 결과
 		if(search.getThema().equals("name")) {

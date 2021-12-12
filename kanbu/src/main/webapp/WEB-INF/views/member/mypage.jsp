@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %> 
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <!doctype html>
 <html class="no-js" lang="zxx">
@@ -153,12 +153,9 @@
                             <img src="resources/img/svg_icon/review.svg" alt="">
                         </div>
                         <h3>나의 게시판</h3>
-                        <a href="/kanbu/mypage/board/reviewInfo.com" class="genric-btn link" 
-                           style="font-size: 16px; width: 350px; height: 28px;">후기글 조회</a>
-                        <a href="/kanbu/mypage/board/reviewReplyInfo.com" class="genric-btn link" 
-                           style="font-size: 16px; width: 350px; height: 28px;">후기댓글 조회</a>
-                        <a href="/kanbu/mypage/info/placeReply.com" class="genric-btn link" 
-                           style="font-size: 16px; width: 350px; height: 28px;">여행지댓글 조회</a>
+                        <p onclick="location.href ='/kanbu/mypage/board/review.com'" style="cursor:pointer;">후기 조회</p>
+                        <p onclick="location.href ='/kanbu/mypage/board/reviewReply.com'" style="cursor:pointer;">후기댓글 조회</p>
+                        <p onclick="location.href ='/kanbu/mypage/info/placeReply.com'" style="cursor:pointer;">여행지댓글 조회</p>
                     </div>
                 </div>
             </div>

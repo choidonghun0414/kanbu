@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 import com.kanbu.dto.SearchDTO;
+import com.kanbu.dto.board.BoardDTO;
 import com.kanbu.dto.info.Place_ReplyDTO;
 import com.kanbu.dto.member.MemberDTO;
 import com.kanbu.email.member.Email;
@@ -41,6 +42,8 @@ public class MemberController {
 	private Place_ReplyDTO place_reply;
 	@Autowired
 	private SearchDTO search;
+	@Autowired
+	private BoardDTO board;
 	
 	@RequestMapping(value ="join.com", method = RequestMethod.GET)
 	public String join() throws Exception{
@@ -326,6 +329,117 @@ public class MemberController {
 
 	}
 	
+	// 마이페이지 내가 쓴 리뷰 목록 페이지
+	@RequestMapping(value="/mypage/board/review.com")
+	public String myReview(HttpServletRequest request, HttpSession session, Model model) throws Exception{
+		int pageSize = 9;											// 한페이지에 보여줄 정보 갯수
+		String pageNum = request.getParameter("pageNum");			// view에서 넘어온 페이지번호
+		if(pageNum == null) {										// view에서 넘어온 페이지번호가 없으면 1로 대입
+			pageNum = "1";
+		}
+		int currentPage = Integer.parseInt(pageNum);				// 현재 페이지번호
+		int startRow = (currentPage - 1) * pageSize + 1;			// 시작 번호
+		int endRow = currentPage * pageSize;						// 끝 번호
+		board.setStartRow(startRow);
+		board.setEndRow(endRow);
+		
+		int writer = (Integer)session.getAttribute("index_num");
+		int myReviewCount = 0;
+		int myReviewTagCount = 0;
+		List<BoardDTO> myReviewList = null;
+		List<BoardDTO> myReviewTagList = null;
+		
+		if(writer > 0) {
+			board.setWriter(writer);
+			myReviewCount = memberImpl.myReviewCount(writer);
+			myReviewTagCount = memberImpl.myReviewTagCount(writer);
+		}
+		if(myReviewCount > 0) {
+			myReviewList = memberImpl.myReview(board);
+		}
+		if(myReviewTagCount > 0) {
+			myReviewTagList = memberImpl.myReviewTag(writer);
+		}
+		
+		request.setAttribute("currentPage", currentPage);
+		request.setAttribute("startRow", board.getStartRow());
+		request.setAttribute("endRow", board.getEndRow());
+		request.setAttribute("pageSize", pageSize);
+		request.setAttribute("pageNum", pageNum);
+		
+		model.addAttribute("myReviewCount", myReviewCount);
+		model.addAttribute("myReviewTagCount", myReviewTagCount);
+		model.addAttribute("myReviewList", myReviewList);
+		model.addAttribute("myReviewTagList", myReviewTagList);
+		
+		
+		
+		return "/member/myReviewList";
+	}
+	
+	// 마이페이지 내가 쓴 리뷰 검색 결과 목록 페이지
+	@RequestMapping(value="/mypage/board/review/search.com")
+	public String myReviewSearch(HttpServletRequest request, HttpSession session, Model model) throws Exception{
+		int pageSize = 9;											// 한페이지에 보여줄 정보 갯수
+		String pageNum = request.getParameter("pageNum");			// view에서 넘어온 페이지번호
+		if(pageNum == null) {										// view에서 넘어온 페이지번호가 없으면 1로 대입
+			pageNum = "1";
+		}
+		int currentPage = Integer.parseInt(pageNum);				// 현재 페이지번호
+		int startRow = (currentPage - 1) * pageSize + 1;			// 시작 번호
+		int endRow = currentPage * pageSize;						// 끝 번호
+		search.setStartRow(startRow);
+		search.setEndRow(endRow);
+		
+		int searchCount = 1;
+		String thema = request.getParameter("thema");
+		String keyword = request.getParameter("keyword");
+		search.setThema(thema);
+		search.setKeyword(keyword);
+		
+		int writer = (Integer)session.getAttribute("index_num");;
+		int myReviewCount = 0;
+		int myReviewTagCount = 0;
+		List<BoardDTO> myReviewList = null;
+		List<BoardDTO> myReviewTagList = null;
+//		List<SearchDTO> myReviewNumList = null;
+		
+		if(writer > 0) {
+			search.setWriter(writer);
+		}
+			
+		if(thema.equals("p.title")) {											// 제목으로 검색
+			myReviewCount = memberImpl.searchTitleMyReviewCount(search);
+			myReviewTagCount = memberImpl.searchTitleMyReviewTagCount(search);
+				
+			if(myReviewCount > 0) {
+				myReviewList = memberImpl.searchTitleMyReview(search);
+			}
+			if(myReviewTagCount > 0) {
+				myReviewTagList = memberImpl.searchTitleMyReviewTag(search);
+			}
+		}
+		
+		
+
+		
+		request.setAttribute("currentPage", currentPage);
+		request.setAttribute("startRow", search.getStartRow());
+		request.setAttribute("endRow", search.getEndRow());
+		request.setAttribute("pageSize", pageSize);
+		request.setAttribute("pageNum", pageNum);
+		
+		model.addAttribute("searchCount", searchCount);
+		model.addAttribute("search", search);
+		model.addAttribute("myReviewCount", myReviewCount);
+		model.addAttribute("myReviewTagCount", myReviewTagCount);
+		model.addAttribute("myReviewList", myReviewList);
+		model.addAttribute("myReviewTagList", myReviewTagList);
+		
+		
+		return "/member/myReviewList";
+	}
+	
 	// 마이페이지 내가 쓴 여행지 댓글 목록 페이지
 	@RequestMapping(value="/mypage/info/placeReply.com")
 	public String placeReplyInfo(HttpServletRequest request, HttpSession session, Model model) throws Exception{
@@ -381,6 +495,7 @@ public class MemberController {
 		search.setStartRow(startRow);
 		search.setEndRow(endRow);
 		
+		int searchCount = 1;
 		String thema = request.getParameter("thema");
 		String keyword = request.getParameter("keyword");
 		search.setThema(thema);
@@ -405,6 +520,8 @@ public class MemberController {
 		request.setAttribute("pageSize", pageSize);
 		request.setAttribute("pageNum", pageNum);
 		
+		model.addAttribute("searchCount", searchCount);
+		model.addAttribute("search", search);
 		model.addAttribute("myPlaceReplyCount", myPlaceReplyCount);
 		model.addAttribute("myPlaceReplyList", myPlaceReplyList);
 

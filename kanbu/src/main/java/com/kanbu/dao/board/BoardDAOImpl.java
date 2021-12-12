@@ -20,11 +20,17 @@ public class BoardDAOImpl implements BoardDAO{
 	public void insertBoard(BoardDTO board) throws Exception {
 		mybatis.insert("board.insertBoard", board);
 	}
+	
+	// 공지 목록 갯수
+	@Override
+	public int selectNoticeCount() throws Exception {
+		return mybatis.selectOne("board.selectNoticeCount");
+	}
 
 	//공지 목록
 	@Override
-	public List<BoardDTO> selectNotice() throws Exception {
-		return mybatis.selectList("board.selectNotice");
+	public List<BoardDTO> selectNotice(BoardDTO board) throws Exception {
+		return mybatis.selectList("board.selectNotice", board);
 	}
 
 	// 관리자 고유번호 검색
@@ -62,8 +68,8 @@ public class BoardDAOImpl implements BoardDAO{
 
 	//리뷰 목록
 	@Override
-	public List selectReview() throws Exception {
-		return mybatis.selectList("board.selectReview");
+	public List selectReview(BoardDTO board) throws Exception {
+		return mybatis.selectList("board.selectReview", board);
 	}
 	
 	//여행 리뷰 태그 리스트 갯수

@@ -9,6 +9,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.kanbu.dto.SearchDTO;
+import com.kanbu.dto.board.BoardDTO;
 import com.kanbu.dto.info.Place_ReplyDTO;
 import com.kanbu.dto.member.MemberDTO;
 
@@ -98,7 +99,73 @@ public class MemberDAOImpl implements MemberDAO{
 	public void myInfoUpdate(MemberDTO member) throws Exception {
 		mybatis.update("member.myInfoUpdate", member);
 	}
+	
+	// 내가 쓴 리뷰 갯수
+	@Override
+	public int myReviewCount(int writer) throws Exception {
+		return mybatis.selectOne("board.selectMyReviewCount", writer);
+	}
+	
+	// 내가 쓴 리뷰 리스트
+	@Override
+	public List<BoardDTO> myReview(BoardDTO board) throws Exception {
+		return mybatis.selectList("board.selectMyReview", board);
+	}
+	
+	// 내가 쓴 리뷰 태그 갯수
+	@Override
+	public int myReviewTagCount(int writer) throws Exception {
+		return mybatis.selectOne("board.selectMyReviewTagCount", writer);
+	}
 
+	// 내가 쓴 리뷰 태그 리스트
+	@Override
+	public List<BoardDTO> myReviewTag(int writer) throws Exception {
+		return mybatis.selectList("board.selectMyReviewTag", writer);
+	}
+	
+	// 내가 쓴 리뷰제목 검색 갯수
+	@Override
+	public int searchTitleMyReviewCount(SearchDTO search) throws Exception {
+		return mybatis.selectOne("board.searchTitleMyReviewCount", search);
+	}
+	
+	// 내가 쓴 리뷰제목 검색 결과 리스트
+	@Override
+	public List<BoardDTO> searchTitleMyReview(SearchDTO search) throws Exception {
+		return mybatis.selectList("board.searchTitleMyReview", search);
+	}
+
+	// 내가 쓴 리뷰제목 검색 태그 갯수
+	@Override
+	public int searchTitleMyReviewTagCount(SearchDTO search) throws Exception {
+		return mybatis.selectOne("board.searchTitleMyReviewTagCount", search);
+	}
+
+	// 내가 쓴 리뷰제목 검색 태그 결과 리스트
+	@Override
+	public List<BoardDTO> searchTitleMyReviewTag(SearchDTO search) throws Exception {
+		return mybatis.selectList("board.searchTitleMyReviewTag", search);
+	}
+	
+	// 내가 쓴 리뷰 태그검색 리스트 갯수
+//	@Override
+//	public int searchTagMyReviewCount(SearchDTO search) throws Exception {
+//		return mybatis.selectOne("board.searchTagMyReviewCount", search);
+//	}
+	
+	// 내가 쓴 리뷰번호 태그검색 리스트
+//	@Override
+//	public List<SearchDTO> searchTagMyReviewNum(SearchDTO search) throws Exception {
+//		return mybatis.selectList("board.searchTagMyReviewNum", search);
+//	}
+	
+	// 내가 쓴 리뷰 태그검색 리스트
+//	@Override
+//	public List<BoardDTO> searchTagMyReview(List<SearchDTO> myReviewNumList) throws Exception {
+//		return mybatis.selectList("board.searchTagMyReview", myReviewNumList);
+//	}
+	
 	// 내가 쓴 여행지 댓글 갯수
 	@Override
 	public int myPlaceReplyCount(int writer) throws Exception {
@@ -122,6 +189,9 @@ public class MemberDAOImpl implements MemberDAO{
 	public List<Place_ReplyDTO> myPlaceReplySearch(SearchDTO search) throws Exception {
 		return mybatis.selectList("info.myPlaceReplySearch", search);
 	}
-	
+
+
+
+
 
 }
