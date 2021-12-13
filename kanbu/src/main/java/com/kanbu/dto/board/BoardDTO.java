@@ -13,6 +13,7 @@ public class BoardDTO {
 	private String picture1, picture2, picture3, picture4, picture5;
 	private MultipartFile uploadFile;
 	private String filename;
+	private int startRow, endRow;		// 시작글, 마지막글(페이징 처리)
 
 	public int getIndex_num() {
 		return index_num;
@@ -147,5 +148,23 @@ public class BoardDTO {
 	public void setFilename(String filename) {
 		this.filename = filename;
 	}
+
+	public int getStartRow() {
+		return startRow;
+	}
+
+	public void setStartRow(int startRow) {
+		this.startRow = startRow;
+	}
+
+	public int getEndRow() {
+		return endRow;
+	}
+
+	public void setEndRow(int endRow) {
+		this.endRow = endRow;
+	}
+	
+	
 
 }

@@ -63,17 +63,18 @@
 
 	<!-- 사용자 정의 약어 -->
 	<bean id="member" class="com.kanbu.dto.member.MemberDTO" />
+	<bean id="plan" class="com.kanbu.dto.plan.MyPlanDTO" />
+	<bean id="splan" class="com.kanbu.dto.plan.SPlanDTO" />
 	<bean id="place" class="com.kanbu.dto.info.PlaceDTO" />
 	<bean id="place_reply" class="com.kanbu.dto.info.Place_ReplyDTO" />
 	<bean id="board" class="com.kanbu.dto.board.BoardDTO" />
 	<bean id="search" class="com.kanbu.dto.SearchDTO" />
-	<bean id="plan" class="com.kanbu.dto.plan.MyPlanDTO" />
 	
 	<bean id="memberImpl" class="com.kanbu.service.member.MemberServiceImpl" />
-	<bean id="myPlanService" class="com.kanbu.service.plan.MyPlanServiceImpl" /> 
-	<bean id="mainImpl" class="com.kanbu.service.MainServiceImpl" />
+	<bean id="myPlanService" class="com.kanbu.service.plan.MyPlanServiceImpl" />
 	<bean id="infoImpl" class="com.kanbu.service.info.InfoServiceImpl" />
 	<bean id="boardImpl" class="com.kanbu.service.board.BoardServiceImpl" />
+	<bean id="mainImpl" class="com.kanbu.service.MainServiceImpl" />
 	<bean id="adminImpl" class="com.kanbu.service.admin.AdminServiceImpl" />
 	
 	<!-- 메일 보내기  -->
@@ -102,8 +103,6 @@
 	<bean id="emailSender" class="com.kanbu.email.member.EmailSender">
 	</bean>
 		   
-
-	
 	   					   
 
 </beans>

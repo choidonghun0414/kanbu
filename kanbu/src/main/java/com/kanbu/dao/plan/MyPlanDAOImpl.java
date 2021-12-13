@@ -9,7 +9,9 @@ import javax.inject.Inject;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
+import com.kanbu.dto.info.PlaceDTO;
 import com.kanbu.dto.plan.MyPlanDTO;
+import com.kanbu.dto.plan.SPlanDTO;
 
 @Repository	//현재 클래스 dao bean으로 등록
 public class MyPlanDAOImpl implements MyPlanDAO {
@@ -17,16 +19,22 @@ public class MyPlanDAOImpl implements MyPlanDAO {
 	@Inject 
 	SqlSessionTemplate mybatis;
 	
-	//일정 생성
+	// 일정 생성
 	@Override
 	public void insert(MyPlanDTO dto) throws Exception {
 		mybatis.insert("myPlan.insert", dto);
 	}
+	
+	// 장소 저장 (찜목록 저장)
+	@Override
+	public void addPlace(MyPlanDTO plan) throws Exception {
+		mybatis.insert("myPlan.insert", plan);
+	}
 
 	// 나의 일정리스트 전체 조회
 	@Override
-	public List<MyPlanDTO> view() throws Exception {
-		return mybatis.selectList("myPlan.view");
+	public List<MyPlanDTO> view(MyPlanDTO myplan) throws Exception {
+		return mybatis.selectList("myPlan.view", myplan);
 	}
 
 	@Override
@@ -46,15 +54,11 @@ public class MyPlanDAOImpl implements MyPlanDAO {
 		map.put("keyowrd", keyword);
 		return mybatis.selectOne( "myPlan.countArticel", map);
 	}
-
+	
+	// 스케줄 삭제
 	@Override
 	public void deleteSchedule(int schedule) {
 		mybatis.delete("myPlan.deleteMySplan_num", schedule);
-	}
-
-	@Override
-	public void addMySplan_num(int[] schedule) {
-		mybatis.insert("myPlan.addMySplan_num", schedule);
 	}
 
 	@Override
@@ -80,8 +84,8 @@ public class MyPlanDAOImpl implements MyPlanDAO {
 
 	// 레코드 갯수 계산
 	@Override
-	public int countArticle() throws Exception {
-		return mybatis.selectOne("myPlan.countArticle");
+	public int countArticle(int writer) throws Exception {
+		return mybatis.selectOne("myPlan.countArticle", writer);
 	}
 
 	// 일정 상세화면 조회
@@ -100,6 +104,30 @@ public class MyPlanDAOImpl implements MyPlanDAO {
 	@Override
 	public void delete(int index_num) {
 		mybatis.delete("myPlan.delete", index_num);
+	}
+
+	// 장소 전체 갯수
+	@Override
+	public int selectPlaceCount() throws Exception {
+		return mybatis.selectOne("info.selectPlaceCount");
+	}
+
+	// 장소 전체 리스트
+	@Override
+	public List<PlaceDTO> selectPlace() throws Exception {
+		return mybatis.selectList("info.selectPlace");
+	}
+
+	//장소 검색 갯수
+	@Override
+	public int placeSearchCount(String keyword) throws Exception {
+		return mybatis.selectOne("myPlan.placeSearchCount", keyword);
+	}
+
+	//장소 검색 결과 리스트
+	@Override
+	public List<PlaceDTO> placeSearch(String keyword) throws Exception {
+		return mybatis.selectList("myPlan.placeSearch", keyword);
 	}
 
 }

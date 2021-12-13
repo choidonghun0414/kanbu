@@ -62,20 +62,11 @@
                                     <nav>
                                         <ul id="navigation">
                                             <li><a class="active" href="/kanbu/main.com">home</a></li>
-<<<<<<< HEAD
                                            <li><a href="/kanbu/list.com">일정만들기</a></li>
                                             <li><a href="/kanbu/place.com">여행지정보</a></li>
-=======
-                                            <li><a href="about.html">일정만들기</a></li>
-                                            <li><a class="" href="/kanbu/place.com">여행지정보</a></li>
->>>>>>> branch 'main' of https://github.com/choidonghun0414/kanbu.git
                                             <li><a href="/kanbu/board/reviewList.com">게시판 <i class="ti-angle-down"></i></a>
                                                 <ul class="submenu">
-<<<<<<< HEAD
-                                                        <li><a href="/kanbu/board/reviewList.com">여행공유</a></li>
-=======
                                                         <li><a href="/kanbu/board/reviewList.com">여행후기</a></li>
->>>>>>> branch 'main' of https://github.com/choidonghun0414/kanbu.git
                                                         <li><a href="/kanbu/board/noticeList.com">공지사항</a></li>
                                                         <li><a href="/kanbu/board/questionList.com">자주하는질문</a></li>
                                                 </ul>
@@ -125,7 +116,12 @@
     
     <div class="destination_banner_wrap overlay">
         <div class="destination_text text-center">
-            <h3>Join</h3>
+        	<c:if test="${empty (sessionScope.status)}">
+            	<h3>Join</h3>
+            </c:if>
+            <c:if test="${sessionScope.status == 100}">
+            	<h3>Admin Join</h3>
+            </c:if>
         </div>
     </div>
 

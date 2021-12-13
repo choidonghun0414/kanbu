@@ -1,10 +1,15 @@
 package com.kanbu.service.member;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
 
 import com.kanbu.dao.member.MemberDAO;
+import com.kanbu.dto.SearchDTO;
+import com.kanbu.dto.board.BoardDTO;
+import com.kanbu.dto.info.Place_ReplyDTO;
 import com.kanbu.dto.member.MemberDTO;
 
 @Service
@@ -94,5 +99,98 @@ public class MemberServiceImpl implements MemberService{
 	public void myInfoUpdate(MemberDTO member) throws Exception {
 		dao.myInfoUpdate(member);
 	}
+	
+	// 내가 쓴 리뷰 갯수
+	@Override
+	public int myReviewCount(int writer) throws Exception {
+		return dao.myReviewCount(writer);
+	}
+	
+	// 내가 쓴 리뷰 리스트
+	@Override
+	public List<BoardDTO> myReview(BoardDTO board) throws Exception {
+		return dao.myReview(board);
+	}
+	
+	// 내가 쓴 리뷰 태그 갯수
+	@Override
+	public int myReviewTagCount(int writer) throws Exception {
+		return dao.myReviewTagCount(writer);
+	}
+	
+	// 내가 쓴 리뷰 태그 리스트
+	@Override
+	public List<BoardDTO> myReviewTag(int writer) throws Exception {
+		return dao.myReviewTag(writer);
+	}
+	
+	// 내가 쓴 리뷰제목 검색 갯수
+	@Override
+	public int searchTitleMyReviewCount(SearchDTO search) throws Exception {
+		return dao.searchTitleMyReviewCount(search);
+	}
+	
+	// 내가 쓴 리뷰제목 검색 결과 리스트
+	@Override
+	public List<BoardDTO> searchTitleMyReview(SearchDTO search) throws Exception {
+		return dao.searchTitleMyReview(search);
+	}
+
+	// 내가 쓴 리뷰제목 검색 태그 갯수
+	@Override
+	public int searchTitleMyReviewTagCount(SearchDTO search) throws Exception {
+		return dao.searchTitleMyReviewTagCount(search);
+	}
+
+	// 내가 쓴 리뷰제목 검색 태그 결과 리스트
+	@Override
+	public List<BoardDTO> searchTitleMyReviewTag(SearchDTO search) throws Exception {
+		return dao.searchTitleMyReviewTag(search);
+	}
+	
+	// 내가 쓴 리뷰 태그검색 리스트 갯수
+//	@Override
+//	public int searchTagMyReviewCount(SearchDTO search) throws Exception {
+//		return dao.searchTagMyReviewCount(search);
+//	}
+	
+	// 내가 쓴 리뷰번호 태그검색 리스트
+//	@Override
+//	public List<SearchDTO> searchTagMyReviewNum(SearchDTO search) throws Exception {
+//		return dao.searchTagMyReviewNum(search);
+//	}
+	
+	// 내가 쓴 리뷰 태그검색 리스트
+//	@Override
+//	public List<BoardDTO> searchTagMyReview(List<SearchDTO> myReviewNumList) throws Exception {
+//		return dao.searchTagMyReview(myReviewNumList);
+//	}
+
+	// 내가 쓴 여행지 댓글 갯수
+	@Override
+	public int myPlaceReplyCount(int writer) throws Exception {
+		return dao.myPlaceReplyCount(writer);
+	}
+
+	// 내가 쓴 여행지 댓글 목록
+	@Override
+	public List<Place_ReplyDTO> myPlaceReply(Place_ReplyDTO place_reply) throws Exception {
+		return dao.myPlaceReply(place_reply);
+	}
+
+	// 여행지 내가 쓴 댓글 검색 갯수
+	@Override
+	public int myPlaceReplySearchCount(SearchDTO search) throws Exception {
+		return dao.myPlaceReplySearchCount(search);
+	}
+
+	// 여행지 내가 쓴 댓글 검색 결과
+	@Override
+	public List<Place_ReplyDTO> myPlaceReplySearch(SearchDTO search) throws Exception {
+		return dao.myPlaceReplySearch(search);
+	}
+
+
+
 
 }

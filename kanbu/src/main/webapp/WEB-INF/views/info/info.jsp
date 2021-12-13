@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>      
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <!doctype html>
 <html class="no-js" lang="zxx">
@@ -61,7 +61,8 @@
                                     <nav>
                                         <ul id="navigation">
                                             <li><a class="active" href="/kanbu/main.com">home</a></li>
-                                            <li><a href="about.html">일정만들기</a></li>
+                                            <li><a href="/kanbu/list.com">일정만들기</a></li>
+                                            <li><a href="/kanbu/place.com">여행지정보</a></li>
                                             <li><a class="" href="travel_destination.html">여행지정보</a></li>
                                             <li><a href="/kanbu/board/reviewList.com">게시판 <i class="ti-angle-down"></i></a>
                                                 <ul class="submenu">
@@ -246,6 +247,15 @@
                                        						<fmt:formatDate value="${place_reply.reg_date}" pattern="yyyy-MM-dd"/> 
                                        					</p>
                                  					</div>
+                                 					<c:if test="${sessionScope.nick eq place_reply.nick || sessionScope.status == 100}">
+                                 						<div class="reply-btn" align="right">
+                                    						<a href="/kanbu/info/replyDelete.com?placeNum=${place_reply.place}&replyNum=${place_reply.index_num}" 
+                                    					   	   class="btn-reply" style="font-weight: bold;"
+                                    					   	   onclick="return replyDelete();">
+                                    					   	   <i class="ti-trash"></i>
+                                    					   	</a>
+                                 						</div>
+                                 					</c:if>
                               					</div>
                            					</div>
                         				</div>
@@ -266,53 +276,76 @@
 							<c:if test="${endPage > pageCount}">
 								<c:set var="endPage" value="${pageCount}" />
 							</c:if>			 
-						</c:if>
 						
-                        <nav class="blog-pagination justify-content-center d-flex">
-                        	<ul class="pagination">
-                        		<c:if test="${startPage > 5}">
-                               		<li class="page-item">
-                               			<a href="/kanbu/info.com?placeNum=${placeInfo.index_num}&pageNum=${startPage-5}" class="page-link" aria-label="Previous">
-                                       		<i class="ti-angle-left"></i>
-                                   		</a>	
-                               		</li>
-                               	</c:if>
-                               	
-                               	<c:forEach var="i" begin="${startPage}" end="${endPage}">
-                               		<li class="page-item">
-                               			<a href="/kanbu/info.com?placeNum=${placeInfo.index_num}&pageNum=${i}" class="page-link">${i}</a>
-                               		</li>
-                             	</c:forEach>
-                             	
-                             	<c:if test="${endPage < pageCount}">
-                               		<li class="page-item">
-                               			<a href="/kanbu/info.com?placeNum=${placeInfo.index_num}&pageNum=${startPage+5}" class="page-link" aria-label="Next">
-                                       		<i class="ti-angle-right"></i>
-                                   		</a>
-                               		</li>
-                               	</c:if>
-                            </ul>
-                        </nav>
+	                        <nav class="blog-pagination justify-content-center d-flex">
+	                        	<ul class="pagination">
+	                        		<c:if test="${startPage > 5}">
+	                               		<li class="page-item">
+	                               			<a href="/kanbu/info.com?placeNum=${placeInfo.index_num}&pageNum=${startPage-5}" class="page-link" aria-label="Previous">
+	                                       		<i class="ti-angle-left"></i>
+	                                   		</a>	
+	                               		</li>
+	                               	</c:if>
+	                               	
+	                               	<c:forEach var="i" begin="${startPage}" end="${endPage}">
+	                               		<li class="page-item">
+	                               			<a href="/kanbu/info.com?placeNum=${placeInfo.index_num}&pageNum=${i}" class="page-link">${i}</a>
+	                               		</li>
+	                             	</c:forEach>
+	                             	
+	                             	<c:if test="${endPage < pageCount}">
+	                               		<li class="page-item">
+	                               			<a href="/kanbu/info.com?placeNum=${placeInfo.index_num}&pageNum=${startPage+5}" class="page-link" aria-label="Next">
+	                                       		<i class="ti-angle-right"></i>
+	                                   		</a>
+	                               		</li>
+	                               	</c:if>
+	                            </ul>
+	                        </nav>
+                        </c:if>
                     </div>
                   	
                   	<!-- 댓글 작성 영역 -->
-               		<div class="comment-form">
-                  		<h4>후기 남기기</h4>
-                  		<form name="reply" method="post" action="/kanbu/info/reply.com">
-                     		<div class="row">
-                        		<div class="col-12">
-                           			<div class="form-group">
-                           				<input type="hidden" name="placeNum" value="${placeInfo.index_num}" />
-                              			<textarea class="form-control w-100" name="content" id="content" cols="30" rows="9"
-                                 				  placeholder="후기를 남겨주세요..."></textarea>
-                           			</div>
-                        		</div>
-                     		</div>
-                     		<div class="form-group" align="right">
-                        		<button type="submit" class="genric-btn success" onclick="return replyCheck();">등록</button>
-                     		</div>
-                  		</form>
-               		</div>         		
+                  	<c:if test="${sessionScope.status == 1 || sessionScope.status == 100}">
+               			<div class="comment-form">
+                  			<h4>후기 남기기</h4>
+                  			<form name="reply" method="post" action="/kanbu/info/reply.com">
+                     			<div class="row">
+                        			<div class="col-12">
+                           				<div class="form-group">
+                           					<input type="hidden" name="placeNum" value="${placeInfo.index_num}" />
+                           					<input type="hidden" name="writer" id="writer" value="${sessionScope.index_num}" />
+                              				<textarea class="form-control w-100" name="content" id="content" cols="30" rows="9"
+                                 				  	  placeholder="후기를 남겨주세요..."></textarea>
+                           				</div>
+                        			</div>
+                     			</div>
+                     			<div class="form-group" align="right">
+                        			<button type="submit" class="genric-btn success" onclick="return replyCheck();">등록</button>
+                     			</div>
+                  			</form>
+               			</div> 
+               		</c:if>
+               		<c:if test="${empty (sessionScope.status)}">
+               			<div class="comment-form">
+                  			<h4>후기 남기기</h4>
+                  			<form name="reply" method="post" action="/kanbu/login.com">
+                     			<div class="row">
+                        			<div class="col-12">
+                           				<div class="form-group">
+                           					<input type="hidden" name="placeNum" value="${placeInfo.index_num}" />
+                           					<input type="hidden" name="writer" id="writer" value="${sessionScope.index_num}" />
+                              				<textarea class="form-control w-100" name="content" id="content" cols="30" rows="9"
+                                 				  	  placeholder="후기를 남겨주세요..."></textarea>
+                           				</div>
+                        			</div>
+                     			</div>
+                     			<div class="form-group" align="right">
+                        			<button type="submit" class="genric-btn success" onclick="return replyLogin();">등록</button>
+                     			</div>
+                  			</form>
+               			</div> 
+               		</c:if>         		
             	</div>
          	</div>
    		</div>
@@ -528,7 +561,7 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
    		}
    </script>
    
-   <!-- 댓글 등록 유효성 검사 -->
+   <!-- 댓글 등록 유효성 검사(회원) -->
    <script type="text/javascript">
    		function replyCheck() {
 			var content = document.reply.content.value;
@@ -544,62 +577,81 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 		}
    </script>
    
+   <!-- 댓글 등록 유효성 검사(비회원) -->
+   <script type="text/javascript">
+   		function replyLogin(){
+   			alert("로그인 후 등록할 수 있습니다.");
+   		}
+   </script>
+   
+   <!-- 댓글 삭제 유효성 검사 -->
+   <script type="text/javascript">
+   		function replyDelete(){
+   			var result = confirm("댓글을 삭제하시겠습니까?");
+   			if(result){
+   				window.location = "/kanbu/info/replyDelete.com";
+   			}else{
+   				return false;
+   			}
+   		}
+   </script>
+   
    <!-- 지도 생성 및 장소 마크 -->
    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=fe4da653d661d051c0f1aed85923ec4c"></script>
-   		<script>
-			var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
-    		mapOption = { 
-        		center: new kakao.maps.LatLng(${placeInfo.latitude}, ${placeInfo.longitude}), // 지도의 중심좌표(해당 장소 위도, 경도)
-        		level: 3 // 지도의 확대 레벨
-    		};
+   <script>
+		var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+    	mapOption = { 
+        	center: new kakao.maps.LatLng(${placeInfo.latitude}, ${placeInfo.longitude}), // 지도의 중심좌표(해당 장소 위도, 경도)
+        	level: 3 // 지도의 확대 레벨
+    	};
 				
-			var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
-			var marker = new kakao.maps.Marker();
+		var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
+		var marker = new kakao.maps.Marker();
 
-			// 타일 로드가 완료되면 지도 중심에 마커를 표시합니다
-			kakao.maps.event.addListener(map, 'tilesloaded', displayMarker);
+		// 타일 로드가 완료되면 지도 중심에 마커를 표시합니다
+		kakao.maps.event.addListener(map, 'tilesloaded', displayMarker);
 
-			function displayMarker() {
-    			// 마커의 위치를 지도중심으로 설정합니다 
-    			marker.setPosition(map.getCenter()); 
-    			marker.setMap(map); 
+		function displayMarker() {
+    		// 마커의 위치를 지도중심으로 설정합니다 
+    		marker.setPosition(map.getCenter()); 
+    		marker.setMap(map); 
 
-    			// 아래 코드는 최초 한번만 타일로드 이벤트가 발생했을 때 어떤 처리를 하고 
-    			// 지도에 등록된 타일로드 이벤트를 제거하는 코드입니다 
-    			// kakao.maps.event.removeListener(map, 'tilesloaded', displayMarker);
-			}
-		</script>
+    		// 아래 코드는 최초 한번만 타일로드 이벤트가 발생했을 때 어떤 처리를 하고 
+    		// 지도에 등록된 타일로드 이벤트를 제거하는 코드입니다 
+    		// kakao.maps.event.removeListener(map, 'tilesloaded', displayMarker);
+		}
+	</script>
 		
-		<!-- 좋아요 기능 -->
-		<script type="text/javascript">
-   			$(function(){
-   				var good = 1;		// 좋아요 상태(선택 : 1, 미선택 : 0)
-   				var checkCount = false;
+	<!-- 좋아요 기능 -->
+	<script type="text/javascript">
+   		$(function(){
+   			var good = 1;		// 좋아요 상태(선택 : 1, 미선택 : 0)
+   			var checkCount = false;
    								
-   				$('.genric-btn primary-border small').click(function(){
-   					// 회원 상태 확인
+   			$('.genric-btn primary-border small').click(function(){
+   				// 회원 상태 확인
    									
-   					// 회원일 때
-   					var placeNum = "<c:out value='${placeInfo.index_num}' />";		// 장소 번호
+   				// 회원일 때
+   				var placeNum = "<c:out value='${placeInfo.index_num}' />";		// 장소 번호
    									
-   					if(false){
-   						good = 0;
-   					}
+   				if(false){
+   					good = 0;
+   				}
    									
-   					if(good == 1){
-   						// 좋아요 선택완료(색 변경)
-   						$('.genric-btn primary-border small').css({'background-color' : '#FF0000'});
-   						good = 0;
-   						location.replace('/kanbu/info.com?placeNum='+placeNum+'&checkCount=1');
-   					}else{
-   						// 좋아요 선택취소
-   						$('.genric-btn primary-border small').css({'background-color' : '#000000'});
-   						good = 1;
-   						location.replace('/kanbu/info.com?placeNum='+placeNum+'&checkCount=0');
-   					}					
-   				})
-   			});
-   		</script>
+   				if(good == 1){
+   					// 좋아요 선택완료(색 변경)
+   					$('.genric-btn primary-border small').css({'background-color' : '#FF0000'});
+   					good = 0;
+   					location.replace('/kanbu/info.com?placeNum='+placeNum+'&checkCount=1');
+   				}else{
+   					// 좋아요 선택취소
+   					$('.genric-btn primary-border small').css({'background-color' : '#000000'});
+   					good = 1;
+   					location.replace('/kanbu/info.com?placeNum='+placeNum+'&checkCount=0');
+   				}					
+   			})
+   		});
+   	</script>
 
 </body>
 

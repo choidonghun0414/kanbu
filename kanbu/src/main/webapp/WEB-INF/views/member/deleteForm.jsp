@@ -45,7 +45,7 @@ div{ margin-top:15%; text-align: center;}
 					return false;
 				}
 				if(!$("input:checked[id='deletechk']").is(":checked")){
-					alert("이용약관에 동의해주세요.");
+					alert("안내사항 체크해주세요.");
 					$("#deletechk").focus();
 					return false;
 				}

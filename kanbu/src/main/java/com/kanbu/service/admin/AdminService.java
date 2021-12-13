@@ -3,7 +3,9 @@ package com.kanbu.service.admin;
 import java.util.List;
 
 import com.kanbu.dto.SearchDTO;
+import com.kanbu.dto.board.BoardDTO;
 import com.kanbu.dto.info.PlaceDTO;
+import com.kanbu.dto.info.Place_ReplyDTO;
 import com.kanbu.dto.member.MemberDTO;
 
 
@@ -32,4 +34,28 @@ public interface AdminService {
 	
 	// 관리자 장소 입력 검색
 	public List<PlaceDTO> selectKeywordPlace(SearchDTO search) throws Exception;
+	
+	// 등록된 여행지 전체 댓글수 검색 
+	public int selectTotalPlaceReplyCount() throws Exception;
+	
+	// 등록된 여행지 전체 댓글 검색
+	public List<Place_ReplyDTO> selectTotalPlaceReply(Place_ReplyDTO place_reply) throws Exception;
+	
+	// 등록된 여행지 댓글 입력 검색결과 갯수
+	public int selectKeywordPlaceReplyCount(SearchDTO search) throws Exception;
+	
+	// 등록된 여행지 댓글 입력 검색
+	public List<Place_ReplyDTO> selectKeywordPlaceReply(SearchDTO search) throws Exception;
+	
+	// 등록된 여행후기 전체 갯수 검색
+	public int selectReviewCount() throws Exception;
+	
+	// 등록된 여행후기 전체 검색
+	public List<BoardDTO> selectReview(BoardDTO board) throws Exception;
+	
+	// 등록된 여행후기 태그 리스트 갯수
+	public int selectReviewTagCount() throws Exception;
+	
+	// 등록된 여행후기 태그 리스트
+	public List<BoardDTO> selectReviewTag() throws Exception;
 }

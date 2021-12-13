@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>      
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>   
 
 
 
@@ -116,7 +116,7 @@
                 <div class="col-xl-12">
                     <div class="bradcam_text text-center">
                         <h3>Search Place</h3>
-                        <p>${place} ( 검색결과 : ${searchCount}개 )</p>
+                        <p>${keyword} ( 검색결과 : ${searchCount}개 )</p>
                     </div>
                 </div>
             </div>
@@ -207,20 +207,22 @@
                 </div>
                 <div class="col-lg-4">
                     <div class="blog_right_sidebar">
+                        <!-- 검색 영역 -->
                         <aside class="single_sidebar_widget search_widget">
-                            <form action="#">
+                            <form action="/kanbu/search.com" name="searchPlace" id="searchPlace" method="post">
                                 <div class="form-group">
                                     <div class="input-group mb-3">
-                                        <input type="text" class="form-control" placeholder='Search Keyword'
-                                            onfocus="this.placeholder = ''"
-                                            onblur="this.placeholder = 'Search Keyword'">
+                                        <input type="text" class="form-control" name="keyword" id="keyword"
+                                        	   placeholder='검색할 장소를 입력해주세요..'
+                                               onfocus="this.placeholder = ''"
+                                               onblur="this.placeholder = '검색할 장소를 입력해주세요..'">
                                         <div class="input-group-append">
                                             <button class="btn" type="button"><i class="ti-search"></i></button>
                                         </div>
                                     </div>
                                 </div>
                                 <button class="button rounded-0 primary-bg text-white w-100 btn_1 boxed-btn"
-                                    type="submit">Search</button>
+                                    	type="submit" onclick="return keywordValueChk();">Search</button>
                             </form>
                         </aside>
 
@@ -266,44 +268,29 @@
                             </ul>
                         </aside>
 
+						<!-- 최근 등록된 장소 영역 -->
                         <aside class="single_sidebar_widget popular_post_widget">
-                            <h3 class="widget_title">Recent Post</h3>
-                            <div class="media post_item">
-                                <img src="resources/img/post/post_1.png" alt="post">
-                                <div class="media-body">
-                                    <a href="single-blog.html">
-                                        <h3>From life was you fish...</h3>
-                                    </a>
-                                    <p>January 12, 2019</p>
-                                </div>
-                            </div>
-                            <div class="media post_item">
-                                <img src="resources/img/post/post_2.png" alt="post">
-                                <div class="media-body">
-                                    <a href="single-blog.html">
-                                        <h3>The Amazing Hubble</h3>
-                                    </a>
-                                    <p>02 Hours ago</p>
-                                </div>
-                            </div>
-                            <div class="media post_item">
-                                <img src="resources/img/post/post_3.png" alt="post">
-                                <div class="media-body">
-                                    <a href="single-blog.html">
-                                        <h3>Astronomy Or Astrology</h3>
-                                    </a>
-                                    <p>03 Hours ago</p>
-                                </div>
-                            </div>
-                            <div class="media post_item">
-                                <img src="resources/img/post/post_4.png" alt="post">
-                                <div class="media-body">
-                                    <a href="single-blog.html">
-                                        <h3>Asteroids telescope</h3>
-                                    </a>
-                                    <p>01 Hours ago</p>
-                                </div>
-                            </div>
+                            <h3 class="widget_title">Recent Place</h3>
+                            <c:if test='${recentPlaceCount == 0}'>
+                            	<div class="media post_item">
+                                	<div class="media-body">
+                                    	<h3>최신 등록된 장소가 없습니다.</h3>
+                                	</div>
+                            	</div>
+                            </c:if>
+                            <c:if test='${recentPlaceCount > 0}'>
+                            	<c:forEach var="place" items="${recentPlaceList}" end="5">
+                            		<div class="media post_item">
+                                		<img width="80px" height="80px" src="${place.picture1}" alt="place">
+                                		<div class="media-body">
+                                    		<a href="/kanbu/info.com?placeNum=${place.index_num}">
+                                        		<h3>${place.name}</h3>
+                                    		</a>
+                                    		<p>${place.addr}</p>
+                                		</div>
+                            		</div>
+                            	</c:forEach>
+                            </c:if>
                         </aside>
                     </div>
                 </div>
@@ -506,6 +493,21 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
              rightIcon: '<span class="fa fa-caret-down"></span>'
          }
         });
+    </script>
+    
+    <!-- 검색 유효성 검사 -->
+    <script type="text/javascript">
+    	function keywordValueChk(){
+			var place = document.searchPlace.keyword.value;
+			console.log(place);
+    		
+    		if(place == null || place == ""){
+    			alert("검색할 장소를 입력해주세요.");
+    			return false;
+    		}else{
+    			window.location = '/kanbu/search.com?keyword='+place;
+    		}
+    	}
     </script>
 </body>
 

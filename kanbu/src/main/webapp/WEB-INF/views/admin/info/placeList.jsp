@@ -170,8 +170,8 @@
             </a>
             <div class="collapse" id="auth">
               <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href="/kanbu/admin/memberInfo.com">조회/수정/탈퇴</a></li>
-                <li class="nav-item"> <a class="nav-link" href="/kanbu/admin/adminJoin.com">관리자 등록</a></li>
+                <li class="nav-item"> <a class="nav-link" href="/kanbu/admin/memberInfo.com">회원 조회</a></li>
+                <li class="nav-item"> <a class="nav-link" href="/kanbu/join.com">관리자 등록</a></li>
               </ul>
             </div>
           </li>
@@ -183,8 +183,9 @@
             </a>
             <div class="collapse" id="icons">
               <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href="/kanbu/admin/placeInfo.com">조회/수정/삭제</a></li>
+                <li class="nav-item"> <a class="nav-link" href="/kanbu/admin/placeInfo.com">조회/수정</a></li>
                 <li class="nav-item"> <a class="nav-link" href="/kanbu/admin/placeAdd.com">여행지 등록</a></li>
+                <li class="nav-item"> <a class="nav-link" href="/kanbu/admin/placeReply.com">여행지 댓글 관리</a></li>
               </ul>
             </div>
           </li>
@@ -209,7 +210,7 @@
             <div class="collapse" id="charts">
               <ul class="nav flex-column sub-menu">
                 <li class="nav-item"> <a class="nav-link" href="/kanbu/admin/board/reviewInfo.com">후기게시판</a></li>
-                <li class="nav-item"> <a class="nav-link" href="/kanbu/admin/board/noticeInfo.com">공지사항</a></li>
+                <li class="nav-item"> <a class="nav-link" href="/kanbu/board/noticeList.com">공지사항</a></li>
                 <li class="nav-item"> <a class="nav-link" href="/kanbu/admin/board/qaInfo.com">자주하는질문</a></li>
               </ul>
             </div>
@@ -236,7 +237,7 @@
                       <thead align="center">
                         <tr>
                           <th>No.</th>
-                          <th>장소명</th>
+                          <th>장소</th>
                           <th>주소</th>
                           <th>전화번호</th>
                           <th>어른요금</th>
@@ -245,6 +246,7 @@
                           <th>마감시간</th>
                           <th>좋아요</th>
                           <th>조회수</th>
+                          <th>수정</th>
                         </tr>
                       </thead>
                       <tbody align="center">
@@ -279,6 +281,12 @@
                           				</c:if></td>
                           			<td>${place.good}</td>
                          			<td>${place.views}</td>
+                         			<td>
+                         				<button type="button" class="btn btn-inverse-info btn-icon"
+                         						onclick="location.href='/kanbu/admin/placeInfo/edit.com?placeNum=${place.index_num}'">
+                        					<i class="typcn typcn-edit"></i>
+                      					</button>
+                      				</td>
                         		</tr>
                         	</c:forEach>
                         </c:if>
@@ -305,23 +313,48 @@
                 		<ul class="pagination">
                     		<c:if test="${startPage > 5}">
                         		<li class="page-item">
-                            		<a href="/kanbu/admin/placeInfo.com?pageNum=${startPage-5}" class="page-link" aria-label="Previous">
-                                		<i class="mdi mdi-arrow-left"></i>
-                                	</a>	
+                        			<c:if test="${searchCount != 1}">
+                            			<a href="/kanbu/admin/placeInfo.com?pageNum=${startPage-5}" 
+                            			   class="page-link" aria-label="Previous">
+                                			<i class="mdi mdi-arrow-left"></i>
+                                		</a>
+                                	</c:if>
+                                	<c:if test="${searchCount == 1}">
+                            			<a href="/kanbu/admin/search.com?thema=${thema}&keyword=${keyword}&pageNum=${startPage-5}" 
+                            			   class="page-link" aria-label="Previous">
+                                			<i class="mdi mdi-arrow-left"></i>
+                                		</a>
+                                	</c:if>	
                             	</li>
                         	</c:if>
                                	
                         	<c:forEach var="i" begin="${startPage}" end="${endPage}">
                         		<li class="page-item">
-                            		<a href="/kanbu/admin/placeInfo.com?pageNum=${i}" class="page-link">${i}</a>
+                        			<c:if test="${searchCount != 1}">
+                            			<a href="/kanbu/admin/placeInfo.com?pageNum=${i}" 
+                            		   	   class="page-link">${i}</a>
+                            		</c:if>
+                            		<c:if test="${searchCount == 1}">
+                            			<a href="/kanbu/admin/search.com?thema=${thema}&keyword=${keyword}&pageNum=${i}" 
+                            		   	   class="page-link">${i}</a>
+                            		</c:if>
                             	</li>
                         	</c:forEach>
                              	
                         	<c:if test="${endPage < pageCount}">
                         		<li class="page-item">
-                            		<a href="/kanbu/admin/placeInfo.com?pageNum=${startPage+5}" class="page-link" aria-label="Next">
-                             			<i class="mdi mdi-arrow-right"></i>
-                                	</a>
+                        			<c:if test="${searchCount != 1}">
+                            			<a href="/kanbu/admin/placeInfo.com?pageNum=${startPage+5}" 
+                            		   	   class="page-link" aria-label="Next">
+                             				<i class="mdi mdi-arrow-right"></i>
+                                		</a>
+                                	</c:if>
+                                	<c:if test="${searchCount == 1}">
+                                		<a href="/kanbu/admin/search.com?thema=${thema}&keyword=${keyword}&pageNum=${startPage+5}" 
+                            			   class="page-link" aria-label="Next">
+                             				<i class="mdi mdi-arrow-right"></i>
+                                		</a>
+                                	</c:if>
                             	</li>
                         	</c:if>
                     	</ul>
@@ -333,7 +366,7 @@
                 <form name="searchPlace" id="searchPlace" action="/kanbu/admin/search.com" method="post" style="text-align: center;">
 					<div class="form-group">
 						<select name="thema" id="thema" class="form-control-sm">
-                  	   		<option value="name" selected>장소명</option>
+                  	   		<option value="name" selected>장소</option>
                   	   	</select>
                   	   	<input type="text" name="keyword" id="keyword" class="form-control-sm"/>
                   	   	<button class="btn btn-sm btn-secondary" type="button" onclick="search();">검색</button>

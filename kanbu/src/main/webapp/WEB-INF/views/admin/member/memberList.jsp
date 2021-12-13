@@ -170,7 +170,7 @@
             </a>
             <div class="collapse" id="auth">
               <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href="/kanbu/admin/memberInfo.com">조회/수정/탈퇴</a></li>
+                <li class="nav-item"> <a class="nav-link" href="/kanbu/admin/memberInfo.com">회원 조회</a></li>
                 <li class="nav-item"> <a class="nav-link" href="/kanbu/join.com">관리자 등록</a></li>
               </ul>
             </div>
@@ -183,8 +183,9 @@
             </a>
             <div class="collapse" id="icons">
               <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href="/kanbu/admin/placeInfo.com">조회/수정/삭제</a></li>
+                <li class="nav-item"> <a class="nav-link" href="/kanbu/admin/placeInfo.com">조회/수정</a></li>
                 <li class="nav-item"> <a class="nav-link" href="/kanbu/admin/placeAdd.com">여행지 등록</a></li>
+                <li class="nav-item"> <a class="nav-link" href="/kanbu/admin/placeReply.com">여행지 댓글 관리</a></li>
               </ul>
             </div>
           </li>
@@ -209,7 +210,7 @@
             <div class="collapse" id="charts">
               <ul class="nav flex-column sub-menu">
                 <li class="nav-item"> <a class="nav-link" href="/kanbu/admin/board/reviewInfo.com">후기게시판</a></li>
-                <li class="nav-item"> <a class="nav-link" href="/kanbu/admin/board/noticeInfo.com">공지사항</a></li>
+                <li class="nav-item"> <a class="nav-link" href="/kanbu/board/noticeList.com">공지사항</a></li>
                 <li class="nav-item"> <a class="nav-link" href="/kanbu/admin/board/qaInfo.com">자주하는질문</a></li>
               </ul>
             </div>
@@ -243,8 +244,6 @@
                           			<th>이메일</th>
                           			<th>회원상태</th>
                           			<th>가입날짜</th>
-                          			<th>수정</th>
-                          			<th>삭제</th>
                         		</tr>
                       		</thead>
                       		<tbody align="center">
@@ -255,9 +254,12 @@
                           				<td>${member.nick}</td>
                           				<td>${member.phone}</td>
                           				<td>
-                          					${member.mail}@<c:if test="${member.domain eq '1'}">naver.com</c:if>
-                          							   	   <c:if test="${member.domain eq '2'}">google.com</c:if>
-                          							   	   <c:if test="${member.domain eq '3'}">daum.net</c:if>
+                          					${member.mail} @
+                          					<c:choose>
+                          						<c:when test="${member.domain eq '1'}">naver.com</c:when>
+                          						<c:when test="${member.domain eq '2'}">google.com</c:when>
+                          						<c:when test="${member.domain eq '3'}">daum.net</c:when>
+                          					</c:choose>
                           				</td>
                           				<td>
                           					<c:if test="${empty (member.status)}">비회원</c:if>
@@ -265,16 +267,6 @@
                           					<c:if test="${member.status eq 100}">관리자</c:if>
                           				</td>
                           				<td><fmt:formatDate value="${member.reg_date}" pattern="yyyy-MM-dd" /></td>
-                         				<td>
-                         					<button type="button" class="btn btn-inverse-info btn-icon">
-                        						<i class="typcn typcn-edit"></i>
-                      						</button>
-                      					</td>
-                         				<td>
-                         					<button type="button" class="btn btn-inverse-danger btn-icon">
-                        						<i class="typcn typcn-trash"></i>
-                      						</button>
-                         				</td>
                         			</tr>
                         		</c:forEach>
                       		</tbody>
@@ -300,23 +292,48 @@
                 		<ul class="pagination">
                     		<c:if test="${startPage > 5}">
                         		<li class="page-item">
-                            		<a href="/kanbu/admin/memberInfo.com?pageNum=${startPage-5}" class="page-link" aria-label="Previous">
-                                		<i class="mdi mdi-arrow-left"></i>
-                                	</a>	
+                        			<c:if test="${searchCount != 1}">
+                            			<a href="/kanbu/admin/memberInfo.com?pageNum=${startPage-5}" 
+                            			   class="page-link" aria-label="Previous">
+                                			<i class="mdi mdi-arrow-left"></i>
+                                		</a>
+                                	</c:if>	
+                                	<c:if test="${searchCount == 1}">
+                            			<a href="/kanbu/admin/search.com?thema=${thema}&keyword=${keyword}&pageNum=${startPage-5}" 
+                            			   class="page-link" aria-label="Previous">
+                                			<i class="mdi mdi-arrow-left"></i>
+                                		</a>
+                                	</c:if>	
                             	</li>
                         	</c:if>
                                	
                         	<c:forEach var="i" begin="${startPage}" end="${endPage}">
                         		<li class="page-item">
-                            		<a href="/kanbu/admin/memberInfo.com?pageNum=${i}" class="page-link">${i}</a>
+                        			<c:if test="${searchCount != 1}">
+                            			<a href="/kanbu/admin/memberInfo.com?pageNum=${i}" 
+                            		   	   class="page-link">${i}</a>
+                            		</c:if>
+                            		<c:if test="${searchCount == 1}">
+                            			<a href="/kanbu/admin/search.com?thema=${thema}&keyword=${keyword}&pageNum=${i}" 
+                            		   	   class="page-link">${i}</a>
+                            		</c:if>
                             	</li>
                         	</c:forEach>
                              	
                         	<c:if test="${endPage < pageCount}">
                         		<li class="page-item">
-                            		<a href="/kanbu/admin/memberInfo.com?pageNum=${startPage+5}" class="page-link" aria-label="Next">
-                             			<i class="mdi mdi-arrow-right"></i>
-                                	</a>
+                        			<c:if test="${searchCount != 1}">
+                            			<a href="/kanbu/admin/memberInfo.com?pageNum=${startPage+5}" 
+                            			   class="page-link" aria-label="Next">
+                             				<i class="mdi mdi-arrow-right"></i>
+                                		</a>
+                                	</c:if>
+                                	<c:if test="${searchCount == 1}">
+                                		<a href="/kanbu/admin/search.com?thema=${thema}&keyword=${keyword}&pageNum=${startPage+5}" 
+                            			   class="page-link" aria-label="Next">
+                             				<i class="mdi mdi-arrow-right"></i>
+                                		</a>
+                                	</c:if>
                             	</li>
                         	</c:if>
                     	</ul>

@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %> 
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <!doctype html>
 <html class="no-js" lang="zxx">
@@ -148,13 +148,14 @@
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-6">
-                    <div class="single_travel text-center" style="cursor:pointer;">
+                    <div class="single_travel text-center">
                         <div class="icon">
                             <img src="resources/img/svg_icon/review.svg" alt="">
                         </div>
                         <h3>나의 게시판</h3>
-                        <p>후기글 조회</p>
-                        <p>댓글 조회</p>
+                        <p onclick="location.href ='/kanbu/mypage/board/review.com'" style="cursor:pointer;">후기 조회</p>
+                        <p onclick="location.href ='/kanbu/mypage/board/reviewReply.com'" style="cursor:pointer;">후기댓글 조회</p>
+                        <p onclick="location.href ='/kanbu/mypage/info/placeReply.com'" style="cursor:pointer;">여행지댓글 조회</p>
                     </div>
                 </div>
             </div>
