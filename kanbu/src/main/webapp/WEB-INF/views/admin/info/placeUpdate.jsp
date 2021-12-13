@@ -3,6 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>      
 
+
 <!doctype html>
 <html class="no-js" lang="zxx">
 
@@ -61,7 +62,8 @@
    <!--[if lte IE 9]>
             <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
         <![endif]-->
-      <!-- header-start -->
+	
+	<!-- header-start -->
     <header>
         <div class="header-area ">
             <div id="sticky-header" class="main-header-area">
@@ -80,9 +82,9 @@
                                     <nav>
                                         <ul id="navigation">
                                             <li><a class="active" href="/kanbu/main.com">home</a></li>
-                                            <li><a href="/kanbu/list.com">일정만들기</a></li>
-                                            <li><a class="active" href="/kanbu/place.com">여행지정보</a></li>
-                                            <li><a href="/kanbu/board/reviewList.com">게시판 <i class="ti-angle-down"></i></a>
+                                            <li><a href="/kanbu/mapView.com">일정만들기</a></li>
+                                            <li><a href="/kanbu/place.com">여행지정보</a></li>
+                               		 		<li><a href="/kanbu/board/reviewList.com">게시판 <i class="ti-angle-down"></i></a>
                                                 <ul class="submenu">
                                                         <li><a href="/kanbu/board/reviewList.com">여행후기</a></li>
                                                         <li><a href="/kanbu/board/noticeList.com">공지사항</a></li>
@@ -109,8 +111,7 @@
                                         	</c:if>
                                         	<c:if test="${empty(sessionScope.status)}">
                                         		<li><a href="/kanbu/login.com"> <i class="fa fa-lock"></i> </a></li>
-                                        	</c:if>
-                                            
+                                        	</c:if>    
                                         </ul>
                                     </div>
                                 </div>
@@ -206,32 +207,32 @@
 								
 	                		<div class="section-top-border">
 	                			<div>
-								<p style="font: bold;">
-									위도	: <input type="text" name="latitude" id="latitude" value="${placeInfo.latitude}" 
-												 placeholder="위도를 입력해주세요.."/>&nbsp&nbsp&nbsp&nbsp&nbsp
-									경도	: <input type="text" name="longitude" id="longitude" value="${placeInfo.longitude}" 
-												 placeholder="경도를 입력해주세요.."/>
-								</p>
+									<p style="font: bold;">
+										위도	: <input type="text" name="latitude" id="latitude" value="${placeInfo.latitude}" 
+													 placeholder="위도를 입력해주세요.."/>&nbsp&nbsp&nbsp&nbsp&nbsp
+										경도	: <input type="text" name="longitude" id="longitude" value="${placeInfo.longitude}" 
+													 placeholder="경도를 입력해주세요.."/>
+									</p>
 								</div>
 								<div>
-								<p style="font: bold;">
-									문의 및 안내	: <input type="text" name="tel" id="tel" value="${placeInfo.tel}" 
-													     placeholder="ex) 064-111-1234"/>
-								</p>
+									<p style="font: bold;">
+										문의 및 안내	: <input type="text" name="tel" id="tel" value="${placeInfo.tel}" 
+														     placeholder="ex) 064-111-1234"/>
+									</p>
 								</div>
 								<div>
-								<p style="font: bold;">	
-									휴일	: <input type="text" name="holiday" id="holiday" value="${placeInfo.holiday}"
-												 placeholder="휴일 날짜를 넣어주세요.." />
-								</p>
+									<p style="font: bold;">	
+										휴일	: <input type="text" name="holiday" id="holiday" value="${placeInfo.holiday}"
+													 placeholder="휴일 날짜를 넣어주세요.." />
+									</p>
 								</div>
 								<div>
-								<p style="font: bold;">	
-									어른 입장료 : <input type="text" name="fee1" id="fee1" value="${placeInfo.fee1}" 
-												       placeholder="어른입장료를 입력해주세요.."/>&nbsp&nbsp&nbsp&nbsp&nbsp
-									아이 입장료 : <input type="text" name="fee2" id="fee2" value="${placeInfo.fee2}" 
-													   placeholder="아이입장료를 입력해주세요.."/>
-								</p>
+									<p style="font: bold;">	
+										어른 입장료 : <input type="text" name="fee1" id="fee1" value="${placeInfo.fee1}" 
+													       placeholder="어른입장료를 입력해주세요.."/>&nbsp&nbsp&nbsp&nbsp&nbsp
+										아이 입장료 : <input type="text" name="fee2" id="fee2" value="${placeInfo.fee2}" 
+														   placeholder="아이입장료를 입력해주세요.."/>
+									</p>
 								</div>
 								<div class="default-select" id="default-select">
 									주차	: <span style="float: right;width: 90%;">
@@ -242,17 +243,18 @@
 										  </span>			
 								</div>
 								<div>
-								<p style="font: bold;">	
-									오픈시간	: <input type="text" name="opening" id="opening" value="${placeInfo.opening}" 
-													 placeholder="ex) 9"/>
-								</p>
+									<p style="font: bold;">	
+										오픈시간	: <input type="text" name="opening" id="opening" value="${placeInfo.opening}" 
+														 placeholder="ex) 9"/>
+									</p>
 								</div>
 								<div>					 
-								<p style="font: bold;">	
-									마감시간	: <input type="text" name="closing" id="closing" value="${placeInfo.closing}" 
-													 placeholder="ex) 22"/>	
-								</p>
+									<p style="font: bold;">	
+										마감시간	: <input type="text" name="closing" id="closing" value="${placeInfo.closing}" 
+														 placeholder="ex) 22"/>	
+									</p>
 								</div>
+								
 								<input type="hidden" name="placeNum" id="placeNum" value="${placeInfo.index_num}" />
 								<p>&nbsp</p>
 								
@@ -272,154 +274,53 @@
    <!--================ Blog Area end =================-->
 
 
-    <!-- footer start -->
-    <footer class="footer">
-      <div class="footer_top">
-          <div class="container">
-              <div class="row">
-                  <div class="col-xl-4 col-md-6 col-lg-4 ">
-                      <div class="footer_widget">
-                          <div class="footer_logo">
-                              <a href="#">
-                                  <img src="/kanbu/resources/img/footer_logo.png" alt="">
-                              </a>
-                          </div>
-                          <p>5th flora, 700/D kings road, green <br> lane New York-1782 <br>
-                              <a href="#">+10 367 826 2567</a> <br>
-                              <a href="#">contact@carpenter.com</a>
-                          </p>
-                          <div class="socail_links">
-                              <ul>
-                                  <li>
-                                      <a href="#">
-                                          <i class="ti-facebook"></i>
-                                      </a>
-                                  </li>
-                                  <li>
-                                      <a href="#">
-                                          <i class="ti-twitter-alt"></i>
-                                      </a>
-                                  </li>
-                                  <li>
-                                      <a href="#">
-                                          <i class="fa fa-instagram"></i>
-                                      </a>
-                                  </li>
-                                  <li>
-                                      <a href="#">
-                                          <i class="fa fa-pinterest"></i>
-                                      </a>
-                                  </li>
-                                  <li>
-                                      <a href="#">
-                                          <i class="fa fa-youtube-play"></i>
-                                      </a>
-                                  </li>
-                              </ul>
-                          </div>
-
-                      </div>
-                  </div>
-                  <div class="col-xl-2 col-md-6 col-lg-2">
-                      <div class="footer_widget">
-                          <h3 class="footer_title">
-                              Company
-                          </h3>
-                          <ul class="links">
-                              <li><a href="#">Pricing</a></li>
-                              <li><a href="#">About</a></li>
-                              <li><a href="#"> Gallery</a></li>
-                              <li><a href="#"> Contact</a></li>
-                          </ul>
-                      </div>
-                  </div>
-                  <div class="col-xl-3 col-md-6 col-lg-3">
-                      <div class="footer_widget">
-                          <h3 class="footer_title">
-                              Popular destination
-                          </h3>
-                          <ul class="links double_links">
-                              <li><a href="#">Indonesia</a></li>
-                              <li><a href="#">America</a></li>
-                              <li><a href="#">India</a></li>
-                              <li><a href="#">Switzerland</a></li>
-                              <li><a href="#">Italy</a></li>
-                              <li><a href="#">Canada</a></li>
-                              <li><a href="#">Franch</a></li>
-                              <li><a href="#">England</a></li>
-                          </ul>
-                      </div>
-                  </div>
-                  <div class="col-xl-3 col-md-6 col-lg-3">
-                      <div class="footer_widget">
-                          <h3 class="footer_title">
-                              Instagram
-                          </h3>
-                          <div class="instagram_feed">
-                              <div class="single_insta">
-                                  <a href="#">
-                                      <img src="resources/img/instagram/1.png" alt="">
-                                  </a>
-                              </div>
-                              <div class="single_insta">
-                                  <a href="#">
-                                      <img src="resources/img/instagram/2.png" alt="">
-                                  </a>
-                              </div>
-                              <div class="single_insta">
-                                  <a href="#">
-                                      <img src="resources/img/instagram/3.png" alt="">
-                                  </a>
-                              </div>
-                              <div class="single_insta">
-                                  <a href="#">
-                                      <img src="resources/img/instagram/4.png" alt="">
-                                  </a>
-                              </div>
-                              <div class="single_insta">
-                                  <a href="#">
-                                      <img src="resources/img/instagram/5.png" alt="">
-                                  </a>
-                              </div>
-                              <div class="single_insta">
-                                  <a href="#">
-                                      <img src="resources/img/instagram/6.png" alt="">
-                                  </a>
-                              </div>
-                          </div>
-                      </div>
-                  </div>
-              </div>
-          </div>
-      </div>
-      <div class="copy-right_text">
-          <div class="container">
-              <div class="footer_border"></div>
-              <div class="row">
-                  <div class="col-xl-12">
-                      <p class="copy_right text-center">
-                          <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
-<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                      </p>
-                  </div>
-              </div>
-          </div>
-      </div>
-  </footer>
-  <!--/ footer end  -->
-
-      <!-- Modal -->
-      <div class="modal fade custom_search_pop" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-      <div class="modal-dialog modal-dialog-centered" role="document">
-         <div class="modal-content">
-            <div class="serch_form">
-               <input type="text" placeholder="Search" >
-               <button type="submit">search</button>
+    <footer class="footer" style="height: 391px;">
+        <div class="footer_top">
+            <div class="container" align="center">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="footer_widget">
+                            <div class="footer_logo">
+								<img src="/kanbu/resources/img/footer_logo.png" alt="" style="float: left;">
+								<p>
+										it컴퓨터 학원 5층 FDX 자바 교육반 &nbsp;&nbsp;|&nbsp;&nbsp; 양재역 10분도보 
+                                		&nbsp;&nbsp;|&nbsp;&nbsp; +10 367 826 2567
+                                		&nbsp;&nbsp;|&nbsp;&nbsp; contact@kanbu.com
+                            	</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-         </div>
+        </div>
+        <div class="copy-right_text">
+            <div class="container">
+                <div class="footer_border"></div>
+                <div class="row">
+                    <div class="col-xl-12">
+                        <p class="copy_right text-center">
+                            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | Kanbu Travel <i class="fa fa-heart-o" aria-hidden="true"></i> <a href="https://colorlib.com" target="_blank"></a>
+<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+  <!-- 검색창 -->
+  <!-- Modal -->
+  <div class="modal fade custom_search_pop" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="serch_form">
+            <input type="text" name="keyword" id="keyword" placeholder="검색할 장소를 입력해주세요..." >
+            <button type="submit" onclick="return search();">search</button>
+        </div>
       </div>
-      </div>
+    </div>
+  </div>
 
    <!-- JS here -->
    <script src="/kanbu/resources/js/vendor/modernizr-3.5.0.min.js"></script>
@@ -449,6 +350,25 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
    <script src="/kanbu/resources/js/mail-script.js"></script>
 
    <script src="/kanbu/resources/js/main.js"></script>
+   
+   <script type="text/javascript">
+    	function logOut(){
+    		alert("로그아웃 되었습니다.");
+    	}
+    </script>
+    
+    <script type="text/javascript">
+    	function search(){
+    		var place = document.getElementById('keyword').value
+    		
+    		if(place == null || place == ""){
+    			alert("검색할 장소를 입력해주세요.");
+    			return false;
+    		}else{
+    			window.location = '/kanbu/search.com?keyword='+place;
+    		}
+    	}
+    </script>
    
    <!-- 사진 슬라이드쇼 script -->
    <script type="text/javascript">
@@ -549,19 +469,6 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 			
 		}
 	</script>
-	
-	<script type="text/javascript">
-		function placeDelete(){
-			var result = confirm("여행지를 삭제하시겠습니까?");
-	  		
-	  		if(result){
-	  			location.href="/kanbu/admin/placeInfo/delete.com?placeNum="+$("#placeNum").val();
-	  		}else{
-	  			return false;
-	  		} 	
-		}
-	</script>
-
 
 
 </body>

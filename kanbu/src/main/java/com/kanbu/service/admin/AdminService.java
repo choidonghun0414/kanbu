@@ -58,4 +58,17 @@ public interface AdminService {
 	
 	// 등록된 여행후기 태그 리스트
 	public List<BoardDTO> selectReviewTag() throws Exception;
+	
+	// 여행후기 검색 갯수(제목, 닉네임)
+	public int searchReviewCount(SearchDTO search) throws Exception;
+
+	// 여행후기 검색 리스트(제목, 닉네임)
+	public List<BoardDTO> searchReview(SearchDTO search) throws Exception;
+	
+	// 여행후기 태그 검색 갯수(제목, 닉네임)
+	public int searchReviewTagCount(SearchDTO search) throws Exception;
+	
+	// 여행후기 태그 검색 리스트(제목, 닉네임)
+	public List<BoardDTO> searchReviewTag(SearchDTO search) throws Exception;
+	
 }

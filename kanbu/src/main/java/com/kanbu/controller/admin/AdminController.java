@@ -288,6 +288,7 @@ public class AdminController {
 			model.addAttribute("memberList", memberList);
 			
 			return "/admin/member/memberList";
+			
 		}else if(search.getThema().equals("p.name") || search.getThema().equals("m.nick") || search.getThema().equals("pr.content")) {
 			int placeReplyCount = 0;
 			List<Place_ReplyDTO> placeReplyList = null;
@@ -301,6 +302,30 @@ public class AdminController {
 			model.addAttribute("placeReplyList", placeReplyList);
 			
 			return "/admin/info/placeReplyList";
+			
+		}else if(search.getThema().equals("p.title") || search.getThema().equals("rm.nick")) {
+			int reviewCount = 0;
+			int reviewTagCount = 0;
+			List<BoardDTO> reviewList = null;
+			List<BoardDTO> reviewTagList = null;
+			
+			reviewCount = adminImpl.searchReviewCount(search);
+			reviewTagCount = adminImpl.searchReviewTagCount(search);
+			
+			if(reviewCount > 0) {
+				reviewList = adminImpl.searchReview(search);
+			}
+			if(reviewTagCount > 0) {
+				reviewTagList = adminImpl.searchReviewTag(search);
+			}
+			
+			model.addAttribute("reviewCount", reviewCount);
+			model.addAttribute("reviewTagCount", reviewTagCount);
+			model.addAttribute("reviewList", reviewList);
+			model.addAttribute("reviewTagList", reviewTagList);
+			
+			return "/admin/board/reviewList";
+	
 		}
 		
 		return "";

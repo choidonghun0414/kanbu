@@ -256,7 +256,12 @@
                                 <div class="col-lg-12">
                                  <h5>&nbsp</h5>
                                     <div class="submit_btn">
-                                        <button class="boxed-btn4" type="submit" id="optionModifyBtn" >회원가입</button>
+                                    	<c:if test="${empty (sessionScope.status)}">
+                                        	<button class="boxed-btn4" type="submit" id="optionModifyBtn" >회원가입</button>
+                                    	</c:if>
+                                    	<c:if test="${sessionScope.status == 100}">
+                                        	<button class="boxed-btn4" type="submit" id="optionModifyBtn" >관리자 등록</button>
+                                    	</c:if>
                                     </div>
                                 </div>
                             </div>
