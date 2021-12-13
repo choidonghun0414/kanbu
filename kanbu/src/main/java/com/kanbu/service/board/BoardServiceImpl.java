@@ -101,6 +101,12 @@ public class BoardServiceImpl implements BoardService{
 		
 	}
 
+	//리뷰 수정
+	@Override
+	public void reviewUpdate(BoardDTO board) throws Exception {
+		boardDAO.reviewUpdate(board);
+	}
+
 
 
 

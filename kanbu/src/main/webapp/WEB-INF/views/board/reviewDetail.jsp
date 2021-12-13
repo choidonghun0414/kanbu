@@ -196,12 +196,12 @@
         	<!-- ================== 목록, 수정 버튼 ================== -->
         	<div class="d-flex flex-row-reverse">
 				<span class="input-group-btn">
-					<a class="btn btn-secondary" href="/kanbu/board/noticeList.com" role="button">목록</a>
-					<a class="btn btn-secondary" href="/kanbu/board/noticeUpdateForm.com?noticeNum=${noticeDetail.index_num}" role="button">수정</a>
-					<a class="btn btn btn-danger" href="/kanbu/board/noticeDeletePro.com?noticeNum=${noticeDetail.index_num}" role="button"
+					<a class="btn btn-secondary" href="/kanbu/board/reviewList.com" role="button">목록</a>
+					<c:if test="${sessionScope.status == 100}">
+					<a class="btn btn-secondary" href="/kanbu/board/reviewUpdateForm.com?reviewNum=${selectReview.index_num}" role="button">수정</a>
+					<a class="btn btn btn-danger" href="/kanbu/board/reviewDeletePro.com?reviewNum=${selectReview.index_num}" role="button"
 						onclick="alert('모든 내용이 삭제됩니다.');return alert('삭제되었습니다!');">삭제</a>
-						<!-- <button type="submit" id="a_save_btn"
-								class="btn btn-secondary">수정</button> -->
+					</c:if>
 				</span>
 			</div>
     	</div>

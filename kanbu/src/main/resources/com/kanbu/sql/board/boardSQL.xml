@@ -53,13 +53,17 @@
 		where index_num = #{index_num}
 	</update>
 	
-	
 	<!-- 공지 삭제 -->
 	<delete id="noticeDelete">
 		delete
 		from notice
 		where index_num = #{index_num}
 	</delete>
+	
+	<!-- 공지사항 조회수  -->
+ 	<update id="updateViews" parameterType="Integer">
+    	update notice set views=views+1 where index_num=#{index_num}
+ 	</update>
 	
 	<!-- 여행 리뷰 리스트 갯수 -->
 	<select id="selectReviewCount" resultType="int">
@@ -115,9 +119,13 @@
  		values (plan_review_SEQ.nextval, #{title}, #{writer}, #{content}, sysdate)
 	</insert>
 	
-	<!-- 공지사항 조회수  -->
- 	<update id="updateViews" parameterType="Integer">
-    	update notice set views=views+1 where index_num=#{index_num}
- 	</update>
+	
+	<!-- 여행 리뷰 수정 -->
+	<update id="reviewUpdate">
+		update plan_review
+		set content = #{content}, title = #{title}
+		where index_num = #{index_num}
+	</update>
+	
  
  </mapper> 

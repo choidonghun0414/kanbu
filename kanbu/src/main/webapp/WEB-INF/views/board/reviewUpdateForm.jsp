@@ -181,7 +181,7 @@
 	<!-- ================== 게시글 등록 폼 =================== -->
 	<div class="container">
 		<!-- <form action="/kanbu/board/noticeUpdatePro.com" name="noticeForm" method="post"> -->
-		<form action="/kanbu/board/noticeUpdatePro.com?noticeNum=${noticeDetail.index_num}" method="post">
+		<form action="/kanbu/board/reviewUpdatePro.com?reviewNum=${selectReview.index_num}" method="post">
 			<table class="table table-write" id="add_mt">
 				<colgroup>
 					<col style="width:120px" />
@@ -191,13 +191,13 @@
 				<tr>
 					<th>제목</th>
 						<td>
-							<input value="${noticeDetail.title}" type="text" class="form-control"
+							<input value="${selectReview.title}" type="text" class="form-control"
 									id="title" name="title" required="required" />
 						</td>
 				</tr>
 			</table>
 	
-			<textarea id="summernote" name="content">${noticeDetail.content}</textarea>
+			<textarea id="summernote" name="content">${selectReview.content}</textarea>
 			
 				<script>
 			 		//썸머노트에 값넣기

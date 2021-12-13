@@ -174,6 +174,33 @@ public class BoardController {
         return "redirect:/board/reviewList.com";
     }
 
+	// ====== 리뷰 수정 폼
+		@RequestMapping("board/reviewUpdateForm.com")
+		public String reviewUpdate(HttpServletRequest request, Model model) throws Exception{
+			int index_num = Integer.parseInt(request.getParameter("reviewNum"));
+			board = boardImpl.selectReviewDetail(index_num);
+			List tagList = boardImpl.selectReviewDetailTag(index_num);
+			
+			model.addAttribute("selectReview", board);
+			model.addAttribute("tagList", tagList);	
+			
+			return "board/reviewUpdateForm";
+		}
+		
+		// ====== 리뷰 수정 완료
+		@RequestMapping(value = "/board/reviewUpdatePro.com", method = RequestMethod.POST)
+	    public String reviewUpdatePro(Model model, HttpServletRequest request) throws Exception{
+			int index_num = Integer.parseInt(request.getParameter("reviewNum"));
+			board.setContent(request.getParameter("content"));
+			board.setTitle(request.getParameter("title"));
+			board.setWriter(boardImpl.selectAdmin());
+			
+			
+			boardImpl.reviewUpdate(board);
+			
+			
+	        return "redirect:/board/reviewDetail.com?reviewNum="+index_num;
+	    }
 	
 //	@RequestMapping(value="/board/reviewWritePro.com", method = RequestMethod.POST) 
 //	public String insertBoard(MultipartFile uploadFile, HttpServletRequest request) throws Exception { 

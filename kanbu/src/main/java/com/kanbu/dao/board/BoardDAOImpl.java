@@ -101,6 +101,12 @@ public class BoardDAOImpl implements BoardDAO{
 		
 	}
 
+	//리뷰 수정
+	@Override
+	public void reviewUpdate(BoardDTO board) throws Exception {
+		mybatis.update("board.reviewUpdate", board);
+	}
+
 
 
 

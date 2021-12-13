@@ -48,4 +48,6 @@ public interface BoardDAO {
 	//리뷰 작성
 	public void insertReview(BoardDTO board) throws Exception;
 	
+	//리뷰 수정
+	public void reviewUpdate(BoardDTO board) throws Exception;
 }
