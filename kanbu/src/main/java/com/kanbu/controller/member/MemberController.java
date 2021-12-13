@@ -196,7 +196,7 @@ public class MemberController {
 		return "/member/memberUpdate";
 	}
 	
-	// 회원수정페이지
+	// 회원수정페이지 처리
 	@RequestMapping("/mypage/memberInfoUpdate.com")
 	public String memberUpdatePro(HttpServletRequest request, HttpSession session) throws Exception{
 		member.setIndex_num(Integer.parseInt(request.getParameter("index_num")));
