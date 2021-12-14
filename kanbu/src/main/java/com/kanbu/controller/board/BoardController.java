@@ -30,11 +30,33 @@ public class BoardController {
 	
 	// ====== 공지 목록
 	@RequestMapping("board/noticeList.com")
-	public String noticeList(Model model) throws Exception{
-		int adminNum = boardImpl.selectAdmin();
+	public String noticeList(HttpServletRequest request, Model model) throws Exception{
+		int pageSize = 10;											// 한페이지에 보여줄 정보 갯수
+		String pageNum = request.getParameter("pageNum");			// view에서 넘어온 페이지번호
+		if(pageNum == null) {										// view에서 넘어온 페이지번호가 없으면 1로 대입
+			pageNum = "1";
+		}
 		
-		List noticeList = boardImpl.selectNotice(adminNum);
+		int currentPage = Integer.parseInt(pageNum);				// 현재 페이지번호
+		int startRow = (currentPage - 1) * pageSize + 1;			// 시작 번호
+		int endRow = currentPage * pageSize;						// 끝 번호
+		board.setStartRow(startRow);
+		board.setEndRow(endRow);
 		
+		int noticeCount = boardImpl.selectNoticeCount();
+		List<BoardDTO> noticeList = null;
+		
+		if(noticeCount > 0) {
+			noticeList = boardImpl.selectNotice(board);
+		}
+		
+		request.setAttribute("currentPage", currentPage);
+		request.setAttribute("startRow", board.getStartRow());
+		request.setAttribute("endRow", board.getEndRow());
+		request.setAttribute("pageSize", pageSize);
+		request.setAttribute("pageNum", pageNum);
+				
+		model.addAttribute("noticeCount", noticeCount);
 		model.addAttribute("noticeList", noticeList);
 		
 		return "board/noticeList";	
@@ -121,23 +143,42 @@ public class BoardController {
 	
 	// ====== 리뷰 목록
 	@RequestMapping("board/reviewList.com")
-	public String reviewList(Model model) throws Exception{
+	public String reviewList(HttpServletRequest request, Model model) throws Exception{
+		int pageSize = 9;											// 한페이지에 보여줄 정보 갯수
+		String pageNum = request.getParameter("pageNum");			// view에서 넘어온 페이지번호
+		if(pageNum == null) {										// view에서 넘어온 페이지번호가 없으면 1로 대입
+			pageNum = "1";
+		}
+		
+		int currentPage = Integer.parseInt(pageNum);				// 현재 페이지번호
+		int startRow = (currentPage - 1) * pageSize + 1;			// 시작 번호
+		int endRow = currentPage * pageSize;						// 끝 번호
+		board.setStartRow(startRow);
+		board.setEndRow(endRow);
+		
 		int reviewCount = boardImpl.selectReviewCount();
 		int reviewTagCount = boardImpl.selectReviewTagCount();
 		List reviewList = null;
 		List reviewTagList = null;
 		
 		if(reviewCount > 0) {
-			reviewList = boardImpl.selectReview();
+			reviewList = boardImpl.selectReview(board);
 		}
 		if(reviewTagCount > 0) {
 			reviewTagList = boardImpl.selectReviewTag();
 		}
 		
+		request.setAttribute("currentPage", currentPage);
+		request.setAttribute("startRow", board.getStartRow());
+		request.setAttribute("endRow", board.getEndRow());
+		request.setAttribute("pageSize", pageSize);
+		request.setAttribute("pageNum", pageNum);
+		
 		model.addAttribute("reviewCount", reviewCount);
 		model.addAttribute("reviewList", reviewList);
 		model.addAttribute("reviewTagCount", reviewTagCount);
 		model.addAttribute("reviewTagList", reviewTagList);
+		
 		return "board/reviewList";
 	}
 	

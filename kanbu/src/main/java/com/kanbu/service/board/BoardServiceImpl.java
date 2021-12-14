@@ -4,8 +4,6 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-import org.mybatis.spring.SqlSessionTemplate;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.kanbu.dao.board.BoardDAO;
@@ -22,11 +20,17 @@ public class BoardServiceImpl implements BoardService{
 	public void insertBoard(BoardDTO board) throws Exception {
 		boardDAO.insertBoard(board);
 	}
+	
+	// 공지 목록 갯수
+	@Override
+	public int selectNoticeCount() throws Exception {
+		return boardDAO.selectNoticeCount();
+	}
 
 	//공지 목록
 	@Override
-	public List selectNotice(int writer) throws Exception {
-		return boardDAO.selectNotice(writer);
+	public List<BoardDTO> selectNotice(BoardDTO board) throws Exception {
+		return boardDAO.selectNotice(board);
 	}
 
 	// 관리자고유번호 검색
@@ -62,8 +66,8 @@ public class BoardServiceImpl implements BoardService{
 
 	//리뷰 목록
 	@Override
-	public List selectReview() throws Exception {
-		return boardDAO.selectReview();
+	public List selectReview(BoardDTO board) throws Exception {
+		return boardDAO.selectReview(board);
 	}
 	
 	//여행 리뷰 태그 리스트 갯수
@@ -100,12 +104,6 @@ public class BoardServiceImpl implements BoardService{
 		boardDAO.insertReview(board);
 		
 	}
-
-
-
-
-
-
 
 
 

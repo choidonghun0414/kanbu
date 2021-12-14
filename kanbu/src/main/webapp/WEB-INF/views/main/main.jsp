@@ -14,24 +14,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- <link rel="manifest" href="site.webmanifest"> -->
-    <link rel="shortcut icon" type="image/x-icon" href="resources/img/favicon.png">
+    <link rel="shortcut icon" type="image/x-icon" href="/kanbu/resources/img/favicon.png">
     <!-- Place favicon.ico in the root directory -->
 
     <!-- CSS here -->
-    <link rel="stylesheet" href="resources/css/bootstrap.min.css">
-    <link rel="stylesheet" href="resources/css/owl.carousel.min.css">
-    <link rel="stylesheet" href="resources/css/magnific-popup.css">
-    <link rel="stylesheet" href="resources/css/font-awesome.min.css">
-    <link rel="stylesheet" href="resources/css/themify-icons.css">
-    <link rel="stylesheet" href="resources/css/nice-select.css">
-    <link rel="stylesheet" href="resources/css/flaticon.css">
-    <link rel="stylesheet" href="resources/css/gijgo.css">
-    <link rel="stylesheet" href="resources/css/animate.css">
-    <link rel="stylesheet" href="resources/css/slick.css">
-    <link rel="stylesheet" href="resources/css/slicknav.css">
+    <link rel="stylesheet" href="/kanbu/resources/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/kanbu/resources/css/owl.carousel.min.css">
+    <link rel="stylesheet" href="/kanbu/resources/css/magnific-popup.css">
+    <link rel="stylesheet" href="/kanbu/resources/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/kanbu/resources/css/themify-icons.css">
+    <link rel="stylesheet" href="/kanbu/resources/css/nice-select.css">
+    <link rel="stylesheet" href="/kanbu/resources/css/flaticon.css">
+    <link rel="stylesheet" href="/kanbu/resources/css/gijgo.css">
+    <link rel="stylesheet" href="/kanbu/resources/css/animate.css">
+    <link rel="stylesheet" href="/kanbu/resources/css/slick.css">
+    <link rel="stylesheet" href="/kanbu/resources/css/slicknav.css">
     <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/themes/smoothness/jquery-ui.css">
 
-    <link rel="stylesheet" href="resources/css/style.css">
+    <link rel="stylesheet" href="/kanbu/resources/css/style.css">
     <!-- <link rel="stylesheet" href="css/responsive.css"> -->
     
 	<link rel="preconnect" href="https://fonts.googleapis.com">
@@ -53,7 +53,7 @@
             <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
         <![endif]-->
 
-     <!-- header-start -->
+    <!-- header-start -->
     <header>
         <div class="header-area ">
             <div id="sticky-header" class="main-header-area">
@@ -63,7 +63,7 @@
                             <div class="col-xl-2 col-lg-2">
                                 <div class="logo">
                                     <a href="/kanbu/main.com">
-                                        <img src="resources/img/kanbulogo.png" alt="">
+                                        <img src="/kanbu/resources/img/kanbulogo.png" alt="">
                                     </a>
                                 </div>
                             </div>
@@ -89,6 +89,7 @@
                                 <div class="social_wrap d-flex align-items-center justify-content-end">
                                     <div class="social_links d-none d-xl-block">
                                         <ul>
+<<<<<<< HEAD
                                         	<c:if test="${sessionScope.status > 0}">
                                               <li><p>${sessionScope.nick}님 환영합니다.</p></li>
                                               <c:if test="${sessionScope.status == 1}">
@@ -102,6 +103,21 @@
                                            <c:if test="${empty(sessionScope.status)}">
                                               <li><a href="/kanbu/login.com"> <i class="fa fa-lock"></i> </a></li>
                                            </c:if>    
+=======
+                                        	<c:if test="${sessionScope.status > 0}">
+                                        		<li><p>${sessionScope.nick}님 환영합니다.</p></li>
+                                        		<c:if test="${sessionScope.status == 1}">
+                                        			<li><a href="/kanbu/mypage.com"> <i class="fa fa-user"></i> </a></li>
+                                        		</c:if>
+                                        		<c:if test="${sessionScope.status == 100}">
+                                        			<li><a href="/kanbu/admin.com"> <i class="fa fa-dashboard"></i> </a></li>
+                                        		</c:if>
+                                        		<li><a href="/kanbu/logout.com"> <i class="fa fa-unlock"></i> </a></li>
+                                        	</c:if>
+                                        	<c:if test="${empty(sessionScope.status)}">
+                                        		<li><a href="/kanbu/login.com"> <i class="fa fa-lock"></i> </a></li>
+                                        	</c:if>    
+>>>>>>> branch 'main' of https://github.com/choidonghun0414/kanbu.git
                                         </ul>
                                     </div>
                                 </div>
@@ -134,7 +150,11 @@
                                 <h3>Jeju Island</h3>
                                 <p></p>
                                 <p class="regular">아름다운 제주도에서 추억을 만들어보세요</p>
+<<<<<<< HEAD
                                  <a href="/kanbu/mapView.com" class="boxed-btn3">여행가기</a>
+=======
+                                <a href="/kanbu/mapView.com" class="boxed-btn3">여행가기</a>
+>>>>>>> branch 'main' of https://github.com/choidonghun0414/kanbu.git
                             </div>
                         </div>
                     </div>
@@ -305,7 +325,7 @@
                 <div class="col-lg-4 col-md-6">
                     <div class="single_travel text-center">
                         <div class="icon">
-                            <img src="resources/img/svg_icon/1.svg" alt="">
+                            <img src="/kanbu/resources/img/svg_icon/1.svg" alt="">
                         </div>
                         <h3 style="font-weight: 600; font-size:large; color: black;">성공적인 여행</h3>
                         <p>탄탄한 계획과 정보로 <br>성공적인 여행이 가능합니다.</p>
@@ -313,7 +333,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div>  
 
     <footer class="footer" style="height: 391px;">
         <div class="footer_top">

@@ -29,8 +29,6 @@
 		</constructor-arg>
 	</bean>
 
-
-
 	<!-- controller 사용할 패키지 설정 -->
 	<context:component-scan base-package="com.kanbu" />
 

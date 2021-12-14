@@ -11,9 +11,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.kanbu.dto.SearchDTO;
+import com.kanbu.dto.board.BoardDTO;
 import com.kanbu.dto.info.PlaceDTO;
+import com.kanbu.dto.info.Place_ReplyDTO;
 import com.kanbu.dto.member.MemberDTO;
 import com.kanbu.service.admin.AdminService;
+import com.kanbu.service.info.InfoService;
 
 
 
@@ -25,6 +28,9 @@ public class AdminController {
 	private AdminService adminImpl;
 	
 	@Autowired
+	private InfoService infoImpl;
+	
+	@Autowired
 	private MemberDTO member;
 	
 	@Autowired
@@ -32,6 +38,12 @@ public class AdminController {
 	
 	@Autowired
 	private SearchDTO search;
+	
+	@Autowired
+	private Place_ReplyDTO place_reply;
+	
+	@Autowired
+	private BoardDTO board;
 	
 	// 관리자 페이지
 	@RequestMapping("admin.com")
@@ -104,8 +116,8 @@ public class AdminController {
 		}
 		
 		request.setAttribute("currentPage", currentPage);
-		request.setAttribute("startRow", member.getStartRow());
-		request.setAttribute("endRow", member.getEndRow());
+		request.setAttribute("startRow", place.getStartRow());
+		request.setAttribute("endRow", place.getEndRow());
 		request.setAttribute("pageSize", pageSize);
 		request.setAttribute("pageNum", pageNum);
 		
@@ -113,6 +125,107 @@ public class AdminController {
 		model.addAttribute("placeList", placeList);
 	
 		return "/admin/info/placeList";
+	}
+	
+	// 관리자 여행지 수정 페이지
+	@RequestMapping("/admin/placeInfo/edit.com")
+	public String adminPlaceUpdate(HttpServletRequest request, Model model) throws Exception{
+		// 해당 장소 상세정보
+		int index_num = Integer.parseInt(request.getParameter("placeNum"));		// index_num : 해당장소 고유번호
+		System.out.println(index_num);
+		
+		int count = infoImpl.selectPlaceInfoCount(index_num);					// count : 해당 여행지 정보 갯수
+		System.out.println(count);
+		
+		if(count > 0) {
+			place = infoImpl.selectPlaceInfo(index_num);
+		}
+		
+		model.addAttribute("count", count);
+		model.addAttribute("placeInfo", place);
+		
+		return "/admin/info/placeUpdate";
+	}
+	
+	// 관리자 여행지 댓글 조회 페이지
+	@RequestMapping("/admin/placeReply.com")
+	public String adminPlaceReply(HttpServletRequest request, Model model) throws Exception{
+		
+		// 페이징 처리
+		int pageSize = 10;											// 한페이지에 보여줄 정보 갯수
+		String pageNum = request.getParameter("pageNum");			// view에서 넘어온 페이지번호
+		if(pageNum == null) {										// view에서 넘어온 페이지번호가 없으면 1로 대입
+				pageNum = "1";
+		}
+				
+		int currentPage = Integer.parseInt(pageNum);				// 현재 페이지번호
+		int startRow = (currentPage - 1) * pageSize + 1;			// 시작 번호
+		int endRow = currentPage * pageSize;						// 끝 번호
+		place_reply.setStartRow(startRow);
+		place_reply.setEndRow(endRow);
+				
+		// 장소 전체 정보 조회
+		int placeReplyCount = adminImpl.selectTotalPlaceReplyCount();
+		List<Place_ReplyDTO> placeReplyList = null;
+		
+		if(placeReplyCount > 0) {
+			placeReplyList = adminImpl.selectTotalPlaceReply(place_reply);
+		}
+		
+		request.setAttribute("currentPage", currentPage);
+		request.setAttribute("startRow", place_reply.getStartRow());
+		request.setAttribute("endRow", place_reply.getEndRow());
+		request.setAttribute("pageSize", pageSize);
+		request.setAttribute("pageNum", pageNum);
+				
+		model.addAttribute("placeReplyCount", placeReplyCount);
+		model.addAttribute("placeReplyList", placeReplyList);
+		
+		return "/admin/info/placeReplyList";
+	}
+	
+	// 관리자 여행후기 조회 페이지
+	@RequestMapping("/admin/board/reviewInfo.com")
+	public String adminReview(HttpServletRequest request, Model model) throws Exception{
+		// 페이징 처리
+		int pageSize = 10;											// 한페이지에 보여줄 정보 갯수
+		String pageNum = request.getParameter("pageNum");			// view에서 넘어온 페이지번호
+		if(pageNum == null) {										// view에서 넘어온 페이지번호가 없으면 1로 대입
+			pageNum = "1";
+		}
+						
+		int currentPage = Integer.parseInt(pageNum);				// 현재 페이지번호
+		int startRow = (currentPage - 1) * pageSize + 1;			// 시작 번호
+		int endRow = currentPage * pageSize;						// 끝 번호
+		board.setStartRow(startRow);
+		board.setEndRow(endRow);
+		
+		int reviewCount = adminImpl.selectReviewCount();
+		int reviewTagCount = adminImpl.selectReviewTagCount();
+		List reviewList = null;
+		List reviewTagList = null;
+		
+		if(reviewCount > 0) {
+			reviewList = adminImpl.selectReview(board);
+		}
+		if(reviewTagCount > 0) {
+			reviewTagList = adminImpl.selectReviewTag();
+		}
+		
+		
+		request.setAttribute("currentPage", currentPage);
+		request.setAttribute("startRow", board.getStartRow());
+		request.setAttribute("endRow", board.getEndRow());
+		request.setAttribute("pageSize", pageSize);
+		request.setAttribute("pageNum", pageNum);
+		
+		model.addAttribute("reviewCount", reviewCount);
+		model.addAttribute("reviewList", reviewList);
+		model.addAttribute("reviewTagCount", reviewTagCount);
+		model.addAttribute("reviewTagList", reviewTagList);
+		
+		
+		return "/admin/board/reviewList";
 	}
 	
 	// 관리자 검색 기능
@@ -133,6 +246,7 @@ public class AdminController {
 		int currentPage = Integer.parseInt(pageNum);				// 현재 페이지번호
 		int startRow = (currentPage - 1) * pageSize + 1;			// 시작 번호
 		int endRow = currentPage * pageSize;						// 끝 번호
+		int searchCount = 1;
 		search.setStartRow(startRow);
 		search.setEndRow(endRow);
 		
@@ -141,6 +255,10 @@ public class AdminController {
 		request.setAttribute("endRow", search.getEndRow());
 		request.setAttribute("pageSize", pageSize);
 		request.setAttribute("pageNum", pageNum);
+		
+		model.addAttribute("searchCount", searchCount);
+		model.addAttribute("thema", search.getThema());
+		model.addAttribute("keyword", search.getKeyword());
 		
 		// 테마별 검색 결과
 		if(search.getThema().equals("name")) {
@@ -170,6 +288,44 @@ public class AdminController {
 			model.addAttribute("memberList", memberList);
 			
 			return "/admin/member/memberList";
+			
+		}else if(search.getThema().equals("p.name") || search.getThema().equals("m.nick") || search.getThema().equals("pr.content")) {
+			int placeReplyCount = 0;
+			List<Place_ReplyDTO> placeReplyList = null;
+			
+			placeReplyCount = adminImpl.selectKeywordPlaceReplyCount(search);
+			if(placeReplyCount > 0) {
+				placeReplyList = adminImpl.selectKeywordPlaceReply(search);
+			}
+			
+			model.addAttribute("placeReplyCount", placeReplyCount);
+			model.addAttribute("placeReplyList", placeReplyList);
+			
+			return "/admin/info/placeReplyList";
+			
+		}else if(search.getThema().equals("p.title") || search.getThema().equals("rm.nick")) {
+			int reviewCount = 0;
+			int reviewTagCount = 0;
+			List<BoardDTO> reviewList = null;
+			List<BoardDTO> reviewTagList = null;
+			
+			reviewCount = adminImpl.searchReviewCount(search);
+			reviewTagCount = adminImpl.searchReviewTagCount(search);
+			
+			if(reviewCount > 0) {
+				reviewList = adminImpl.searchReview(search);
+			}
+			if(reviewTagCount > 0) {
+				reviewTagList = adminImpl.searchReviewTag(search);
+			}
+			
+			model.addAttribute("reviewCount", reviewCount);
+			model.addAttribute("reviewTagCount", reviewTagCount);
+			model.addAttribute("reviewList", reviewList);
+			model.addAttribute("reviewTagList", reviewTagList);
+			
+			return "/admin/board/reviewList";
+	
 		}
 		
 		return "";

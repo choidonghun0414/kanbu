@@ -20,80 +20,96 @@
 	<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet"> 
   	<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
   	<script src=" https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.18/lang/summernote-ko-KR.min.js"></script>
-	<script src="../resources/js/summernote-lite.js"></script>
-	<script src="../resources/js/summernote-ko-KR.js"></script>
+	<script src="/kanbu/resources/js/summernote-lite.js"></script>
+	<script src="/kanbu/resources/js/summernote-ko-KR.js"></script>
 	
-
-	
-
     <!-- <link rel="manifest" href="site.webmanifest"> -->
-    <link rel="shortcut icon" type="image/x-icon" href="../resources/img/favicon.png">
+    <link rel="shortcut icon" type="image/x-icon" href="/kanbu/resources/img/favicon.png">
     <!-- Place favicon.ico in the root directory -->
 
     <!-- CSS here -->
-    <link rel="stylesheet" href="../resources/css/bootstrap.min.css">
-    <link rel="stylesheet" href="../resources/css/bootstrap1.min.css">
-    <link rel="stylesheet" href="../resources/css/owl.carousel.min.css">
-    <link rel="stylesheet" href="../resources/css/magnific-popup.css">
-    <link rel="stylesheet" href="../resources/css/font-awesome.min.css">
-    <link rel="stylesheet" href="../resources/css/themify-icons.css">
-    <link rel="stylesheet" href="../resources/css/nice-select.css">
-    <link rel="stylesheet" href="../resources/css/flaticon.css">
-    <link rel="stylesheet" href="../resources/css/gijgo.css">
-    <link rel="stylesheet" href="../resources/css/animate.css">
-    <link rel="stylesheet" href="../resources/css/slicknav.css">
-    <link rel="stylesheet" href="../resources/css/style.css">
-    <link rel="stylesheet" href="../resources/css/summernote-lite.css">
+    <link rel="stylesheet" href="/kanbu/resources/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/kanbu/resources/css/bootstrap1.min.css">
+    <link rel="stylesheet" href="/kanbu/resources/css/owl.carousel.min.css">
+    <link rel="stylesheet" href="/kanbu/resources/css/magnific-popup.css">
+    <link rel="stylesheet" href="/kanbu/resources/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/kanbu/resources/css/themify-icons.css">
+    <link rel="stylesheet" href="/kanbu/resources/css/nice-select.css">
+    <link rel="stylesheet" href="/kanbu/resources/css/flaticon.css">
+    <link rel="stylesheet" href="/kanbu/resources/css/gijgo.css">
+    <link rel="stylesheet" href="/kanbu/resources/css/animate.css">
+    <link rel="stylesheet" href="/kanbu/resources/css/slicknav.css">
+    <link rel="stylesheet" href="/kanbu/resources/css/style.css">
+    <link rel="stylesheet" href="/kanbu/resources/css/summernote-lite.css">
     <!-- <link rel="stylesheet" href="css/responsive.css"> -->
     
-<style>
-    /* 푸터 사이즈 조절, 컨텐츠와 간격 조절 */
-    .footer .footer_top {
-   		margin-top: 110px;
-   		padding-top: 50px;
-   		padding-bottom: 30px;
-	}
+      <!-- 관리자 상태 유효성 검사 -->
+	  <c:if test="${empty(sessionScope.status)}">
+	  	<script type="text/javascript">
+	  		alert("접근 권한이 없는 페이지입니다.");
+	  		window.location = "/kanbu/main.com";
+	  	</script>
+	  </c:if>
+	  
+	  <c:if test="${!empty(sessionScope.status)}">
+	  	<script type="text/javascript">
+	  		var status = ${sessionScope.status};
+	  	
+	  		if(status != 100){
+	  			alert("접근 권한이 없는 페이지입니다.");
+	  			window.location = "/kanbu/main.com";
+	  		}
+	  	</script>
+	  </c:if>
+    
+	<style>
+	    /* 푸터 사이즈 조절, 컨텐츠와 간격 조절 */
+	    .footer .footer_top {
+	   		margin-top: 110px;
+	   		padding-top: 50px;
+	   		padding-bottom: 30px;
+		}
+		
+		/* 페이지 내부 게시판 제목 표시 (공지사항, 자주 하는 질문 등) */
+		h3.md-30 {
+	    text-align: center;
+	    margin-top: 60px;
+	    margin-bottom: 60px;
+	    font-size: 60px;
+		}
 	
-	/* 페이지 내부 게시판 제목 표시 (공지사항, 자주 하는 질문 등) */
-	h3.md-30 {
-    text-align: center;
-    margin-top: 60px;
-    margin-bottom: 60px;
-    font-size: 60px;
-	}
-
-	.progress-table .country {
-	    width: 300;
-	}
+		.progress-table .country {
+		    width: 300;
+		}
+		
+		a {
+		    color: #007bff;
+		    text-decoration: none;
+		    background-color: transparent;
+		    -webkit-text-decoration-skip: objects;
+		    color: inherit;
+		}
+		
+		.search-form {
+			margin-top: 50px;
+		}
+		
+		
+		/* 버튼 왼쪽의 여백 */
+		.input-group-btn{
+			margin-top: 9px;
+			margin-left: 5px;
+		}
+		
+		.border {
+			width: 75%;
+		}
+	</style>
 	
-	a {
-	    color: #007bff;
-	    text-decoration: none;
-	    background-color: transparent;
-	    -webkit-text-decoration-skip: objects;
-	    color: inherit;
-	}
-	
-	.search-form {
-		margin-top: 50px;
-	}
-	
-	
-	/* 버튼 왼쪽의 여백 */
-	.input-group-btn{
-		margin-top: 9px;
-		margin-left: 5px;
-	}
-	
-	.border {
-		width: 75%;
-	}
-</style>
-
-
 </head>
 
 <body>
+     <!-- header-start -->
     <header>
         <div class="header-area ">
             <div id="sticky-header" class="main-header-area">
@@ -103,7 +119,7 @@
                             <div class="col-xl-2 col-lg-2">
                                 <div class="logo">
                                     <a href="/kanbu/main.com">
-                                        <img src="../resources/img/logo.png" alt="">
+                                        <img src="/kanbu/resources/img/kanbulogo.png" alt="">
                                     </a>
                                 </div>
                             </div>
@@ -112,30 +128,36 @@
                                     <nav>
                                         <ul id="navigation">
                                             <li><a class="active" href="/kanbu/main.com">home</a></li>
-                                            <li><a href="/kanbu/list.com">일정만들기</a></li>
+                                            <li><a href="/kanbu/mapView.com">일정만들기</a></li>
                                             <li><a href="/kanbu/place.com">여행지정보</a></li>
-                                            <li><a href="/kanbu/board/reviewList.com">게시판 <i class="ti-angle-down"></i></a>
+                               		 		<li><a href="/kanbu/board/reviewList.com">게시판 <i class="ti-angle-down"></i></a>
                                                 <ul class="submenu">
-                                                        <li><a href="/kanbu/board/reviewList.com">여행공유</a></li>
+                                                        <li><a href="/kanbu/board/reviewList.com">여행후기</a></li>
                                                         <li><a href="/kanbu/board/noticeList.com">공지사항</a></li>
                                                         <li><a href="/kanbu/board/questionList.com">자주하는질문</a></li>
                                                 </ul>
-                                            </li>          
+                                            </li>
                                         </ul>
                                     </nav>
                                 </div>
                             </div>
                             <div class="col-xl-4 col-lg-4 d-none d-lg-block">
                                 <div class="social_wrap d-flex align-items-center justify-content-end">
-                                    <div class="number">
-                                        <p> <i class="fa fa-phone"></i> 10(256)-928 256</p>
-                                    </div>
                                     <div class="social_links d-none d-xl-block">
                                         <ul>
-                                            <li><a href="#"> <i class="fa fa-instagram"></i> </a></li>
-                                            <li><a href="#"> <i class="fa fa-linkedin"></i> </a></li>
-                                            <li><a href="#"> <i class="fa fa-facebook"></i> </a></li>
-                                            <li><a href="#"> <i class="fa fa-google-plus"></i> </a></li>
+                                        	<c:if test="${sessionScope.status > 0}">
+                                        		<li><p>${sessionScope.nick}님 환영합니다.</p></li>
+                                        		<c:if test="${sessionScope.status == 1}">
+                                        			<li><a href="/kanbu/mypage.com"> <i class="fa fa-user"></i> </a></li>
+                                        		</c:if>
+                                        		<c:if test="${sessionScope.status == 100}">
+                                        			<li><a href="/kanbu/admin.com"> <i class="fa fa-dashboard"></i> </a></li>
+                                        		</c:if>
+                                        		<li><a href="/kanbu/logout.com"> <i class="fa fa-unlock"></i> </a></li>
+                                        	</c:if>
+                                        	<c:if test="${empty(sessionScope.status)}">
+                                        		<li><a href="/kanbu/login.com"> <i class="fa fa-lock"></i> </a></li>
+                                        	</c:if>    
                                         </ul>
                                     </div>
                                 </div>
@@ -177,17 +199,14 @@
 		<h3 class="md-30">공지사항</h3>
 	</div>
 
-	<!-- ================== 게시글 등록 폼 =================== -->
-	<!-- ================== 게시글 등록 폼 =================== -->
+	<!-- ================== 게시글 수정 폼 =================== -->
 	<div class="container">
-		<!-- <form action="/kanbu/board/noticeUpdatePro.com" name="noticeForm" method="post"> -->
 		<form action="/kanbu/board/noticeUpdatePro.com?noticeNum=${noticeDetail.index_num}" method="post">
 			<table class="table table-write" id="add_mt">
 				<colgroup>
 					<col style="width:120px" />
 					<col style="width:*" />
 				</colgroup>
-				
 				<tr>
 					<th>제목</th>
 						<td>
@@ -219,122 +238,19 @@
 		</form>
 	</div>
 
-
-
-    <!-- footer start -->
-    <footer class="footer">
+    <footer class="footer" style="height: 391px;">
         <div class="footer_top">
-            <div class="container">
+            <div class="container" align="center">
                 <div class="row">
-                    <div class="col-xl-4 col-md-6 col-lg-4 ">
+                    <div class="col-lg-12">
                         <div class="footer_widget">
                             <div class="footer_logo">
-                                <a href="#">
-                                    <img src="../resources/img/footer_logo.png" alt="">
-                                </a>
-                            </div>
-                            <p>5th flora, 700/D kings road, green <br> lane New York-1782 <br>
-                                <a href="#">+10 367 826 2567</a> <br>
-                                <a href="#">contact@carpenter.com</a>
-                            </p>
-                            <div class="socail_links">
-                                <ul>
-                                    <li>
-                                        <a href="#">
-                                            <i class="ti-facebook"></i>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            <i class="ti-twitter-alt"></i>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            <i class="fa fa-instagram"></i>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            <i class="fa fa-pinterest"></i>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            <i class="fa fa-youtube-play"></i>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-
-                        </div>
-                    </div>
-                    <div class="col-xl-2 col-md-6 col-lg-2">
-                        <div class="footer_widget">
-                            <h3 class="footer_title">
-                                Company
-                            </h3>
-                            <ul class="links">
-                                <li><a href="#">Pricing</a></li>
-                                <li><a href="#">About</a></li>
-                                <li><a href="#"> Gallery</a></li>
-                                <li><a href="#"> Contact</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="col-xl-3 col-md-6 col-lg-3">
-                        <div class="footer_widget">
-                            <h3 class="footer_title">
-                                Popular destination
-                            </h3>
-                            <ul class="links double_links">
-                                <li><a href="#">Indonesia</a></li>
-                                <li><a href="#">America</a></li>
-                                <li><a href="#">India</a></li>
-                                <li><a href="#">Switzerland</a></li>
-                                <li><a href="#">Italy</a></li>
-                                <li><a href="#">Canada</a></li>
-                                <li><a href="#">Franch</a></li>
-                                <li><a href="#">England</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="col-xl-3 col-md-6 col-lg-3">
-                        <div class="footer_widget">
-                            <h3 class="footer_title">
-                                Instagram
-                            </h3>
-                            <div class="instagram_feed">
-                                <div class="single_insta">
-                                    <a href="#">
-                                        <img src="../resources/img/instagram/1.png" alt="">
-                                    </a>
-                                </div>
-                                <div class="single_insta">
-                                    <a href="#">
-                                        <img src="../resources/img/instagram/2.png" alt="">
-                                    </a>
-                                </div>
-                                <div class="single_insta">
-                                    <a href="#">
-                                        <img src="../resources/img/instagram/3.png" alt="">
-                                    </a>
-                                </div>
-                                <div class="single_insta">
-                                    <a href="#">
-                                        <img src="../resources/img/instagram/4.png" alt="">
-                                    </a>
-                                </div>
-                                <div class="single_insta">
-                                    <a href="#">
-                                        <img src="../resources/img/instagram/5.png" alt="">
-                                    </a>
-                                </div>
-                                <div class="single_insta">
-                                    <a href="#">
-                                        <img src="../resources/img/instagram/6.png" alt="">
-                                    </a>
-                                </div>
+								<img src="/kanbu/resources/img/footer_logo.png" alt="" style="float: left;">
+								<p>
+										it컴퓨터 학원 5층 FDX 자바 교육반 &nbsp;&nbsp;|&nbsp;&nbsp; 양재역 10분도보 
+                                		&nbsp;&nbsp;|&nbsp;&nbsp; +10 367 826 2567
+                                		&nbsp;&nbsp;|&nbsp;&nbsp; contact@kanbu.com
+                            	</p>
                             </div>
                         </div>
                     </div>
@@ -348,7 +264,7 @@
                     <div class="col-xl-12">
                         <p class="copy_right text-center">
                             <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | Kanbu Travel <i class="fa fa-heart-o" aria-hidden="true"></i> <a href="https://colorlib.com" target="_blank"></a>
 <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
                         </p>
                     </div>
@@ -356,48 +272,48 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
             </div>
         </div>
     </footer>
-    <!--/ footer end  -->
 
+  <!-- 검색창 -->
   <!-- Modal -->
   <div class="modal fade custom_search_pop" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
       <div class="modal-content">
         <div class="serch_form">
-            <input type="text" placeholder="Search" >
-            <button type="submit">search</button>
+            <input type="text" name="keyword" id="keyword" placeholder="검색할 장소를 입력해주세요..." >
+            <button type="submit" onclick="return search();">search</button>
         </div>
       </div>
     </div>
   </div>
 
 	<!-- JS here -->
-	<script src="../resources/js/vendor/modernizr-3.5.0.min.js"></script>
-	<script src="../resources/js/vendor/jquery-1.12.4.min.js"></script>
-	<script src="../resources/js/popper.min.js"></script>
-	<script src="../resources/js/bootstrap.min.js"></script>
-	<script src="../resources/js/owl.carousel.min.js"></script>
-	<script src="../resources/js/isotope.pkgd.min.js"></script>
-	<script src="../resources/js/ajax-form.js"></script>
-	<script src="../resources/js/waypoints.min.js"></script>
-	<script src="../resources/js/jquery.counterup.min.js"></script>
-	<script src="../resources/js/imagesloaded.pkgd.min.js"></script>
-	<script src="../resources/js/scrollIt.js"></script>
-	<script src="../resources/js/jquery.scrollUp.min.js"></script>
-	<script src="../resources/js/wow.min.js"></script>
-	<script src="../resources/js/nice-select.min.js"></script>
-	<script src="../resources/js/jquery.slicknav.min.js"></script>
-	<script src="../resources/js/jquery.magnific-popup.min.js"></script>
-	<script src="../resources/js/plugins.js"></script>
-	<script src="../resources/js/gijgo.min.js"></script>
+	<script src="/kanbu/resources/js/vendor/modernizr-3.5.0.min.js"></script>
+	<script src="/kanbu/resources/js/vendor/jquery-1.12.4.min.js"></script>
+	<script src="/kanbu/resources/js/popper.min.js"></script>
+	<script src="/kanbu/resources/js/bootstrap.min.js"></script>
+	<script src="/kanbu/resources/js/owl.carousel.min.js"></script>
+	<script src="/kanbu/resources/js/isotope.pkgd.min.js"></script>
+	<script src="/kanbu/resources/js/ajax-form.js"></script>
+	<script src="/kanbu/resources/js/waypoints.min.js"></script>
+	<script src="/kanbu/resources/js/jquery.counterup.min.js"></script>
+	<script src="/kanbu/resources/js/imagesloaded.pkgd.min.js"></script>
+	<script src="/kanbu/resources/js/scrollIt.js"></script>
+	<script src="/kanbu/resources/js/jquery.scrollUp.min.js"></script>
+	<script src="/kanbu/resources/js/wow.min.js"></script>
+	<script src="/kanbu/resources/js/nice-select.min.js"></script>
+	<script src="/kanbu/resources/js/jquery.slicknav.min.js"></script>
+	<script src="/kanbu/resources/js/jquery.magnific-popup.min.js"></script>
+	<script src="/kanbu/resources/js/plugins.js"></script>
+	<script src="/kanbu/resources/js/gijgo.min.js"></script>
 
 	<!--contact js-->
-	<script src="../resources/js/contact.js"></script>
-	<script src="../resources/js/jquery.ajaxchimp.min.js"></script>
-	<script src="../resources/js/jquery.form.js"></script>
-	<script src="../resources/js/jquery.validate.min.js"></script>
-	<script src="../resources/js/mail-script.js"></script>
+	<script src="/kanbu/resources/js/contact.js"></script>
+	<script src="/kanbu/resources/js/jquery.ajaxchimp.min.js"></script>
+	<script src="/kanbu/resources/js/jquery.form.js"></script>
+	<script src="/kanbu/resources/js/jquery.validate.min.js"></script>
+	<script src="/kanbu/resources/js/mail-script.js"></script>
 
-	<script src="../resources/js/main.js"></script>
+	<script src="/kanbu/resources/js/main.js"></script>
     <script>
         $('#datepicker').datepicker({
             iconsLibrary: 'fontawesome',
@@ -414,7 +330,25 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
         });
     </script>
     
-    	
-    </body>
+    <script type="text/javascript">
+    	function logOut(){
+    		alert("로그아웃 되었습니다.");
+    	}
+    </script>
     
-    </html>
+    <script type="text/javascript">
+    	function search(){
+    		var place = document.getElementById('keyword').value
+    		
+    		if(place == null || place == ""){
+    			alert("검색할 장소를 입력해주세요.");
+    			return false;
+    		}else{
+    			window.location = '/kanbu/search.com?keyword='+place;
+    		}
+    	}
+    </script>
+    
+</body>
+    
+</html>

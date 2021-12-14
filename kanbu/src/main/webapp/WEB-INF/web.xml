@@ -43,6 +43,35 @@
 	</servlet-mapping>
 	
 	<!-- 에러페이지 처리 -->
+	<error-page>
+  		<error-code>400</error-code>
+		<location>/error400.com</location>
+	</error-page>
+
+	<error-page>
+		<error-code>403</error-code>
+		<location>/error403.com</location>
+	</error-page>
+	
+	<error-page>
+		<error-code>404</error-code>
+		<location>/error404.com</location>
+	</error-page>
+
+	<error-page>
+		<error-code>405</error-code>
+		<location>/error405.com</location>
+		</error-page>
+	<error-page>
+	
+	<error-code>500</error-code>
+		<location>/error500.com</location>
+		</error-page>
+	<error-page>
+	
+	<error-code>503</error-code>
+		<location>/error503.com</location>
+	</error-page>
 	
 
 </web-app>
