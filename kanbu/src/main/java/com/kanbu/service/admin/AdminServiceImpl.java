@@ -30,6 +30,12 @@ public class AdminServiceImpl implements AdminService{
 	public List<MemberDTO> selectTotalMember(MemberDTO member) throws Exception {
 		return adminDAO.selectTotalMember(member);
 	}
+	
+	// 여행지 등록하기
+	@Override
+	public void insertPlace(PlaceDTO place) throws Exception {
+		adminDAO.insertPlace(place);
+	}
 
 	// 등록된 장소 전체 갯수 검색
 	@Override

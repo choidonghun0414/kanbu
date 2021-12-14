@@ -1,14 +1,20 @@
 package com.kanbu.controller.admin;
 
 
+import java.io.File;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
+import org.eclipse.jdt.internal.compiler.apt.util.EclipseFileManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
+import org.springframework.web.multipart.MultipartRequest;
 
 import com.kanbu.dto.SearchDTO;
 import com.kanbu.dto.board.BoardDTO;
@@ -45,6 +51,9 @@ public class AdminController {
 	@Autowired
 	private BoardDTO board;
 	
+	// 업로드 저장 경로
+	private String uploadPath = "/kanbu/resources/img/place/"; 
+	
 	// 관리자 페이지
 	@RequestMapping("admin.com")
 	public String admin() throws Exception{
@@ -76,8 +85,7 @@ public class AdminController {
 		if(memberCount > 0) {
 			memberList = adminImpl.selectTotalMember(member);
 		}
-		
-		
+			
 		request.setAttribute("currentPage", currentPage);
 		request.setAttribute("startRow", member.getStartRow());
 		request.setAttribute("endRow", member.getEndRow());
@@ -125,6 +133,83 @@ public class AdminController {
 		model.addAttribute("placeList", placeList);
 	
 		return "/admin/info/placeList";
+	}
+	
+	// 관리자 여행지 등록 페이지
+	@RequestMapping("/admin/placeAdd.com")
+	public String adminPlaceAdd() throws Exception{
+		return "/admin/info/placeAdd";
+	}
+	
+	// 관리자 여행지 등록 처리 페이지
+	@RequestMapping("/admin/placeAddPro.com")
+	public String adminPlaceAddPro(MultipartHttpServletRequest ms, HttpServletRequest request, 
+								   HttpSession session, Model model) throws Exception{
+		// 여행지 등록값
+		place.setName(request.getParameter("name"));
+		place.setAddr(request.getParameter("addr"));
+		place.setLatitude(Double.parseDouble(request.getParameter("latitude")));
+		place.setLongitude(Double.parseDouble(request.getParameter("longitude")));
+		place.setInfo(request.getParameter("info"));
+		place.setTel(request.getParameter("tel"));
+		place.setHoliday(request.getParameter("holiday"));
+		place.setParking(Integer.parseInt(request.getParameter("parking")));
+		place.setFee1(Integer.parseInt(request.getParameter("fee1")));
+		place.setFee2(Integer.parseInt(request.getParameter("fee2")));
+		place.setOpening(Integer.parseInt(request.getParameter("opening")));
+		place.setClosing(Integer.parseInt(request.getParameter("closing")));
+		
+		// 저장경로 설정(로컬 컴퓨터에서 실제로 저장되는 경로)
+		String root = session.getServletContext().getRealPath("/");			
+		String path = root + "\\resources\\img\\place\\";
+				
+		// 파일 가져오기
+		MultipartFile mf1 = ms.getFile("picture1");						
+		MultipartFile mf2 = ms.getFile("picture2");						
+		MultipartFile mf3 = ms.getFile("picture3");						
+		MultipartFile mf4 = ms.getFile("picture4");					
+		MultipartFile mf5 = ms.getFile("picture5");
+		String picture1 = null;
+		String picture2 = null;
+		String picture3 = null;
+		String picture4 = null;
+		String picture5 = null;
+		
+		if(!mf1.isEmpty()) {
+			picture1 = mf1.getOriginalFilename();		// 기존 파일 이름(오리지널)
+			File f1 = new File(path+picture1);			
+			mf1.transferTo(f1);							// 파일 저장
+			place.setPicture1(picture1);
+		}
+		if(!mf2.isEmpty()) {
+			picture2 = mf2.getOriginalFilename();
+			File f2 = new File(path+picture2);
+			mf2.transferTo(f2);
+			place.setPicture2(picture2);
+		}
+		if(!mf3.isEmpty()) {
+			picture3 = mf3.getOriginalFilename();
+			File f3 = new File(path+picture3);
+			mf3.transferTo(f3);
+			place.setPicture3(picture3);
+		}
+		if(!mf4.isEmpty()) {
+			picture4 = mf4.getOriginalFilename();
+			File f4 = new File(path+picture4);
+			mf4.transferTo(f4);
+			place.setPicture4(picture4);
+		}
+		if(!mf5.isEmpty()) {
+			picture5 = mf5.getOriginalFilename();
+			File f5 = new File(path+picture5);
+			mf5.transferTo(f5);
+			place.setPicture5(picture5);
+		}
+							
+		// 여행지 DB에 저장
+		adminImpl.insertPlace(place);
+		
+		return "redirect:/admin/placeInfo.com";
 	}
 	
 	// 관리자 여행지 수정 페이지

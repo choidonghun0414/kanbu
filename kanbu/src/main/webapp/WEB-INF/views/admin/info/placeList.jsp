@@ -266,7 +266,7 @@
                           			<td><fmt:formatNumber type="currency" value="${place.fee1}" /></td>
                           			<td><fmt:formatNumber type="currency" value="${place.fee2}" /></td>
                           			<td>
-                          				<c:if test="${place.opening > 0 && place.opening < 10}">
+                          				<c:if test="${place.opening >= 0 && place.opening < 10}">
                           					0${place.opening}:00
                           				</c:if>
                           				<c:if test="${place.opening >= 10}">
@@ -274,7 +274,7 @@
                           				</c:if>
                           			</td>
                           			<td>
-                          				<c:if test="${place.closing > 0 && place.closing < 10}">
+                          				<c:if test="${place.closing >= 0 && place.closing < 10}">
                           					0${place.closing}:00
                           				</c:if>
                           				<c:if test="${place.closing >= 10}">

@@ -16,6 +16,9 @@ public interface AdminDAO {
 	// 전체회원 정보 검색
 	public List<MemberDTO> selectTotalMember(MemberDTO member) throws Exception;
 	
+	// 여행지 등록하기
+	public void insertPlace(PlaceDTO place) throws Exception;
+	
 	// 등록된 장소 전체 갯수 검색
 	public int selectTotalPlaceCount() throws Exception;
 	

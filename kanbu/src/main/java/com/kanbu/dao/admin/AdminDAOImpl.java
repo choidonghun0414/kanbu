@@ -30,7 +30,13 @@ public class AdminDAOImpl implements AdminDAO{
 	public List<MemberDTO> selectTotalMember(MemberDTO member) throws Exception {
 		return mybatis.selectList("admin.selectTotalMember", member);
 	}
-
+	
+	// 여행지 등록하기
+	@Override
+	public void insertPlace(PlaceDTO place) throws Exception {
+		mybatis.insert("admin.insertPlace", place);
+	}
+	
 	// 등록된 장소 전체 갯수 검색
 	@Override
 	public int selectTotalPlaceCount() throws Exception {

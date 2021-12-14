@@ -23,6 +23,17 @@
  		</where>	  
  	</select>
  	
+ 	<!-- 여행지 등록하기 -->
+ 	<insert id="insertPlace" parameterType="placeDTO">
+ 		insert into place (index_num, name, addr, latitude, longitude, info, tel, holiday, parking, fee1, fee2,
+ 						   opening, closing, picture1, picture2, picture3, picture4, picture5)
+ 		values (place_seq.NEXTVAL, #{name}, #{addr, jdbcType=VARCHAR}, #{latitude, jdbcType=NUMERIC}, #{longitude, jdbcType=NUMERIC}, 
+ 				#{info, jdbcType=VARCHAR}, #{tel, jdbcType=VARCHAR}, #{holiday, jdbcType=VARCHAR}, #{parking, jdbcType=NUMERIC},
+ 				#{fee1, jdbcType=NUMERIC}, #{fee2, jdbcType=NUMERIC}, #{opening, jdbcType=NUMERIC}, #{closing, jdbcType=NUMERIC}, 
+ 				#{picture1, jdbcType=VARCHAR}, #{picture2, jdbcType=VARCHAR}, #{picture3, jdbcType=VARCHAR},
+ 				 #{picture4, jdbcType=VARCHAR}, #{picture5, jdbcType=VARCHAR})				   
+ 	</insert>
+ 	
  	<!-- 등록된 장소 전체 갯수 검색 -->
  	<select id="selectTotalPlaceCount" resultType="int">
  		select count(*) from place 
