@@ -12,6 +12,8 @@
 	   					   http://www.springframework.org/schema/context/spring-context-3.0.xsd
 	   					   http://www.springframework.org/schema/tx
 	   					   http://www.springframework.org/schema/tx/spring-tx.xsd">
+	   					   
+
 
 	<!-- 프로젝트 전체의 공통된 설정하는 root Controller를 만드는 것이 좋다. -->
 	<!-- Control 파일을 나누어졌다고 해서 작성되는 Control 파일마다 모든 내용을 복사해서 붙여야 하는 건 아니다.
@@ -68,16 +70,15 @@
 	<bean id="board" class="com.kanbu.dto.board.BoardDTO" />
 	<bean id="search" class="com.kanbu.dto.SearchDTO" />
 	
-	<bean id="mainImpl" class="com.kanbu.service.MainServiceImpl" />
-	<bean id="adminImpl" class="com.kanbu.service.admin.AdminServiceImpl" />
 	<bean id="memberImpl" class="com.kanbu.service.member.MemberServiceImpl" />
 	<bean id="myPlanService" class="com.kanbu.service.plan.MyPlanServiceImpl" />
 	<bean id="infoImpl" class="com.kanbu.service.info.InfoServiceImpl" />
 	<bean id="boardImpl" class="com.kanbu.service.board.BoardServiceImpl" />
-	
+	<bean id="mainImpl" class="com.kanbu.service.MainServiceImpl" />
+	<bean id="adminImpl" class="com.kanbu.service.admin.AdminServiceImpl" />
 	
 	<!-- 메일 보내기  -->
-		<bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+	   <bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
 	      <property name="host" value="smtp.gmail.com" />
 	      <property name="port" value="587" />
 	      <property name="defaultEncoding" value="utf-8"/>
@@ -101,5 +102,8 @@
 
 	<bean id="emailSender" class="com.kanbu.email.member.EmailSender">
 	</bean>
+
+		   
+	   					   
 
 </beans>

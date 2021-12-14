@@ -91,15 +91,17 @@
                                         <ul>
                                         	<c:if test="${sessionScope.status > 0}">
                                               <li><p>${sessionScope.nick}님 환영합니다.</p></li>
+                                              <c:if test="${sessionScope.status == 1}">
                                               <li><a href="/kanbu/mypage.com"> <i class="fa fa-user"></i> </a></li>
                                            </c:if>
-                                            <c:if test="${sessionScope.status > 0}">
+                                            <c:if test="${sessionScope.status == 100}">
                                               <li><a href="/kanbu/logout.com" onclick="logout();"> <i class="fa fa-unlock"></i> </a></li>
+                                           </c:if>
+                                           	<li><a href="/kanbu/logout.com"> <i class="fa fa-unlock"></i> </a></li>
                                            </c:if>
                                            <c:if test="${empty(sessionScope.status)}">
                                               <li><a href="/kanbu/login.com"> <i class="fa fa-lock"></i> </a></li>
-                                           </c:if>
-                                            
+                                           </c:if>    
                                         </ul>
                                     </div>
                                 </div>
@@ -132,7 +134,7 @@
                                 <h3>Jeju Island</h3>
                                 <p></p>
                                 <p class="regular">아름다운 제주도에서 추억을 만들어보세요</p>
-                                <a href="/kanbu/list.com" class="boxed-btn3">여행가기</a>
+                                 <a href="/kanbu/mapView.com" class="boxed-btn3">여행가기</a>
                             </div>
                         </div>
                     </div>
@@ -146,7 +148,7 @@
                                 <h3>Jeju Island</h3>
                                 <p></p>
                                 <p>은은한 저녁노을을 볼 수 있는 기회</p>
-                                <a href="/kanbu/list.com" class="boxed-btn3">여행가기</a>
+                                <a href="/kanbu/mapView.com" class="boxed-btn3">여행가기</a>
                             </div>
                         </div>
                     </div>
@@ -160,53 +162,16 @@
                                 <h3>Jeju Island</h3>
                                 <p></p>
                                 <p>푸른초원 위에서 힐링</p>
-                                <a href="/kanbu/list.com" class="boxed-btn3">여행가기</a>
+                                <a href="/kanbu/mapView.com" class="boxed-btn3">여행가기</a>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-
     </div>
     <!-- slider_area_end -->
-
-    <!-- where_togo_area_start  -->
-    <div class="where_togo_area">
-        <div class="container">
-            <div class="row align-items-center">
-                <div class="col-lg-3">
-                    <div class="form_area">
-                        <p style="font-weight: bold; font-size: x-large; color: white;">내가 가고싶은 여행지는?</p>
-                    </div>
-                </div>
-                <div class="col-lg-9">
-                    <div class="search_wrap">
-                        <form class="search_form" action="#">
-                            <div class="input_field">
-                                <input type="text" placeholder="Where to go?">
-                            </div>
-                            <div class="input_field">
-                                <input id="datepicker" placeholder="Date">
-                            </div>
-                            <div class="input_field">
-                                <select>
-                                    <option data-display="Travel type">Travel type</option>
-                                    <option value="1">Some option</option>
-                                    <option value="2">Another option</option>
-                                </select>
-                            </div>
-                            <div class="search_btn">
-                                <button class="boxed-btn4 " type="submit" >Search</button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- where_togo_area_end  -->
-    
+ 
     <!-- popular_destination_area_start  -->
     <div class="popular_destination_area">
         <div class="container">
@@ -222,117 +187,37 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-lg-4 col-md-6">
-                    <div class="single_destination">
-                        <div class="thumb">
-                            <img src="resources/img/destination/jeju_hub1.jpg" alt="">
-                        </div>
-                        <div class="content">
-                            <p class="d-flex align-items-center" style="font-weight: 800; font-size: large;">제주허브동산<a href="travel_destination.html">보러가기</a></p>
-                            
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6">
-                    <div class="single_destination">
-                        <div class="thumb">
-                            <img src="resources/img/destination/hwangwoozi_2.png" alt="">
-                        </div>
-                        <div class="content">
-                            <p class="d-flex align-items-center" style="font-weight: 800; font-size: large;">황우지해안 <a href="travel_destination.html">보러가기</a> </p>
-                            
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6">
-                    <div class="single_destination">
-                        <div class="thumb">
-                            <img src="resources/img/destination/camelliahill_4.png" alt="">
-                        </div>
-                        <div class="content">
-                            <p class="d-flex align-items-center" style="font-weight: 800; font-size: large;">카멜리아힐 <a href="travel_destination.html">보러가기</a> </p>
-                            
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6">
-                    <div class="single_destination">
-                        <div class="thumb">
-                            <img src="resources/img/destination/cheonjiyeonFalls_2.png" alt="">
-                        </div>
-                        <div class="content">
-                            <p class="d-flex align-items-center" style="font-weight: 800; font-size: large;">천지연폭포 <a href="travel_destination.html">보러가기</a> </p>
-                            
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6">
-                    <div class="single_destination">
-                        <div class="thumb">
-                            <img src="resources/img/destination/saehwaMarket_2.png" alt="">
-                        </div>
-                        <div class="content">
-                            <p class="d-flex align-items-center" style="font-weight: 800; font-size: large;">세화민속오일시장 <a href="travel_destination.html">보러가기</a> </p>
-                            
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6">
-                    <div class="single_destination">
-                        <div class="thumb">
-                            <img src="resources/img/destination/teddybearMuseum_3.png" alt="" style= "height: 100%; width: 100%;">
-                        </div>
-                        <div class="content">
-                            <p class="d-flex align-items-center" style="font-weight: 800; font-size: large;">테디베어뮤지엄 <a href="travel_destination.html">보러가기</a> </p>
-                            
-                        </div>
-                    </div>
-                </div>
+            	<c:if test="${placeCount == 0}">
+            		<p align="center">인기 여행지가 없습니다.</p>
+            	</c:if>
+            	<c:if test="${placeCount > 0}">
+            		<c:forEach var="popularPlace" items="${popularPlaceList}">
+		                <div class="col-lg-4 col-md-6">
+		                    <div class="single_destination">
+		                        <div class="thumb">
+		                            <img src="${popularPlace.picture1}" alt="" style="width: 350px; height: 265px;">
+		                        </div>
+		                        <div class="content">
+		                            <p class="d-flex align-items-center" style="font-weight: 800; font-size: large;">
+		                            	${popularPlace.name}
+		                            	<a href="/kanbu/info.com?placeNum=${popularPlace.index_num}">보러가기</a>
+		                            </p>
+		                        </div>
+		                    </div>
+	                	</div>
+                	</c:forEach>
+                </c:if>
             </div>
-            	<br>
-                <div style="float: right; width: 56%;">
-                      <a class="boxed-btn4" href="/kanbu/place.com">더보기</a>
-            	</div>
+            
+            <br>
+            
+            <div style="float: right; width: 56%;">
+            	<a class="boxed-btn4" href="/kanbu/place.com">더보기</a>
+            </div>
         </div>
     </div>
+    
     <!-- popular_destination_area_end  -->
-
-    <!-- newletter_area_start  -->
-<!--     <div class="newletter_area overlay">
-        <div class="container">
-            <div class="row justify-content-center align-items-center">
-                <div class="col-lg-10">
-                    <div class="row align-items-center">
-                        <div class="col-lg-5">
-                            <div class="newsletter_text">
-                                <h4>Subscribe Our Newsletter</h4>
-                                <p>Subscribe newsletter to get offers and about
-                                    new places to discover.</p>
-                            </div>
-                        </div>
-                        <div class="col-lg-7">
-                            <div class="mail_form">
-                                <div class="row no-gutters">
-                                    <div class="col-lg-9 col-md-8">
-                                        <div class="newsletter_field">
-                                            <input type="email" placeholder="Your mail" >
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-3 col-md-4">
-                                        <div class="newsletter_btn">
-                                            <button class="boxed-btn4 " type="submit" >Subscribe</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div> -->
-    <!-- newletter_area_end  -->
-
     <div class="popular_places_area">
         <div class="container">
             <div class="row justify-content-center">
@@ -347,162 +232,44 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-lg-4 col-md-6">
-                    <div class="single_place">
-                        <div class="thumb">
-                            <img src="resources/img/place/1.png" alt="">
-                            <a href="#" class="prise">Best</a>
-                        </div>
-                        <div class="place_info">
-                            <a href="destination_details.html"><h3>California</h3></a>
-                            <p>United State of America</p>
-                            <div class="rating_days d-flex justify-content-between">
-                                <span class="d-flex justify-content-center align-items-center">
-                                     <i class="fa fa-star"></i> 
-                                     <i class="fa fa-star"></i> 
-                                     <i class="fa fa-star"></i> 
-                                     <i class="fa fa-star"></i> 
-                                     <i class="fa fa-star"></i>
-                                     <a href="#">(20 Review)</a>
-                                </span>
-                                <div class="days">
-                                    <i class="fa fa-clock-o"></i>
-                                    <a href="#">5 Days</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6">
-                    <div class="single_place">
-                        <div class="thumb">
-                            <img src="resources/img/place/2.png" alt="">
-                            <a href="#" class="prise">Best</a>
-                        </div>
-                        <div class="place_info">
-                            <a href="destination_details.html"><h3>Korola Megna</h3></a>
-                            <p>United State of America</p>
-                            <div class="rating_days d-flex justify-content-between">
-                                <span class="d-flex justify-content-center align-items-center">
-                                     <i class="fa fa-star"></i> 
-                                     <i class="fa fa-star"></i> 
-                                     <i class="fa fa-star"></i> 
-                                     <i class="fa fa-star"></i> 
-                                     <i class="fa fa-star"></i>
-                                     <a href="#">(20 Review)</a>
-                                </span>
-                                <div class="days">
-                                    <i class="fa fa-clock-o"></i>
-                                    <a href="#">5 Days</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6">
-                    <div class="single_place">
-                        <div class="thumb">
-                            <img src="resources/img/place/3.png" alt="">
-                            <a href="#" class="prise">Best</a>
-                        </div>
-                        <div class="place_info">
-                            <a href="destination_details.html"><h3>London</h3></a>
-                            <p>United State of America</p>
-                            <div class="rating_days d-flex justify-content-between">
-                                <span class="d-flex justify-content-center align-items-center">
-                                     <i class="fa fa-star"></i> 
-                                     <i class="fa fa-star"></i> 
-                                     <i class="fa fa-star"></i> 
-                                     <i class="fa fa-star"></i> 
-                                     <i class="fa fa-star"></i>
-                                     <a href="#">(20 Review)</a>
-                                </span>
-                                <div class="days">
-                                    <i class="fa fa-clock-o"></i>
-                                    <a href="#">5 Days</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6">
-                    <div class="single_place">
-                        <div class="thumb">
-                            <img src="resources/img/place/4.png" alt="">
-                            <a href="#" class="prise">Hot</a>
-                        </div>
-                        <div class="place_info">
-                            <a href="destination_details.html"><h3>Miami Beach</h3></a>
-                            <p>United State of America</p>
-                            <div class="rating_days d-flex justify-content-between">
-                                <span class="d-flex justify-content-center align-items-center">
-                                     <i class="fa fa-star"></i> 
-                                     <i class="fa fa-star"></i> 
-                                     <i class="fa fa-star"></i> 
-                                     <i class="fa fa-star"></i> 
-                                     <i class="fa fa-star"></i>
-                                     <a href="#">(20 Review)</a>
-                                </span>
-                                <div class="days">
-                                    <i class="fa fa-clock-o"></i>
-                                    <a href="#">5 Days</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6">
-                    <div class="single_place">
-                        <div class="thumb">
-                            <img src="resources/img/place/5.png" alt="">
-                            <a href="#" class="prise">Hot</a>
-                        </div>
-                        <div class="place_info">
-                            <a href="destination_details.html"><h3>California</h3></a>
-                            <p>United State of America</p>
-                            <div class="rating_days d-flex justify-content-between">
-                                <span class="d-flex justify-content-center align-items-center">
-                                     <i class="fa fa-star"></i> 
-                                     <i class="fa fa-star"></i> 
-                                     <i class="fa fa-star"></i> 
-                                     <i class="fa fa-star"></i> 
-                                     <i class="fa fa-star"></i>
-                                     <a href="#">(20 Review)</a>
-                                </span>
-                                <div class="days">
-                                    <i class="fa fa-clock-o"></i>
-                                    <a href="#">5 Days</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6">
-                    <div class="single_place">
-                        <div class="thumb">
-                            <img src="resources/img/place/6.png" alt="">
-                            <a href="#" class="prise">Hot</a>
-                        </div>
-                        <div class="place_info">
-                            <a href="destination_details.html"><h3>Saintmartine Iceland</h3></a>
-                            <p>United State of America</p>
-                            <div class="rating_days d-flex justify-content-between">
-                                <span class="d-flex justify-content-center align-items-center">
-                                     <i class="fa fa-star"></i> 
-                                     <i class="fa fa-star"></i> 
-                                     <i class="fa fa-star"></i> 
-                                     <i class="fa fa-star"></i> 
-                                     <i class="fa fa-star"></i>
-                                     <a href="#">(20 Reply)</a>
-                                </span>
-                                <div class="days">
-                                    <i class="fa fa-clock-o"></i>
-                                    <a href="#">5 Days</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            	<c:if test="${reviewCount == 0}">
+            		<p align="center">인기 리뷰가 없습니다.</p>
+            	</c:if>
+            	<c:if test="${reviewCount > 0}">
+            		<c:forEach var="popularReview" items="${popularReviewList}">
+		                <div class="col-lg-4 col-md-6">
+		                    <div class="single_place">
+		                        <div class="thumb">
+		                            <img src="resources/img/place/1.png" alt="">
+		                            <a class="prise"><i class="fa fa-eye">&nbsp;${popularReview.views}</i></a>
+		                        </div>
+		                        <div class="place_info">
+		                            <a href="/kanbu/board/reviewDetail.com?reviewNum=${popularReview.index_num}">
+		                            	<h3>${popularReview.title}</h3>
+		                            </a>
+		                            <p>${popularReview.nick}</p>
+		                            <div class="rating_days d-flex justify-content-between">
+		                                <span class="d-flex justify-content-center align-items-center">
+		                                	<a>     
+		                                    	<c:if test="${reviewTagCount > 0}">
+	                            					<c:forEach var="popularReviewTag" items="${popularReviewTagList}">
+	                            						<c:if test="${popularReview.index_num == popularReviewTag.index_num}">
+	                            							#${popularReviewTag.name}&nbsp
+	                            						</c:if>
+	                            					</c:forEach>
+	                            			 	</c:if>
+		                                    </a>
+		                                </span>
+		                                <div class="days">
+		                                    <i class="fa fa-clock-o"></i>
+		                                    <a><fmt:formatDate value="${popularReview.reg_date}" type="date"/></a>
+		                                </div>
+		                            </div>
+		                        </div>
+		                    </div>
+		                </div>
+		        	</c:forEach>
+                </c:if>
             </div>
             <div class="row">
                 <div class="col-lg-12">
@@ -514,32 +281,13 @@
         </div>
     </div>
 
-
-<!--     <div class="video_area video_bg overlay">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="video_wrap text-center">
-                        <h3>Enjoy Video</h3>
-                        <div class="video_icon">
-                            <a class="popup-video video_play_button" href="https://www.youtube.com/watch?v=aJ4o0n7yFMA">
-                                <i class="fa fa-play"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div> -->
-
-
     <div class="travel_variation_area">
         <div class="container">
             <div class="row">
                 <div class="col-lg-4 col-md-6">
                     <div class="single_travel text-center">
                         <div class="icon">
-                            <img src="resources/img/svg_icon/map.png" alt="">
+                            <img src="/kanbu/resources/img/svg_icon/map.png" alt="">
                         </div>
                          <h3 style="font-weight: 600; font-size:large; color: black;">편리한 일정</h3>
                         <p>원하는 여행일정을 쉽고 간편하게 <br>기록할 수 있습니다.</p>
@@ -567,243 +315,19 @@
         </div>
     </div>
 
-
-    <!-- testimonial_area  -->
-<!--     <div class="testimonial_area">
-        <div class="container">
-            <div class="row">
-                <div class="col-xl-12">
-                    <div class="testmonial_active owl-carousel">
-                        <div class="single_carousel">
-                            <div class="row justify-content-center">
-                                <div class="col-lg-8">
-                                    <div class="single_testmonial text-center">
-                                        <div class="author_thumb">
-                                            <img src="resources/img/testmonial/author.png" alt="">
-                                        </div>
-                                        <p>""</p>
-                                        <div class="testmonial_author">
-                                            <h3>- Micky Mouse</h3>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="single_carousel">
-                            <div class="row justify-content-center">
-                                <div class="col-lg-8">
-                                    <div class="single_testmonial text-center">
-                                        <div class="author_thumb">
-                                            <img src="resources/img/testmonial/author.png" alt="">
-                                        </div>
-                                        <p>"Working in conjunction with humanitarian aid agencies, we have supported programmes to help alleviate human suffering.</p>
-                                        <div class="testmonial_author">
-                                            <h3>- Tom Mouse</h3>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="single_carousel">
-                            <div class="row justify-content-center">
-                                <div class="col-lg-8">
-                                    <div class="single_testmonial text-center">
-                                        <div class="author_thumb">
-                                            <img src="resources/img/testmonial/author.png" alt="">
-                                        </div>
-                                        <p>"Working in conjunction with humanitarian aid agencies, we have supported programmes to help alleviate human suffering.</p>
-                                        <div class="testmonial_author">
-                                            <h3>- Jerry Mouse</h3>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div> -->
-    <!-- /testimonial_area  -->
-
-
-    <div class="recent_trip_area">
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-lg-6">
-                    <div class="section_title text-center mb_70">
-                        <h3>Recent Trips</h3>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-4 col-md-6">
-                    <div class="single_trip">
-                        <div class="thumb">
-                            <img src="resources/img/trip/1.png" alt="">
-                        </div>
-                        <div class="info">
-                            <div class="date">
-                                <span>Oct 12, 2019</span>
-                            </div>
-                            <a href="#">
-                                <h3>Journeys Are Best Measured In
-                                    New Friends</h3>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6">
-                    <div class="single_trip">
-                        <div class="thumb">
-                            <img src="resources/img/trip/2.png" alt="">
-                        </div>
-                        <div class="info">
-                            <div class="date">
-                                <span>Oct 12, 2019</span>
-                            </div>
-                            <a href="#">
-                                <h3>Journeys Are Best Measured In
-                                    New Friends</h3>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6">
-                    <div class="single_trip">
-                        <div class="thumb">
-                            <img src="resources/img/trip/3.png" alt="">
-                        </div>
-                        <div class="info">
-                            <div class="date">
-                                <span>Oct 12, 2019</span>
-                            </div>
-                            <a href="#">
-                                <h3>Journeys Are Best Measured In
-                                    New Friends</h3>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-
-
-    <footer class="footer">
+    <footer class="footer" style="height: 391px;">
         <div class="footer_top">
-            <div class="container">
+            <div class="container" align="center">
                 <div class="row">
-                    <div class="col-xl-4 col-md-6 col-lg-4 ">
+                    <div class="col-lg-12">
                         <div class="footer_widget">
                             <div class="footer_logo">
-                                <a href="#">
-                                    <img src="resources/img/footer_logo.png" alt="">
-                                </a>
-                            </div>
-                            <p>it컴퓨터 학원 5층 FDX 자바 교육반<br> 양재역 10분도보 <br>
-                                <a href="#">+10 367 826 2567</a> <br>
-                                <a href="#">contact@kanbu.com</a>
-                            </p>
-                            <div class="socail_links">
-                                <ul>
-                                    <li>
-                                        <a href="#">
-                                            <i class="ti-facebook"></i>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            <i class="ti-twitter-alt"></i>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            <i class="fa fa-instagram"></i>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            <i class="fa fa-pinterest"></i>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            <i class="fa fa-youtube-play"></i>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-
-                        </div>
-                    </div>
-                    <div class="col-xl-2 col-md-6 col-lg-2">
-                        <div class="footer_widget">
-                            <h3 class="footer_title">
-                              
-                            </h3>
-                            <ul class="links">
-<!--                                 <li><a href="#">Pricing</a></li>
-                                <li><a href="#">About</a></li>
-                                <li><a href="#"> Gallery</a></li>
-                                <li><a href="#"> Contact</a></li> -->
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="col-xl-3 col-md-6 col-lg-3">
-                        <div class="footer_widget">
-                            <h3 class="footer_title">
-                               
-                            </h3>
-                            <ul class="links double_links">
-     <!--                            <li><a href="#">Indonesia</a></li>
-                                <li><a href="#">America</a></li>
-                                <li><a href="#">India</a></li>
-                                <li><a href="#">Switzerland</a></li>
-                                <li><a href="#">Italy</a></li>
-                                <li><a href="#">Canada</a></li>
-                                <li><a href="#">Franch</a></li>
-                                <li><a href="#">England</a></li> -->
-                            </ul>
-                        </div>
-                    </div> 
-                     <div class="col-xl-3 col-md-6 col-lg-3">
-                        <div class="footer_widget">
-                            <h3 class="footer_title">
-                                
-                            </h3>
-                            <div class="instagram_feed">
-                                <div class="single_insta">
-                                    <a href="#">
-                                        <img src="" alt="">
-                                    </a>
-                                </div>
-                                <div class="single_insta">
-                                    <a href="#">
-                                        <img src="" alt="">
-                                    </a>
-                                </div>
-                                <div class="single_insta">
-                                    <a href="#">
-                                        <img src="" alt="">
-                                    </a>
-                                </div>
-                                <div class="single_insta">
-                                    <a href="#">
-                                        <img src="" alt="">
-                                    </a>
-                                </div>
-                                <div class="single_insta">
-                                    <a href="#">
-                                        <img src="" alt="">
-                                    </a>
-                                </div>
-                                <div class="single_insta">
-                                    <a href="#">
-                                        <img src="" alt="">
-                                    </a>
-                                </div>
+								<img src="/kanbu/resources/img/footer_logo.png" alt="" style="float: left;">
+								<p>
+										it컴퓨터 학원 5층 FDX 자바 교육반 &nbsp;&nbsp;|&nbsp;&nbsp; 양재역 10분도보 
+                                		&nbsp;&nbsp;|&nbsp;&nbsp; +10 367 826 2567
+                                		&nbsp;&nbsp;|&nbsp;&nbsp; contact@kanbu.com
+                            	</p>
                             </div>
                         </div>
                     </div>
@@ -833,7 +357,7 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
       <div class="modal-content">
         <div class="serch_form">
             <input type="text" name="keyword" id="keyword" placeholder="검색할 장소를 입력해주세요..." >
-            <button type="submit" onclick="search();">search</button>
+            <button type="submit" onclick="return search();">search</button>
         </div>
       </div>
     </div>
@@ -845,37 +369,37 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 
     <script src=" https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"> </script> -->
     <!-- JS here -->
-    <script src="resources/js/vendor/modernizr-3.5.0.min.js"></script>
-    <script src="resources/js/vendor/jquery-1.12.4.min.js"></script>
-    <script src="resources/js/popper.min.js"></script>
-    <script src="resources/js/bootstrap.min.js"></script>
-    <script src="resources/js/owl.carousel.min.js"></script>
-    <script src="resources/js/isotope.pkgd.min.js"></script>
-    <script src="resources/js/ajax-form.js"></script>
-    <script src="resources/js/waypoints.min.js"></script>
-    <script src="resources/js/jquery.counterup.min.js"></script>
-    <script src="resources/js/imagesloaded.pkgd.min.js"></script>
-    <script src="resources/js/scrollIt.js"></script>
-    <script src="resources/js/jquery.scrollUp.min.js"></script>
-    <script src="resources/js/wow.min.js"></script>
-    <script src="resources/js/nice-select.min.js"></script>
-    <script src="resources/js/jquery.slicknav.min.js"></script>
-    <script src="resources/js/jquery.magnific-popup.min.js"></script>
-    <script src="resources/js/plugins.js"></script>
-    <script src="resources/js/gijgo.min.js"></script>
-    <script src="resources/js/slick.min.js"></script>
+    <script src="/kanbu/resources/js/vendor/modernizr-3.5.0.min.js"></script>
+    <script src="/kanbu/resources/js/vendor/jquery-1.12.4.min.js"></script>
+    <script src="/kanbu/resources/js/popper.min.js"></script>
+    <script src="/kanbu/resources/js/bootstrap.min.js"></script>
+    <script src="/kanbu/resources/js/owl.carousel.min.js"></script>
+    <script src="/kanbu/resources/js/isotope.pkgd.min.js"></script>
+    <script src="/kanbu/resources/js/ajax-form.js"></script>
+    <script src="/kanbu/resources/js/waypoints.min.js"></script>
+    <script src="/kanbu/resources/js/jquery.counterup.min.js"></script>
+    <script src="/kanbu/resources/js/imagesloaded.pkgd.min.js"></script>
+    <script src="/kanbu/resources/js/scrollIt.js"></script>
+    <script src="/kanbu/resources/js/jquery.scrollUp.min.js"></script>
+    <script src="/kanbu/resources/js/wow.min.js"></script>
+    <script src="/kanbu/resources/js/nice-select.min.js"></script>
+    <script src="/kanbu/resources/js/jquery.slicknav.min.js"></script>
+    <script src="/kanbu/resources/js/jquery.magnific-popup.min.js"></script>
+    <script src="/kanbu/resources/js/plugins.js"></script>
+    <script src="/kanbu/resources/js/gijgo.min.js"></script>
+    <script src="/kanbu/resources/js/slick.min.js"></script>
    
 
     
     <!--contact js-->
-    <script src="resources/js/contact.js"></script>
-    <script src="resources/js/jquery.ajaxchimp.min.js"></script>
-    <script src="resources/js/jquery.form.js"></script>
-    <script src="resources/js/jquery.validate.min.js"></script>
-    <script src="resources/js/mail-script.js"></script>
+    <script src="/kanbu/resources/js/contact.js"></script>
+    <script src="/kanbu/resources/js/jquery.ajaxchimp.min.js"></script>
+    <script src="/kanbu/resources/js/jquery.form.js"></script>
+    <script src="/kanbu/resources/js/jquery.validate.min.js"></script>
+    <script src="/kanbu/resources/js/mail-script.js"></script>
 
 
-    <script src="resources/js/main.js"></script>
+    <script src="/kanbu/resources/js/main.js"></script>
     <script>
         $('#datepicker').datepicker({
             iconsLibrary: 'fontawesome',
@@ -894,7 +418,13 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
     <script type="text/javascript">
     	function search(){
     		var place = document.getElementById('keyword').value
-    		window.location = '/kanbu/search.com?keyword='+place;
+    		
+    		if(place == null || place == ""){
+    			alert("검색할 장소를 입력해주세요.");
+    			return false;
+    		}else{
+    			window.location = '/kanbu/search.com?keyword='+place;
+    		}
     	}
     </script>
     
