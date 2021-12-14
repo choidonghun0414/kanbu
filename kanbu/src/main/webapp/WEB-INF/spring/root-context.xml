@@ -102,7 +102,7 @@
 
 	<bean id="emailSender" class="com.kanbu.email.member.EmailSender">
 	</bean>
-		   
+
 	   					   
 
 </beans>

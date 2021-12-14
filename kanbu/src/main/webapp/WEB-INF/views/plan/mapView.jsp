@@ -13,6 +13,8 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.js"></script>
 	<script src='//code.jquery.com/jquery.min.js'></script>
+	<script src="/kanbu/jquery.cookie.js" type="text/javascript"></script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
 	
 	<!-- CSS here -->
    <link rel="stylesheet" href="/kanbu/resources/css/bootstrap.min.css">
@@ -224,41 +226,28 @@
  				document.mapView.expense.focus();
  				return false;
  			}
- 			
- 			var objParams = {
- 					"favList" : placeArr	// 찜한 장소 배열 저장
- 			};
- 			
- 			// ajax 호출
- 			$.ajax({
- 				url			:	"/insert.com",
- 				dataType	:	"json",
- 				contentType :	"application/x-www-form-urlencoded; charset=UTF-8",
- 				type		:	"post",
- 				data		:	objParams,
- 				success		:   function(retVal){
- 					
- 					if(retVal.code == "OK"){
- 						alert(retVal.message);
- 					}else{
- 						alert(retVal.message);
- 					}
- 				},
- 				error		:	function(request, status, error){
- 					console.log("AJAX_ERROR");
- 				}	
- 			});
- 			
- 			console.log(placeArr);
+
  			document.mapView.submit();
+ 			
+ 			/* 쿠키저장 */
+ 			console.log("##쿠키에 저장됩니다.##");
+			var userId = $("#userId").val();
+			console.log("사용자ID::"+userId);
+			var title = $("#title").val();
+			console.log("일정제목::"+title);
+			
+			var favorTitleList = "";
+			$("#fav_list div").each(function(index, element){
+				var favorTitle = $(element).find("p").text();
+				favorTitleList += favorTitle;
+				favorTitleList += "|";
+			});
+			console.log("찜목록들::"+favorTitleList);
+			//쿠키에 저장
+			$.cookie(userId+'_'+title, favorTitleList, {expires:30});
  		});
 	});
 
-		
-	</script>
-	
-	
-	<script type="text/javascript">
 		
 	</script>
 	
@@ -286,6 +275,7 @@
 					<font face="나눔고딕" size="4"><b>${sessionScope.nick}님의 여행일정</b></font>
 				</span>
 				<input name="title" id="title" size="80" placeholder="여행 제목을 입력하세요" style="font-size:15px;">
+				<input type="hidden" id="userId" value="${sessionScope.id}">
 			</div>
 			
 			<div class="div1">
