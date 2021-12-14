@@ -31,8 +31,21 @@
  				#{info, jdbcType=VARCHAR}, #{tel, jdbcType=VARCHAR}, #{holiday, jdbcType=VARCHAR}, #{parking, jdbcType=NUMERIC},
  				#{fee1, jdbcType=NUMERIC}, #{fee2, jdbcType=NUMERIC}, #{opening, jdbcType=NUMERIC}, #{closing, jdbcType=NUMERIC}, 
  				#{picture1, jdbcType=VARCHAR}, #{picture2, jdbcType=VARCHAR}, #{picture3, jdbcType=VARCHAR},
- 				 #{picture4, jdbcType=VARCHAR}, #{picture5, jdbcType=VARCHAR})				   
+ 				#{picture4, jdbcType=VARCHAR}, #{picture5, jdbcType=VARCHAR})				   
  	</insert>
+ 	
+ 	<!-- 여행지 수정하기 -->
+ 	<update id="updatePlace" parameterType="placeDTO">
+ 		update place 
+ 		set name=#{name}, addr=#{addr, jdbcType=VARCHAR}, latitude=#{latitude, jdbcType=NUMERIC}, longitude=#{longitude, jdbcType=NUMERIC},
+ 			info=#{info, jdbcType=VARCHAR}, tel=#{tel, jdbcType=VARCHAR}, holiday=#{holiday, jdbcType=VARCHAR}, parking=#{parking, jdbcType=NUMERIC},
+			fee1=#{fee1, jdbcType=NUMERIC}, fee2=#{fee2, jdbcType=NUMERIC}, opening=#{opening, jdbcType=NUMERIC}, closing=#{closing, jdbcType=NUMERIC},
+			picture1=#{picture1, jdbcType=VARCHAR}, picture2=#{picture2, jdbcType=VARCHAR}, picture3=#{picture3, jdbcType=VARCHAR},
+			picture4=#{picture4, jdbcType=VARCHAR}, picture5=#{picture5, jdbcType=VARCHAR}
+		<where>
+			<if test="index_num > 0">index_num = #{index_num}</if>
+		</where>
+ 	</update>
  	
  	<!-- 등록된 장소 전체 갯수 검색 -->
  	<select id="selectTotalPlaceCount" resultType="int">
@@ -124,6 +137,15 @@
  			<if test="endRow > 0 and endRow > startRow"><![CDATA[and r <= #{endRow}]]></if>
  		</where>	  
  	</select>
+ 	
+ 	<!-- 등록된 여행지 댓글 삭제(관리자) -->
+ 	<update id="placeReplyDeleteAdmin" parameterType="int">
+ 		update place_reply
+ 		set content = '관리자에 의해 삭제된 댓글입니다.'
+ 		<where>
+ 			<if test="index_num > 0">index_num = #{value}</if>
+ 		</where>
+ 	</update>
  	
  	<!-- 등록된 여행지 댓글 입력 검색결과 갯수 -->
  	<select id="selectKeywordPlaceReplyCount" parameterType="searchDTO" resultType="int">

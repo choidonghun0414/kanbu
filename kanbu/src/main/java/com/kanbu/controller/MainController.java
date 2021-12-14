@@ -38,6 +38,9 @@ public class MainController {
 	@Autowired
 	private PlaceDTO place;
 	
+	// 업로드 저장 경로
+	private String uploadPath = "/kanbu/resources/img/place/"; 
+	
 	@RequestMapping("main.com")
 	public String main(Model model) throws Exception{
 		int rownum = 6;													// 추출 갯수
@@ -72,6 +75,7 @@ public class MainController {
 		model.addAttribute("popularPlaceList", popularPlaceList);
 		model.addAttribute("popularReviewList", popularReviewList);
 		model.addAttribute("popularReviewTagList", popularReviewTagList);
+		model.addAttribute("uploadPath", uploadPath);
 		
 		return "/main/main";
 	}
@@ -118,6 +122,7 @@ public class MainController {
 		
 		model.addAttribute("recentPlaceCount", recentPlaceCount);
 		model.addAttribute("recentPlaceList", recentPlaceList);
+		model.addAttribute("uploadPath", uploadPath);
 		
 		return "/main/searchList";
 	}

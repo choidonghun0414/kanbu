@@ -88,22 +88,7 @@
                             <div class="col-xl-4 col-lg-4 d-none d-lg-block">
                                 <div class="social_wrap d-flex align-items-center justify-content-end">
                                     <div class="social_links d-none d-xl-block">
-                                        <ul>
-<<<<<<< HEAD
-                                        	<c:if test="${sessionScope.status > 0}">
-                                              <li><p>${sessionScope.nick}님 환영합니다.</p></li>
-                                              <c:if test="${sessionScope.status == 1}">
-                                              <li><a href="/kanbu/mypage.com"> <i class="fa fa-user"></i> </a></li>
-                                           </c:if>
-                                            <c:if test="${sessionScope.status == 100}">
-                                              <li><a href="/kanbu/logout.com" onclick="logout();"> <i class="fa fa-unlock"></i> </a></li>
-                                           </c:if>
-                                           	<li><a href="/kanbu/logout.com"> <i class="fa fa-unlock"></i> </a></li>
-                                           </c:if>
-                                           <c:if test="${empty(sessionScope.status)}">
-                                              <li><a href="/kanbu/login.com"> <i class="fa fa-lock"></i> </a></li>
-                                           </c:if>    
-=======
+                                        <ul>   
                                         	<c:if test="${sessionScope.status > 0}">
                                         		<li><p>${sessionScope.nick}님 환영합니다.</p></li>
                                         		<c:if test="${sessionScope.status == 1}">
@@ -117,7 +102,6 @@
                                         	<c:if test="${empty(sessionScope.status)}">
                                         		<li><a href="/kanbu/login.com"> <i class="fa fa-lock"></i> </a></li>
                                         	</c:if>    
->>>>>>> branch 'main' of https://github.com/choidonghun0414/kanbu.git
                                         </ul>
                                     </div>
                                 </div>
@@ -150,11 +134,7 @@
                                 <h3>Jeju Island</h3>
                                 <p></p>
                                 <p class="regular">아름다운 제주도에서 추억을 만들어보세요</p>
-<<<<<<< HEAD
                                  <a href="/kanbu/mapView.com" class="boxed-btn3">여행가기</a>
-=======
-                                <a href="/kanbu/mapView.com" class="boxed-btn3">여행가기</a>
->>>>>>> branch 'main' of https://github.com/choidonghun0414/kanbu.git
                             </div>
                         </div>
                     </div>
@@ -215,7 +195,7 @@
 		                <div class="col-lg-4 col-md-6">
 		                    <div class="single_destination">
 		                        <div class="thumb">
-		                            <img src="${popularPlace.picture1}" alt="" style="width: 350px; height: 265px;">
+		                            <img src="${uploadPath+=popularPlace.picture1}" alt="" style="width: 350px; height: 265px;">
 		                        </div>
 		                        <div class="content">
 		                            <p class="d-flex align-items-center" style="font-weight: 800; font-size: large;">

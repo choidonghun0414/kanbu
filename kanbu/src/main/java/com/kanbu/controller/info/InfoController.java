@@ -28,6 +28,9 @@ public class InfoController {
 	@Autowired
 	private Place_ReplyDTO place_reply;
 	
+	// 업로드 저장 경로
+	private String uploadPath = "/kanbu/resources/img/place/";
+	
 	// 장소목록 페이지
 	@RequestMapping("place.com")
 	public String place(HttpServletRequest request, Model model) throws Exception{
@@ -58,6 +61,7 @@ public class InfoController {
 
 		model.addAttribute("placeCount", placeCount);
 		model.addAttribute("placeList", placeList);
+		model.addAttribute("uploadPath", uploadPath);
 		
 		return "/info/placeList";
 	}
@@ -109,6 +113,7 @@ public class InfoController {
 		model.addAttribute("placeInfo", placeInfo);
 		model.addAttribute("reply_count", reply_count);
 		model.addAttribute("place_replyList", place_replyList);
+		model.addAttribute("uploadPath", uploadPath);
 		
 		return "/info/info";
 	}
@@ -143,8 +148,5 @@ public class InfoController {
 		return "redirect:/info.com?placeNum="+placeNum;
 	}
 	
-	
-
-
 
 }

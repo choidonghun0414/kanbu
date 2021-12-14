@@ -122,11 +122,6 @@
                         <h1 style="font-weight: bold;" align="center">${placeInfo.name}</h1>
                         <p align="center">${placeInfo.addr}</p>
    							<ul class="blog-info-link">
-        						<li>
-        							<a class="good">
-        								<i class="fa fa-heart" style="cursor:pointer;" id="good"></i>${placeInfo.good}
-        							</a>		
-        						</li>
             					<li>
             						<a class="views">
             							<i class="fa fa-eye" style="cursor:pointer;" id="views"></i>${placeInfo.views}
@@ -139,19 +134,24 @@
    						<!-- slider_area_start -->
     					<div class="w3-content w3-display-container">
     						<c:if test="${!empty(placeInfo.picture1)}">
-    							<img class="mySlides" src="${placeInfo.picture1}" width="100%"/>
+    							<img class="mySlides" src="${uploadPath+=placeInfo.picture1}" 
+    								 width="100%" height="300px" />
     						</c:if>
     						<c:if test="${!empty(placeInfo.picture2)}">
-    							<img class="mySlides" src="${placeInfo.picture2}" width="100%"/>
+    							<img class="mySlides" src="${uploadPath+=placeInfo.picture2}" 
+    								 width="100%" height="300px" />
     						</c:if>
     						<c:if test="${!empty(placeInfo.picture3)}">
-    							<img class="mySlides" src="${placeInfo.picture3}" width="100%"/>
+    							<img class="mySlides" src="${uploadPath+=placeInfo.picture3}" 
+    								 width="100%" height="300px" />
     						</c:if>
     						<c:if test="${!empty(placeInfo.picture4)}">
-    							<img class="mySlides" src="${placeInfo.picture4}" width="100%"/>
+    							<img class="mySlides" src="${uploadPath+=placeInfo.picture4}" 
+    								 width="100%" height="300px" />
 							</c:if>
     						<c:if test="${!empty(placeInfo.picture5)}">
-    							<img class="mySlides" src="${placeInfo.picture5}" width="100%"/>
+    							<img class="mySlides" src="${uploadPath+=placeInfo.picture5}" 
+    								 width="100%" height="300px" />
     						</c:if>
     						
     						<button class="w3-button w3-black w3-display-left" onclick="plusDivs(-1)">&#10094;</button>
@@ -178,12 +178,12 @@
 								<li>입장료
 									<ul>
 										<li>어른 요금	:	
-											<c:if test="${placeInfo.fee1 > 0}">
+											<c:if test="${placeInfo.fee1 >= 0}">
 												<fmt:formatNumber value="${placeInfo.fee1}" type="currency"/>
 											</c:if>
 										</li>
 										<li>아이 요금	:
-											<c:if test="${placeInfo.fee2 > 0}">
+											<c:if test="${placeInfo.fee2 >= 0}">
 												<fmt:formatNumber value="${placeInfo.fee2}" type="currency"/>
 											</c:if>
 										</li>
@@ -203,18 +203,18 @@
 									</c:if>
 								</li>
 								<li>오픈시간	:
-									<c:if test="${placeInfo.opening > 0 && placeInfo.opening < 10}">
+									<c:if test="${placeInfo.opening >= 0 && placeInfo.opening < 10}">
 										0${placeInfo.opening}:00
 									</c:if>
-									<c:if test="${placeInfo.opening > 10}">
+									<c:if test="${placeInfo.opening >= 10}">
 										${placeInfo.opening}:00
 									</c:if>
 								</li>
 								<li>마감시간	:	
-									<c:if test="${placeInfo.closing > 0 && placeInfo.closing < 10}">
+									<c:if test="${placeInfo.closing >= 0 && placeInfo.closing < 10}">
 										0${placeInfo.closing}:00
 									</c:if>
-									<c:if test="${placeInfo.closing > 10}">
+									<c:if test="${placeInfo.closing >= 10}">
 										${placeInfo.closing}:00
 									</c:if>
 								</li>
@@ -245,7 +245,7 @@
                      				<div class="single-comment justify-content-between d-flex">
                         				<div class="user justify-content-between d-flex">
                            					<div class="thumb">
-                              					<img src="resources/img/comment/profile.png" alt="">
+                              					<img src="/kanbu/resources/img/comment/profile.png" alt="">
                            					</div>
                            					<div class="desc">
                               					<p class="comment" style="font-weight: bolder;">
@@ -257,14 +257,16 @@
                                        						<fmt:formatDate value="${place_reply.reg_date}" pattern="yyyy-MM-dd"/> 
                                        					</p>
                                  					</div>
-                                 					<c:if test="${sessionScope.nick eq place_reply.nick || sessionScope.status == 100}">
-                                 						<div class="reply-btn" align="right">
-                                    						<a href="/kanbu/info/replyDelete.com?placeNum=${place_reply.place}&replyNum=${place_reply.index_num}" 
-                                    					   	   class="btn-reply" style="font-weight: bold;"
-                                    					   	   onclick="return replyDelete();">
-                                    					   	   <i class="ti-trash"></i>
-                                    					   	</a>
-                                 						</div>
+                                 					<c:if test="${sessionScope.nick eq place_reply.nick}">
+                                 						<c:if test="${!(place_reply.content eq '관리자에 의해 삭제된 댓글입니다.')}">
+	                                 						<div class="reply-btn" align="right">
+	                                    						<a href="/kanbu/info/replyDelete.com?placeNum=${place_reply.place}&replyNum=${place_reply.index_num}" 
+	                                    					   	   class="btn-reply" style="font-weight: bold;"
+	                                    					   	   onclick="return replyDelete();">
+	                                    					   	   <i class="ti-trash"></i>
+	                                    					   	</a>
+	                                 						</div>
+	                                 					</c:if>
                                  					</c:if>
                               					</div>
                            					</div>
@@ -550,36 +552,6 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 		}
 	</script>
 		
-	<!-- 좋아요 기능 -->
-	<script type="text/javascript">
-   		$(function(){
-   			var good = 1;		// 좋아요 상태(선택 : 1, 미선택 : 0)
-   			var checkCount = false;
-   								
-   			$('.genric-btn primary-border small').click(function(){
-   				// 회원 상태 확인
-   									
-   				// 회원일 때
-   				var placeNum = "<c:out value='${placeInfo.index_num}' />";		// 장소 번호
-   									
-   				if(false){
-   					good = 0;
-   				}
-   									
-   				if(good == 1){
-   					// 좋아요 선택완료(색 변경)
-   					$('.genric-btn primary-border small').css({'background-color' : '#FF0000'});
-   					good = 0;
-   					location.replace('/kanbu/info.com?placeNum='+placeNum+'&checkCount=1');
-   				}else{
-   					// 좋아요 선택취소
-   					$('.genric-btn primary-border small').css({'background-color' : '#000000'});
-   					good = 1;
-   					location.replace('/kanbu/info.com?placeNum='+placeNum+'&checkCount=0');
-   				}					
-   			})
-   		});
-   	</script>
 
 </body>
 

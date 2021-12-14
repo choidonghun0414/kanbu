@@ -348,7 +348,6 @@
 							<option value="select" selected>선택</option>
                   	   		<option value="p.title">제목</option>
                   	   		<option value="rm.nick">작성자</option>
-                  	   		<option value="t.tag">태그</option>
                   	   	</select>
                   	   	<input type="text" name="keyword" id="keyword" class="form-control-sm"/>
                   	   	<button class="btn btn-sm btn-secondary" type="button" onclick="search();">검색</button>

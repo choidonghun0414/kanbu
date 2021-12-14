@@ -36,6 +36,12 @@ public class AdminServiceImpl implements AdminService{
 	public void insertPlace(PlaceDTO place) throws Exception {
 		adminDAO.insertPlace(place);
 	}
+	
+	// 여행지 수정하기
+	@Override
+	public void updatePlace(PlaceDTO place) throws Exception {
+		adminDAO.updatePlace(place);
+	}
 
 	// 등록된 장소 전체 갯수 검색
 	@Override
@@ -83,6 +89,12 @@ public class AdminServiceImpl implements AdminService{
 	@Override
 	public List<Place_ReplyDTO> selectTotalPlaceReply(Place_ReplyDTO place_reply) throws Exception {
 		return adminDAO.selectTotalPlaceReply(place_reply);
+	}
+	
+	// 등록된 여행지 댓글 삭제(관리자)
+	@Override
+	public void placeReplyDeleteAdmin(int index_num) throws Exception {
+		adminDAO.placeReplyDeleteAdmin(index_num);
 	}
 
 	// 등록된 여행지 댓글 입력 검색결과 갯수

@@ -372,8 +372,6 @@ public class MemberController {
 		model.addAttribute("myReviewList", myReviewList);
 		model.addAttribute("myReviewTagList", myReviewTagList);
 		
-		
-		
 		return "/member/myReviewList";
 	}
 	
@@ -420,9 +418,6 @@ public class MemberController {
 			}
 		}
 		
-		
-
-		
 		request.setAttribute("currentPage", currentPage);
 		request.setAttribute("startRow", search.getStartRow());
 		request.setAttribute("endRow", search.getEndRow());
@@ -435,7 +430,6 @@ public class MemberController {
 		model.addAttribute("myReviewTagCount", myReviewTagCount);
 		model.addAttribute("myReviewList", myReviewList);
 		model.addAttribute("myReviewTagList", myReviewTagList);
-		
 		
 		return "/member/myReviewList";
 	}
@@ -466,7 +460,6 @@ public class MemberController {
 			myPlaceReplyList = memberImpl.myPlaceReply(place_reply);
 		}
 		
-		
 		request.setAttribute("currentPage", currentPage);
 		request.setAttribute("startRow", place_reply.getStartRow());
 		request.setAttribute("endRow", place_reply.getEndRow());
@@ -475,8 +468,7 @@ public class MemberController {
 		
 		model.addAttribute("myPlaceReplyCount", myPlaceReplyCount);
 		model.addAttribute("myPlaceReplyList", myPlaceReplyList);
-		
-		
+			
 		return "/member/myPlaceReplyList";
 	}
 	

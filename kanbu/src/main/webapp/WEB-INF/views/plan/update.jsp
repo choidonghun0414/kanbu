@@ -19,98 +19,96 @@
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
 
 	<!-- <link rel="manifest" href="site.webmanifest"> -->
-    <link rel="shortcut icon" type="image/x-icon" href="resources/img/favicon.png">
+    <link rel="shortcut icon" type="image/x-icon" href="/kanbu/resources/img/favicon.png">
     <!-- Place favicon.ico in the root directory -->
 
     <!-- CSS here -->
-    <link rel="stylesheet" href="resources/css/bootstrap.min.css">
-    <link rel="stylesheet" href="resources/css/owl.carousel.min.css">
-    <link rel="stylesheet" href="resources/css/magnific-popup.css">
-    <link rel="stylesheet" href="resources/css/font-awesome.min.css">
-    <link rel="stylesheet" href="resources/css/themify-icons.css">
-    <link rel="stylesheet" href="resources/css/nice-select.css">
-    <link rel="stylesheet" href="resources/css/flaticon.css">
-    <link rel="stylesheet" href="resources/css/gijgo.css">
-    <link rel="stylesheet" href="resources/css/animate.css">
-    <link rel="stylesheet" href="resources/css/slick.css">
-    <link rel="stylesheet" href="resources/css/slicknav.css">
+    <link rel="stylesheet" href="/kanbu/resources/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/kanbu/resources/css/owl.carousel.min.css">
+    <link rel="stylesheet" href="/kanbu/resources/css/magnific-popup.css">
+    <link rel="stylesheet" href="/kanbu/resources/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/kanbu/resources/css/themify-icons.css">
+    <link rel="stylesheet" href="/kanbu/resources/css/nice-select.css">
+    <link rel="stylesheet" href="/kanbu/resources/css/flaticon.css">
+    <link rel="stylesheet" href="/kanbu/resources/css/gijgo.css">
+    <link rel="stylesheet" href="/kanbu/resources/css/animate.css">
+    <link rel="stylesheet" href="/kanbu/resources/css/slick.css">
+    <link rel="stylesheet" href="/kanbu/resources/css/slicknav.css">
     <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/themes/smoothness/jquery-ui.css">
 
-    <link rel="stylesheet" href="resources/css/style.css">
+    <link rel="stylesheet" href="/kanbu/resources/css/style.css">
     <!-- <link rel="stylesheet" href="css/responsive.css"> -->
     
     <style>
-    
-	.div1{
-		  width:22%;
-		  height:850px;
-		  padding-top: 20px;
-		  margin-right: 5px;
-		  margin-left: 5px;
-		  border: 1px solid gray;
-		  transition-property: background-color;
-		  transition-duration: 1s;
-		  transition-timing-function: ease-out;
-		  transition-delay: 50ms;
-		  word-break:break-all;
-		  float: left;
-	  }
-	  
-	  .div2{
-		  float: left;
-		  width: 55%;
-		  height:850px;
-		  margin-right: 5px;
-		  border: 1px solid gray;
-		  text-align: center;
-	  }
-	  
-	  .div3{
-		  float: left;
-		  width: 20.5%;
-		  height: 850px;
-		  border: 1px solid gray;
-	  }
-	  
-	  .div_top{
-	  	margin-top: 10px;
-	  	margin-bottom: 10px;
-	  	height: 40px;
-	  }
-	  
-	  .font {
-	  	size: 2em;
-	  	color: #D3D3D3;
-	  }
-	  
-	  .pList {
-	  	font:normal normal 12px/1.6  "나눔고딕";
-	  	color: gray;
-	  	margin: 5px 0px 3px 0px;
-	  	}
-	  	
-	  	.p1 {
-	  	font:normal normal 18px/1.6  "나눔고딕";
-	  	color: #111111;
-	  	margin: 5px 0px 3px 0px;
-	  	}
-	  	
-	  	.mini {
-	  	font:normal normal 14px/1.6  "나눔고딕";
-	  	color: gray;
-	  	margin: 5px 0px 3px 0px;
-	  	}
-	  	
-	  	.search {
-	  		background-color: #ff4951;
-	  		border: 0;
-	  		outline: 0;
-	  		color: #fff;
-	  		border-radius: 0.35em;
-	  		wegiht: 9px;
-	  		height: 30px;
-	  	}
-	  	
+		.div1{
+			  width:22%;
+			  height:850px;
+			  padding-top: 20px;
+			  margin-right: 5px;
+			  margin-left: 5px;
+			  border: 1px solid gray;
+			  transition-property: background-color;
+			  transition-duration: 1s;
+			  transition-timing-function: ease-out;
+			  transition-delay: 50ms;
+			  word-break:break-all;
+			  float: left;
+		  }
+		  
+		  .div2{
+			  float: left;
+			  width: 55%;
+			  height:850px;
+			  margin-right: 5px;
+			  border: 1px solid gray;
+			  text-align: center;
+		  }
+		  
+		  .div3{
+			  float: left;
+			  width: 20.5%;
+			  height: 850px;
+			  border: 1px solid gray;
+		  }
+		  
+		  .div_top{
+		  	margin-top: 10px;
+		  	margin-bottom: 10px;
+		  	height: 40px;
+		  }
+		  
+		  .font {
+		  	size: 2em;
+		  	color: #D3D3D3;
+		  }
+		  
+		  .pList {
+		  	font:normal normal 12px/1.6  "나눔고딕";
+		  	color: gray;
+		  	margin: 5px 0px 3px 0px;
+		  	}
+		  	
+		  	.p1 {
+		  	font:normal normal 18px/1.6  "나눔고딕";
+		  	color: #111111;
+		  	margin: 5px 0px 3px 0px;
+		  	}
+		  	
+		  	.mini {
+		  	font:normal normal 14px/1.6  "나눔고딕";
+		  	color: gray;
+		  	margin: 5px 0px 3px 0px;
+		  	}
+		  	
+		  	.search {
+		  		background-color: #ff4951;
+		  		border: 0;
+		  		outline: 0;
+		  		color: #fff;
+		  		border-radius: 0.35em;
+		  		wegiht: 9px;
+		  		height: 30px;
+		  	}	
 	</style>
 	
 	<!-- 지도 api -->

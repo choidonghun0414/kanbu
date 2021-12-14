@@ -138,7 +138,8 @@
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-lg-8 col-md-9">
-                	<form name="placeInfoUpdate" id="placeInfoUpdate" action="/kanbu/admin/placeInfo/editPro.com" method="post">
+                	<form name="placeInfoUpdate" id="placeInfoUpdate" method="post" enctype="multipart/form-data"
+                		  action="/kanbu/admin/placeInfo/editPro.com">
 	                    <div class="destination_info">
 	                    	<h1 style="font-weight: bold;" align="center">
 	                    		여행지 정보 수정
@@ -156,47 +157,49 @@
 	                        </h4>
 	                        <p>&nbsp</p>
 	   							<ul class="blog-info-link">
-	        						<li>
-	        							<a class="good">
-	        								<i class="fa fa-heart" style="cursor:pointer;" id="good"></i>${placeInfo.good}
-	        							</a>		
-	        						</li>
 	            					<li>
 	            						<a class="views">
 	            							<i class="fa fa-eye" style="cursor:pointer;" id="views"></i>${placeInfo.views}
 	            						</a>
 	            					</li>
-	            					<li style="cursor:pointer;">
-	            						<a class="picture">
-	            							<i class="fa fa-camera" id="picture"></i>사진 수정하기
-	            						</a>
-	            					</li>
 	        					</ul>
+	   						
 	   						<hr/>
 	   						
 	   						<!-- 사진 슬라이드 쇼 -->
 	   						<!-- slider_area_start -->
 	    					<div class="w3-content w3-display-container">
 	    						<c:if test="${!empty(placeInfo.picture1)}">
-	    							<img class="mySlides" src="${placeInfo.picture1}" width="100%"/>
+	    							<img class="mySlides" src="${uploadPath+=placeInfo.picture1}" width="100%"/>
 	    						</c:if>
 	    						<c:if test="${!empty(placeInfo.picture2)}">
-	    							<img class="mySlides" src="${placeInfo.picture2}" width="100%"/>
+	    							<img class="mySlides" src="${uploadPath+=placeInfo.picture2}" width="100%"/>
 	    						</c:if>
 	    						<c:if test="${!empty(placeInfo.picture3)}">
-	    							<img class="mySlides" src="${placeInfo.picture3}" width="100%"/>
+	    							<img class="mySlides" src="${uploadPath+=placeInfo.picture3}" width="100%"/>
 	    						</c:if>
 	    						<c:if test="${!empty(placeInfo.picture4)}">
-	    							<img class="mySlides" src="${placeInfo.picture4}" width="100%"/>
+	    							<img class="mySlides" src="${uploadPath+=placeInfo.picture4}" width="100%"/>
 								</c:if>
 	    						<c:if test="${!empty(placeInfo.picture5)}">
-	    							<img class="mySlides" src="${placeInfo.picture5}" width="100%"/>
+	    							<img class="mySlides" src="${uploadPath+=placeInfo.picture5}" width="100%"/>
 	    						</c:if>
 	    						
 	    						<button type="button" class="w3-button w3-black w3-display-left" onclick="plusDivs(-1)">&#10094;</button>
 	    						<button type="button" class="w3-button w3-black w3-display-right" onclick="plusDivs(1)">&#10095;</button>
 	    					</div>
 	    					<!-- slider_area_end -->
+	    					
+	    					<p>&nbsp</p>
+	    					<!-- 사진 수정하기 -->
+	   						<h4 style="font-weight: bold;">사진 수정하기</h4>
+		   						<p id="picture1"> 사진1 : <input type="file" name="picture1" id="picture1"/>${placeInfo.picture1}</p>
+		    					<p id="picture2"> 사진2 : <input type="file" name="picture2" id="picture2"/>${placeInfo.picture2}</p>
+		    					<p id="picture3"> 사진3 : <input type="file" name="picture3" id="picture3"/>${placeInfo.picture3}</p>
+		    					<p id="picture4"> 사진4 : <input type="file" name="picture4" id="picture4"/>${placeInfo.picture4}</p>
+		    					<p id="picture5"> 사진5 : <input type="file" name="picture5" id="picture5"/>${placeInfo.picture5}</p>	
+	    					
+	    					<hr/>
 	    					
 	    					<!-- 상세정보 -->
 	    					<p>&nbsp</p>
@@ -213,10 +216,10 @@
 	                		<div class="section-top-border">
 	                			<div>
 									<p style="font: bold;">
-										위도	: <input type="text" name="latitude" id="latitude" value="${placeInfo.latitude}" 
-													 placeholder="위도를 입력해주세요.."/>&nbsp&nbsp&nbsp&nbsp&nbsp
-										경도	: <input type="text" name="longitude" id="longitude" value="${placeInfo.longitude}" 
-													 placeholder="경도를 입력해주세요.."/>
+										위도	: <input type="text" name="latitude" id="latitude" class="location"
+													 value="${placeInfo.latitude}" placeholder="위도를 입력해주세요.."/>&nbsp&nbsp&nbsp&nbsp&nbsp
+										경도	: <input type="text" name="longitude" id="longitude" class="location"
+													 value="${placeInfo.longitude}" placeholder="경도를 입력해주세요.."/>
 									</p>
 								</div>
 								<div>
@@ -242,8 +245,8 @@
 								<div class="default-select" id="default-select">
 									주차	: <span style="float: right;width: 90%;">
 										  	<select name="parking" id="parking">
-												<option value=" 1" <c:if test="${placeInfo.parking eq '1'}">selected</c:if>>가능</option>
-												<option value="1" <c:if test="${placeInfo.parking eq '0'}">selected</c:if>>불가능</option>
+												<option value="1" <c:if test="${placeInfo.parking eq '1'}">selected</c:if>>가능</option>
+												<option value="0" <c:if test="${placeInfo.parking eq '0'}">selected</c:if>>불가능</option>
 											</select>
 										  </span>			
 								</div>
@@ -428,6 +431,37 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
     		// 지도에 등록된 타일로드 이벤트를 제거하는 코드입니다 
     		// kakao.maps.event.removeListener(map, 'tilesloaded', displayMarker);
 		}
+	</script>
+	
+	<script type="text/javascript">
+		$(document).ready(function(){
+			$('.location').change(function(){
+				var latitude = $('#latitude').val();
+	   			var longitude = $('#longitude').val();
+	   			
+	   			var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+	    		mapOption = { 
+	        		center: new kakao.maps.LatLng(latitude, longitude), // 지도의 중심좌표(해당 장소 위도, 경도)
+	        		level: 7 // 지도의 확대 레벨
+	    		};
+					
+				var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
+				var marker = new kakao.maps.Marker();
+		
+				// 타일 로드가 완료되면 지도 중심에 마커를 표시합니다
+				kakao.maps.event.addListener(map, 'tilesloaded', displayMarker);
+		
+				function displayMarker() {
+		    		// 마커의 위치를 지도중심으로 설정합니다 
+		    		marker.setPosition(map.getCenter()); 
+		    		marker.setMap(map); 
+		
+		    		// 아래 코드는 최초 한번만 타일로드 이벤트가 발생했을 때 어떤 처리를 하고 
+		    		// 지도에 등록된 타일로드 이벤트를 제거하는 코드입니다 
+		    		// kakao.maps.event.removeListener(map, 'tilesloaded', displayMarker);
+				};
+			});
+		});
 	</script>
 	
 	<!-- 여행지 정보 수정 취소 -->

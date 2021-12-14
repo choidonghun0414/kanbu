@@ -192,7 +192,9 @@
 							<td>${myPlaceReply.content}</td>
 							<td><fmt:formatDate value="${myPlaceReply.reg_date}" pattern="yyyy-MM-dd"/> </td>
 							<td>
-								<i class="ti-trash" style="cursor: pointer;" onclick="return replyDelete();"></i>
+								<c:if test="${!(myPlaceReply.content eq '관리자에 의해 삭제된 댓글입니다.')}">
+									<i class="ti-trash" style="cursor: pointer;" onclick="return replyDelete();"></i>
+								</c:if>
 								<input type="hidden" id="replyNum" value="${myPlaceReply.index_num}" />
 								<input type="hidden" id="placeNum" value="${myPlaceReply.place}" />									
 							</td>

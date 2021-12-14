@@ -14,7 +14,7 @@
 	<link rel="stylesheet" href="/kanbu/resources/css/magnific-popup.css">
 	<link rel="stylesheet" href="/kanbu/resources/css/font-awesome.min.css">
 	
-	<link rel="stylesheet" href="resources/css/style.css">
+	<link rel="stylesheet" href="/kanbu/resources/css/style.css">
 	
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"> 
 	<title>비밀번호발급 오류</title>

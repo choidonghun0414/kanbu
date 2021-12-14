@@ -148,7 +148,7 @@
                             		<div class="blog_item_img">
                                 		<img class="card-img rounded-0" 
                                 			 width="750px" height="375px"
-                                			 src="${place.picture1}" 
+                                			 src=<c:if test="${!empty (place.picture1)}">"${uploadPath+=place.picture1}"</c:if> 
                                 			 alt="해당 사진이 존재하지 않습니다.">
                             		</div>
 
@@ -157,8 +157,7 @@
                                     		<h2>${place.name}</h2>
                                 		</a>
                                 		<p>${place.info}</p>
-                                		<ul class="blog-info-link">
-                                    		<li><i class="fa fa-heart"></i>${place.good}</li>
+                                		<ul class="blog-info-link" style="float: right;">
                                     		<li><i class="fa fa-eye"></i>${place.views}</li>
                                 		</ul>
                             		</div>
@@ -243,7 +242,8 @@
                             <c:if test='${placeCount > 0}'>
                             	<c:forEach var="place" items="${placeList}" end="5">
                             		<div class="media post_item">
-                                		<img width="80px" height="80px" src="${place.picture1}" alt="place">
+                                		<img width="80px" height="80px" alt="place"
+                                			 src=<c:if test="${!empty (place.picture1)}">"${uploadPath+=place.picture1}"</c:if>>
                                 		<div class="media-body">
                                     		<a href="/kanbu/info.com?placeNum=${place.index_num}">
                                         		<h3>${place.name}</h3>
