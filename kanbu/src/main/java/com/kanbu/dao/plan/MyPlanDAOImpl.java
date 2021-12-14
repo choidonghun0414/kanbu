@@ -25,11 +25,6 @@ public class MyPlanDAOImpl implements MyPlanDAO {
 		mybatis.insert("myPlan.insert", dto);
 	}
 	
-	// 장소 저장 (찜목록 저장)
-	@Override
-	public void addPlace(MyPlanDTO plan) throws Exception {
-		mybatis.insert("myPlan.insert", plan);
-	}
 
 	// 나의 일정리스트 전체 조회
 	@Override

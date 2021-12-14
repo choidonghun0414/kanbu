@@ -9,6 +9,39 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<title>Insert title here</title>
+	<script src="/kanbu/resources/js/jquery-3.6.0.min.js" type="text/javascript"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.js"></script>
+	<script src='//code.jquery.com/jquery.min.js'></script>
+	<script src="/kanbu/jquery.cookie.js" type="text/javascript"></script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+	
+	<script type="text/javascript">
+		$(document).ready(function() {
+			console.log("##쿠키 꺼내기##");
+			var userId = $("#userId").val();
+			console.log("사용자Id::"+userId);
+			var title = $("#title").val();
+			console.log("일정제목::"+title);
+			// 쿠키꺼내기
+			var cookieVal = $.cookie(userId+'_'+title);
+			console.log("쿠키당::"+cookieVal);
+			
+			var htmlCookieList = "";
+			var favorTitleList = cookieVal.split("|");
+			for(var i=0; i<favorTitleList.length; i++) {
+				var favorTitle = favorTitleList[i];
+				if(favorTitle != "") {
+					console.log("favorTitle["+i+"]:"+favorTitle);
+					htmlCookieList += "<div><p>"+favorTitle+"</p></div>";
+				}
+			}
+			
+			// 여행지 일정에 상세(디테일)에 보여주기
+			$("#cookie_list").html(htmlCookieList);
+		});
+	
+	</script>
 	
 	<!-- <link rel="manifest" href="site.webmanifest"> -->
     <link rel="shortcut icon" type="image/x-icon" href="resources/img/favicon.png">
@@ -120,6 +153,8 @@
 	<h3>${sessionScope.nick}님의 여행일정</h3>
 	<br>
 	<div>
+		<input type="hidden" name="title" id="title" value="${plan.title}">
+		<input type="hidden" id="userId" value="${sessionScope.id}">
 		<p><b>${plan.title}</b></p>
 	</div>
 	
@@ -135,7 +170,11 @@
 
 	<div>
 		<p>❤️<b>이번 여행 찜리스트</b></p>
-		${plan.place}
+		<div id="cookie">
+			<div id="cookie_list">
+			
+			</div>
+		</div>
 	</div>
 
 	<br><br>

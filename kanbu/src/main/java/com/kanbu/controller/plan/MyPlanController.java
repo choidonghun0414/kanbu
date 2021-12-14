@@ -41,14 +41,14 @@ public class MyPlanController {
 	}
 
 	@RequestMapping(value = "insert.com", method = RequestMethod.POST)
-	public String insert(HttpServletRequest request, Model model) throws Exception {
+	public String insert(HttpServletRequest request, Model model, HttpSession session) throws Exception {
 
 		plan.setTitle(request.getParameter("title"));
 		plan.setStartDay(java.sql.Date.valueOf(request.getParameter("startDay")));
 		plan.setArrivalDay(java.sql.Date.valueOf(request.getParameter("arrivalDay")));
 		plan.setTraffic(request.getParameter("traffic"));
 		plan.setExpense(Integer.parseInt(request.getParameter("expense")));
-		plan.setPlace(Integer.parseInt(request.getParameter("place")));
+		plan.setWriter((Integer)session.getAttribute("index_num"));
 
 		myPlanService.insert(plan); // 일정 등록
 		return "/plan/insert";
@@ -114,6 +114,19 @@ public class MyPlanController {
 	@RequestMapping(value="update.com", method=RequestMethod.GET)
 	public String getupdate(HttpServletRequest request, Model model) throws Exception{
 		 MyPlanDTO plan = myPlanService.detail(Integer.parseInt(request.getParameter("index_num")));
+		 
+		 int placeCount=0;
+		 List<PlaceDTO> placeList = null;
+		 
+		 //db에서 장소 데이터 가져오기
+		 placeCount = myPlanService.selectPlaceCount();
+		 
+		 if(placeCount > 0) {
+			 placeList = myPlanService.selectPlace();
+		 }
+		 
+		 model.addAttribute("placeList", placeList);
+		 model.addAttribute("placeCount", placeCount);
 		 model.addAttribute("plan", plan);
 		
 		return "plan/update";

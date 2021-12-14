@@ -1,5 +1,6 @@
 package com.kanbu.service.plan;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -27,25 +28,12 @@ public class MyPlanServiceImpl implements MyPlanService {
 	public List<String> getMySplan_num(int list_num) {
 		return myPlanDao.getMySplan_num(list_num);
 	}
-	
-	// 찜장소 등록
-	@Override
-	public void addPlace(MyPlanDTO plan) throws Exception {
-		myPlanDao.addPlace(plan);
-	}
 
 	// 일정 등록
 	@Override
 	public void insert(MyPlanDTO dto) throws Exception {
-		myPlanDao.insert(dto);
-		
-		// 스케쥴 등록 controller에서 작성
-//		int[] schedule=dto.getSchedule();
-//		// 스케쥴이 없으면 종료
-//		if(schedule==null) return;
-//		for(int list_num : schedule) {
-//			myPlanDao.addMySplan_num(schedule);
-//		}		
+		// 일정 등록
+		myPlanDao.insert(dto);		
 	}
 
 	//나의 일정리스트 전체 조회
