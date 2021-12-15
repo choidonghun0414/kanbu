@@ -194,7 +194,24 @@
 		        				&nbsp;&nbsp;조회수&nbsp;&nbsp;${selectReview.views} </td>
 		        			</tr>
 		        			<tr class="notice-contents">
-	        					<td colspan="2" scope="colgroup">${selectReview.content}</td>
+	        					<td colspan="2" scope="colgroup">
+	        						<c:if test="${!empty(selectReview.picture1)}">
+    									<img src="${uploadPath+=selectReview.picture1}"/>
+    								</c:if>
+    								<c:if test="${!empty(selectReview.picture2)}">
+    									<img src="${uploadPath+=selectReview.picture2}"/>
+    								</c:if>
+    								<c:if test="${!empty(selectReview.picture3)}">
+    									<img src="${uploadPath+=selectReview.picture3}"/>
+    								</c:if>
+    								<c:if test="${!empty(selectReview.picture4)}">
+    									<img src="${uploadPath+=selectReview.picture4}"/>
+    								</c:if>
+    								<c:if test="${!empty(selectReview.picture5)}">
+    									<img src="${uploadPath+=selectReview.picture5}"/>
+    								</c:if>
+	        						${selectReview.content}
+	        					</td>
 	        				</tr>
 	        				<tr>
 	        					<td colspan="2" style="text-align: left;">

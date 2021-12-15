@@ -9,7 +9,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>reviewUpdateForm</title>
+    <title>리뷰 수정하기</title>
     
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -87,6 +87,16 @@
 	
 	.border {
 		width: 75%;
+	}
+	
+	/* 파일 박스 크기 조절 */
+	 p > .form-control{
+		height: 33px;
+		font-size: 15px;
+	}
+	
+	.submenu > li > a:hover{
+	  background-color: #D3D3D3;
 	}
 </style>
 
@@ -174,13 +184,12 @@
     
     <!--/ bradcam_area  -->
 	<div class="container box_1170">
-		<h3 class="md-30"></h3>
+		<h3 class="md-30">리뷰 수정하기</h3>
 	</div>
 
 	<!-- ================== 게시글 등록 폼 =================== -->
 	<div class="container">
-		<!-- <form action="/kanbu/board/noticeUpdatePro.com" name="noticeForm" method="post"> -->
-		<form action="/kanbu/board/reviewUpdatePro.com?reviewNum=${selectReview.index_num}" method="post">
+		<form action="/kanbu/board/reviewUpdatePro.com?reviewNum=${selectReview.index_num}" method="post" enctype="multipart/form-data">
 			<table class="table table-write" id="add_mt">
 				<colgroup>
 					<col style="width:120px" />
@@ -196,7 +205,9 @@
 				</tr>
 			</table>
 	
-			<textarea id="summernote" name="content">${selectReview.content}</textarea>
+			<textarea id="summernote" name="content">
+				${selectReview.content}
+			</textarea>
 			
 				<script>
 			 		//썸머노트에 값넣기
@@ -205,7 +216,6 @@
 						disableResizeEditor: true,
 						lang : "ko-KR",
 						focus: true,
-						
 					});
 				</script>
 				
@@ -220,6 +230,32 @@
 				</c:forEach>
 			</div>
 				
+			<!-- 사진 등록 -->
+			<div class="form-group">
+			<legend class="mt-4">사진 수정</legend>
+				<p> 사진1 : <input type="file" name="picture1" id="picture1" class="form-control"/></p>
+				<p> 사진2 : <input type="file" name="picture2" id="picture2" class="form-control"/></p>
+				<p> 사진3 : <input type="file" name="picture3" id="picture3" class="form-control"/></p>
+				<p> 사진4 : <input type="file" name="picture4" id="picture4" class="form-control"/></p>
+				<p> 사진5 : <input type="file" name="picture5" id="picture5" class="form-control"/></p>
+				
+				<h4 style="margin-top: 10px;">등록된 사진</h4>
+				<c:if test="${!empty(selectReview.picture1)}">
+					<img src="${uploadPath+=selectReview.picture1}"/>
+				</c:if>
+				<c:if test="${!empty(selectReview.picture2)}">
+					<img src="${uploadPath+=selectReview.picture2}"/>
+				</c:if>
+				<c:if test="${!empty(selectReview.picture3)}">
+					<img src="${uploadPath+=selectReview.picture3}"/>
+				</c:if>
+				<c:if test="${!empty(selectReview.picture4)}">
+					<img src="${uploadPath+=selectReview.picture4}"/>
+				</c:if>
+				<c:if test="${!empty(selectReview.picture5)}">
+					<img src="${uploadPath+=selectReview.picture5}"/>
+				</c:if>
+    		</div>	
 				
 				<!-- ============글 수정 완료 버튼 ============ -->
 			<div class="d-flex flex-row-reverse">

@@ -120,7 +120,6 @@
         </foreach>
 	</select>
 	
-	
 	<!-- 여행 리뷰 리스트 갯수 -->
 	<select id="selectReviewCount" resultType="int">
 		select count(*) from plan_review
@@ -129,8 +128,8 @@
 	<!-- 여행 리뷰 리스트 -->
  	<select id="selectReview" parameterType="boardDTO" resultType="boardDTO">
 	 	select *
-		from (select index_num, title, nick, content, views, reg_date, rownum r
-      		  from (select p.index_num, p.title, m.nick, p.content, p.views, p.reg_date
+		from (select index_num, title, nick, content, views, reg_date, picture1, rownum r
+      		  from (select p.index_num, p.title, m.nick, p.content, p.views, p.reg_date, p.picture1
             		from plan_review p, member m
             		where m.index_num = p.writer
             		order by p.index_num desc)
@@ -160,7 +159,8 @@
 	
 	<!-- 여행 리뷰 상세 보기 -->
  	<select id="selectReviewDetail" parameterType="int" resultType="boardDTO">
-	 	select p.index_num, p.title, m.nick, p.content, p.views
+	 	select p.index_num, p.title, m.nick, p.content, p.views,
+	 			p.picture1, p.picture2, p.picture3, p.picture4, p.picture5
 		from plan_review p, member m
 		where p.writer = m.index_num
 		and p.index_num = #{index_num}
@@ -178,8 +178,11 @@
  
  	<!-- 여행 리뷰 작성 -->
  	<insert id="insertReview" parameterType="boardDTO">
-	 	insert into plan_review (index_num, title, writer, content, reg_date) 
- 		values (plan_review_SEQ.nextval, #{title}, #{writer}, #{content}, sysdate)
+	 	insert into plan_review (index_num, title, writer, content, reg_date,
+	 							 picture1, picture2, picture3, picture4, picture5) 
+ 		values (plan_review_SEQ.nextval, #{title}, #{writer}, #{content}, sysdate,
+ 				#{picture1, jdbcType=VARCHAR}, #{picture2, jdbcType=VARCHAR}, #{picture3, jdbcType=VARCHAR},
+ 				#{picture4, jdbcType=VARCHAR}, #{picture5, jdbcType=VARCHAR})
 	</insert>
 	
 	<!-- 새로 들어온 리뷰번호 가져오기 -->
@@ -195,7 +198,7 @@
         </foreach>
  	</insert>
 	
-	<!-- 나의 여행 리뷰 리스트 갯수 -->
+	<!-- 여행 리뷰 리스트 갯수 -->
 	<select id="selectMyReviewCount" parameterType="int" resultType="int">
 		select count(*) from plan_review
 		<where>
@@ -209,11 +212,11 @@
 		from tag
 	</select>
 	
-	<!-- 나의 여행 리뷰 리스트 -->
+	<!-- 나의 여행 리뷰 리스트(마이페이지) -->
  	<select id="selectMyReview" parameterType="boardDTO"  resultType="boardDTO">
 	 	select *
-		from (select index_num, title, nick, content, views, reg_date, rownum r         
-      		  from (select p.index_num, p.title, m.nick, p.content, p.views, p.reg_date
+		from (select index_num, title, nick, content, views, reg_date, picture1, rownum r         
+      		  from (select p.index_num, p.title, m.nick, p.content, p.views, p.reg_date, p.picture1
            			from plan_review p, member m
            			where m.index_num = p.writer and p.writer = #{writer}
 		   			order by p.index_num desc)
@@ -224,7 +227,7 @@
 		</where>
 	</select>
 	
-	<!-- 나의 여행 리뷰 태그 리스트 갯수 -->
+	<!-- 여행 리뷰 태그 리스트 갯수 -->
 	<select id="selectMyReviewTagCount" parameterType="int" resultType="int">
 		select count(*)
 		from plan_review p, plan_review_tag pt, tag t
@@ -233,7 +236,7 @@
 		and p.writer = #{value}
 	</select>
 	
-	<!-- 나의 여행 리뷰 태그 리스트 -->
+	<!-- 여행 리뷰 태그 리스트 -->
 	<select id="selectMyReviewTag" parameterType="int" resultType="boardDTO">
 		select p.index_num, p.title, t.name
 		from plan_review p, plan_review_tag pt, tag t
@@ -267,13 +270,13 @@
 		</where>          
  	</select>
  	
- 	<!-- 댓글 등록 -->
+ 	<!-- 리뷰 댓글 등록 -->
  	<insert id="insertReviewReply" parameterType="boardDTO">
  		insert into plan_review_reply
  		values(plan_review_reply_seq.nextval, #{writer}, #{content}, #{review}, sysdate)
  	</insert>
  	
- 	<!-- 댓글 삭제 -->
+ 	<!-- 리뷰 댓글 삭제 -->
  	<delete id="deleteReviewReply" parameterType="int">
  		delete from plan_review_reply
  		<where>
@@ -281,7 +284,7 @@
  		</where>
  	</delete>
  	
- 	<!-- 글 삭제 시 댓글 삭제 -->
+ 	<!-- 글 삭제 시 댓글 강제 삭제 -->
  	<delete id="deleteReply" parameterType="int">
  		delete from plan_review_reply
  		<where>
@@ -315,7 +318,7 @@
 		</where>
 	</select>
 	
-	<!-- 나의 여행 리뷰 태그 검색 리스트 갯수(제목) -->
+	<!-- 리뷰 태그 검색 리스트 갯수(제목) -->
 	<select id="searchTitleMyReviewTagCount" parameterType="searchDTO" resultType="int">
 		select count(*)
 		from plan_review p, plan_review_tag pt, tag t
@@ -325,7 +328,7 @@
 		and ${thema} like '%' || #{keyword} || '%'
 	</select>
 	
-	<!-- 나의 여행 리뷰 태그 검색 리스트(제목) -->
+	<!-- 리뷰 태그 검색 리스트(제목) -->
 	<select id="searchTitleMyReviewTag" parameterType="searchDTO" resultType="boardDTO">
 		select p.index_num, p.title, t.name
 		from plan_review p, plan_review_tag pt, tag t
@@ -335,10 +338,12 @@
 		and ${thema} like '%' || #{keyword} || '%'
 	</select>
 	
-	<!-- 여행 리뷰 수정 -->
+	<!-- 리뷰 수정 -->
 	<update id="reviewUpdate" parameterType="boardDTO">
 		update plan_review
-		set content = #{content}, title = #{title}
+		set content = #{content}, title = #{title}, picture1 = #{picture1, jdbcType=VARCHAR},
+						picture2 = #{picture2, jdbcType=VARCHAR}, picture3= #{picture3, jdbcType=VARCHAR},
+				 		picture4 = #{picture4, jdbcType=VARCHAR}, picture5 = #{picture5, jdbcType=VARCHAR}
 		where index_num = #{index_num}
 	</update>
 	
@@ -383,8 +388,8 @@
 	<!-- 여행 리뷰 검색 리스트(제목, 닉네임) -->
  	<select id="searchReview" parameterType="searchDTO"  resultType="boardDTO">
 	 	select *
-		from (select index_num, title, nick, content, views, reg_date, rownum r         
-      		  from (select p.index_num, p.title, rm.nick, p.content, p.views, p.reg_date
+		from (select index_num, title, nick, content, views, reg_date, picture1, rownum r         
+      		  from (select p.index_num, p.title, rm.nick, p.content, p.views, p.reg_date, p.picture1
            			from plan_review p, member rm
            			where rm.index_num = p.writer
            			and ${thema} like '%' || #{keyword} || '%'

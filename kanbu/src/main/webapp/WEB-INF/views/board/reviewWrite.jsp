@@ -99,6 +99,12 @@
 	  background-color: #D3D3D3;
 	}
 	
+	/* 파일 박스 크기 조절 */
+	 p > .form-control{
+		height: 33px;
+		font-size: 15px;
+	}
+	
 </style>
 
 </head>
@@ -195,7 +201,7 @@
 
 	<!-- ================== 게시글 등록 폼 =================== -->
 	<div class="container">
-		<form action="/kanbu/board/reviewWritePro.com" name="reviewForm" method="post">
+		<form action="/kanbu/board/reviewWritePro.com" name="reviewForm" method="post" enctype="multipart/form-data">
 			<table class="table table-write" id="add_mt">
 				<colgroup>
 					<col style="width:120px" />
@@ -211,11 +217,25 @@
 			<textarea id="summernote" name="content"></textarea>
 				<script type="text/javascript">
 					$('#summernote').summernote({
+						 toolbar: [
+							    // [groupName, [list of button]]
+							    ['style', ['style']],
+							    ['fontname', ['fontname']],
+							    ['fontsize', ['fontsize']],
+							    ['style', ['bold', 'italic', 'underline','strikethrough', 'clear']],
+							    ['color', ['forecolor','color']],
+							    ['table', ['table']],
+							    ['para', ['ul', 'ol', 'paragraph']],
+							    ['view', ['codeview', 'help']]
+							  ],
+							fontNames: ['Arial', 'Arial Black', 'Comic Sans MS', 'Courier New','맑은 고딕','궁서','굴림체','굴림','돋움체','바탕체'],
+							fontSizes: ['8','9','10','11','12','14','16','18','20','22','24','28','30','36','50','72'],
 						height : 500,
 						disableResizeEditor: true,
 						lang : "ko-KR",
 						focus: true,
 						placeholder: "내용을 입력해주세요."
+						
 					});
 				</script>
 
@@ -226,6 +246,16 @@
 				  	<label class="btn btn-outline-info" for="btncheck${tag.index_num}">#${tag.name}</label>
 				</c:forEach>
 			</div>
+			
+			<!-- 사진 등록하기 -->
+			<div class="form-group">
+			<legend class="mt-4">사진 등록하기</legend>
+				<p> 사진1 : <input type="file" name="picture1" id="picture1" class="form-control"/></p>
+				<p> 사진2 : <input type="file" name="picture2" id="picture2" class="form-control"/></p>
+				<p> 사진3 : <input type="file" name="picture3" id="picture3" class="form-control"/></p>
+				<p> 사진4 : <input type="file" name="picture4" id="picture4" class="form-control"/></p>
+				<p> 사진5 : <input type="file" name="picture5" id="picture5" class="form-control"/></p>
+    		</div>
 			
 				<!-- ============글 등록 버튼 (목록으로 돌아옴) ============ -->
 				<div class="d-flex flex-row-reverse">
@@ -392,7 +422,6 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 				return false;
 			}if(!$("input:checked[Name='index_num[]']").is(":checked")){
 				alert("태그는 하나 이상 선택해주세요.");
-				$("#index_num[]").focus();
 				return false;
 			}else{
 				var result = confirm("리뷰를 등록하시겠습니까?");

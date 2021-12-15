@@ -104,6 +104,11 @@
 		.border {
 			width: 75%;
 		}
+		
+		.submenu > li > a:hover{
+		  background-color: #D3D3D3;
+		}
+		
 	</style>
 	
 </head>

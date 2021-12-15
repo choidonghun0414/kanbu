@@ -180,14 +180,14 @@
                     </div>
                     <div class="d-flex justify-content-center">
                     	<select name="thema" id="thema" class="form-control">
-							<option value="select" selected>선택</option>
+							<!-- <option value="select" selected>선택</option> -->
                   	   		<option value="p.title">제목</option>
                   	   		<option value="rm.nick">작성자</option>
                   	   		<option value="t.tag">태그</option>
                   	   	</select>
 						<input type="text" class="form-control" name="keyword" id="keyword" placeholder="검색어 입력">
 						<span class="input-group-btn">
-							<button class="btn btn-secondary" type="button" onclick="searchReview();">검색</button>
+							<button class="btn btn-secondary" id="reviewSearch" type="button" onclick="searchReview();">검색</button>
 						</span>
 					</div>
                 </div>
@@ -203,7 +203,14 @@
 	                <div class="col-lg-4 col-md-6">
 	                    <div class="single_place">
 	                        <div class="thumb">
-	                            <a href="/kanbu/board/reviewDetail.com?reviewNum=${review.index_num}"><img src="../resources/img/place/1.png" alt=""></a>
+	                            <a href="/kanbu/board/reviewDetail.com?reviewNum=${review.index_num}">
+	                            	<c:if test="${!empty (review.picture1)}">
+	                            		<img src="${uploadPath+=review.picture1}" alt="" width="360px" height="200px">
+	                            	</c:if>
+	                            	<c:if test="${empty (review.picture1)}">
+	                            		<img src="/kanbu/resources/img/place/1.png" alt="" width="360px" height="200px">
+	                            	</c:if>
+	                            </a>
 	                            <div class="prise">${review.views}</div>
 	                        </div>
 	                        <div class="place_info">
@@ -519,8 +526,19 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
   				return false;
   			}			
     	}
-    
     </script>
+    
+    <!-- 엔터로 검색 -->
+    <script>
+    $('#keyword').keypress(function(event){
+        if ( event.which == 13 ) {
+            $('#reviewSearch').click();
+            return false;
+        }
+   });
+    </script>
+
+    
     </body>
     
 </html>

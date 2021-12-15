@@ -1,9 +1,9 @@
 package com.kanbu.controller.board;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -12,6 +12,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
+import org.springframework.web.multipart.MultipartRequest;
 
 import com.kanbu.dto.SearchDTO;
 import com.kanbu.dto.board.BoardDTO;
@@ -21,8 +24,8 @@ import com.kanbu.service.board.BoardService;
 @Controller
 public class BoardController {
 
-	@Resource(name = "uploadPath")
-	private String uploadPath;
+	// 업로드 저장 경로
+	private String uploadPath = "/kanbu/resources/img/review/";
 
 	@Autowired
 	private BoardService boardImpl;
@@ -83,15 +86,14 @@ public class BoardController {
 
 	// ====== 공지 작성
 	@RequestMapping(value = "/board/noticeWritePro.com", method = RequestMethod.POST)
-	public String noticeWritePro(Model model, HttpServletRequest request) throws Exception {
-//		String title = request.getParameter("title");
-//		String content = request.getParameter("content");
-//		int writer = boardImpl.selectAdmin();
-
-		board.setContent(request.getParameter("content"));
+	public String noticeWritePro(MultipartHttpServletRequest ms, Model model,
+									HttpSession session, HttpServletRequest request) throws Exception {
 		board.setTitle(request.getParameter("title"));
+		board.setContent(request.getParameter("content"));
 		board.setWriter(boardImpl.selectAdmin());
-
+		
+		
+		
 		boardImpl.insertBoard(board);
 
 		return "redirect:/board/noticeList.com";
@@ -114,14 +116,18 @@ public class BoardController {
 		return "board/noticeUpdateForm";
 	}
 
-	// ====== 공지 수정 완료
+	// ====== 공지 수정 처리
 	@RequestMapping(value = "/board/noticeUpdatePro.com", method = RequestMethod.POST)
-	public String noticeUpdatePro(Model model, HttpServletRequest request) throws Exception {
+	public String noticeUpdatePro(MultipartHttpServletRequest ms, Model model,
+								HttpSession session, HttpServletRequest request) throws Exception {
 		int index_num = Integer.parseInt(request.getParameter("noticeNum"));
-		board.setContent(request.getParameter("content"));
 		board.setTitle(request.getParameter("title"));
+		board.setContent(request.getParameter("content"));
 		board.setWriter(boardImpl.selectAdmin());
 
+		
+		
+		
 		boardImpl.noticeUpdate(board);
 
 		return "redirect:/board/noticeDetail.com?noticeNum=" + index_num;
@@ -196,6 +202,8 @@ public class BoardController {
 		model.addAttribute("reviewList", reviewList);
 		model.addAttribute("reviewTagCount", reviewTagCount);
 		model.addAttribute("reviewTagList", reviewTagList);
+		model.addAttribute("uploadPath", uploadPath);
+		
 
 		return "board/reviewList";
 	}
@@ -211,7 +219,7 @@ public class BoardController {
 		
 		board = boardImpl.selectReviewDetail(index_num);
 		List tagList = boardImpl.selectReviewDetailTag(index_num);
-		
+		model.addAttribute("uploadPath", uploadPath);
 		model.addAttribute("selectReview", board);
 		model.addAttribute("tagList", tagList);
 		
@@ -282,13 +290,56 @@ public class BoardController {
 		return "board/reviewWrite";
 	}
 
-	// ====== 리뷰 작성
+	// ====== 리뷰 작성 처리
 	@RequestMapping(value = "/board/reviewWritePro.com", method = RequestMethod.POST)
-	public String reviewWritePro(Model model, HttpServletRequest request, HttpSession session) throws Exception {
+	public String reviewWritePro(MultipartHttpServletRequest ms, Model model,
+								HttpServletRequest request, HttpSession session) throws Exception {
 		board.setTitle(request.getParameter("title"));
 		board.setContent(request.getParameter("content"));
 		int writer = (Integer) session.getAttribute("index_num");
 		board.setWriter(writer);
+		// 파일 저장경로 설정(로컬 컴퓨터에서 실제로 저장되는 경로)
+		String root = session.getServletContext().getRealPath("/");			
+		String path = root + "\\resources\\img\\review\\";
+
+		// 파일 가져오기
+		MultipartFile mf1 = ms.getFile("picture1");						
+		MultipartFile mf2 = ms.getFile("picture2");						
+		MultipartFile mf3 = ms.getFile("picture3");						
+		MultipartFile mf4 = ms.getFile("picture4");					
+		MultipartFile mf5 = ms.getFile("picture5");
+		
+		if(!mf1.isEmpty()) {
+			String picture1 = mf1.getOriginalFilename();		// 기존 파일 이름(오리지널)
+			File f1 = new File(path+picture1);			
+			mf1.transferTo(f1);							// 파일 저장
+			board.setPicture1(picture1);
+		}
+		if(!mf2.isEmpty()) {
+			String picture2 = mf2.getOriginalFilename();
+			File f2 = new File(path+picture2);
+			mf2.transferTo(f2);
+			board.setPicture2(picture2);
+		}
+		if(!mf3.isEmpty()) {
+			String picture3 = mf3.getOriginalFilename();
+			File f3 = new File(path+picture3);
+			mf3.transferTo(f3);
+			board.setPicture3(picture3);
+		}
+		if(!mf4.isEmpty()) {
+			String picture4 = mf4.getOriginalFilename();
+			File f4 = new File(path+picture4);
+			mf4.transferTo(f4);
+			board.setPicture4(picture4);
+		}
+		if(!mf5.isEmpty()) {
+			String picture5 = mf5.getOriginalFilename();
+			File f5 = new File(path+picture5);
+			mf5.transferTo(f5);
+			board.setPicture5(picture5);
+		}
+		
 
 		boardImpl.insertReview(board);
 
@@ -329,6 +380,7 @@ public class BoardController {
 		
 		
 		model.addAttribute("reviewNum", index_num);
+		model.addAttribute("uploadPath", uploadPath);
 		model.addAttribute("selectReview", board);
 		model.addAttribute("tagList", tagList);
 		model.addAttribute("editTagList", editTagList);
@@ -336,15 +388,58 @@ public class BoardController {
 		return "board/reviewUpdateForm";
 	}
 
-	// ====== 리뷰 수정 완료
+	// ====== 리뷰 수정 처리
 	@RequestMapping(value = "/board/reviewUpdatePro.com", method = RequestMethod.POST)
-	public String reviewUpdatePro(Model model, HttpServletRequest request, HttpSession session) throws Exception {
+	public String reviewUpdatePro(MultipartHttpServletRequest ms, Model model, HttpServletRequest request, HttpSession session) throws Exception {
 		int reviewNum = Integer.parseInt(request.getParameter("reviewNum"));
 		int writer = (Integer)session.getAttribute("index_num");
 		board.setContent(request.getParameter("content"));
 		board.setTitle(request.getParameter("title"));
 		board.setWriter(writer);
 
+		// 저장경로 설정(로컬 컴퓨터에서 실제로 저장되는 경로)
+		String root = session.getServletContext().getRealPath("/");			
+		String path = root + "\\resources\\img\\reveiw\\";
+						
+		// 수정 파일 가져오기
+		MultipartFile mf1 = ms.getFile("picture1");						
+		MultipartFile mf2 = ms.getFile("picture2");						
+		MultipartFile mf3 = ms.getFile("picture3");						
+		MultipartFile mf4 = ms.getFile("picture4");					
+		MultipartFile mf5 = ms.getFile("picture5");
+
+		if(!mf1.isEmpty()) {
+			String picture1 = mf1.getOriginalFilename();		// 기존 파일 이름(오리지널)
+			File f1 = new File(path+picture1);			
+			mf1.transferTo(f1);									// 파일 저장
+			board.setPicture1(picture1);
+		}
+		if(!mf2.isEmpty()) {
+			String picture2 = mf2.getOriginalFilename();
+			File f2 = new File(path+picture2);
+			mf2.transferTo(f2);
+			board.setPicture2(picture2);
+		}
+		if(!mf3.isEmpty()) {
+			String picture3 = mf3.getOriginalFilename();
+			File f3 = new File(path+picture3);
+			mf3.transferTo(f3);
+			board.setPicture3(picture3);
+		}
+		if(!mf4.isEmpty()) {
+			String picture4 = mf4.getOriginalFilename();
+			File f4 = new File(path+picture4);
+			mf4.transferTo(f4);
+			board.setPicture4(picture4);
+		}
+		if(!mf5.isEmpty()) {
+			String picture5 = mf5.getOriginalFilename();
+			File f5 = new File(path+picture5);
+			mf5.transferTo(f5);
+			board.setPicture5(picture5);
+		}
+		
+		
 		boardImpl.reviewUpdate(board);
 
 		String[] tagArr = request.getParameterValues("index_num[]");
@@ -408,6 +503,7 @@ public class BoardController {
 		model.addAttribute("searchCount", searchCount);
 		model.addAttribute("thema", search.getThema());
 		model.addAttribute("keyword", search.getKeyword());
+		model.addAttribute("uploadPath", uploadPath);
 		
 		int reviewCount = 0;
 		int reviewTagCount = 0;
