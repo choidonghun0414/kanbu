@@ -69,6 +69,16 @@
 		text-align: center;
 	}
 	
+	.submenu > li > a:hover{
+	  background-color: #D3D3D3;
+	}
+	
+	.btn-outline-info{
+		margin-top: 5px;
+		margin-bottom: 3px;
+		font-size: 13px;
+	}
+	
 </style>
 </head>
 
@@ -159,6 +169,7 @@
         </div>
     </div>
     
+    
     <!--======== 여행 리뷰 게시판 시작 ========  -->
  	<div class="popular_places_area">
         <div class="container">
@@ -168,9 +179,15 @@
                         <h3>어떤 여행을 떠나시나요?</h3>
                     </div>
                     <div class="d-flex justify-content-center">
-						<input type="text" class="form-control" placeholder="검색어 입력">
+                    	<select name="thema" id="thema" class="form-control">
+							<!-- <option value="select" selected>선택</option> -->
+                  	   		<option value="p.title">제목</option>
+                  	   		<option value="rm.nick">작성자</option>
+                  	   		<option value="t.tag">태그</option>
+                  	   	</select>
+						<input type="text" class="form-control" name="keyword" id="keyword" placeholder="검색어 입력">
 						<span class="input-group-btn">
-							<button class="btn btn-secondary" type="button">검색</button>
+							<button class="btn btn-secondary" id="reviewSearch" type="button" onclick="searchReview();">검색</button>
 						</span>
 					</div>
                 </div>
@@ -186,25 +203,32 @@
 	                <div class="col-lg-4 col-md-6">
 	                    <div class="single_place">
 	                        <div class="thumb">
-	                            <img src="../resources/img/place/1.png" alt="">
-	                            <a href="#" class="prise">${review.views}</a>
+	                            <a href="/kanbu/board/reviewDetail.com?reviewNum=${review.index_num}">
+	                            	<c:if test="${!empty (review.picture1)}">
+	                            		<img src="${uploadPath+=review.picture1}" alt="" width="360px" height="200px">
+	                            	</c:if>
+	                            	<c:if test="${empty (review.picture1)}">
+	                            		<img src="/kanbu/resources/img/place/1.png" alt="" width="360px" height="200px">
+	                            	</c:if>
+	                            </a>
+	                            <div class="prise">${review.views}</div>
 	                        </div>
 	                        <div class="place_info">
 	                            <a href="/kanbu/board/reviewDetail.com?reviewNum=${review.index_num}"><h3>${review.title}</h3></a>
 	                            <c:if test="${reviewTagCount > 0}">
 	                            	<c:forEach var="reviewTag" items="${reviewTagList}">
 	                            		<c:if test="${review.index_num == reviewTag.index_num}">
-	                            			#${reviewTag.name}&nbsp
+	                            			<div class="btn btn-outline-info btn-sm">#${reviewTag.name}&nbsp</div>
 	                            		</c:if>
 	                            	</c:forEach>
 	                            </c:if>
 	                            <div class="rating_days d-flex justify-content-between">
 	                                <span class="d-flex justify-content-center align-items-center">
-	                                     <a href="/kanbu/board/reviewDetail.com">${review.nick}</a>
+	                                     <a href="/kanbu/board/reviewDetail.com?reviewNum=${review.index_num}">${review.nick}</a>
 	                                </span>
 	                                <div class="days">
 	                                    <i class="fa fa-clock-o"></i>
-	                                    <a href="/kanbu/board/reviewDetail.com"><fmt:formatDate value="${review.reg_date}" type="date"/></a>
+	                                    <a href="/kanbu/board/reviewDetail.com?reviewNum=${review.index_num}"><fmt:formatDate value="${review.reg_date}" type="date"/></a>
 	                                </div>
 	                            </div>
 	                        </div>
@@ -245,7 +269,7 @@
 	                        	</a>
 	                        </c:if>
 	                        <c:if test="${searchCount == 1}">
-	                        	<a href="/kanbu/board/review/search.com?thema=${search.thema}&keyword=${search.keyword}&pageNum=${startPage-5}" 
+	                        	<a href="/kanbu/board/reviewSearch.com?thema=${thema}&keyword=${keyword}&pageNum=${startPage-5}" 
 	                    	   	   class="page-link">
 	                        		&laquo;
 	                        	</a>
@@ -259,7 +283,7 @@
 	                    		<a href="/kanbu/board/reviewList.com?pageNum=${i}" class="page-link">${i}</a>
 	                    	</c:if>
 	                    	<c:if test="${searchCount == 1}">
-	                    		<a href="/kanbu/board/review/search.com?thema=${search.thema}&keyword=${search.keyword}&pageNum=${i}" 
+	                    		<a href="/kanbu/board/reviewSearch.com?thema=${thema}&keyword=${keyword}&pageNum=${i}" 
 	                    		   class="page-link">${i}</a>
 	                    	</c:if>
 	                    </li>
@@ -274,7 +298,7 @@
 	                       	 	</a>
 	                       	</c:if>
 	                       	<c:if test="${searchCount == 1}">
-	                       		<a href="/kanbu/board/review/search.com?thema=${search.thema}&keyword=${search.keyword}&pageNum=${startPage+5}" 
+	                       		<a href="/kanbu/board/reviewSearch.com?thema=${thema}&keyword=${keyword}&pageNum=${startPage+5}" 
 	                           	   class="page-link">
 	                        		&raquo;
 	                       	 	</a>
@@ -482,6 +506,39 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 
         });
     </script>
+    
+    <!-- 리뷰 검색 유효성 검사 -->
+    <script type="text/javascript">
+    	function searchReview(){
+    		var target = document.getElementById("thema");
+  			var thema = target.options[target.selectedIndex].value;
+  			var keyword = document.getElementById('keyword').value
+  			
+  			if(thema != null && thema != "" && thema !="select"){
+  				if(keyword != null && keyword != ""){
+  					window.location = '/kanbu/board/reviewSearch.com?thema='+thema+'&keyword='+keyword;
+  				}else{
+  					alert("검색어를 입력해주세요.");
+  					return false;
+  				}
+  			}else{
+  				alert("검색 테마를 선택해주세요.");
+  				return false;
+  			}			
+    	}
+    </script>
+    
+    <!-- 엔터로 검색 -->
+    <script>
+    $('#keyword').keypress(function(event){
+        if ( event.which == 13 ) {
+            $('#reviewSearch').click();
+            return false;
+        }
+   });
+    </script>
+
+    
     </body>
     
 </html>

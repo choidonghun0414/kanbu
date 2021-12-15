@@ -72,34 +72,40 @@
 	    font-size: 60px;
 		}
 	
-		.progress-table .country {
-		    width: 300;
-		}
-		
-		a {
-		    color: #007bff;
-		    text-decoration: none;
-		    background-color: transparent;
-		    -webkit-text-decoration-skip: objects;
-		    color: inherit;
-		}
-		
-		.search-form {
-			margin-top: 50px;
-		}
-		
-		
-		/* 버튼 왼쪽의 여백 */
-		.input-group-btn{
-			margin-top: 9px;
-			margin-left: 5px;
-		}
-		
-		.border {
-			width: 75%;
-		}
-	</style>
-
+	a {
+	    color: #007bff;
+	    text-decoration: none;
+	    background-color: transparent;
+	    -webkit-text-decoration-skip: objects;
+	    color: inherit;
+	}
+	
+	.search-form {
+		margin-top: 50px;
+	}
+	
+	
+	/* 버튼 왼쪽의 여백 */
+	.input-group-btn{
+		margin-top: 9px;
+		margin-left: 5px;
+	}
+	
+	.border {
+		width: 75%;
+	}
+	
+	.submenu > li > a:hover{
+	  background-color: #D3D3D3;
+	}
+	
+	/* 파일 박스 크기 조절 */
+	 p > .form-control{
+		height: 33px;
+		font-size: 15px;
+	}
+	
+</style>
 
 </head>
 
@@ -211,14 +217,46 @@
 			<textarea id="summernote" name="content"></textarea>
 				<script type="text/javascript">
 					$('#summernote').summernote({
+						 toolbar: [
+							    // [groupName, [list of button]]
+							    ['style', ['style']],
+							    ['fontname', ['fontname']],
+							    ['fontsize', ['fontsize']],
+							    ['style', ['bold', 'italic', 'underline','strikethrough', 'clear']],
+							    ['color', ['forecolor','color']],
+							    ['table', ['table']],
+							    ['para', ['ul', 'ol', 'paragraph']],
+							    ['view', ['codeview', 'help']]
+							  ],
+							fontNames: ['Arial', 'Arial Black', 'Comic Sans MS', 'Courier New','맑은 고딕','궁서','굴림체','굴림','돋움체','바탕체'],
+							fontSizes: ['8','9','10','11','12','14','16','18','20','22','24','28','30','36','50','72'],
 						height : 500,
 						disableResizeEditor: true,
 						lang : "ko-KR",
 						focus: true,
 						placeholder: "내용을 입력해주세요."
+						
 					});
 				</script>
-				<input type="file" class="form-control" name="uploadFile">
+
+			<legend class="mt-4">태그 선택</legend>
+			<div class="btn-group" role="group" aria-label="Basic checkbox toggle button group">
+				<c:forEach var="tag" items="${tagList}">
+				  <input type="checkbox" class="btn-check" id="btncheck${tag.index_num}" name="index_num[]" value="${tag.index_num}">
+				  	<label class="btn btn-outline-info" for="btncheck${tag.index_num}">#${tag.name}</label>
+				</c:forEach>
+			</div>
+			
+			<!-- 사진 등록하기 -->
+			<div class="form-group">
+			<legend class="mt-4">사진 등록하기</legend>
+				<p> 사진1 : <input type="file" name="picture1" id="picture1" class="form-control"/></p>
+				<p> 사진2 : <input type="file" name="picture2" id="picture2" class="form-control"/></p>
+				<p> 사진3 : <input type="file" name="picture3" id="picture3" class="form-control"/></p>
+				<p> 사진4 : <input type="file" name="picture4" id="picture4" class="form-control"/></p>
+				<p> 사진5 : <input type="file" name="picture5" id="picture5" class="form-control"/></p>
+    		</div>
+			
 				<!-- ============글 등록 버튼 (목록으로 돌아옴) ============ -->
 				<div class="d-flex flex-row-reverse">
 					<span class="input-group-btn">		
@@ -322,6 +360,14 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
     
     <!--  
     <script type="text/javascript">
+    $("#a_save_btn").on('click',function(){
+    	var index_num = [];
+    	
+    	$("input[name=index_num[]]:checked").each(function(){
+    		index_num.push($(this.val());
+    	})
+    })
+
   	    function sendFile(file, el) {
         var form_data = new FormData();
         form_data.append('file', file);
@@ -360,6 +406,32 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
     		}
     	}
     </script>
+    
+    <!-- 유효성 검사  -->
+   	<script>
+	$(document).ready(function(){
+		$("#a_save_btn").on("click", function(){
+			if($("#title").val()==""){
+				alert("제목을 입력해주세요.");
+				$("#title").focus();
+				return false;
+			}
+			if($("#summernote").val()==""){
+				alert("내용을 입력해주세요.");
+				$("#summernote").focus();
+				return false;
+			}if(!$("input:checked[Name='index_num[]']").is(":checked")){
+				alert("태그는 하나 이상 선택해주세요.");
+				return false;
+			}else{
+				var result = confirm("리뷰를 등록하시겠습니까?");
+				if(!result){
+					return false;
+				}
+			}
+		});
+	})
+	</script>
     
     	
 </body>

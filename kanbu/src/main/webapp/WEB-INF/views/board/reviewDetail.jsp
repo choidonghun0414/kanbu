@@ -32,59 +32,64 @@
     <link rel="stylesheet" href="/kanbu/resources/css/slicknav.css">
     <link rel="stylesheet" href="/kanbu/resources/css/style.css">
     <!-- <link rel="stylesheet" href="css/responsive.css"> -->
-    
-	<style>
-		.logo {
-			width: 140px;
-			height: 56px;
-		}
-		
-	    a {
-		    color: #007bff;
-		    text-decoration: none;
-		    background-color: transparent;
-		    -webkit-text-decoration-skip: objects;
-		    color: inherit;
-		}
-		
-		h3.md-30 {
-		    text-align: center;
-		    margin-top: 60px;
-		    margin-bottom: 60px;
-		    font-size: 35px;
-		}
-		
-		.mb_70 {
-	    	margin-bottom: 30px;
-		}
-		
-		/* 검색 input창 서타일 */
-		input.form-control {
-			margin-bottom: 50px;
-			width: 300px;
-		}
-		
-		/* 버튼 왼쪽의 여백 */
-		.input-group-btn{
-			margin-left: 5px;
-		}
-		
-		/* 푸터 사이즈 조절, 컨텐츠와 간격 조절 */
-	    .footer .footer_top {
-	   		margin-top: 110px;
-	   		padding-top: 50px;
-	   		padding-bottom: 30px;
-		}
-		
-		.notice-contents{
-			height: 100%;
-		}
-		
-		.notice-contents > td{
-			text-align: center;
-			padding: 30px;
-		}
-	</style>
+
+<style>
+
+	.logo {
+		width: 140px;
+		height: 56px;
+	}
+	
+    a {
+	    color: #007bff;
+	    text-decoration: none;
+	    background-color: transparent;
+	    -webkit-text-decoration-skip: objects;
+	    color: inherit;
+	}
+	
+	h3.md-30 {
+	    text-align: center;
+	    margin-top: 60px;
+	    margin-bottom: 60px;
+	    font-size: 35px;
+	}
+	
+	.mb_70 {
+    	margin-bottom: 30px;
+	}
+	
+	/* 검색 input창 서타일 */
+	input.form-control {
+		margin-bottom: 50px;
+		width: 300px;
+	}
+	
+	/* 버튼 왼쪽의 여백 */
+	.input-group-btn{
+		margin-left: 5px;
+	}
+	
+	/* 푸터 사이즈 조절, 컨텐츠와 간격 조절 */
+    .footer .footer_top {
+   		margin-top: 110px;
+   		padding-top: 50px;
+   		padding-bottom: 30px;
+	}
+	
+	.notice-contents{
+		height: 100%;
+	}
+	
+	.notice-contents > td{
+		text-align: center;
+		padding: 30px;
+	}
+	
+	.submenu > li > a:hover{
+	  background-color: #D3D3D3;
+	}
+</style>
 </head>
 
 <body>
@@ -163,59 +168,220 @@
 		<h3 class="md-30"> ${selectReview.nick}님의 여행 리뷰</h3>
 	</div>
 	
-	<!-- =================== 게시글 보기 =================== -->
-	<div class="container">
-		<form action="/kanbu/board/reviewDetailPro.com" name="reviewForm" method="post">
-			<div class="row">
-				<div class="col-sm-12">
-	        		<table class="table table-bordered table-condensed">
-			        	<colgroup>
-							<col width= "9%" />
-							<col width= "80%" />
-						</colgroup>
-			        		<thead>
-					        	<tr>
-					        		<td scope="col">제목</td>
-					        		<td scope="col" style="text-align: left;">&nbsp;&nbsp;&nbsp;${selectReview.title}</td>
-					        	</tr>
-					        	<tr>
-					        		<td scope="col">작성자</td>
-					        		<td scope="col" style="text-align: left;">&nbsp;&nbsp;&nbsp;${selectReview.nick}</td>
-					        	</tr>
-			        		</thead>
-			        			<tr class="notice-contents">
-		        					<td colspan="2" scope="colgroup">${selectReview.content}</td>
-		        				</tr>
-		        				<tr>
-		        					<td colspan="2" style="text-align: left;">
-		        						<c:forEach var="tag" items="${tagList}">
-		        							<c:if test="${selectReview.index_num == tag.index_num}">
-		        								#${tag.name}&nbsp;
-		        							</c:if>
-		        						</c:forEach>
-		        					</td>
-		        				</tr>
-		    		</table>
-	        	</div>
-	        	<!-- ================== 목록, 수정 버튼 ================== -->
-	        	<div class="d-flex flex-row-reverse">
-					<span class="input-group-btn">
-						<a class="btn btn-secondary" href="/kanbu/board/reviewList.com" role="button">목록</a>
-						<c:if test="${sessionScope.index_num == selectReview.writer}">
-							<a class="btn btn-secondary" href="/kanbu/board/reviewUpdateForm.com?reviewNum=${selectReview.index_num}" role="button">수정</a>
-							<a class="btn btn btn-danger" href="/kanbu/board/reivewDeletePro.com?noticeNum=${selectReview.index_num}" role="button"
-							   onclick="alert('모든 내용이 삭제됩니다.');return alert('삭제되었습니다!');">삭제</a>
-						</c:if>
-							<!-- <button type="submit" id="a_save_btn"
-									class="btn btn-secondary">수정</button> -->
-					</span>
-				</div>
-	    	</div>
-	    </form>  
-	</div>
-	<!-- =================== 게시글 보기 끝 =================== -->
+	
+<!-- =================== 게시글 보기 =================== -->
+<div class="container">
+	<form action="/kanbu/board/reviewDetailPro.com" name="reviewForm" method="post">
+		<div class="row">
+			<div class="col-sm-12">
+        		<table class="table table-bordered table-condensed">
+		        	<colgroup>
+						<col width= "9%" />
+						<col width= "80%" />
+					</colgroup>
+		        		<thead>
+				        	<tr>
+				        		<td scope="col">제목</td>
+				        		<td scope="col" style="text-align: left;">&nbsp;&nbsp;&nbsp;${selectReview.title}</td>
+				        	</tr>
+				        	<tr>
+				        		<td scope="col">작성자</td>
+				        		<td scope="col" style="text-align: left;">&nbsp;&nbsp;&nbsp;${selectReview.nick}</td>
+				        	</tr>
+		        		</thead>
+		        			<tr>
+		        				<td colspan="2" scope="colgroup" style="text-align: left; font-size: 12px;">
+		        				&nbsp;&nbsp;조회수&nbsp;&nbsp;${selectReview.views} </td>
+		        			</tr>
+		        			<tr class="notice-contents">
+	        					<td colspan="2" scope="colgroup">
+	        						<c:if test="${!empty(selectReview.picture1)}">
+    									<img src="${uploadPath+=selectReview.picture1}"/>
+    								</c:if>
+    								<c:if test="${!empty(selectReview.picture2)}">
+    									<img src="${uploadPath+=selectReview.picture2}"/>
+    								</c:if>
+    								<c:if test="${!empty(selectReview.picture3)}">
+    									<img src="${uploadPath+=selectReview.picture3}"/>
+    								</c:if>
+    								<c:if test="${!empty(selectReview.picture4)}">
+    									<img src="${uploadPath+=selectReview.picture4}"/>
+    								</c:if>
+    								<c:if test="${!empty(selectReview.picture5)}">
+    									<img src="${uploadPath+=selectReview.picture5}"/>
+    								</c:if>
+	        						${selectReview.content}
+	        					</td>
+	        				</tr>
+	        				<tr>
+	        					<td colspan="2" style="text-align: left;">
+	        						<c:forEach var="tag" items="${tagList}">
+	        							<c:if test="${selectReview.index_num == tag.index_num}">
+	        								#${tag.name}&nbsp;
+	        							</c:if>
+	        						</c:forEach>
+	        					</td>
+	        				</tr>
+	    		</table>
+        	</div>
+        	<!-- ================== 목록, 수정 버튼 ================== -->
+        	<div class="d-flex flex-row-reverse">
+				<span class="input-group-btn">
+					<a class="btn btn-secondary" href="/kanbu/board/reviewList.com" role="button">목록</a>
+					<c:if test="${sessionScope.status == 1}">
+					<a class="btn btn-secondary" href="/kanbu/board/reviewUpdateForm.com?reviewNum=${selectReview.index_num}" role="button">수정</a>
+					<a class="btn btn btn-danger" href="/kanbu/board/reviewDeletePro.com?reviewNum=${selectReview.index_num}" role="button"
+						onclick="return deleteReview();">삭제</a>
+					</c:if>
+				</span>
+			</div>
+    	</div>
+    </form>  
+</div>
+<!-- =================== 게시글 보기 끝 =================== -->
+<!-- 댓글 조회 영역 -->
+				<div class="row justify-content-center">
+				<div class="col-lg-8 col-md-9">
+               		<div class="comments-area">
+               		
+               		
+                  		<h4>리뷰톡 ${reply_count}</h4>
+                  		<c:if test="${reply_count == 0}">
+                  			<div class="comment-list">
+                     			<div class="single-comment justify-content-between d-flex">
+                     				<div class="user justify-content-between d-flex">
+                        				<div class="desc">
+                              				<p class="comment" style="font-weight: bolder;">
+                                 				작성된 댓글이 존재하지 않습니다.
+                              				</p>
+                           				</div>
+                           			</div>
+                           		</div>
+                           	</div>
+                       	</c:if>
+                        		
+                        <c:if test="${reply_count > 0}">
+                        	<c:forEach var="review_reply" items="${ReviewReplyList}">
+                        		<div class="comment-list">
+                     				<div class="single-comment justify-content-between d-flex">
+                        				<div class="user justify-content-between d-flex">
+                           					<div class="thumb">
+                              					<img src="/kanbu/resources/img/comment/profile.png" alt="">
+                           					</div>
+                           					<div class="desc">
+                              					<p class="comment" style="font-weight: bolder;">
+                                 					${review_reply.content}
+                              					</p>
+                            					<div class="d-flex justify-content-between">
+                                					<div class="d-flex align-items-center">
+                                       					<p>${review_reply.nick}	|	
+                                       						<fmt:formatDate value="${review_reply.reg_date}" pattern="yyyy-MM-dd"/> 
+                                       					</p>
+                                 					</div>
+                                 					<c:if test="${sessionScope.nick eq review_reply.nick || sessionScope.status == 100}">
+                                 						<div class="reply-btn" align="right">
+                                    						<a href="/kanbu/board/reviewReplyDelete.com?reviewNum=${review_reply.review}&replyNum=${review_reply.index_num}" 
+                                    					   	   class="btn-reply" style="font-weight: bold;"
+                                    					   	   onclick="return replyDelete();">
+                                    					   	   <i class="ti-trash"></i>
+                                    					   	</a>
+                                 						</div>
+                                 					</c:if>
+                              					</div>
+                           					</div>
+                        				</div>
+                        			</div>	
+                        		</div>
+                        	</c:forEach>
+                        </c:if>
+                        
+                        <!-- 페이지 번호 나타내기 -->
+						<c:if test="${reply_count > 0}">
+							<fmt:parseNumber var="pageCount" 
+											 value="${reply_count / pageSize + (reply_count %  pageSize == 0 ? 0 : 1)}"
+											 integerOnly="true" />
+							<c:set var="pageBlock" value="${5}" />
+							<fmt:parseNumber var="result" value="${currentPage/5}" integerOnly="true"/>
+							<c:set var="startPage" value="${result*5+1}" />
+							<c:set var="endPage" value="${startPage + pageBlock - 1}" />
+							<c:if test="${endPage > pageCount}">
+								<c:set var="endPage" value="${pageCount}" />
+							</c:if>			 
+						
+	                        <nav class="blog-pagination justify-content-center d-flex">
+	                        	<ul class="pagination">
+	                        		<c:if test="${startPage > 5}">
+	                               		<li class="page-item">
+	                               			<a href="/kanbu/board/reviewDetail.com?reviewNum=${selectReview.index_num}&pageNum=${startPage-5}" class="page-link" aria-label="Previous">
+	                                       		<i class="ti-angle-left"></i>
+	                                   		</a>	
+	                               		</li>
+	                               	</c:if>
+	                               	
+	                               	<c:forEach var="i" begin="${startPage}" end="${endPage}">
+	                               		<li class="page-item">
+	                               			<a href="/kanbu/board/reviewDetail.com?reviewNum=${selectReview.index_num}&pageNum=${i}" class="page-link">${i}</a>
+	                               		</li>
+	                             	</c:forEach>
+	                             	
+	                             	<c:if test="${endPage < pageCount}">
+	                               		<li class="page-item">
+	                               			<a href="/kanbu/board/reviewDetail.com?reviewNum=${selectReview.index_num}&pageNum=${startPage+5}" class="page-link" aria-label="Next">
+	                                       		<i class="ti-angle-right"></i>
+	                                   		</a>
+	                               		</li>
+	                               	</c:if>
+	                            </ul>
+	                        </nav>
+                        </c:if>
+                        
+                        
+                        <c:if test="${sessionScope.status == 1 || sessionScope.status == 100}">
+               			<div class="comment-form">
+                  			<h4>댓글 남기기</h4>
+                  			<form name="reply" method="post" action="/kanbu/board/reviewReply.com">
+                     			<div class="row">
+                        			<div class="col-12">
+                           				<div class="form-group">
+                           					<input type="hidden" name="reviewNum" id="reviewNum" value="${selectReview.index_num}" />
+                           					<input type="hidden" name="writer" id="writer" value="${sessionScope.index_num}" />
+                              				<textarea class="form-control w-100" name="content" id="content" cols="30" rows="9"
+                                 				  	  placeholder="댓글을 남겨주세요..."></textarea>
+                           				</div>
+                        			</div>
+                     			</div>
+                     			<div class="form-group" align="right">
+                        			<button type="submit" class="genric-btn success" onclick="return replyCheck();">등록</button>
+                     			</div>
+                  			</form>
+               			</div> 
+               		</c:if>
+               		<c:if test="${empty (sessionScope.status)}">
+               			<div class="comment-form">
+                  			<h4>댓글 남기기</h4>
+                  			<form name="reply" method="post" action="/kanbu/login.com">
+                     			<div class="row">
+                        			<div class="col-12">
+                           				<div class="form-group">
+                           					<input type="hidden" name="placeNum" value="${selectReview.index_num}" />
+                           					<input type="hidden" name="writer" id="writer" value="${sessionScope.index_num}" />
+                              				<textarea class="form-control w-100" name="content" id="content" cols="30" rows="9"
+                                 				  	  placeholder="댓글을 남겨주세요..."></textarea>
+                           				</div>
+                        			</div>
+                     			</div>
+                     			<div class="form-group" align="right">
+                        			<button type="submit" class="genric-btn success" onclick="return replyLogin();">등록</button>
+                     			</div>
+                  			</form>
+               			</div> 
+               		</c:if>         		
+            	</div>
+            	</div>
+			</div>
 
 	<footer class="footer" style="height: 391px;">
+
         <div class="footer_top">
             <div class="container" align="center">
                 <div class="row">
@@ -305,6 +471,53 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
          	}
         });
     </script>
+    
+    <!-- 댓글 등록 유효성 검사(회원) -->
+   <script type="text/javascript">
+   		function replyCheck() {
+			var content = document.reply.content.value;
+			if(content != null && content != ""){
+				var result = confirm("댓글을 등록하시겠습니까?");
+				if(!result){
+					return false;
+				}
+			}else{
+				alert("댓글을 입력해주세요.");
+				return false;
+			}
+		}
+   </script>
+   
+   <!-- 댓글 등록 유효성 검사(비회원) -->
+   <script type="text/javascript">
+   		function replyLogin(){
+   			alert("로그인 후 등록할 수 있습니다.");
+   		}
+   </script>
+   
+   <!-- 댓글 삭제 유효성 검사 -->
+   <script type="text/javascript">
+   		function replyDelete(){
+   			var result = confirm("댓글을 삭제하시겠습니까?");
+   			if(result){
+   				window.location = "/kanbu/board/reviewReplyDelete.com";
+   			}else{
+   				return false;
+   			}
+   		}
+   </script>
+   
+   <!-- 리뷰 삭제 유효성 검사 -->
+   <script type="text/javascript">
+   		function deleteReview(){
+   			var result = confirm("리뷰를 삭제하시겠습니까?");
+   			
+   			if(!result){
+   				return false;
+   			}
+   		}
+   </script>
+   
     
   
 </body>

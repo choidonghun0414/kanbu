@@ -1,12 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>        
-    
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+
 <!doctype html>
 <html class="no-js" lang="zxx">
 
 <head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<title>WRITE</title>
+
+<meta name="description" content="">
+<meta name="viewport" content="width=device-width, initial-scale=1">
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <title>WRITE</title>
@@ -24,9 +30,98 @@
 	<script src="/kanbu/resources/js/summernote-lite.js"></script>
 	<script src="/kanbu/resources/js/summernote-ko-KR.js"></script>
 
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
     <!-- <link rel="manifest" href="site.webmanifest"> -->
     <link rel="shortcut icon" type="image/x-icon" href="/kanbu/resources/img/favicon.png">
     <!-- Place favicon.ico in the root directory -->
+
+<link
+	href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css"
+	rel="stylesheet">
+<script
+	src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.18/lang/summernote-ko-KR.min.js"></script>
+<script src="../resources/js/summernote-lite.js"></script>
+<script src="../resources/js/summernote-ko-KR.js"></script>
+
+
+
+
+<!-- <link rel="manifest" href="site.webmanifest"> -->
+<link rel="shortcut icon" type="image/x-icon"
+	href="../resources/img/favicon.png">
+<!-- Place favicon.ico in the root directory -->
+
+<!-- CSS here -->
+<link rel="stylesheet" href="../resources/css/bootstrap.min.css">
+<link rel="stylesheet" href="../resources/css/bootstrap1.min.css">
+<link rel="stylesheet" href="../resources/css/owl.carousel.min.css">
+<link rel="stylesheet" href="../resources/css/magnific-popup.css">
+<link rel="stylesheet" href="../resources/css/font-awesome.min.css">
+<link rel="stylesheet" href="../resources/css/themify-icons.css">
+<link rel="stylesheet" href="../resources/css/nice-select.css">
+<link rel="stylesheet" href="../resources/css/flaticon.css">
+<link rel="stylesheet" href="../resources/css/gijgo.css">
+<link rel="stylesheet" href="../resources/css/animate.css">
+<link rel="stylesheet" href="../resources/css/slicknav.css">
+<link rel="stylesheet" href="../resources/css/style.css">
+<link rel="stylesheet" href="../resources/css/summernote-lite.css">
+<!-- <link rel="stylesheet" href="css/responsive.css"> -->
+
+<style>
+.logo {
+	width: 140px;
+	height: 56px;
+}
+
+/* 푸터 사이즈 조절, 컨텐츠와 간격 조절 */
+.footer .footer_top {
+	margin-top: 110px;
+	padding-top: 50px;
+	padding-bottom: 30px;
+}
+
+/* 페이지 내부 게시판 제목 표시 (공지사항, 자주 하는 질문 등) */
+h3.md-30 {
+	text-align: center;
+	margin-top: 60px;
+	margin-bottom: 60px;
+	font-size: 60px;
+}
+
+.progress-table .country {
+	width: 300;
+}
+
+a {
+	color: #007bff;
+	text-decoration: none;
+	background-color: transparent;
+	-webkit-text-decoration-skip: objects;
+	color: inherit;
+}
+
+.search-form {
+	margin-top: 50px;
+}
+
+/* 버튼 왼쪽의 여백 */
+.input-group-btn {
+	margin-top: 9px;
+	margin-left: 5px;
+}
+
+.border {
+	width: 75%;
+}
+</style>
 
     <!-- CSS here -->
     <link rel="stylesheet" href="/kanbu/resources/css/bootstrap.min.css">
@@ -179,41 +274,41 @@
                             </div>
                         </div>
                     </div>
+				</div>
+			</div>
+		</div>
+	</header>
+	<!-- header-end -->
 
-                </div>
-            </div>
-        </div>
-    </header>
-    <!-- header-end -->
+	<!-- bradcam_area  -->
+	<div class="bradcam_area bradcam_bg_4">
+		<div class="container">
+			<div class="row">
+				<div class="col-xl-12">
+					<div class="bradcam_text text-center">
+						<h3>Any Where, Wherever</h3>
+						<p></p>
+						<p>Wherever You Want To Go, With Kanbu</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 
-    <!-- bradcam_area  -->
-    <div class="bradcam_area bradcam_bg_4">
-        <div class="container">
-            <div class="row">
-                <div class="col-xl-12">
-                    <div class="bradcam_text text-center">
-                        <h3>Any Where, Wherever</h3>
-                        <p></p>
-                        <p>Wherever You Want To Go, With Kanbu</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    
-    <!--/ bradcam_area  -->
+	<!--/ bradcam_area  -->
 	<div class="container box_1170">
 		<h3 class="md-30">공지사항</h3>
 	</div>
 
 	<!-- ================== 게시글 등록 폼 =================== -->
 	<div class="container">
-		<form action="/kanbu/board/noticeWritePro.com" name="noticeForm" method="post">
+		<form action="/kanbu/board/noticeWritePro.com" name="noticeForm"
+			method="post">
 			<table class="table table-write" id="add_mt">
 				<colgroup>
-					<col style="width:120px" />
-					<col style="width:*" />
-				</colgroup>		
+					<col style="width: 120px" />
+					<col style="width: *" />
+				</colgroup>	
 				<tr>
 					<th>제목</th>
 					<td>
@@ -221,9 +316,9 @@
 					</td>
 				</tr>
 			</table>
-	
+
 			<textarea id="summernote" name="content"></textarea>
-				<script>
+			<script>
 			 		//썸머노트에 값넣기
 			  
 					$('#summernote').summernote({
@@ -234,11 +329,10 @@
 						placeholder: "내용을 입력해주세요."
 					});
 				</script>
-				<!-- ============글 등록 버튼 (목록으로 돌아옴) ============ -->
+			<!-- ============글 등록 버튼 (목록으로 돌아옴) ============ -->
 			<div class="d-flex flex-row-reverse">
-				<span class="input-group-btn">		
-					<button type="submit" id="a_save_btn" 
-						    class="btn btn-secondary">등록</button>
+				<span class="input-group-btn">
+					<button type="submit" id="a_save_btn" class="btn btn-secondary">등록</button>
 				</span>
 			</div>
 		</form>
@@ -279,6 +373,20 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
         </div>
     </footer>
 
+	<!-- Modal -->
+	<div class="modal fade custom_search_pop" id="exampleModalCenter"
+		tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+		aria-hidden="true">
+		<div class="modal-dialog modal-dialog-centered" role="document">
+			<div class="modal-content">
+				<div class="serch_form">
+					<input type="text" placeholder="Search">
+					<button type="submit">search</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
   <!-- 검색창 -->
   <!-- Modal -->
   <div class="modal fade custom_search_pop" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
@@ -318,9 +426,9 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 	<script src="/kanbu/resources/js/jquery.form.js"></script>
 	<script src="/kanbu/resources/js/jquery.validate.min.js"></script>
 	<script src="/kanbu/resources/js/mail-script.js"></script>
-
 	<script src="/kanbu/resources/js/main.js"></script>
     <script>
+
         $('#datepicker').datepicker({
             iconsLibrary: 'fontawesome',
             icons: {
@@ -335,7 +443,30 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 
         });
     </script>
-    
+
+	<!-- 공지사항 작성 유효성 검사  -->
+	<script>
+	$(document).ready(function(){
+		$("#a_save_btn").on("click", function(){
+			if($("#title").val()==""){
+				alert("제목을 입력해주세요.");
+				$("#title").focus();
+				return false;
+			}
+			if($("#summernote").val()==""){
+				alert("내용을 입력해주세요.");
+				$("#summernote").focus();
+				return false;
+			}else{
+				var result = confirm("공지를 등록하시겠습니까?");
+				if(!result){
+					return false;
+				}
+			}
+		});
+	})
+	</script>
+
     <script type="text/javascript">
     	function logOut(){
     		alert("로그아웃 되었습니다.");
@@ -358,4 +489,5 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
     	
 </body>
     
+
 </html>

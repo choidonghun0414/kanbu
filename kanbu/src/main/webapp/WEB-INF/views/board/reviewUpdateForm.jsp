@@ -9,9 +9,22 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Q&A | 자주하는 질문</title>
+    <title>리뷰 수정하기</title>
+    
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+	<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet"> 
+  	<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
+  	<script src=" https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.18/lang/summernote-ko-KR.min.js"></script>
+	<script src="../resources/js/summernote-lite.js"></script>
+	<script src="../resources/js/summernote-ko-KR.js"></script>
+	
+
+	
 
     <!-- <link rel="manifest" href="site.webmanifest"> -->
     <link rel="shortcut icon" type="image/x-icon" href="../resources/img/favicon.png">
@@ -30,21 +43,23 @@
     <link rel="stylesheet" href="../resources/css/animate.css">
     <link rel="stylesheet" href="../resources/css/slicknav.css">
     <link rel="stylesheet" href="../resources/css/style.css">
+    <link rel="stylesheet" href="../resources/css/summernote-lite.css">
     <!-- <link rel="stylesheet" href="css/responsive.css"> -->
     
 <style>
-     /* 푸터 사이즈 조절, 컨텐츠와 간격 조절 */
+    /* 푸터 사이즈 조절, 컨텐츠와 간격 조절 */
     .footer .footer_top {
    		margin-top: 110px;
    		padding-top: 50px;
    		padding-bottom: 30px;
 	}
 	
+	/* 페이지 내부 게시판 제목 표시 (공지사항, 자주 하는 질문 등) */
 	h3.md-30 {
-	    text-align: center;
-	    margin-top: 60px;
-	    margin-bottom: 60px;
-	    font-size: 60px;
+    text-align: center;
+    margin-top: 60px;
+    margin-bottom: 60px;
+    font-size: 60px;
 	}
 
 	.progress-table .country {
@@ -59,10 +74,6 @@
 	    color: inherit;
 	}
 	
-	.blog-pagination{
-		margin-top: auto;
-	}
-	
 	.search-form {
 		margin-top: 50px;
 	}
@@ -70,13 +81,26 @@
 	
 	/* 버튼 왼쪽의 여백 */
 	.input-group-btn{
+		margin-top: 9px;
 		margin-left: 5px;
+	}
+	
+	.border {
+		width: 75%;
+	}
+	
+	/* 파일 박스 크기 조절 */
+	 p > .form-control{
+		height: 33px;
+		font-size: 15px;
 	}
 	
 	.submenu > li > a:hover{
 	  background-color: #D3D3D3;
 	}
 </style>
+
+
 </head>
 
 <body>
@@ -158,120 +182,91 @@
         </div>
     </div>
     
-
-	<!--======== 자주하는 질문 헤더 ========  -->
+    <!--/ bradcam_area  -->
 	<div class="container box_1170">
-		<h3 class="md-30">자주하는 질문</h3>
+		<h3 class="md-30">리뷰 수정하기</h3>
 	</div>
+
+	<!-- ================== 게시글 등록 폼 =================== -->
+	<div class="container">
+		<form action="/kanbu/board/reviewUpdatePro.com?reviewNum=${selectReview.index_num}" method="post" enctype="multipart/form-data">
+			<table class="table table-write" id="add_mt">
+				<colgroup>
+					<col style="width:120px" />
+					<col style="width:*" />
+				</colgroup>
+				
+				<tr>
+					<th>제목</th>
+						<td>
+							<input value="${selectReview.title}" type="text" class="form-control"
+									id="title" name="title" required="required" />
+						</td>
+				</tr>
+			</table>
 	
-	<!--======== 자주하는 질문 목록 테이블 ========  -->
-	<div class="container box_1170">
-		<table class="table table-hover">
-			<thead>
-				<tr>
-					<th width="50">No.</th>
-					<th width="650">제목</th>
-					<th width="50">작성자</th>
-					<th width="50">작성일</th>
-					<th width="50">조회수</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr class="table-active">
-					<th scope="row">공지</th>
-					<td><a href="/kanbu/board/qaDetail1.com">일정 등록은 어떻게 하나요?</a></td>
-					<td>깐부</td>
-					<td>2021.11.19</td>
-					<td>121</td>
-				</tr>
-				<tr class="table-active">
-					<th scope="row">공지</th>
-					<td><a href="/kanbu/board/qaDetail2.com">회원만 이용 가능한가요?</a></td>
-					<td>깐부</td>
-					<td>2021.11.19</td>
-					<td>59</td>
-				</tr>
-				<tr class="table-active">
-					<th scope="row">공지</th>
-					<td>제 목</td>
-					<td>깐부</td>
-					<td>2021.11.19</td>
-					<td>84</td>
-				</tr>
-				<tr>
-					<th scope="row">[4]</th>
-					<td>질문 제목4</td>
-					<td>홍길동4</td>
-					<td>2021.11.14</td>
-					<td>4</td>
-				</tr>
-				<tr>
-					<th scope="row">[3]</th>
-					<td>질문 제목3</td>
-					<td>홍길동3</td>
-					<td>2021.11.13</td>
-					<td>3</td>
-				</tr>
-				<tr>
-					<th scope="row">[2]</th>
-					<td>질문 제목2</td>
-					<td>홍길동2</td>
-					<td>2021.11.12</td>
-					<td>2</td>
-				</tr>
-				<tr>
-					<th scope="row">[1]</th>
-					<td>질문 제목1</td>
-					<td>홍길동1</td>
-					<td>2021.11.11</td>
-					<td>1</td>
-				</tr>
-			</tbody>
-		</table>
-		
-		<!-- ============글 등록 버튼 (( 관리자에게만 보이게 해야함...))============ -->
-		<c:if test="${sessionScope.status == 100}">
-		<div class="d-flex flex-row-reverse">
-			<span class="input-group-btn">
-				<a class="btn btn-secondary" href="/kanbu/board/qaWrite.com" role="button">등록</a>
-			</span>
-		</div>
-		</c:if>
-	
-		<!-- ============ 게시판 페이징 표시 ============ -->
-		<nav class="blog-pagination d-flex justify-content-center">
-			<ul class="pagination">
-				<li class="page-item"><a href="#" class="page-link"
-					aria-label="Previous"> <i class="ti-angle-left"></i>
-				</a></li>
-				<li class="page-item"><a href="#" class="page-link">1</a></li>
-				<li class="page-item"><a href="#" class="page-link"
-					aria-label="Next"> <i class="ti-angle-right"></i>
-				</a></li>
-			</ul>
-		</nav>
-		
-		<!-- ========게시판 검색창======== -->
-		
-		<div class="search-form">
-			<div class="d-flex justify-content-center">
-				<div class="input-group-prepend">
-					<button class="btn btn-outline-secondary dropdown-toggle"
-						type="button" data-toggle="dropdown" aria-haspopup="true"
-						aria-expanded="false">제목</button>
-					<div class="dropdown-menu">
-						<a class="dropdown-item" href="#">작성자</a>
-					</div>
-				</div>
-				<input type="text" class="form-control" placeholder="검색어 입력">
-				<span class="input-group-btn">
-					<button class="btn btn-secondary" type="button">검색</button>
+			<textarea id="summernote" name="content">
+				${selectReview.content}
+			</textarea>
+			
+				<script>
+			 		//썸머노트에 값넣기
+					$('#summernote').summernote({
+						height : 500,
+						disableResizeEditor: true,
+						lang : "ko-KR",
+						focus: true,
+					});
+				</script>
+				
+			<legend class="mt-4">태그 선택</legend>
+			<div class="btn-group" role="group" aria-label="Basic checkbox toggle button group">
+				<c:forEach var="tag" items="${tagList}">
+					<input type="checkbox" class="btn-check" id="btncheck${tag.index_num}" 
+					       name="index_num[]" value="${tag.index_num}" 
+				  		   <c:forEach var="editTag" items="${editTagList}">
+				  		   		<c:if test="${tag.index_num == editTag.tag}">checked</c:if></c:forEach>/>
+				  	<label class="btn btn-outline-info" for="btncheck${tag.index_num}">#${tag.name}</label>
+				</c:forEach>
+			</div>
+				
+			<!-- 사진 등록 -->
+			<div class="form-group">
+			<legend class="mt-4">사진 수정</legend>
+				<p> 사진1 : <input type="file" name="picture1" id="picture1" class="form-control"/></p>
+				<p> 사진2 : <input type="file" name="picture2" id="picture2" class="form-control"/></p>
+				<p> 사진3 : <input type="file" name="picture3" id="picture3" class="form-control"/></p>
+				<p> 사진4 : <input type="file" name="picture4" id="picture4" class="form-control"/></p>
+				<p> 사진5 : <input type="file" name="picture5" id="picture5" class="form-control"/></p>
+				
+				<h4 style="margin-top: 10px;">등록된 사진</h4>
+				<c:if test="${!empty(selectReview.picture1)}">
+					<img src="${uploadPath+=selectReview.picture1}"/>
+				</c:if>
+				<c:if test="${!empty(selectReview.picture2)}">
+					<img src="${uploadPath+=selectReview.picture2}"/>
+				</c:if>
+				<c:if test="${!empty(selectReview.picture3)}">
+					<img src="${uploadPath+=selectReview.picture3}"/>
+				</c:if>
+				<c:if test="${!empty(selectReview.picture4)}">
+					<img src="${uploadPath+=selectReview.picture4}"/>
+				</c:if>
+				<c:if test="${!empty(selectReview.picture5)}">
+					<img src="${uploadPath+=selectReview.picture5}"/>
+				</c:if>
+    		</div>	
+				
+				<!-- ============글 수정 완료 버튼 ============ -->
+			<div class="d-flex flex-row-reverse">
+				<span class="input-group-btn">		
+					<button type="submit" id="a_save_btn" 
+						    class="btn btn-secondary">수정 완료</button>
 				</span>
 			</div>
-		</div>
+		</form>
 	</div>
 
-	<!-- End Align Area -->
 
 
     <!-- footer start -->
@@ -466,6 +461,34 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 
         });
     </script>
+    
+    <script>
+	$(document).ready(function(){
+		$("#a_save_btn").on("click", function(){
+			if($("#title").val()==""){
+				alert("제목을 입력해주세요.");
+				$("#title").focus();
+				return false;
+			}
+			if($("#summernote").val()==""){
+				alert("내용을 입력해주세요.");
+				$("#summernote").focus();
+				return false;
+			}if(!$("input:checked[Name='index_num[]']").is(":checked")){
+				alert("태그는 하나 이상 선택해주세요.");
+				$("#index_num[]").focus();
+				return false;
+			}else{
+				var result = confirm("리뷰를 수정하시겠습니까?");
+				if(!result){
+					return false;
+				}
+			}
+		});
+	})
+	</script>
+    
+    	
     </body>
     
     </html>

@@ -34,57 +34,63 @@
     <!-- <link rel="stylesheet" href="css/responsive.css"> -->
     
 	<style>
-		.logo {
-			width: 140px;
-			height: 56px;
-		}
+	.logo {
+		width: 140px;
+		height: 56px;
+	}
+		
+	a {
+	    color: #007bff;
+	    text-decoration: none;
+	    background-color: transparent;
+	    -webkit-text-decoration-skip: objects;
+	    color: inherit;
+		}	
 	
-	    a {
-		    color: #007bff;
-		    text-decoration: none;
-		    background-color: transparent;
-		    -webkit-text-decoration-skip: objects;
-		    color: inherit;
-		}
-		
-		h3.md-30 {
-		    text-align: center;
-		    margin-top: 60px;
-		    margin-bottom: 60px;
-		    font-size: 35px;
-		}
-		
-		.mb_70 {
-	    	margin-bottom: 30px;
-		}
-		
-		/* 검색 input창 서타일 */
-		input.form-control {
-			margin-bottom: 50px;
-			width: 300px;
-		}
-		
-		/* 버튼 왼쪽의 여백 */
-		.input-group-btn{
-			margin-left: 5px;
-		}
-		
-		/* 푸터 사이즈 조절, 컨텐츠와 간격 조절 */
-	    .footer .footer_top {
-	   		margin-top: 110px;
-	   		padding-top: 50px;
-	   		padding-bottom: 30px;
-		}
-		
-		.notice-contents{
-			height: 100%;
-		}
-		
-		.notice-contents > td{
-			text-align: center;
-			padding: 30px;
-		}
-	</style>
+	h3.md-30 {
+	    text-align: center;
+	    margin-top: 60px;
+	    margin-bottom: 60px;
+	    font-size: 35px;
+	}
+	
+	.mb_70 {
+    	margin-bottom: 30px;
+	}
+	
+	/* 검색 input창 서타일 */
+	input.form-control {
+		margin-bottom: 50px;
+		width: 300px;
+	}
+	
+	/* 버튼 왼쪽의 여백 */
+	.input-group-btn{
+		margin-left: 5px;
+	}
+	
+	/* 푸터 사이즈 조절, 컨텐츠와 간격 조절 */
+    .footer .footer_top {
+   		margin-top: 110px;
+   		padding-top: 50px;
+   		padding-bottom: 30px;
+	}
+	
+	.notice-contents{
+		height: 100%;
+	}
+	
+	.notice-contents > td{
+		text-align: center;
+		padding: 30px;
+	}
+	
+	.submenu > li > a:hover{
+	  background-color: #D3D3D3;
+	}
+	
+</style>
+
 </head>
 
 <body>
@@ -163,49 +169,55 @@
 		<h3 class="md-30">공지사항</h3>
 	</div>
 	
-	
-	<!-- =================== 게시글 보기 =================== -->
-	<div class="container">
-		<form action="/kanbu/board/noticeWritePro.com" name="noticeForm" method="post">
-			<div class="row">
-				<div class="col-sm-12">
-	        		<table class="table table-bordered table-condensed">
-			        	<colgroup>
-							<col width= "9%" />
-							<col width= "80%" />
-						</colgroup>
-			        		<thead>
-					        	<tr>
-					        		<td scope="col">제목</td>
-					        		<td scope="col" style="text-align: left;">&nbsp;&nbsp;&nbsp;${noticeDetail.title}</td>
-					        	</tr>
-					        	<tr>
-					        		<td scope="col">작성자</td>
-					        		<td scope="col" style="text-align: left;">&nbsp;&nbsp;&nbsp;${noticeDetail.nick}</td>
-					        	</tr>
-			        		</thead>
-			        			<tr class="notice-contents">
-		        					<td colspan="2" scope="colgroup">${noticeDetail.content}</td>
-		        				</tr>
-		    		</table>
-	        	</div>
-	        	<!-- ================== 목록, 수정 버튼 ================== -->
-	        	<div class="d-flex flex-row-reverse">
-					<span class="input-group-btn">
-						<a class="btn btn-secondary" href="/kanbu/board/noticeList.com" role="button">목록</a>
-						<c:if test="${sessionScope.status == 100}">
-							<a class="btn btn-secondary" href="/kanbu/board/noticeUpdateForm.com?noticeNum=${noticeDetail.index_num}" role="button">수정</a>
-							<a class="btn btn btn-danger" href="/kanbu/board/noticeDeletePro.com?noticeNum=${noticeDetail.index_num}" role="button"
-								onclick="alert('모든 내용이 삭제됩니다.');return alert('삭제되었습니다!');">삭제</a>
-						</c:if>
-							<!-- <button type="submit" id="a_save_btn"
-									class="btn btn-secondary">수정</button> -->
-					</span>
-				</div>
-	    	</div>
-	    </form>  
-	</div>
-	<!-- =================== 게시글 보기 끝 =================== -->
+
+<!-- =================== 게시글 보기 =================== -->
+<div class="container">
+	<form action="/kanbu/board/noticeWritePro.com" name="noticeForm" method="post">
+		<div class="row">
+			<div class="col-sm-12">
+        		<table class="table table-bordered table-condensed">
+		        	<colgroup>
+						<col width= "9%" />
+						<col width= "80%" />
+					</colgroup>
+		        		<thead>
+		        			
+				        	<tr>
+				        		<td scope="col">제목</td>
+				        		<td scope="col" style="text-align: left;">&nbsp;&nbsp;&nbsp;${noticeDetail.title}</td>
+				        	</tr>
+				        	<tr>
+				        		<td scope="col">작성자</td>
+				        		<td scope="col" style="text-align: left;">&nbsp;&nbsp;&nbsp;${noticeDetail.nick}</td>
+				        	</tr>
+		        		</thead>
+		        			<tr>
+		        				<td colspan="2" scope="colgroup" style="text-align: left; font-size: 12px;">
+		        				&nbsp;&nbsp;조회수&nbsp;&nbsp;${noticeDetail.views} </td>
+		        			</tr>
+		        			<tr class="notice-contents">
+	        					<td colspan="2" scope="colgroup">${noticeDetail.content}</td>
+	        				</tr>
+	    		</table>
+        	</div>
+        	<!-- ================== 목록, 수정 버튼 ================== -->
+        	<div class="d-flex flex-row-reverse">
+				<span class="input-group-btn">
+					<a class="btn btn-secondary" href="/kanbu/board/noticeList.com" role="button">목록</a>
+					<c:if test="${sessionScope.status == 100}">
+						<a class="btn btn-secondary" href="/kanbu/board/noticeUpdateForm.com?noticeNum=${noticeDetail.index_num}" role="button">수정</a>
+						<a class="btn btn btn-danger" href="/kanbu/board/noticeDeletePro.com?noticeNum=${noticeDetail.index_num}" role="button"
+							onclick="alert('모든 내용이 삭제됩니다.');return alert('삭제되었습니다!');">삭제</a>
+					</c:if>
+						<!-- <button type="submit" id="a_save_btn"
+								class="btn btn-secondary">수정</button> -->
+				</span>
+			</div>
+    	</div>
+    </form>  
+</div>
+<!-- =================== 게시글 보기 끝 =================== -->
+
 
     <footer class="footer" style="height: 391px;">
         <div class="footer_top">

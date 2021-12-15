@@ -34,7 +34,17 @@
 
     <link rel="stylesheet" href="/kanbu/resources/css/style.css">
     <!-- <link rel="stylesheet" href="css/responsive.css"> -->
+    
+<style>
+    
+    .submenu > li > a:hover{
+	  background-color: #D3D3D3;
+	}
+	
+</style>
 </head>
+
+
 
 <body>
     <!--[if lte IE 9]>

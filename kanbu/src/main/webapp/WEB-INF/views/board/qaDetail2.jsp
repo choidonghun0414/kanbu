@@ -9,7 +9,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Q&A | 자주하는 질문</title>
+    <title>noticeDetail</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -20,6 +20,7 @@
     <!-- CSS here -->
     <link rel="stylesheet" href="../resources/css/bootstrap.min.css">
     <link rel="stylesheet" href="../resources/css/bootstrap1.min.css">
+    <link rel="stylesheet" href="../resources/css/bootstrap2.min.css">
     <link rel="stylesheet" href="../resources/css/owl.carousel.min.css">
     <link rel="stylesheet" href="../resources/css/magnific-popup.css">
     <link rel="stylesheet" href="../resources/css/font-awesome.min.css">
@@ -33,25 +34,13 @@
     <!-- <link rel="stylesheet" href="css/responsive.css"> -->
     
 <style>
-     /* 푸터 사이즈 조절, 컨텐츠와 간격 조절 */
-    .footer .footer_top {
-   		margin-top: 110px;
-   		padding-top: 50px;
-   		padding-bottom: 30px;
-	}
-	
-	h3.md-30 {
-	    text-align: center;
-	    margin-top: 60px;
-	    margin-bottom: 60px;
-	    font-size: 60px;
+
+	.logo {
+		width: 140px;
+		height: 56px;
 	}
 
-	.progress-table .country {
-	    width: 300;
-	}
-	
-	a {
+    a {
 	    color: #007bff;
 	    text-decoration: none;
 	    background-color: transparent;
@@ -59,23 +48,48 @@
 	    color: inherit;
 	}
 	
-	.blog-pagination{
-		margin-top: auto;
+	h3.md-30 {
+	    text-align: center;
+	    margin-top: 60px;
+	    margin-bottom: 60px;
+	    font-size: 35px;
 	}
 	
-	.search-form {
-		margin-top: 50px;
+	.mb_70 {
+    	margin-bottom: 30px;
 	}
 	
+	/* 검색 input창 서타일 */
+	input.form-control {
+		margin-bottom: 50px;
+		width: 300px;
+	}
 	
 	/* 버튼 왼쪽의 여백 */
 	.input-group-btn{
 		margin-left: 5px;
 	}
 	
+	/* 푸터 사이즈 조절, 컨텐츠와 간격 조절 */
+    .footer .footer_top {
+   		margin-top: 110px;
+   		padding-top: 50px;
+   		padding-bottom: 30px;
+	}
+	
+	.notice-contents{
+		height: 100%;
+	}
+	
+	.notice-contents > td{
+		text-align: center;
+		padding: 30px;
+	}
+	
 	.submenu > li > a:hover{
 	  background-color: #D3D3D3;
 	}
+	
 </style>
 </head>
 
@@ -143,135 +157,57 @@
     </header>
     <!-- header-end -->
 
-    <!-- bradcam_area  -->
-    <div class="bradcam_area bradcam_bg_4">
-        <div class="container">
-            <div class="row">
-                <div class="col-xl-12">
-                    <div class="bradcam_text text-center">
-                        <h3>Any Where, Wherever</h3>
-                        <p></p>
-                        <p>Wherever You Want To Go, With Kanbu</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    
 
-	<!--======== 자주하는 질문 헤더 ========  -->
+    <!-- bradcam_area  -->
 	<div class="container box_1170">
 		<h3 class="md-30">자주하는 질문</h3>
 	</div>
 	
-	<!--======== 자주하는 질문 목록 테이블 ========  -->
-	<div class="container box_1170">
-		<table class="table table-hover">
-			<thead>
-				<tr>
-					<th width="50">No.</th>
-					<th width="650">제목</th>
-					<th width="50">작성자</th>
-					<th width="50">작성일</th>
-					<th width="50">조회수</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr class="table-active">
-					<th scope="row">공지</th>
-					<td><a href="/kanbu/board/qaDetail1.com">일정 등록은 어떻게 하나요?</a></td>
-					<td>깐부</td>
-					<td>2021.11.19</td>
-					<td>121</td>
-				</tr>
-				<tr class="table-active">
-					<th scope="row">공지</th>
-					<td><a href="/kanbu/board/qaDetail2.com">회원만 이용 가능한가요?</a></td>
-					<td>깐부</td>
-					<td>2021.11.19</td>
-					<td>59</td>
-				</tr>
-				<tr class="table-active">
-					<th scope="row">공지</th>
-					<td>제 목</td>
-					<td>깐부</td>
-					<td>2021.11.19</td>
-					<td>84</td>
-				</tr>
-				<tr>
-					<th scope="row">[4]</th>
-					<td>질문 제목4</td>
-					<td>홍길동4</td>
-					<td>2021.11.14</td>
-					<td>4</td>
-				</tr>
-				<tr>
-					<th scope="row">[3]</th>
-					<td>질문 제목3</td>
-					<td>홍길동3</td>
-					<td>2021.11.13</td>
-					<td>3</td>
-				</tr>
-				<tr>
-					<th scope="row">[2]</th>
-					<td>질문 제목2</td>
-					<td>홍길동2</td>
-					<td>2021.11.12</td>
-					<td>2</td>
-				</tr>
-				<tr>
-					<th scope="row">[1]</th>
-					<td>질문 제목1</td>
-					<td>홍길동1</td>
-					<td>2021.11.11</td>
-					<td>1</td>
-				</tr>
-			</tbody>
-		</table>
-		
-		<!-- ============글 등록 버튼 (( 관리자에게만 보이게 해야함...))============ -->
-		<c:if test="${sessionScope.status == 100}">
-		<div class="d-flex flex-row-reverse">
-			<span class="input-group-btn">
-				<a class="btn btn-secondary" href="/kanbu/board/qaWrite.com" role="button">등록</a>
-			</span>
-		</div>
-		</c:if>
 	
-		<!-- ============ 게시판 페이징 표시 ============ -->
-		<nav class="blog-pagination d-flex justify-content-center">
-			<ul class="pagination">
-				<li class="page-item"><a href="#" class="page-link"
-					aria-label="Previous"> <i class="ti-angle-left"></i>
-				</a></li>
-				<li class="page-item"><a href="#" class="page-link">1</a></li>
-				<li class="page-item"><a href="#" class="page-link"
-					aria-label="Next"> <i class="ti-angle-right"></i>
-				</a></li>
-			</ul>
-		</nav>
-		
-		<!-- ========게시판 검색창======== -->
-		
-		<div class="search-form">
-			<div class="d-flex justify-content-center">
-				<div class="input-group-prepend">
-					<button class="btn btn-outline-secondary dropdown-toggle"
-						type="button" data-toggle="dropdown" aria-haspopup="true"
-						aria-expanded="false">제목</button>
-					<div class="dropdown-menu">
-						<a class="dropdown-item" href="#">작성자</a>
-					</div>
-				</div>
-				<input type="text" class="form-control" placeholder="검색어 입력">
+<!-- =================== 게시글 보기 =================== -->
+<div class="container">
+	<form action="/kanbu/board/noticeWritePro.com" name="noticeForm" method="post">
+		<div class="row">
+			<div class="col-sm-12">
+        		<table class="table table-bordered table-condensed">
+		        	<colgroup>
+						<col width= "9%" />
+						<col width= "80%" />
+					</colgroup>
+		        		<thead>
+				        	<tr>
+				        		<td scope="col">제목</td>
+				        		<td scope="col" style="text-align: left;">&nbsp;&nbsp;&nbsp;회원만 이용 가능한가요?</td>
+				        	</tr>
+				        	<tr>
+				        		<td scope="col">작성자</td>
+				        		<td scope="col" style="text-align: left;">&nbsp;&nbsp;&nbsp;깐부</td>
+				        	</tr>
+		        		</thead>
+		        			<tr class="notice-contents">
+	        					<td colspan="2" scope="colgroup">네 회원가입 후 이용 바랍니다.</td>
+	        				</tr>
+	    		</table>
+        	</div>
+        	<!-- ================== 목록, 수정 버튼 ================== -->
+        	<div class="d-flex flex-row-reverse">
 				<span class="input-group-btn">
-					<button class="btn btn-secondary" type="button">검색</button>
+					<a class="btn btn-secondary" href="/kanbu/board/questionList.com" role="button">목록</a>
+					<%-- <c:if test="${sessionScope.status == 100}">
+						<a class="btn btn-secondary" href="/kanbu/board/noticeUpdateForm.com?noticeNum=${noticeDetail.index_num}" role="button">수정</a>
+						<a class="btn btn btn-danger" href="/kanbu/board/noticeDeletePro.com?noticeNum=${noticeDetail.index_num}" role="button"
+							onclick="alert('모든 내용이 삭제됩니다.');return alert('삭제되었습니다!');">삭제</a>
+					</c:if> --%>
+						<!-- <button type="submit" id="a_save_btn"
+								class="btn btn-secondary">수정</button> -->
 				</span>
 			</div>
-		</div>
-	</div>
+    	</div>
+    </form>  
+</div>
+<!-- =================== 게시글 보기 끝 =================== -->
 
-	<!-- End Align Area -->
+
 
 
     <!-- footer start -->
@@ -466,6 +402,8 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 
         });
     </script>
+    
+  
     </body>
     
     </html>

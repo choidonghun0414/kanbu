@@ -104,6 +104,11 @@
 		.border {
 			width: 75%;
 		}
+		
+		.submenu > li > a:hover{
+		  background-color: #D3D3D3;
+		}
+		
 	</style>
 	
 </head>
@@ -330,6 +335,30 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
         });
     </script>
     
+    <script>
+	$(document).ready(function(){
+		$("#a_save_btn").on("click", function(){
+			if($("#title").val()==""){
+				alert("제목을 입력해주세요.");
+				$("#title").focus();
+				return false;
+			}
+			if($("#summernote").val()==""){
+				alert("내용을 입력해주세요.");
+				$("#summernote").focus();
+				return false;
+			}else{
+				var result = confirm("공지를 수정하시겠습니까?");
+				if(!result){
+					return false;
+				}
+			}
+		});
+	})
+	</script>
+    
+    	
+    </body>
     <script type="text/javascript">
     	function logOut(){
     		alert("로그아웃 되었습니다.");
