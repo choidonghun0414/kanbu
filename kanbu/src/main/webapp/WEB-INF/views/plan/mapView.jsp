@@ -8,7 +8,7 @@
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<title>Insert title here</title>
+	<title>일정만들기</title>
 	<script src="/kanbu/resources/js/jquery-3.6.0.min.js" type="text/javascript"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.js"></script>
@@ -67,7 +67,6 @@
 		  transition-duration: 1s;
 		  transition-timing-function: ease-out;
 		  transition-delay: 50ms;
-		  word-break:break-all;
 		  float: left;
 	  }
 	  
@@ -134,7 +133,6 @@
 <!-- 찜목록 기능 -->
 	<script type="text/javascript">
 	$(document).ready(function() {
-		var placeArr = []; 
 		$(document).on("click", "#fav_add", function() {
 			var $place_area = $(this).parent().parent().clone(true);
 			$place_area.find(".remove").remove();
@@ -237,7 +235,7 @@
 			console.log("일정제목::"+title);
 			
 			var favorTitleList = "";
-			$("#fav_list div").each(function(index, element){
+			$("#fav_list #ddiv").each(function(index, element){
 				var favorTitle = $(element).find("p").text();
 				favorTitleList += favorTitle;
 				favorTitleList += "|";
@@ -270,7 +268,9 @@
 		<div class="inner-div">
 		
 			<div class="div_top">
-				<img src="/kanbu/resources/img/logo.png" height="40" style="margin-right:20px; margin-left: 10px;">
+				<a href="/kanbu/main.com">
+					<img src="/kanbu/resources/img/logo.png" height="40" style="margin-right:20px; margin-left: 10px;">
+				</a>
 				<span style="margin-right:20px;">
 					<font face="나눔고딕" size="4"><b>${sessionScope.nick}님의 여행일정</b></font>
 				</span>
@@ -321,7 +321,7 @@
 						<div style="text-align: center;">
 							<font face="나눔고딕" size="4">❤️ <b>찜 목록</b></font>
 						</div>
-						<div style="width:100%; height:280px; overflow:auto;">
+						<div style="width:100%; height:252px; overflow:auto;">
 							<div id="fav_list" style="margin-top:3px; margin-bottom:3px; margin-left:5px; margin-right:5px;">
 							</div>
 						</div>
@@ -349,12 +349,14 @@
 			<div style="height:150px; width:350px;">
 				<div class="place_area" style="margin-top:3px; margin-bottom:3px; margin-left:5px; margin-right:5px;">
 					<div style="float:left;">
-						<img src="${place.picture1}" height="100" width="100">
+						<img src="${uploadPath+=place.picture1}" height="100" width="100">
 					</div>
 					<div style="float:left; margin-left:5px; height:100px; width:230px; 
 						 display:inline-block; text-overflow:ellipsis;">
-							<p class="p1" id="${status.index}" style="cursor: pointer;" 
-							   onclick="markMap(${status.index});"><b>${place.name}</b></p>
+						 	<div id=ddiv>
+								<p class="p1" id="${status.index}" style="cursor: pointer;" 
+								   onclick="markMap(${status.index});"><b>${place.name}</b></p>
+							</div>
 							<p class="pList" id="addr"><b>주소:</b> ${place.addr}</p>
 							<p class="pList" id="parking"><b>주차여부:</b> 
 								<c:if test="${place.parking == 1}">

@@ -106,4 +106,10 @@
  		where index_num=#{index_num}
  	</select>
  
+ 	<!-- 장소정보 전체 검색 sql문 -->
+    <select id="selectPlace" resultType="placeDTO">
+       select index_num, name, addr, latitude, longitude, parking, picture1
+       from place order by index_num desc
+    </select>
+    
  </mapper>

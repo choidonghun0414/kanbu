@@ -9,7 +9,7 @@
 <head>
 	<meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-	<title>Insert title here</title>
+	<title>나의 일정 리스트</title>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 	<meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -29,7 +29,7 @@
     <link rel="stylesheet" href="/kanbu/resources/css/flaticon.css">
     <link rel="stylesheet" href="/kanbu/resources/css/gijgo.css">
     <link rel="stylesheet" href="/kanbu/resources/css/animate.css">
-    <link rel="stylesheet" href="/kanburesources/css/slick.css">
+    <link rel="stylesheet" href="/kanbu/resources/css/slick.css">
     <link rel="stylesheet" href="/kanbu/resources/css/slicknav.css">
     <link rel="stylesheet" href="/kanbu/resources/css/style.css">
     <!-- <link rel="stylesheet" href="css/responsive.css"> -->
@@ -74,6 +74,10 @@
 		.input-group-btn{
 			margin-left: 5px;
 		}
+		
+		.submenu > li > a:hover{
+	  background-color: #D3D3D3;
+	}
 		
 	</style>
 </head>
