@@ -335,7 +335,6 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
         });
     </script>
     
-<<<<<<< HEAD
     <script>
 	$(document).ready(function(){
 		$("#a_save_btn").on("click", function(){
@@ -360,13 +359,11 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
     
     	
     </body>
-=======
     <script type="text/javascript">
     	function logOut(){
     		alert("로그아웃 되었습니다.");
     	}
     </script>
->>>>>>> branch 'main' of https://github.com/choidonghun0414/kanbu.git
     
     <script type="text/javascript">
     	function search(){
