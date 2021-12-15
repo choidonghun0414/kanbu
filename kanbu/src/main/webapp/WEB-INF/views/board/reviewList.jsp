@@ -69,6 +69,16 @@
 		text-align: center;
 	}
 	
+	.submenu > li > a:hover{
+	  background-color: #D3D3D3;
+	}
+	
+	.btn-outline-info{
+		margin-top: 5px;
+		margin-bottom: 3px;
+		font-size: 13px;
+	}
+	
 </style>
 </head>
 
@@ -98,7 +108,6 @@
                                                 <ul class="submenu">
                                                         <li><a href="/kanbu/board/reviewList.com">여행후기</a></li>
                                                         <li><a href="/kanbu/board/noticeList.com">공지사항</a></li>
-                                                        <li><a href="/kanbu/board/questionList.com">자주하는질문</a></li>
                                                 </ul>
                                             </li>
                                         </ul>
@@ -168,9 +177,15 @@
                         <h3>어떤 여행을 떠나시나요?</h3>
                     </div>
                     <div class="d-flex justify-content-center">
-						<input type="text" class="form-control" placeholder="검색어 입력">
+                    	<select name="thema" id="thema" class="form-control">
+							<!-- <option value="select" selected>선택</option> -->
+                  	   		<option value="p.title">제목</option>
+                  	   		<option value="rm.nick">작성자</option>
+                  	   		<option value="t.tag">태그</option>
+                  	   	</select>
+						<input type="text" class="form-control" name="keyword" id="keyword" placeholder="검색어 입력">
 						<span class="input-group-btn">
-							<button class="btn btn-secondary" type="button">검색</button>
+							<button class="btn btn-secondary" id="reviewSearch" type="button" onclick="searchReview();">검색</button>
 						</span>
 					</div>
                 </div>
@@ -186,25 +201,32 @@
 	                <div class="col-lg-4 col-md-6">
 	                    <div class="single_place">
 	                        <div class="thumb">
-	                            <img src="../resources/img/place/1.png" alt="">
-	                            <a href="#" class="prise">${review.views}</a>
+	                            <a href="/kanbu/board/reviewDetail.com?reviewNum=${review.index_num}">
+	                            	<c:if test="${!empty (review.picture1)}">
+	                            		<img src="${uploadPath+=review.picture1}" alt="" width="360px" height="200px">
+	                            	</c:if>
+	                            	<c:if test="${empty (review.picture1)}">
+	                            		<img src="/kanbu/resources/img/place/1.png" alt="" width="360px" height="200px">
+	                            	</c:if>
+	                            </a>
+	                            <div class="prise">${review.views}</div>
 	                        </div>
 	                        <div class="place_info">
 	                            <a href="/kanbu/board/reviewDetail.com?reviewNum=${review.index_num}"><h3>${review.title}</h3></a>
 	                            <c:if test="${reviewTagCount > 0}">
 	                            	<c:forEach var="reviewTag" items="${reviewTagList}">
 	                            		<c:if test="${review.index_num == reviewTag.index_num}">
-	                            			#${reviewTag.name}&nbsp
+	                            			<div class="btn btn-outline-info btn-sm">#${reviewTag.name}&nbsp</div>
 	                            		</c:if>
 	                            	</c:forEach>
 	                            </c:if>
 	                            <div class="rating_days d-flex justify-content-between">
 	                                <span class="d-flex justify-content-center align-items-center">
-	                                     <a href="/kanbu/board/reviewDetail.com">${review.nick}</a>
+	                                     <a href="/kanbu/board/reviewDetail.com?reviewNum=${review.index_num}">${review.nick}</a>
 	                                </span>
 	                                <div class="days">
 	                                    <i class="fa fa-clock-o"></i>
-	                                    <a href="/kanbu/board/reviewDetail.com"><fmt:formatDate value="${review.reg_date}" type="date"/></a>
+	                                    <a href="/kanbu/board/reviewDetail.com?reviewNum=${review.index_num}"><fmt:formatDate value="${review.reg_date}" type="date"/></a>
 	                                </div>
 	                            </div>
 	                        </div>
@@ -245,7 +267,7 @@
 	                        	</a>
 	                        </c:if>
 	                        <c:if test="${searchCount == 1}">
-	                        	<a href="/kanbu/board/review/search.com?thema=${search.thema}&keyword=${search.keyword}&pageNum=${startPage-5}" 
+	                        	<a href="/kanbu/board/reviewSearch.com?thema=${thema}&keyword=${keyword}&pageNum=${startPage-5}" 
 	                    	   	   class="page-link">
 	                        		&laquo;
 	                        	</a>
@@ -259,7 +281,7 @@
 	                    		<a href="/kanbu/board/reviewList.com?pageNum=${i}" class="page-link">${i}</a>
 	                    	</c:if>
 	                    	<c:if test="${searchCount == 1}">
-	                    		<a href="/kanbu/board/review/search.com?thema=${search.thema}&keyword=${search.keyword}&pageNum=${i}" 
+	                    		<a href="/kanbu/board/reviewSearch.com?thema=${thema}&keyword=${keyword}&pageNum=${i}" 
 	                    		   class="page-link">${i}</a>
 	                    	</c:if>
 	                    </li>
@@ -274,7 +296,7 @@
 	                       	 	</a>
 	                       	</c:if>
 	                       	<c:if test="${searchCount == 1}">
-	                       		<a href="/kanbu/board/review/search.com?thema=${search.thema}&keyword=${search.keyword}&pageNum=${startPage+5}" 
+	                       		<a href="/kanbu/board/reviewSearch.com?thema=${thema}&keyword=${keyword}&pageNum=${startPage+5}" 
 	                           	   class="page-link">
 	                        		&raquo;
 	                       	 	</a>
@@ -290,120 +312,19 @@
 	<!-- End Align Area -->
 
 
-    <!-- footer start -->
-    <footer class="footer">
+   <footer class="footer" style="height: 391px;">
         <div class="footer_top">
-            <div class="container">
+            <div class="container" align="center">
                 <div class="row">
-                    <div class="col-xl-4 col-md-6 col-lg-4 ">
+                    <div class="col-lg-12">
                         <div class="footer_widget">
                             <div class="footer_logo">
-                                <a href="#">
-                                    <img src="/kanbu/resources/img/footer_logo.png" alt="">
-                                </a>
-                            </div>
-                            <p>5th flora, 700/D kings road, green <br> lane New York-1782 <br>
-                                <a href="#">+10 367 826 2567</a> <br>
-                                <a href="#">contact@carpenter.com</a>
-                            </p>
-                            <div class="socail_links">
-                                <ul>
-                                    <li>
-                                        <a href="#">
-                                            <i class="ti-facebook"></i>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            <i class="ti-twitter-alt"></i>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            <i class="fa fa-instagram"></i>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            <i class="fa fa-pinterest"></i>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            <i class="fa fa-youtube-play"></i>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-
-                        </div>
-                    </div>
-                    <div class="col-xl-2 col-md-6 col-lg-2">
-                        <div class="footer_widget">
-                            <h3 class="footer_title">
-                                Company
-                            </h3>
-                            <ul class="links">
-                                <li><a href="#">Pricing</a></li>
-                                <li><a href="#">About</a></li>
-                                <li><a href="#"> Gallery</a></li>
-                                <li><a href="#"> Contact</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="col-xl-3 col-md-6 col-lg-3">
-                        <div class="footer_widget">
-                            <h3 class="footer_title">
-                                Popular destination
-                            </h3>
-                            <ul class="links double_links">
-                                <li><a href="#">Indonesia</a></li>
-                                <li><a href="#">America</a></li>
-                                <li><a href="#">India</a></li>
-                                <li><a href="#">Switzerland</a></li>
-                                <li><a href="#">Italy</a></li>
-                                <li><a href="#">Canada</a></li>
-                                <li><a href="#">Franch</a></li>
-                                <li><a href="#">England</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="col-xl-3 col-md-6 col-lg-3">
-                        <div class="footer_widget">
-                            <h3 class="footer_title">
-                                Instagram
-                            </h3>
-                            <div class="instagram_feed">
-                                <div class="single_insta">
-                                    <a href="#">
-                                        <img src="../resources/img/instagram/1.png" alt="">
-                                    </a>
-                                </div>
-                                <div class="single_insta">
-                                    <a href="#">
-                                        <img src="../resources/img/instagram/2.png" alt="">
-                                    </a>
-                                </div>
-                                <div class="single_insta">
-                                    <a href="#">
-                                        <img src="../resources/img/instagram/3.png" alt="">
-                                    </a>
-                                </div>
-                                <div class="single_insta">
-                                    <a href="#">
-                                        <img src="../resources/img/instagram/4.png" alt="">
-                                    </a>
-                                </div>
-                                <div class="single_insta">
-                                    <a href="#">
-                                        <img src="../resources/img/instagram/5.png" alt="">
-                                    </a>
-                                </div>
-                                <div class="single_insta">
-                                    <a href="#">
-                                        <img src="../resources/img/instagram/6.png" alt="">
-                                    </a>
-                                </div>
+								<img src="/kanbu/resources/img/footer_logo.png" alt="" style="float: left;">
+								<p>
+										it컴퓨터 학원 5층 FDX 자바 교육반 &nbsp;&nbsp;|&nbsp;&nbsp; 양재역 10분도보 
+                                		&nbsp;&nbsp;|&nbsp;&nbsp; +10 367 826 2567
+                                		&nbsp;&nbsp;|&nbsp;&nbsp; contact@kanbu.com
+                            	</p>
                             </div>
                         </div>
                     </div>
@@ -417,7 +338,7 @@
                     <div class="col-xl-12">
                         <p class="copy_right text-center">
                             <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | Kanbu Travel <i class="fa fa-heart-o" aria-hidden="true"></i> <a href="https://colorlib.com" target="_blank"></a>
 <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
                         </p>
                     </div>
@@ -425,15 +346,15 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
             </div>
         </div>
     </footer>
-    <!--/ footer end  -->
 
+  <!-- 검색창 -->
   <!-- Modal -->
   <div class="modal fade custom_search_pop" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
       <div class="modal-content">
         <div class="serch_form">
-            <input type="text" placeholder="Search" >
-            <button type="submit">search</button>
+            <input type="text" name="keyword" id="keyword" placeholder="검색할 장소를 입력해주세요..." >
+            <button type="submit" onclick="return search();">search</button>
         </div>
       </div>
     </div>
@@ -481,6 +402,56 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
          }
 
         });
+    </script>
+    
+      <!-- 리뷰 검색 유효성 검사 -->
+    <script type="text/javascript">
+    	function searchReview(){
+    		var target = document.getElementById("thema");
+  			var thema = target.options[target.selectedIndex].value;
+  			var keyword = document.getElementById('keyword').value
+  			
+  			if(thema != null && thema != "" && thema !="select"){
+  				if(keyword != null && keyword != ""){
+  					window.location = '/kanbu/board/reviewSearch.com?thema='+thema+'&keyword='+keyword;
+  				}else{
+  					alert("검색어를 입력해주세요.");
+  					return false;
+  				}
+  			}else{
+  				alert("검색 테마를 선택해주세요.");
+  				return false;
+  			}			
+    	}
+    </script>
+    
+    <!-- 엔터로 검색 -->
+    <script>
+    $('#keyword').keypress(function(event){
+        if ( event.which == 13 ) {
+            $('#reviewSearch').click();
+            return false;
+        }
+   });
+    </script>
+    
+    <script type="text/javascript">
+    	function logOut(){
+    		alert("로그아웃 되었습니다.");
+    	}
+    </script>
+    
+    <script type="text/javascript">
+    	function search(){
+    		var place = document.getElementById('keyword').value
+    		
+    		if(place == null || place == ""){
+    			alert("검색할 장소를 입력해주세요.");
+    			return false;
+    		}else{
+    			window.location = '/kanbu/search.com?keyword='+place;
+    		}
+    	}
     </script>
     </body>
     

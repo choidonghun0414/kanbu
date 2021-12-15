@@ -81,7 +81,6 @@
               <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="boardDropdown">
                 <a class="dropdown-item" href="/kanbu/board/reviewList.com">여행후기</a>
                 <a class="dropdown-item" href="/kanbu/board/noticeList.com">공지사항</a>
-                <a class="dropdown-item" href="/kanbu/board/questionList.com">자주하는질문</a>
               </div>
             </li>        
           </ul>
@@ -211,8 +210,8 @@
             <div class="collapse" id="charts">
               <ul class="nav flex-column sub-menu">
                 <li class="nav-item"> <a class="nav-link" href="/kanbu/admin/board/reviewInfo.com">여행후기</a></li>
+                <li class="nav-item"> <a class="nav-link" href="/kanbu/admin/board/reviewReply.com">여행후기댓글</a></li>
                 <li class="nav-item"> <a class="nav-link" href="/kanbu/board/noticeList.com">공지사항</a></li>
-                <li class="nav-item"> <a class="nav-link" href="/kanbu/admin/board/qaInfo.com">자주하는질문</a></li>
               </ul>
             </div>
           </li>    

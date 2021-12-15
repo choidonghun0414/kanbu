@@ -141,7 +141,6 @@
                                                 <ul class="submenu">
                                                         <li><a href="/kanbu/board/reviewList.com">여행후기</a></li>
                                                         <li><a href="/kanbu/board/noticeList.com">공지사항</a></li>
-                                                        <li><a href="/kanbu/board/questionList.com">자주하는질문</a></li>
                                                 </ul>
                                             </li>
                                         </ul>
@@ -179,7 +178,6 @@
                             </div>
                         </div>
                     </div>
-
                 </div>
             </div>
         </div>
@@ -208,7 +206,8 @@
 
 	<!-- ================== 게시글 등록 폼 =================== -->
 	<div class="container">
-		<form action="/kanbu/board/noticeWritePro.com" name="noticeForm" method="post">
+		<form action="/kanbu/board/noticeWritePro.com" name="noticeForm"
+			method="post">
 			<table class="table table-write" id="add_mt">
 				<colgroup>
 					<col style="width:120px" />
@@ -236,9 +235,8 @@
 				</script>
 				<!-- ============글 등록 버튼 (목록으로 돌아옴) ============ -->
 			<div class="d-flex flex-row-reverse">
-				<span class="input-group-btn">		
-					<button type="submit" id="a_save_btn" 
-						    class="btn btn-secondary">등록</button>
+				<span class="input-group-btn">
+					<button type="submit" id="a_save_btn" class="btn btn-secondary">등록</button>
 				</span>
 			</div>
 		</form>
@@ -318,7 +316,6 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 	<script src="/kanbu/resources/js/jquery.form.js"></script>
 	<script src="/kanbu/resources/js/jquery.validate.min.js"></script>
 	<script src="/kanbu/resources/js/mail-script.js"></script>
-
 	<script src="/kanbu/resources/js/main.js"></script>
     <script>
         $('#datepicker').datepicker({
@@ -335,7 +332,30 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 
         });
     </script>
-    
+
+	<!-- 공지사항 작성 유효성 검사  -->
+	<script>
+	$(document).ready(function(){
+		$("#a_save_btn").on("click", function(){
+			if($("#title").val()==""){
+				alert("제목을 입력해주세요.");
+				$("#title").focus();
+				return false;
+			}
+			if($("#summernote").val()==""){
+				alert("내용을 입력해주세요.");
+				$("#summernote").focus();
+				return false;
+			}else{
+				var result = confirm("공지를 등록하시겠습니까?");
+				if(!result){
+					return false;
+				}
+			}
+		});
+	})
+	</script>
+
     <script type="text/javascript">
     	function logOut(){
     		alert("로그아웃 되었습니다.");

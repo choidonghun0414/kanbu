@@ -383,6 +383,52 @@ public class AdminController {
 		return "/admin/board/reviewList";
 	}
 	
+	// 관리자 리뷰 댓글 조회 페이지
+	@RequestMapping("/admin/board/reviewReply.com")
+	public String adminReviewReply(HttpServletRequest request, Model model) throws Exception{
+		// 페이징 처리
+		int pageSize = 10;											// 한페이지에 보여줄 정보 갯수
+		String pageNum = request.getParameter("pageNum");			// view에서 넘어온 페이지번호
+		if(pageNum == null) {										// view에서 넘어온 페이지번호가 없으면 1로 대입
+			pageNum = "1";
+		}
+						
+		int currentPage = Integer.parseInt(pageNum);				// 현재 페이지번호
+		int startRow = (currentPage - 1) * pageSize + 1;			// 시작 번호
+		int endRow = currentPage * pageSize;						// 끝 번호
+		board.setStartRow(startRow);
+		board.setEndRow(endRow);
+						
+		// 리뷰댓글 전체 정보 조회
+		int reviewReplyCount = adminImpl.selectTotalReviewReplyCount();
+		List<BoardDTO> reviewReplyList = null;
+		
+		if(reviewReplyCount > 0) {
+			reviewReplyList = adminImpl.selectTotalReviewReply(board);
+		}
+				
+		request.setAttribute("currentPage", currentPage);
+		request.setAttribute("startRow", board.getStartRow());
+		request.setAttribute("endRow", board.getEndRow());
+		request.setAttribute("pageSize", pageSize);
+		request.setAttribute("pageNum", pageNum);
+						
+		model.addAttribute("reviewReplyCount", reviewReplyCount);
+		model.addAttribute("reviewReplyList", reviewReplyList);
+		
+		return "/admin/board/reviewReplyList";
+	}
+	
+	// 관리자 리뷰 댓글 삭제
+	@RequestMapping("/admin/board/reviewReply/delete.com")
+	public String adminReviewReplyDelete(HttpServletRequest request) throws Exception{
+		int index_num = Integer.parseInt(request.getParameter("replyNum"));
+		System.out.println(index_num);
+		adminImpl.reviewReplyDeleteAdmin(index_num);
+			
+		return "redirect:/admin/board/reviewReply.com";
+	}
+	
 	// 관리자 검색 기능
 	@RequestMapping("/admin/search.com")
 	public String adminSearch(HttpServletRequest request, Model model) throws Exception{

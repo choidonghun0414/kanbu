@@ -157,5 +157,23 @@ public class AdminDAOImpl implements AdminDAO{
 		return mybatis.selectList("admin.searchReviewTag", search);
 	}
 
+	// 등록된 리뷰 전체 댓글수 검색
+	@Override
+	public int selectTotalReviewReplyCount() throws Exception {
+		return mybatis.selectOne("admin.selectTotalReviewReplyCount");
+	}
+
+	// 등록된 리뷰 전체 댓글 검색
+	@Override
+	public List<BoardDTO> selectTotalReviewReply(BoardDTO board) throws Exception {
+		return mybatis.selectList("admin.selectTotalReviewReply", board);
+	}
+
+	// 등록된 리뷰 댓글 삭제(관리자)
+	@Override
+	public void reviewReplyDeleteAdmin(int index_num) throws Exception {
+		mybatis.update("admin.reviewReplyDeleteAdmin", index_num);
+	}
+
 
 }

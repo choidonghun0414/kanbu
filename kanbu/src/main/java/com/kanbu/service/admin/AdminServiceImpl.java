@@ -157,5 +157,23 @@ public class AdminServiceImpl implements AdminService{
 		return adminDAO.searchReviewTag(search);
 	}
 
+	// 등록된 리뷰 전체 댓글수 검색
+	@Override
+	public int selectTotalReviewReplyCount() throws Exception {
+		return adminDAO.selectTotalReviewReplyCount();
+	}
+
+	// 등록된 리뷰 전체 댓글 검색
+	@Override
+	public List<BoardDTO> selectTotalReviewReply(BoardDTO board) throws Exception {
+		return adminDAO.selectTotalReviewReply(board);
+	}
+
+	// 등록된 리뷰 댓글 삭제(관리자)
+	@Override
+	public void reviewReplyDeleteAdmin(int index_num) throws Exception {
+		adminDAO.reviewReplyDeleteAdmin(index_num);
+	}
+
 
 }

@@ -86,7 +86,6 @@
                                                 <ul class="submenu">
                                                         <li><a href="/kanbu/board/reviewList.com">여행후기</a></li>
                                                         <li><a href="/kanbu/board/noticeList.com">공지사항</a></li>
-                                                        <li><a href="/kanbu/board/questionList.com">자주하는질문</a></li>
                                                 </ul>
                                             </li>
                                         </ul>
@@ -183,8 +182,8 @@
                         </div>
                         <h3>게시판 관리</h3>
                         <p onclick="location.href ='/kanbu/admin/board/reviewInfo.com'" style="cursor:pointer;">여행후기</p>
-                        <p onclick="location.href ='/kanbu/board/noticeList.com'" style="cursor:pointer;">공지사항</p>
-                        <p onclick="location.href ='/kanbu/admin/board/qaInfo.com'" style="cursor:pointer;">자주하는질문</p>
+              			<p onclick="location.href ='/kanbu/admin/board/reviewReply.com'" style="cursor:pointer;">여행후기댓글</p>
+                        <p onclick="location.href ='/kanbu/board/noticeList.com'" style="cursor:pointer;">공지사항</p>     
                     </div>
                 </div>
             </div>

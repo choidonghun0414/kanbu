@@ -400,7 +400,6 @@ public class MemberController {
 		int myReviewTagCount = 0;
 		List<BoardDTO> myReviewList = null;
 		List<BoardDTO> myReviewTagList = null;
-//		List<SearchDTO> myReviewNumList = null;
 		
 		if(writer > 0) {
 			search.setWriter(writer);
@@ -518,6 +517,95 @@ public class MemberController {
 		model.addAttribute("myPlaceReplyList", myPlaceReplyList);
 
 		return "/member/myPlaceReplyList";
+	}
+	
+	
+	// 마이페이지 내가 쓴 리뷰 댓글 페이지
+	@RequestMapping("/mypage/board/reviewReply.com")
+	public String reviewReplyInfo(HttpServletRequest request, HttpSession session, Model model) throws Exception{
+		int pageSize = 10;											// 한페이지에 보여줄 정보 갯수
+		String pageNum = request.getParameter("pageNum");			// view에서 넘어온 페이지번호
+		if(pageNum == null) {										// view에서 넘어온 페이지번호가 없으면 1로 대입
+			pageNum = "1";
+		}
+		
+		int currentPage = Integer.parseInt(pageNum);				// 현재 페이지번호
+		int startRow = (currentPage - 1) * pageSize + 1;			// 시작 번호
+		int endRow = currentPage * pageSize;						// 끝 번호
+		board.setStartRow(startRow);
+		board.setEndRow(endRow);
+		
+		int writer = (Integer)session.getAttribute("index_num");
+		int myReviewReplyCount = 0;
+		List<BoardDTO> myReviewReplyList = null;
+
+		if(writer > 0) {
+			board.setWriter(writer);
+			myReviewReplyCount = memberImpl.myReviewReplyCount(writer);
+		}
+	
+		if(myReviewReplyCount > 0) {
+			myReviewReplyList = memberImpl.myReviewReply(board);
+		}
+		
+		request.setAttribute("currentPage", currentPage);
+		request.setAttribute("startRow", board.getStartRow());
+		request.setAttribute("endRow", board.getEndRow());
+		request.setAttribute("pageSize", pageSize);
+		request.setAttribute("pageNum", pageNum);
+		
+		model.addAttribute("myReviewReplyCount", myReviewReplyCount);
+		model.addAttribute("myReviewReplyList", myReviewReplyList);
+
+		return "/member/myReviewReplyList";
+	}
+	
+	// 마이페이지 내가 쓴 리뷰 댓글 검색 결과 목록 페이지
+	@RequestMapping("/mypage/board/reviewReply/search.com")
+	public String myReviewReplySearch(HttpServletRequest request, HttpSession session, Model model) throws Exception{
+		int pageSize = 10;											// 한페이지에 보여줄 정보 갯수
+		String pageNum = request.getParameter("pageNum");			// view에서 넘어온 페이지번호
+		if(pageNum == null) {										// view에서 넘어온 페이지번호가 없으면 1로 대입
+			pageNum = "1";
+		}
+			
+		int currentPage = Integer.parseInt(pageNum);				// 현재 페이지번호
+		int startRow = (currentPage - 1) * pageSize + 1;			// 시작 번호
+		int endRow = currentPage * pageSize;						// 끝 번호
+		search.setStartRow(startRow);
+		search.setEndRow(endRow);
+		
+		int searchCount = 1;
+		String thema = request.getParameter("thema");
+		String keyword = request.getParameter("keyword");
+		search.setThema(thema);
+		search.setKeyword(keyword);
+			
+		int writer = (Integer)session.getAttribute("index_num");
+		int myReviewReplyCount = 0;
+		List<BoardDTO> myReviewReplyList = null;
+
+		if(writer > 0) {
+			search.setWriter(writer);
+			myReviewReplyCount = memberImpl.myReviewReplySearchCount(search);
+		}
+		
+		if(myReviewReplyCount > 0) {
+			myReviewReplyList = memberImpl.myReviewReplySearch(search);
+		}
+			
+		request.setAttribute("currentPage", currentPage);
+		request.setAttribute("startRow", search.getStartRow());
+		request.setAttribute("endRow", search.getEndRow());
+		request.setAttribute("pageSize", pageSize);
+		request.setAttribute("pageNum", pageNum);
+		
+		model.addAttribute("searchCount", searchCount);
+		model.addAttribute("search", search);
+		model.addAttribute("myReviewReplyCount", myReviewReplyCount);
+		model.addAttribute("myReviewReplyList", myReviewReplyList);
+		
+		return "/member/myReviewReplyList";
 	}
 
 }

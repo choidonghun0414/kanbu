@@ -117,7 +117,6 @@
                                                 <ul class="submenu">
                                                         <li><a href="/kanbu/board/reviewList.com">여행공유</a></li>
                                                         <li><a href="/kanbu/board/noticeList.com">공지사항</a></li>
-                                                        <li><a href="/kanbu/board/questionList.com">자주하는질문</a></li>
                                                 </ul>
                                             </li>          
                                         </ul>

@@ -34,6 +34,14 @@
 
     <link rel="stylesheet" href="/kanbu/resources/css/style.css">
     <!-- <link rel="stylesheet" href="css/responsive.css"> -->
+    
+<style>
+    
+    .submenu > li > a:hover{
+	  background-color: #D3D3D3;
+	}
+	
+</style>
 </head>
 
 <body>
@@ -66,7 +74,6 @@
                                                 <ul class="submenu">
                                                         <li><a href="/kanbu/board/reviewList.com">여행후기</a></li>
                                                         <li><a href="/kanbu/board/noticeList.com">공지사항</a></li>
-                                                        <li><a href="/kanbu/board/questionList.com">자주하는질문</a></li>
                                                 </ul>
                                             </li>
                                         </ul>

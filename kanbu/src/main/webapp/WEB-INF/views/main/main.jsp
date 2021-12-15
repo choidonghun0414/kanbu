@@ -42,6 +42,11 @@
 		font-family: 'Noto Sans KR', sans-serif;
 	}
 	
+    .submenu > li > a:hover{
+	  background-color: #D3D3D3;
+	}
+	
+	
 	</style>
 	
 </head>
@@ -78,7 +83,6 @@
                                                 <ul class="submenu">
                                                         <li><a href="/kanbu/board/reviewList.com">여행후기</a></li>
                                                         <li><a href="/kanbu/board/noticeList.com">공지사항</a></li>
-                                                        <li><a href="/kanbu/board/questionList.com">자주하는질문</a></li>
                                                 </ul>
                                             </li>
                                         </ul>

@@ -9,21 +9,10 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>reviewWrite</title>
-    
+    <title>mypage | 내가 쓴 리뷰 댓글</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-  	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-  	
-	<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet"> 
-  	<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
-  	<script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.18/lang/summernote-ko-KR.min.js"></script>
-	<script src="/kanbu/resources/js/summernote-lite.js"></script>
-	<script src="/kanbu/resources/js/summernote-ko-KR.js"></script>
-	
+
     <!-- <link rel="manifest" href="site.webmanifest"> -->
     <link rel="shortcut icon" type="image/x-icon" href="/kanbu/resources/img/favicon.png">
     <!-- Place favicon.ico in the root directory -->
@@ -41,7 +30,6 @@
     <link rel="stylesheet" href="/kanbu/resources/css/animate.css">
     <link rel="stylesheet" href="/kanbu/resources/css/slicknav.css">
     <link rel="stylesheet" href="/kanbu/resources/css/style.css">
-    <link rel="stylesheet" href="/kanbu/resources/css/summernote-lite.css">
     <!-- <link rel="stylesheet" href="css/responsive.css"> -->
     
     <c:if test="${empty (sessionScope.status)}">
@@ -52,61 +40,47 @@
     </c:if>
     
 	<style>
-		.logo {
-			width: 140px;
-			height: 56px;
-		}
-	
-	    /* 푸터 사이즈 조절, 컨텐츠와 간격 조절 */
+	     /* 푸터 사이즈 조절, 컨텐츠와 간격 조절 */
 	    .footer .footer_top {
 	   		margin-top: 110px;
 	   		padding-top: 50px;
 	   		padding-bottom: 30px;
 		}
 		
-		/* 페이지 내부 게시판 제목 표시 (공지사항, 자주 하는 질문 등) */
 		h3.md-30 {
-	    text-align: center;
-	    margin-top: 60px;
-	    margin-bottom: 60px;
-	    font-size: 60px;
+		    text-align: center;
+		    margin-top: 60px;
+		    margin-bottom: 60px;
+		    font-size: 60px;
 		}
 	
-	a {
-	    color: #007bff;
-	    text-decoration: none;
-	    background-color: transparent;
-	    -webkit-text-decoration-skip: objects;
-	    color: inherit;
-	}
-	
-	.search-form {
-		margin-top: 50px;
-	}
-	
-	
-	/* 버튼 왼쪽의 여백 */
-	.input-group-btn{
-		margin-top: 9px;
-		margin-left: 5px;
-	}
-	
-	.border {
-		width: 75%;
-	}
-	
-	.submenu > li > a:hover{
-	  background-color: #D3D3D3;
-	}
-	
-	/* 파일 박스 크기 조절 */
-	 p > .form-control{
-		height: 33px;
-		font-size: 15px;
-	}
-	
+		.progress-table .country {
+		    width: 300;
+		}
+		
+		a {
+		    color: #007bff;
+		    text-decoration: none;
+		    background-color: transparent;
+		    -webkit-text-decoration-skip: objects;
+		    color: inherit;
+		}
+		
+		.blog-pagination{
+			margin-top: auto;
+		}
+		
+		.search-form {
+			margin-top: 50px;
+		}
+		
+		
+		/* 버튼 왼쪽의 여백 */
+		.input-group-btn{
+			margin-left: 5px;
+		}
+		
 	</style>
-
 </head>
 
 <body>
@@ -178,94 +152,150 @@
         </div>
     </header>
     <!-- header-end -->
-    <!-- bradcam_area  -->
-    <div class="bradcam_area bradcam_bg_4">
-        <div class="container">
-            <div class="row">
-                <div class="col-xl-12">
-                    <div class="bradcam_text text-center">
-                        <h3>Any Where, Wherever</h3>
-                        <p></p>
-                        <p>Wherever You Want To Go, With Kanbu</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    
-    <!--/ bradcam_area  -->
+
+	<!--======== 내가 쓴 리뷰 댓글 헤더 ========  -->
 	<div class="container box_1170">
-		<h3 class="md-30">나만의 여행 리뷰</h3>
+		<h3 class="md-30">내가 쓴 리뷰 댓글</h3>
 	</div>
-
-	<!-- ================== 게시글 등록 폼 =================== -->
-	<div class="container">
-		<form action="/kanbu/board/reviewWritePro.com" name="reviewForm" method="post" enctype="multipart/form-data">
-			<table class="table table-write" id="add_mt">
-				<colgroup>
-					<col style="width:120px" />
-					<col style="width:*" />
-				</colgroup>
+	
+	<!--======== 내가 쓴 리뷰 댓글 목록 테이블 ========  -->
+	<div class="container box_1170">
+		<table class="table table-hover">
+			<thead>
 				<tr>
-					<th>제목</th>
-						<td>
-							<input type="text" class="form-control" id="title" name="title" placeholder="제목">
-						</td>
+					<th width="50">No.</th>
+					<th width="100">리뷰</th>
+					<th width="250">내용</th>
+					<th width="100">작성일</th>
+					<th width="30">삭제</th>
 				</tr>
-			</table>
-			<textarea id="summernote" name="content"></textarea>
-				<script type="text/javascript">
-					$('#summernote').summernote({
-						 toolbar: [
-							    // [groupName, [list of button]]
-							    ['style', ['style']],
-							    ['fontname', ['fontname']],
-							    ['fontsize', ['fontsize']],
-							    ['style', ['bold', 'italic', 'underline','strikethrough', 'clear']],
-							    ['color', ['forecolor','color']],
-							    ['table', ['table']],
-							    ['para', ['ul', 'ol', 'paragraph']],
-							    ['view', ['codeview', 'help']]
-							  ],
-							fontNames: ['Arial', 'Arial Black', 'Comic Sans MS', 'Courier New','맑은 고딕','궁서','굴림체','굴림','돋움체','바탕체'],
-							fontSizes: ['8','9','10','11','12','14','16','18','20','22','24','28','30','36','50','72'],
-						height : 500,
-						disableResizeEditor: true,
-						lang : "ko-KR",
-						focus: true,
-						placeholder: "내용을 입력해주세요."
-					});
-				</script>
-
-			<legend class="mt-4">태그 선택</legend>
-			<div class="btn-group" role="group" aria-label="Basic checkbox toggle button group">
-				<c:forEach var="tag" items="${tagList}">
-				  <input type="checkbox" class="btn-check" id="btncheck${tag.index_num}" name="index_num[]" value="${tag.index_num}">
-				  	<label class="btn btn-outline-info" for="btncheck${tag.index_num}">#${tag.name}</label>
-				</c:forEach>
-			</div>
-			
-			<!-- 사진 등록하기 -->
-			<div class="form-group">
-			<legend class="mt-4">사진 등록하기</legend>
-				<p> 사진1 : <input type="file" name="picture1" id="picture1" class="form-control"/></p>
-				<p> 사진2 : <input type="file" name="picture2" id="picture2" class="form-control"/></p>
-				<p> 사진3 : <input type="file" name="picture3" id="picture3" class="form-control"/></p>
-				<p> 사진4 : <input type="file" name="picture4" id="picture4" class="form-control"/></p>
-				<p> 사진5 : <input type="file" name="picture5" id="picture5" class="form-control"/></p>
-    		</div>
-			
-				<!-- ============글 등록 버튼 (목록으로 돌아옴) ============ -->
-				<div class="d-flex flex-row-reverse">
-					<span class="input-group-btn">		
-						<button type="submit" id="a_save_btn" 
-							    class="btn btn-secondary">등록</button>
-					</span>
+			</thead>
+			<c:if test="${myReviewReplyCount == 0}">
+				<tbody>
+					<tr>
+						<td></td>
+						<td></td>
+						<td scope="row">작성한 댓글이 없습니다.</td>
+						<td></td>
+						<td></td>
+					</tr>
+				</tbody>
+			</c:if>
+			<c:if test="${myReviewReplyCount > 0}">
+			<c:set var="index" value="${myReviewReplyCount}" />
+				<tbody>
+					<c:forEach var="myReviewReply" items="${myReviewReplyList}">
+						<tr>
+							<td scope="row">${index}</td>
+							<td><a href="/kanbu/board/reviewDetail.com?reviewNum==${myReviewReply.review}">${myReviewReply.title}</a></td>
+							<td>${myReviewReply.content}</td>
+							<td><fmt:formatDate value="${myReviewReply.reg_date}" pattern="yyyy-MM-dd"/> </td>
+							<td>
+								<c:if test="${!(myReviewReply.content eq '관리자에 의해 삭제된 댓글입니다.')}">
+									<i class="ti-trash" style="cursor: pointer;" onclick="return replyDelete();"></i>
+								</c:if>								
+							</td>
+						</tr>
+						<c:set var="index" value="${index-1}" />
+						<input type="hidden" id="replyNum" value="${myReviewReply.index_num}" />
+					</c:forEach>
+				</tbody>
+			</c:if>
+		</table>
+		
+		<!-- ============글 목록 버튼 ============ -->
+		<div class="d-flex flex-row-reverse">
+			<span class="input-group-btn">
+				<a class="btn btn-secondary" href="/kanbu/mypage/board/reviewReply.com" role="button">목록</a>
+			</span>
+		</div>
+		
+		<!-- 페이지 번호 나타내기 -->
+		<c:if test="${myReviewReplyCount > 0}">
+			<fmt:parseNumber var="pageCount" 
+							 value="${myReviewReplyCount / pageSize + (myReviewReplyCount %  pageSize == 0 ? 0 : 1)}"
+							 integerOnly="true" />
+			<c:set var="pageBlock" value="${5}" />
+			<fmt:parseNumber var="result" value="${currentPage/5}" integerOnly="true"/>
+			<c:set var="startPage" value="${result*5+1}" />
+			<c:set var="endPage" value="${startPage + pageBlock - 1}" />
+			<c:if test="${endPage > pageCount}">
+				<c:set var="endPage" value="${pageCount}" />
+			</c:if>			 
+		
+			<!-- ========게시판 페이징 표시======== -->
+			<nav class="blog-pagination d-flex justify-content-center">
+				<ul class="pagination">
+					<c:if test="${startPage > 5}">
+	                	<li class="page-item">
+	                		<c:if test="${searchCount != 1}">
+	                    		<a href="/kanbu/mypage/board/reviewReply.com?pageNum=${startPage-5}" 
+	                    	   	   class="page-link" aria-label="Previous">
+	                        		<i class="ti-angle-left"></i>
+	                        	</a>
+	                        </c:if>
+	                        <c:if test="${searchCount == 1}">
+	                        	<a href="/kanbu/mypage/board/reviewReply/search.com?thema=${search.thema}&keyword=${search.keyword}&pageNum=${startPage-5}" 
+	                    	   	   class="page-link" aria-label="Previous">
+	                        		<i class="ti-angle-left"></i>
+	                        	</a>
+	                        </c:if>	
+	                    </li>
+	                </c:if>
+	                               	
+	                <c:forEach var="i" begin="${startPage}" end="${endPage}">
+	                	<li class="page-item">
+	                		<c:if test="${searchCount != 1}">
+	                    		<a href="/kanbu/mypage/board/reviewReply.com?pageNum=${i}" class="page-link">${i}</a>
+	                    	</c:if>
+	                    	<c:if test="${searchCount == 1}">
+	                    		<a href="/kanbu/mypage/board/reviewReply/search.com?thema=${search.thema}&keyword=${search.keyword}&pageNum=${i}" 
+	                    		   class="page-link">${i}</a>
+	                    	</c:if>
+	                    </li>
+	                </c:forEach>
+	                             	
+	                <c:if test="${endPage < pageCount}">
+	                    <li class="page-item">
+	                    	<c:if test="${searchCount != 1}">
+	                        	<a href="/kanbu/mypage/board/reviewReply.com?pageNum=${startPage+5}" 
+	                           	   class="page-link" aria-label="Next">
+	                        		<i class="ti-angle-right"></i>
+	                       	 	</a>
+	                       	</c:if>
+	                       	<c:if test="${searchCount == 1}">
+	                       		<a href="/kanbu/mypage/board/reviewReply/search.com?thema=${search.thema}&keyword=${search.keyword}&pageNum=${startPage+5}" 
+	                           	   class="page-link" aria-label="Next">
+	                        		<i class="ti-angle-right"></i>
+	                       	 	</a>
+	                       	 </c:if>
+	                    </li>
+	                </c:if>
+				</ul>
+			</nav>
+		</c:if>
+		
+		<!-- ========게시판 검색창======== -->
+		<div class="search-form">
+			<div class="d-flex justify-content-center">
+				<div class="input-group-prepend">
+					<select id="thema" class="thema" style="width: 90px;">
+						<option value="select" selected>선택</option>
+						<option value="pr.title">리뷰</option>
+						<option value="prr.content">내용</option>
+					</select>
 				</div>
-			</form>
+				<input type="text" class="form-control" id="keyword" placeholder="검색어를 입력해주세요..">
+				<span class="input-group-btn">
+					<button class="btn btn-secondary" type="button" onclick="return searchMyReviewReply();">검색</button>
+				</span>
+			</div>
+		</div>
 	</div>
+	<!-- End Align Area -->
 
-	<footer class="footer" style="height: 391px;">
+
+    <footer class="footer" style="height: 391px;">
         <div class="footer_top">
             <div class="container" align="center">
                 <div class="row">
@@ -306,13 +336,13 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
     <div class="modal-dialog modal-dialog-centered" role="document">
       <div class="modal-content">
         <div class="serch_form">
-            <input type="text" name="keyword" id="keyword" placeholder="검색할 장소를 입력해주세요..." >
+            <input type="text" name="keyword" id="keywordPlace" placeholder="검색할 장소를 입력해주세요..." >
             <button type="submit" onclick="return search();">search</button>
         </div>
       </div>
     </div>
   </div>
-  
+
 	<!-- JS here -->
 	<script src="/kanbu/resources/js/vendor/modernizr-3.5.0.min.js"></script>
 	<script src="/kanbu/resources/js/vendor/jquery-1.12.4.min.js"></script>
@@ -346,45 +376,16 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
             iconsLibrary: 'fontawesome',
             icons: {
              rightIcon: '<span class="fa fa-caret-down"></span>'
-         	}
+         }
         });
         $('#datepicker2').datepicker({
             iconsLibrary: 'fontawesome',
             icons: {
              rightIcon: '<span class="fa fa-caret-down"></span>'
-         	}
-        });
-    </script>
-    
-    <!--  
-    <script type="text/javascript">
-    $("#a_save_btn").on('click',function(){
-    	var index_num = [];
-    	
-    	$("input[name=index_num[]]:checked").each(function(){
-    		index_num.push($(this.val());
-    	})
-    })
+         }
 
-  	    function sendFile(file, el) {
-        var form_data = new FormData();
-        form_data.append('file', file);
-        $.ajax({
-          data: form_data,
-          type: "POST",
-          url: '/image',
-          cache: false,
-          contentType: false,
-          enctype: 'multipart/form-data',
-          processData: false,
-          success: function(url) {
-            $(el).summernote('editor.insertImage', url);
-            $('#imageBoard > ul').append('<li><img src="'+url+'" width="480" height="auto"/></li>');
-          }
         });
-      } 
     </script>
-    -->
     
     <script type="text/javascript">
     	function logOut(){
@@ -394,7 +395,7 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
     
     <script type="text/javascript">
     	function search(){
-    		var place = document.getElementById('keyword').value
+    		var place = document.getElementById('keywordPlace').value
     		
     		if(place == null || place == ""){
     			alert("검색할 장소를 입력해주세요.");
@@ -405,33 +406,41 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
     	}
     </script>
     
-    <!-- 유효성 검사  -->
-   	<script>
-	$(document).ready(function(){
-		$("#a_save_btn").on("click", function(){
-			if($("#title").val()==""){
-				alert("제목을 입력해주세요.");
-				$("#title").focus();
-				return false;
-			}
-			if($("#summernote").val()==""){
-				alert("내용을 입력해주세요.");
-				$("#summernote").focus();
-				return false;
-			}if(!$("input:checked[Name='index_num[]']").is(":checked")){
-				alert("태그는 하나 이상 선택해주세요.");
-				return false;
-			}else{
-				var result = confirm("리뷰를 등록하시겠습니까?");
-				if(!result){
-					return false;
-				}
-			}
-		});
-	})
-	</script>
+    <!-- 나의 댓글 검색 유효성 검사 -->
+    <script type="text/javascript">
+    	function searchMyReviewReply(){
+    		var target = document.getElementById("thema");
+  			var thema = target.options[target.selectedIndex].value;
+  			var keyword = document.getElementById('keyword').value;
+  			
+  			if(thema != null && thema != "" && thema !="select"){
+  				if(keyword != null && keyword != ""){
+  					window.location = '/kanbu/mypage/board/reviewReply/search.com?thema='+thema+'&keyword='+keyword;
+  				}else{
+  					alert("검색어를 입력해주세요.");
+  					return false;
+  				}
+  			}else{
+  				alert("검색 테마를 선택해주세요.");
+  				return false;
+  			}
+    	}
+    </script>
     
-    	
-</body>
+    <!-- 댓글 삭제 유효성 검사 -->
+    <script type="text/javascript">
+   		function replyDelete(){
+   			var replyNum = $('#replyNum').val();
+   			console.log(replyNum);
+   			var result = confirm("댓글을 삭제하시겠습니까?");
+   			if(result){
+   				window.location = "/kanbu/board/reviewReply/delete.com?replyNum="+replyNum;
+   			}else{
+   				return false;
+   			}
+   		}
+    </script>
+    
+    </body>
     
 </html>

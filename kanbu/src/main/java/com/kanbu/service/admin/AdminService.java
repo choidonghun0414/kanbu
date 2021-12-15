@@ -80,4 +80,13 @@ public interface AdminService {
 	// 여행후기 태그 검색 리스트(제목, 닉네임)
 	public List<BoardDTO> searchReviewTag(SearchDTO search) throws Exception;
 	
+	// 등록된 리뷰 전체 댓글수 검색
+	public int selectTotalReviewReplyCount() throws Exception;
+	
+	// 등록된 리뷰 전체 댓글 검색
+	public List<BoardDTO> selectTotalReviewReply(BoardDTO board) throws Exception;
+	
+	// 등록된 리뷰 댓글 삭제(관리자)
+	public void reviewReplyDeleteAdmin(int index_num) throws Exception;
+	
 }

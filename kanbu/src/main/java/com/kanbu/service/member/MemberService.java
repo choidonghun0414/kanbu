@@ -64,15 +64,6 @@ public interface MemberService {
 	// 내가 쓴 리뷰제목 검색 태그 결과 리스트
 	public List<BoardDTO> searchTitleMyReviewTag(SearchDTO search) throws Exception;
 	
-	// 내가 쓴 리뷰 태그검색 리스트 갯수
-//	public int searchTagMyReviewCount(SearchDTO search) throws Exception;
-	
-	// 내가 쓴 리뷰번호 태그검색 리스트
-//	public List<SearchDTO> searchTagMyReviewNum(SearchDTO search) throws Exception;
-	
-	// 내가 쓴 리뷰 태그검색 리스트
-//	public List<BoardDTO> searchTagMyReview(List<SearchDTO> myReviewNumList) throws Exception;
-	
 	// 내가 쓴 여행지 댓글 갯수
 	public int myPlaceReplyCount(int writer) throws Exception;
 	
@@ -84,5 +75,17 @@ public interface MemberService {
 	
 	// 여행지 내가 쓴 댓글 검색 결과
 	public List<Place_ReplyDTO> myPlaceReplySearch(SearchDTO search) throws Exception;
+	
+	// 내가 쓴 리뷰 댓글수 검색
+	public int myReviewReplyCount(int writer) throws Exception;
+	
+	// 내가 쓴 리뷰 댓글 목록
+	public List<BoardDTO> myReviewReply(BoardDTO board) throws Exception;
+	
+	// 내가 쓴 리뷰댓글 입력 검색결과 수
+	public int myReviewReplySearchCount(SearchDTO search) throws Exception;
+	
+	// 내가 쓴 리뷰댓글 입력 검색결과
+	public List<BoardDTO> myReviewReplySearch(SearchDTO search) throws Exception;
 
 }

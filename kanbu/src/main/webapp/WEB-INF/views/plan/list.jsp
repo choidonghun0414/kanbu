@@ -9,7 +9,7 @@
 <head>
 	<meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-	<title>Insert title here</title>
+	<title>나의 일정 리스트</title>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 	<meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -29,7 +29,7 @@
     <link rel="stylesheet" href="/kanbu/resources/css/flaticon.css">
     <link rel="stylesheet" href="/kanbu/resources/css/gijgo.css">
     <link rel="stylesheet" href="/kanbu/resources/css/animate.css">
-    <link rel="stylesheet" href="/kanburesources/css/slick.css">
+    <link rel="stylesheet" href="/kanbu/resources/css/slick.css">
     <link rel="stylesheet" href="/kanbu/resources/css/slicknav.css">
     <link rel="stylesheet" href="/kanbu/resources/css/style.css">
     <!-- <link rel="stylesheet" href="css/responsive.css"> -->
@@ -75,6 +75,10 @@
 			margin-left: 5px;
 		}
 		
+		.submenu > li > a:hover{
+	  background-color: #D3D3D3;
+	}
+		
 	</style>
 </head>
 
@@ -107,9 +111,8 @@
                                             <li><a href="/kanbu/place.com">여행지정보</a></li>
                                		 		<li><a href="/kanbu/board/reviewList.com">게시판 <i class="ti-angle-down"></i></a>
                                                 <ul class="submenu">
-                                                        <li><a href="/kanbu/board/reviewList.com">여행후기</a></li>
-                                                        <li><a href="/kanbu/board/noticeList.com">공지사항</a></li>
-                                                        <li><a href="/kanbu/board/questionList.com">자주하는질문</a></li>
+                                                	<li><a href="/kanbu/board/reviewList.com">여행후기</a></li>
+                                                    <li><a href="/kanbu/board/noticeList.com">공지사항</a></li>
                                                 </ul>
                                             </li>
                                         </ul>
@@ -255,6 +258,63 @@
 					</c:if>
 				</ul>
 			</nav>
+			
+  <!-- Modal -->
+  <div class="modal fade custom_search_pop" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="serch_form">
+            <input type="text" placeholder="Search" >
+            <button type="submit">search</button>
+        </div>
+      </div>
+    </div>
+  </div>
+    <!-- link that opens popup -->
+<!--     
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://static.codepen.io/assets/common/stopExecutionOnTimeout-de7e2ef6bfefd24b79a3f68b414b87b8db5b08439cac3f1012092b2290c719cd.js"></script>
+
+    <script src=" https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"> </script> -->
+    <!-- JS here -->
+    <script src="/kanbu/resources/js/vendor/modernizr-3.5.0.min.js"></script>
+    <script src="/kanbu/resources/js/vendor/jquery-1.12.4.min.js"></script>
+    <script src="/kanbu/resources/js/popper.min.js"></script>
+    <script src="/kanbu/resources/js/bootstrap.min.js"></script>
+    <script src="/kanbu/resources/js/owl.carousel.min.js"></script>
+    <script src="/kanbu/resources/js/isotope.pkgd.min.js"></script>
+    <script src="/kanbu/resources/js/ajax-form.js"></script>
+    <script src="/kanbu/resources/js/waypoints.min.js"></script>
+    <script src="/kanbu/resources/js/jquery.counterup.min.js"></script>
+    <script src="/kanbu/resources/js/imagesloaded.pkgd.min.js"></script>
+    <script src="/kanbu/resources/js/scrollIt.js"></script>
+    <script src="/kanbu/resources/js/jquery.scrollUp.min.js"></script>
+    <script src="/kanbu/resources/js/wow.min.js"></script>
+    <script src="/kanbu/resources/js/nice-select.min.js"></script>
+    <script src="/kanbu/resources/js/jquery.slicknav.min.js"></script>
+    <script src="/kanbu/resources/js/jquery.magnific-popup.min.js"></script>
+    <script src="/kanbu/resources/js/plugins.js"></script>
+    <script src="/kanbu/resources/js/gijgo.min.js"></script>
+    <script src="/kanbu/resources/js/slick.min.js"></script>
+   
+
+    
+    <!--contact js-->
+    <script src="/kanbu/resources/js/contact.js"></script>
+    <script src="/kanbu/resources/js/jquery.ajaxchimp.min.js"></script>
+    <script src="/kanbu/resources/js/jquery.form.js"></script>
+    <script src="/kanbu/resources/js/jquery.validate.min.js"></script>
+    <script src="/kanbu/resources/js/mail-script.js"></script>
+
+    <script src="/kanburesources/js/main.js"></script>
+    <script>
+        $('#datepicker').datepicker({
+            iconsLibrary: 'fontawesome',
+            icons: {
+             rightIcon: '<span class="fa fa-caret-down"></span>'
+         }
+        });
+    </script>
 
 	<script type="text/javascript">
 		function delMyPlan(){

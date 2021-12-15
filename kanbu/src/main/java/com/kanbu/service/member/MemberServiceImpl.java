@@ -147,24 +147,6 @@ public class MemberServiceImpl implements MemberService{
 	public List<BoardDTO> searchTitleMyReviewTag(SearchDTO search) throws Exception {
 		return dao.searchTitleMyReviewTag(search);
 	}
-	
-	// 내가 쓴 리뷰 태그검색 리스트 갯수
-//	@Override
-//	public int searchTagMyReviewCount(SearchDTO search) throws Exception {
-//		return dao.searchTagMyReviewCount(search);
-//	}
-	
-	// 내가 쓴 리뷰번호 태그검색 리스트
-//	@Override
-//	public List<SearchDTO> searchTagMyReviewNum(SearchDTO search) throws Exception {
-//		return dao.searchTagMyReviewNum(search);
-//	}
-	
-	// 내가 쓴 리뷰 태그검색 리스트
-//	@Override
-//	public List<BoardDTO> searchTagMyReview(List<SearchDTO> myReviewNumList) throws Exception {
-//		return dao.searchTagMyReview(myReviewNumList);
-//	}
 
 	// 내가 쓴 여행지 댓글 갯수
 	@Override
@@ -188,6 +170,29 @@ public class MemberServiceImpl implements MemberService{
 	@Override
 	public List<Place_ReplyDTO> myPlaceReplySearch(SearchDTO search) throws Exception {
 		return dao.myPlaceReplySearch(search);
+	}
+
+	// 내가 쓴 리뷰 댓글수 검색
+	@Override
+	public int myReviewReplyCount(int writer) throws Exception {
+		return dao.myReviewReplyCount(writer);
+	}
+	
+	// 내가 쓴 리뷰 댓글 목록
+	@Override
+	public List<BoardDTO> myReviewReply(BoardDTO board) throws Exception {
+		return dao.myReviewReply(board);
+	}
+
+	// 내가 쓴 리뷰댓글 입력 검색결과 수
+	@Override
+	public int myReviewReplySearchCount(SearchDTO search) throws Exception {
+		return dao.myReviewReplySearchCount(search);
+	}
+
+	@Override
+	public List<BoardDTO> myReviewReplySearch(SearchDTO search) throws Exception {
+		return dao.myReviewReplySearch(search);
 	}
 
 
