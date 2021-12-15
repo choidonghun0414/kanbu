@@ -1,14 +1,20 @@
 package com.kanbu.controller.admin;
 
 
+import java.io.File;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
+import org.eclipse.jdt.internal.compiler.apt.util.EclipseFileManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
+import org.springframework.web.multipart.MultipartRequest;
 
 import com.kanbu.dto.SearchDTO;
 import com.kanbu.dto.board.BoardDTO;
@@ -45,6 +51,9 @@ public class AdminController {
 	@Autowired
 	private BoardDTO board;
 	
+	// 업로드 저장 경로
+	private String uploadPath = "/kanbu/resources/img/place/"; 
+	
 	// 관리자 페이지
 	@RequestMapping("admin.com")
 	public String admin() throws Exception{
@@ -76,8 +85,7 @@ public class AdminController {
 		if(memberCount > 0) {
 			memberList = adminImpl.selectTotalMember(member);
 		}
-		
-		
+			
 		request.setAttribute("currentPage", currentPage);
 		request.setAttribute("startRow", member.getStartRow());
 		request.setAttribute("endRow", member.getEndRow());
@@ -127,15 +135,85 @@ public class AdminController {
 		return "/admin/info/placeList";
 	}
 	
+	// 관리자 여행지 등록 페이지
+	@RequestMapping("/admin/placeAdd.com")
+	public String adminPlaceAdd() throws Exception{
+		return "/admin/info/placeAdd";
+	}
+	
+	// 관리자 여행지 등록 처리 페이지
+	@RequestMapping("/admin/placeAddPro.com")
+	public String adminPlaceAddPro(MultipartHttpServletRequest ms, HttpServletRequest request, 
+								   HttpSession session, Model model) throws Exception{
+		// 여행지 등록값
+		place.setName(request.getParameter("name"));
+		place.setAddr(request.getParameter("addr"));
+		place.setLatitude(Double.parseDouble(request.getParameter("latitude")));
+		place.setLongitude(Double.parseDouble(request.getParameter("longitude")));
+		place.setInfo(request.getParameter("info"));
+		place.setTel(request.getParameter("tel"));
+		place.setHoliday(request.getParameter("holiday"));
+		place.setParking(Integer.parseInt(request.getParameter("parking")));
+		place.setFee1(Integer.parseInt(request.getParameter("fee1")));
+		place.setFee2(Integer.parseInt(request.getParameter("fee2")));
+		place.setOpening(Integer.parseInt(request.getParameter("opening")));
+		place.setClosing(Integer.parseInt(request.getParameter("closing")));
+		
+		// 저장경로 설정(로컬 컴퓨터에서 실제로 저장되는 경로)
+		String root = session.getServletContext().getRealPath("/");			
+		String path = root + "\\resources\\img\\place\\";
+				
+		// 파일 가져오기
+		MultipartFile mf1 = ms.getFile("picture1");						
+		MultipartFile mf2 = ms.getFile("picture2");						
+		MultipartFile mf3 = ms.getFile("picture3");						
+		MultipartFile mf4 = ms.getFile("picture4");					
+		MultipartFile mf5 = ms.getFile("picture5");
+		
+		if(!mf1.isEmpty()) {
+			String picture1 = mf1.getOriginalFilename();		// 기존 파일 이름(오리지널)
+			File f1 = new File(path+picture1);			
+			mf1.transferTo(f1);							// 파일 저장
+			place.setPicture1(picture1);
+		}
+		if(!mf2.isEmpty()) {
+			String picture2 = mf2.getOriginalFilename();
+			File f2 = new File(path+picture2);
+			mf2.transferTo(f2);
+			place.setPicture2(picture2);
+		}
+		if(!mf3.isEmpty()) {
+			String picture3 = mf3.getOriginalFilename();
+			File f3 = new File(path+picture3);
+			mf3.transferTo(f3);
+			place.setPicture3(picture3);
+		}
+		if(!mf4.isEmpty()) {
+			String picture4 = mf4.getOriginalFilename();
+			File f4 = new File(path+picture4);
+			mf4.transferTo(f4);
+			place.setPicture4(picture4);
+		}
+		if(!mf5.isEmpty()) {
+			String picture5 = mf5.getOriginalFilename();
+			File f5 = new File(path+picture5);
+			mf5.transferTo(f5);
+			place.setPicture5(picture5);
+		}
+							
+		// 여행지 DB에 저장
+		adminImpl.insertPlace(place);
+		
+		return "redirect:/admin/placeInfo.com";
+	}
+	
 	// 관리자 여행지 수정 페이지
 	@RequestMapping("/admin/placeInfo/edit.com")
 	public String adminPlaceUpdate(HttpServletRequest request, Model model) throws Exception{
 		// 해당 장소 상세정보
 		int index_num = Integer.parseInt(request.getParameter("placeNum"));		// index_num : 해당장소 고유번호
-		System.out.println(index_num);
 		
 		int count = infoImpl.selectPlaceInfoCount(index_num);					// count : 해당 여행지 정보 갯수
-		System.out.println(count);
 		
 		if(count > 0) {
 			place = infoImpl.selectPlaceInfo(index_num);
@@ -143,8 +221,76 @@ public class AdminController {
 		
 		model.addAttribute("count", count);
 		model.addAttribute("placeInfo", place);
+		model.addAttribute("uploadPath", uploadPath);		
 		
 		return "/admin/info/placeUpdate";
+	}
+	
+	// 관리자 여행지 수정 페이지처리
+	@RequestMapping("/admin/placeInfo/editPro.com")
+	public String adminPlaceUpdatePro(MultipartHttpServletRequest ms, HttpServletRequest request, 
+									  HttpSession session, Model model) throws Exception{
+		
+		// 여행지 수정값
+		place.setIndex_num(Integer.parseInt(request.getParameter("placeNum")));
+		place.setName(request.getParameter("name"));
+		place.setAddr(request.getParameter("addr"));
+		place.setLatitude(Double.parseDouble(request.getParameter("latitude")));
+		place.setLongitude(Double.parseDouble(request.getParameter("longitude")));
+		place.setInfo(request.getParameter("info"));
+		place.setTel(request.getParameter("tel"));
+		place.setHoliday(request.getParameter("holiday"));
+		place.setParking(Integer.parseInt(request.getParameter("parking")));
+		place.setFee1(Integer.parseInt(request.getParameter("fee1")));
+		place.setFee2(Integer.parseInt(request.getParameter("fee2")));
+		place.setOpening(Integer.parseInt(request.getParameter("opening")));
+		place.setClosing(Integer.parseInt(request.getParameter("closing")));
+				
+		// 저장경로 설정(로컬 컴퓨터에서 실제로 저장되는 경로)
+		String root = session.getServletContext().getRealPath("/");			
+		String path = root + "\\resources\\img\\place\\";
+						
+		// 수정 파일 가져오기
+		MultipartFile mf1 = ms.getFile("picture1");						
+		MultipartFile mf2 = ms.getFile("picture2");						
+		MultipartFile mf3 = ms.getFile("picture3");						
+		MultipartFile mf4 = ms.getFile("picture4");					
+		MultipartFile mf5 = ms.getFile("picture5");
+
+		if(!mf1.isEmpty()) {
+			String picture1 = mf1.getOriginalFilename();		// 기존 파일 이름(오리지널)
+			File f1 = new File(path+picture1);			
+			mf1.transferTo(f1);									// 파일 저장
+			place.setPicture1(picture1);
+		}
+		if(!mf2.isEmpty()) {
+			String picture2 = mf2.getOriginalFilename();
+			File f2 = new File(path+picture2);
+			mf2.transferTo(f2);
+			place.setPicture2(picture2);
+		}
+		if(!mf3.isEmpty()) {
+			String picture3 = mf3.getOriginalFilename();
+			File f3 = new File(path+picture3);
+			mf3.transferTo(f3);
+			place.setPicture3(picture3);
+		}
+		if(!mf4.isEmpty()) {
+			String picture4 = mf4.getOriginalFilename();
+			File f4 = new File(path+picture4);
+			mf4.transferTo(f4);
+			place.setPicture4(picture4);
+		}
+		if(!mf5.isEmpty()) {
+			String picture5 = mf5.getOriginalFilename();
+			File f5 = new File(path+picture5);
+			mf5.transferTo(f5);
+			place.setPicture5(picture5);
+		}
+		
+		adminImpl.updatePlace(place);
+		
+		return "redirect:/admin/placeInfo.com";
 	}
 	
 	// 관리자 여행지 댓글 조회 페이지
@@ -184,7 +330,16 @@ public class AdminController {
 		return "/admin/info/placeReplyList";
 	}
 	
-	// 관리자 여행후기 조회 페이지
+	// 관리자 여행지 댓글 삭제
+	@RequestMapping("/admin/placeReply/delete.com")
+	public String adminPlaceReplyDelete(HttpServletRequest request) throws Exception{
+		int index_num = Integer.parseInt(request.getParameter("replyNum"));
+		adminImpl.placeReplyDeleteAdmin(index_num);
+		
+		return "redirect:/admin/placeReply.com";
+	}
+	
+	// 관리자 리뷰 조회 페이지
 	@RequestMapping("/admin/board/reviewInfo.com")
 	public String adminReview(HttpServletRequest request, Model model) throws Exception{
 		// 페이징 처리
@@ -288,6 +443,7 @@ public class AdminController {
 			model.addAttribute("memberList", memberList);
 			
 			return "/admin/member/memberList";
+			
 		}else if(search.getThema().equals("p.name") || search.getThema().equals("m.nick") || search.getThema().equals("pr.content")) {
 			int placeReplyCount = 0;
 			List<Place_ReplyDTO> placeReplyList = null;
@@ -301,6 +457,30 @@ public class AdminController {
 			model.addAttribute("placeReplyList", placeReplyList);
 			
 			return "/admin/info/placeReplyList";
+			
+		}else if(search.getThema().equals("p.title") || search.getThema().equals("rm.nick")) {
+			int reviewCount = 0;
+			int reviewTagCount = 0;
+			List<BoardDTO> reviewList = null;
+			List<BoardDTO> reviewTagList = null;
+			
+			reviewCount = adminImpl.searchReviewCount(search);
+			reviewTagCount = adminImpl.searchReviewTagCount(search);
+			
+			if(reviewCount > 0) {
+				reviewList = adminImpl.searchReview(search);
+			}
+			if(reviewTagCount > 0) {
+				reviewTagList = adminImpl.searchReviewTag(search);
+			}
+			
+			model.addAttribute("reviewCount", reviewCount);
+			model.addAttribute("reviewTagCount", reviewTagCount);
+			model.addAttribute("reviewList", reviewList);
+			model.addAttribute("reviewTagList", reviewTagList);
+			
+			return "/admin/board/reviewList";
+	
 		}
 		
 		return "";

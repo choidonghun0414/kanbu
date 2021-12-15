@@ -3,6 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %> 
 
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -63,7 +64,7 @@
               </a>
             </li>
             <li class="nav-item  d-none d-lg-flex">
-              <a class="nav-link active" href="#">
+              <a class="nav-link active" href="/kanbu/mapView.com">
                 일정만들기
               </a>
             </li>
@@ -112,7 +113,6 @@
             	</li>
             </c:if>
           </ul>
-          
           
           <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" data-toggle="offcanvas">
             <span class="typcn typcn-th-menu"></span>
@@ -209,7 +209,7 @@
             </a>
             <div class="collapse" id="charts">
               <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href="/kanbu/admin/board/reviewInfo.com">후기게시판</a></li>
+                <li class="nav-item"> <a class="nav-link" href="/kanbu/admin/board/reviewInfo.com">여행후기</a></li>
                 <li class="nav-item"> <a class="nav-link" href="/kanbu/board/noticeList.com">공지사항</a></li>
                 <li class="nav-item"> <a class="nav-link" href="/kanbu/admin/board/qaInfo.com">자주하는질문</a></li>
               </ul>
@@ -354,12 +354,12 @@
                 </form>  
               </div>     
             </div>
-            
+  
         <!-- footer 영역 -->
         <footer class="footer">
             <div class="d-sm-flex justify-content-center justify-content-sm-between">
-              <span class="text-center text-sm-left d-block d-sm-inline-block">Copyright © <a href="https://www.bootstrapdash.com/" target="_blank">bootstrapdash.com</a> 2020</span>
-              <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center">Free <a href="https://www.bootstrapdash.com/" target="_blank">Bootstrap dashboard </a>templates from Bootstrapdash.com</span>
+              <span class="text-center text-sm-left d-block d-sm-inline-block">Copyright © <script>document.write(new Date().getFullYear());</script></span>
+              <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center">All rights reserved | Kanbu Travel</span>
             </div>
           </footer>
         <!-- partial -->

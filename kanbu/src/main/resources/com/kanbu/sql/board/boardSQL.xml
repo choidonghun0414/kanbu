@@ -84,6 +84,42 @@
 		</where>
  	</update>
 	
+	<!-- 인기 여행 리뷰 리스트 -->
+	<select id="popularReview" parameterType="int" resultType="boardDTO">
+		select *
+		from (select prv.index_num, prv.title, prv.writer, m.nick, prv.views, prv.reg_date, 
+					 dense_rank() over (order by prv.views desc) rank
+      		  from plan_review prv, member m
+      		  where prv.writer = m.index_num)     
+		<where>
+			<if test="rownum > 0"><![CDATA[rownum <= #{value}]]></if>
+		</where>
+	</select>
+	
+	<!-- 인기 여행 리뷰 태그 리스트 갯수 -->
+	<select id="popularTagReviewCount" parameterType="java.util.List" resultType="int">
+		select count(*)
+		from plan_review p, plan_review_tag pt, tag t
+		where p.index_num = pt.review
+		and pt.tag = t.index_num
+        and p.index_num in 
+        <foreach collection="list" item="index_num" open="(" close=")" separator=",">
+        	#{index_num}
+        </foreach>
+	</select>
+	
+	<!-- 인기 여행 리뷰 태그 리스트 -->
+	<select id="popularTagReview" parameterType="java.util.List" resultType="boardDTO">
+		select p.index_num, p.title, t.name
+		from plan_review p, plan_review_tag pt, tag t
+		where p.index_num = pt.review
+		and pt.tag = t.index_num
+        and p.index_num in 
+        <foreach collection="list" item="index_num" open="(" close=")" separator=",">
+        	#{index_num}
+        </foreach>
+	</select>
+	
 	<!-- 여행 리뷰 리스트 갯수 -->
 	<select id="selectReviewCount" resultType="int">
 		select count(*) from plan_review

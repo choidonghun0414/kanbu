@@ -178,7 +178,6 @@
 	</div>
 
 	<!-- ================== 게시글 등록 폼 =================== -->
-	<!-- ================== 게시글 등록 폼 =================== -->
 	<div class="container">
 		<!-- <form action="/kanbu/board/noticeUpdatePro.com" name="noticeForm" method="post"> -->
 		<form action="/kanbu/board/reviewUpdatePro.com?reviewNum=${selectReview.index_num}" method="post">

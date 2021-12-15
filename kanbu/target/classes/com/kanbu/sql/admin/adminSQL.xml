@@ -23,6 +23,30 @@
  		</where>	  
  	</select>
  	
+ 	<!-- 여행지 등록하기 -->
+ 	<insert id="insertPlace" parameterType="placeDTO">
+ 		insert into place (index_num, name, addr, latitude, longitude, info, tel, holiday, parking, fee1, fee2,
+ 						   opening, closing, picture1, picture2, picture3, picture4, picture5)
+ 		values (place_seq.NEXTVAL, #{name}, #{addr, jdbcType=VARCHAR}, #{latitude, jdbcType=NUMERIC}, #{longitude, jdbcType=NUMERIC}, 
+ 				#{info, jdbcType=VARCHAR}, #{tel, jdbcType=VARCHAR}, #{holiday, jdbcType=VARCHAR}, #{parking, jdbcType=NUMERIC},
+ 				#{fee1, jdbcType=NUMERIC}, #{fee2, jdbcType=NUMERIC}, #{opening, jdbcType=NUMERIC}, #{closing, jdbcType=NUMERIC}, 
+ 				#{picture1, jdbcType=VARCHAR}, #{picture2, jdbcType=VARCHAR}, #{picture3, jdbcType=VARCHAR},
+ 				#{picture4, jdbcType=VARCHAR}, #{picture5, jdbcType=VARCHAR})				   
+ 	</insert>
+ 	
+ 	<!-- 여행지 수정하기 -->
+ 	<update id="updatePlace" parameterType="placeDTO">
+ 		update place 
+ 		set name=#{name}, addr=#{addr, jdbcType=VARCHAR}, latitude=#{latitude, jdbcType=NUMERIC}, longitude=#{longitude, jdbcType=NUMERIC},
+ 			info=#{info, jdbcType=VARCHAR}, tel=#{tel, jdbcType=VARCHAR}, holiday=#{holiday, jdbcType=VARCHAR}, parking=#{parking, jdbcType=NUMERIC},
+			fee1=#{fee1, jdbcType=NUMERIC}, fee2=#{fee2, jdbcType=NUMERIC}, opening=#{opening, jdbcType=NUMERIC}, closing=#{closing, jdbcType=NUMERIC},
+			picture1=#{picture1, jdbcType=VARCHAR}, picture2=#{picture2, jdbcType=VARCHAR}, picture3=#{picture3, jdbcType=VARCHAR},
+			picture4=#{picture4, jdbcType=VARCHAR}, picture5=#{picture5, jdbcType=VARCHAR}
+		<where>
+			<if test="index_num > 0">index_num = #{index_num}</if>
+		</where>
+ 	</update>
+ 	
  	<!-- 등록된 장소 전체 갯수 검색 -->
  	<select id="selectTotalPlaceCount" resultType="int">
  		select count(*) from place 
@@ -30,10 +54,18 @@
  	
  	<!-- 등록된 장소 전체 정보 검색 -->
  	<select id="selectTotalPlace" parameterType="placeDTO" resultType="placeDTO">
- 		select index_num, name, addr, tel, fee1, fee2, opening, closing, good, views,r
- 		from (select index_num, name, addr, tel, fee1, fee2, opening, closing, good, views, rownum r
- 			  from (select index_num, name, addr, tel, fee1, fee2, opening, closing, good, views from place order by name asc)
- 			  order by index_num desc)
+ 		select *
+		from (select index_num, name, addr, tel, fee1, fee2, opening, closing, reviewcount, views, rownum r
+      		  from (select p.index_num, p.name, p.addr, p.tel, p.fee1, p.fee2, p.opening, p.closing, 
+                   		   case when pr.reviewcount is null then 0
+                        		else pr.reviewcount
+                   		   end reviewcount, p.views 
+            		from place p, (select place, count(*) reviewcount
+                           		   from place_reply
+                           		   group by (place)) pr
+            		where p.index_num = pr.place(+)
+            		order by p.index_num desc)
+      		  order by index_num desc)
  		<where>
  			<if test="startRow > 0"><![CDATA[r >= #{startRow}]]></if>
  			<if test="endRow > 0 and endRow > startRow"><![CDATA[and r <= #{endRow}]]></if>
@@ -67,11 +99,19 @@
  	
  	<!-- 관리자 장소 입력 검색 -->
  	<select id="selectKeywordPlace" parameterType="searchDTO" resultType="placeDTO">
- 		select index_num, name, addr, tel, fee1, fee2, opening, closing, good, views,r
- 		from (select index_num, name, addr, tel, fee1, fee2, opening, closing, good, views, rownum r
- 			  from (select index_num, name, addr, tel, fee1, fee2, opening, closing, good, views from place 
- 			  		where ${thema} like '%' || #{keyword} || '%' order by name asc)
- 			  order by index_num desc)
+ 		select *
+		from (select index_num, name, addr, tel, fee1, fee2, opening, closing, reviewcount, views, rownum r
+      		  from (select p.index_num, p.name, p.addr, p.tel, p.fee1, p.fee2, p.opening, p.closing, 
+                   		   case when pr.reviewcount is null then 0
+                        		else pr.reviewcount
+                   		   end reviewcount, p.views 
+            		from place p, (select place, count(*) reviewcount
+                           		   from place_reply
+                           		   group by (place)) pr
+            		where p.index_num = pr.place(+)
+            		and ${thema} like '%' || #{keyword} || '%'
+            		order by p.index_num desc)
+      		  order by index_num desc)
  		<where>
  			<if test="startRow > 0"><![CDATA[r >= #{startRow}]]></if>
  			<if test="endRow > 0 and endRow > startRow"><![CDATA[and r <= #{endRow}]]></if>
@@ -97,6 +137,15 @@
  			<if test="endRow > 0 and endRow > startRow"><![CDATA[and r <= #{endRow}]]></if>
  		</where>	  
  	</select>
+ 	
+ 	<!-- 등록된 여행지 댓글 삭제(관리자) -->
+ 	<update id="placeReplyDeleteAdmin" parameterType="int">
+ 		update place_reply
+ 		set content = '관리자에 의해 삭제된 댓글입니다.'
+ 		<where>
+ 			<if test="index_num > 0">index_num = #{value}</if>
+ 		</where>
+ 	</update>
  	
  	<!-- 등록된 여행지 댓글 입력 검색결과 갯수 -->
  	<select id="selectKeywordPlaceReplyCount" parameterType="searchDTO" resultType="int">
@@ -155,6 +204,49 @@
 		from plan_review p, plan_review_tag pt, tag t
 		where p.index_num = pt.review
 		and pt.tag = t.index_num
+	</select>
+	
+	<!-- 여행 리뷰 검색 리스트 갯수(제목, 닉네임) -->
+	<select id="searchReviewCount" parameterType="searchDTO" resultType="int">
+		select count(*) from plan_review p, member rm
+		where p.writer = rm.index_num
+		and ${thema} like '%' || #{keyword} || '%'
+	</select>
+	
+	<!-- 여행 리뷰 검색 리스트(제목, 닉네임) -->
+ 	<select id="searchReview" parameterType="searchDTO"  resultType="boardDTO">
+	 	select *
+		from (select index_num, title, nick, content, views, reg_date, rownum r         
+      		  from (select p.index_num, p.title, rm.nick, p.content, p.views, p.reg_date
+           			from plan_review p, member rm
+           			where rm.index_num = p.writer
+           			and ${thema} like '%' || #{keyword} || '%'
+		   			order by p.index_num desc)
+      		  order by index_num desc)
+		<where>
+			<if test="startRow > 0"><![CDATA[r >= #{startRow}]]></if>
+ 			<if test="endRow > 0 and endRow > startRow"><![CDATA[and r <= #{endRow}]]></if>
+		</where>
+	</select>
+	
+	<!-- 여행 리뷰 태그 검색 리스트 갯수(제목, 닉네임) -->
+	<select id="searchReviewTagCount" parameterType="searchDTO" resultType="int">
+		select count(*)
+		from plan_review p, plan_review_tag pt, tag t, member rm
+		where p.index_num = pt.review
+		and pt.tag = t.index_num
+		and p.writer = rm.index_num
+		and ${thema} like '%' || #{keyword} || '%'
+	</select>
+	
+	<!-- 여행 리뷰 태그 검색 리스트(제목, 닉네임) -->
+	<select id="searchReviewTag" parameterType="searchDTO" resultType="boardDTO">
+		select p.index_num, p.title, t.name
+		from plan_review p, plan_review_tag pt, tag t, member rm
+		where p.index_num = pt.review
+		and pt.tag = t.index_num
+		and p.writer = rm.index_num
+		and ${thema} like '%' || #{keyword} || '%'
 	</select>
 	
  

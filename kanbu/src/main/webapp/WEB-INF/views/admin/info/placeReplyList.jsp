@@ -63,7 +63,7 @@
               </a>
             </li>
             <li class="nav-item  d-none d-lg-flex">
-              <a class="nav-link active" href="#">
+              <a class="nav-link active" href="/kanbu/mapView.com">
                 일정만들기
               </a>
             </li>
@@ -209,7 +209,7 @@
             </a>
             <div class="collapse" id="charts">
               <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href="/kanbu/admin/board/reviewInfo.com">후기게시판</a></li>
+                <li class="nav-item"> <a class="nav-link" href="/kanbu/admin/board/reviewInfo.com">여행후기</a></li>
                 <li class="nav-item"> <a class="nav-link" href="/kanbu/board/noticeList.com">공지사항</a></li>
                 <li class="nav-item"> <a class="nav-link" href="/kanbu/admin/board/qaInfo.com">자주하는질문</a></li>
               </ul>
@@ -228,7 +228,7 @@
             <div class="col-lg-12 grid-margin stretch-card">
               <div class="card">
                 <div class="card-body">
-                  <h4 class="card-title">여행지 댓글 조회</h4>
+                  <h4 class="card-title">여행지 댓글 관리</h4>
                   <c:if test="${placeReplyCount == 0}">
                   		<p>등록된 댓글이 없습니다.</p>
                   	</c:if>
@@ -248,7 +248,7 @@
                       	<c:if test="${placeReplyCount > 0}">
                         	<c:forEach var="placeReply" items="${placeReplyList}">
                         		<tr>
-                          			<td>${placeReply.index_num}</td>
+                          			<td id="replyNum">${placeReply.index_num}</td>
                           			<td>
                           				<button type="button" class="btn btn-link btn-fw" 
                           					    onclick="location.href='/kanbu/info.com?placeNum=${placeReply.place}'">
@@ -259,9 +259,12 @@
                           			<td>${placeReply.content}</td>
                           			<td><fmt:formatDate value="${placeReply.reg_date}" pattern="yyyy-MM-dd" /></td>
                          			<td>
-                         				<button type="button" class="btn btn-inverse-danger btn-icon">
-                        					<i class="typcn typcn-trash"></i>
-                      					</button>
+                         				<c:if test="${!(placeReply.content eq '관리자에 의해 삭제된 댓글입니다.')}">
+	                         				<button type="button" class="btn btn-inverse-danger btn-icon" 
+	                         					    onclick="return placeReplyDelete();">
+	                        					<i class="typcn typcn-trash"></i>
+	                      					</button>
+	                      				</c:if>
                       				</td>
                         		</tr>
                         	</c:forEach>
@@ -355,10 +358,10 @@
         <!-- footer 영역 -->
         <footer class="footer">
             <div class="d-sm-flex justify-content-center justify-content-sm-between">
-              <span class="text-center text-sm-left d-block d-sm-inline-block">Copyright © <a href="https://www.bootstrapdash.com/" target="_blank">bootstrapdash.com</a> 2020</span>
-              <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center">Free <a href="https://www.bootstrapdash.com/" target="_blank">Bootstrap dashboard </a>templates from Bootstrapdash.com</span>
+              	<span class="text-center text-sm-left d-block d-sm-inline-block">Copyright © <script>document.write(new Date().getFullYear());</script></span>
+              	<span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center">All rights reserved | Kanbu Travel</span>
             </div>
-          </footer>
+        </footer>
         <!-- partial -->
       </div>
       <!-- main-panel ends -->
@@ -407,6 +410,20 @@
   				return false;
   			}		
   		}
+  	</script>
+  	
+  	<!-- 댓글 삭제 -->
+  	<script type="text/javascript">
+  		function placeReplyDelete() {
+  			var replyNum = $('#replyNum').text();
+			var result = confirm("해당 댓글을 삭제하시겠습니까?");
+			
+			if(result){
+				window.location = '/kanbu/admin/placeReply/delete.com?replyNum='+replyNum;
+			}else{
+				return false;
+			}
+		}
   	</script>
 
 </html>

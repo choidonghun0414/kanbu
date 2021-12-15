@@ -7,7 +7,6 @@ import com.kanbu.dto.plan.MyPlanDTO;
 
 public interface MyPlanDAO {
 
-	public void addPlace(MyPlanDTO splan) throws Exception;	//찜장소 저장
 	public void deleteSchedule(int schedule);	//스케쥴 삭제
 	public List<String> getMySplan_num(int list_num);	//스케쥴 목록
 	public void updateMySplan_num(int schedule, int list_num);	//스케쥴 수정

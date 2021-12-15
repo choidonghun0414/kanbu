@@ -3,10 +3,23 @@ package com.kanbu.service;
 import java.util.List;
 
 import com.kanbu.dto.SearchDTO;
+import com.kanbu.dto.board.BoardDTO;
 import com.kanbu.dto.info.PlaceDTO;
 
 
 public interface MainService {
+	
+	// 인기 여행지 추출
+	public List<PlaceDTO> popularPlace(int rownum) throws Exception;
+	
+	// 인기 리뷰 추출
+	public List<BoardDTO> popularReview(int rownum) throws Exception;
+	
+	// 인기 리뷰 태그 리스트수 추출
+	public int popularTagReviewCount(List<Integer> indexList) throws Exception;
+	
+	// 인기 여행 리뷰 태그 리스트
+	public List<BoardDTO> popularTagReview(List<Integer> indexList) throws Exception;
 	
 	// 키워드 입력하여 장소 검색결과 갯수
 	public int selectKeywordCount(String keyword) throws Exception;

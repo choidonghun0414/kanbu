@@ -30,7 +30,19 @@ public class AdminDAOImpl implements AdminDAO{
 	public List<MemberDTO> selectTotalMember(MemberDTO member) throws Exception {
 		return mybatis.selectList("admin.selectTotalMember", member);
 	}
-
+	
+	// 여행지 등록하기
+	@Override
+	public void insertPlace(PlaceDTO place) throws Exception {
+		mybatis.insert("admin.insertPlace", place);
+	}
+	
+	// 여행지 수정하기
+	@Override
+	public void updatePlace(PlaceDTO place) throws Exception {
+		mybatis.update("admin.updatePlace", place);
+	}
+	
 	// 등록된 장소 전체 갯수 검색
 	@Override
 	public int selectTotalPlaceCount() throws Exception {
@@ -71,6 +83,12 @@ public class AdminDAOImpl implements AdminDAO{
 	@Override
 	public int selectTotalPlaceReplyCount() throws Exception {
 		return mybatis.selectOne("admin.selectTotalPlaceReplyCount");
+	}
+	
+	// 등록된 여행지 댓글 삭제(관리자)
+	@Override
+	public void placeReplyDeleteAdmin(int index_num) throws Exception {
+		mybatis.update("admin.placeReplyDeleteAdmin", index_num);
 	}
 
 	// 등록된 여행지 전체 댓글 검색
@@ -113,6 +131,30 @@ public class AdminDAOImpl implements AdminDAO{
 	@Override
 	public List<BoardDTO> selectReviewTag() throws Exception {
 		return mybatis.selectList("admin.selectReviewTag");
+	}
+
+	// 여행후기 검색 갯수(제목, 닉네임)
+	@Override
+	public int searchReviewCount(SearchDTO search) throws Exception {
+		return mybatis.selectOne("admin.searchReviewCount", search);
+	}
+
+	// 여행후기 검색 리스트(제목, 닉네임)
+	@Override
+	public List<BoardDTO> searchReview(SearchDTO search) throws Exception {
+		return mybatis.selectList("admin.searchReview", search);
+	}
+
+	// 여행후기 태그 검색 갯수(제목, 닉네임)
+	@Override
+	public int searchReviewTagCount(SearchDTO search) throws Exception {
+		return mybatis.selectOne("admin.searchReviewTagCount", search);
+	}
+
+	// 여행후기 태그 검색 리스트(제목, 닉네임)
+	@Override
+	public List<BoardDTO> searchReviewTag(SearchDTO search) throws Exception {
+		return mybatis.selectList("admin.searchReviewTag", search);
 	}
 
 

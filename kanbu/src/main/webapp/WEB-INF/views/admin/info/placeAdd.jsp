@@ -10,7 +10,7 @@
 <head>
    <meta charset="utf-8">
    <meta http-equiv="x-ua-compatible" content="ie=edge">
-   <title>여행지정보수정 | ${placeInfo.name}</title>
+   <title>여행지등록</title>
    <meta name="description" content="">
    <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -139,75 +139,41 @@
             <div class="row justify-content-center">
                 <div class="col-lg-8 col-md-9">
                 	<form name="placeInfoUpdate" id="placeInfoUpdate" method="post" enctype="multipart/form-data"
-                		  action="/kanbu/admin/placeInfo/editPro.com">
+                		  action="/kanbu/admin/placeAddPro.com">
 	                    <div class="destination_info">
 	                    	<h1 style="font-weight: bold;" align="center">
-	                    		여행지 정보 수정
+	                    		여행지 등록
 	                    	</h1>
 	                    	<hr/>
 	                    	<p>&nbsp</p>
 	                    	
 	                        <h3 style="font-weight: bold;" align="center">
-	                        	장소명 : <input type="text" name="name" id="name" value="${placeInfo.name}"
-	                        				   placeholder="장소를 입력해주세요.."/>
+	                        	장소명 : <input type="text" name="name" id="name" placeholder="장소를 입력해주세요.."/>
 	                        </h3>
 	                        <h4 style="font-weight: bold;" align="center">
-	                        	주소 : <input type="text" name="addr" id="addr" value="${placeInfo.addr}"
-	                        			     style="width: 490px;" placeholder="주소를 입력해주세요.."/>
+	                        	주소 : <input type="text" name="addr" id="addr" style="width: 490px;"
+	                        			     placeholder="주소를 입력해주세요.."/>
 	                        </h4>
-	                        <p>&nbsp</p>
-	   							<ul class="blog-info-link">
-	            					<li>
-	            						<a class="views">
-	            							<i class="fa fa-eye" style="cursor:pointer;" id="views"></i>${placeInfo.views}
-	            						</a>
-	            					</li>
-	        					</ul>
-	   						
+	   							
 	   						<hr/>
+	   						<p>&nbsp</p>
 	   						
-	   						<!-- 사진 슬라이드 쇼 -->
-	   						<!-- slider_area_start -->
-	    					<div class="w3-content w3-display-container">
-	    						<c:if test="${!empty(placeInfo.picture1)}">
-	    							<img class="mySlides" src="${uploadPath+=placeInfo.picture1}" width="100%"/>
-	    						</c:if>
-	    						<c:if test="${!empty(placeInfo.picture2)}">
-	    							<img class="mySlides" src="${uploadPath+=placeInfo.picture2}" width="100%"/>
-	    						</c:if>
-	    						<c:if test="${!empty(placeInfo.picture3)}">
-	    							<img class="mySlides" src="${uploadPath+=placeInfo.picture3}" width="100%"/>
-	    						</c:if>
-	    						<c:if test="${!empty(placeInfo.picture4)}">
-	    							<img class="mySlides" src="${uploadPath+=placeInfo.picture4}" width="100%"/>
-								</c:if>
-	    						<c:if test="${!empty(placeInfo.picture5)}">
-	    							<img class="mySlides" src="${uploadPath+=placeInfo.picture5}" width="100%"/>
-	    						</c:if>
-	    						
-	    						<button type="button" class="w3-button w3-black w3-display-left" onclick="plusDivs(-1)">&#10094;</button>
-	    						<button type="button" class="w3-button w3-black w3-display-right" onclick="plusDivs(1)">&#10095;</button>
-	    					</div>
-	    					<!-- slider_area_end -->
-	    					
-	    					<p>&nbsp</p>
-	    					<!-- 사진 수정하기 -->
-	   						<h4 style="font-weight: bold;">사진 수정하기</h4>
-		   						<p id="picture1"> 사진1 : <input type="file" name="picture1" id="picture1"/>${placeInfo.picture1}</p>
-		    					<p id="picture2"> 사진2 : <input type="file" name="picture2" id="picture2"/>${placeInfo.picture2}</p>
-		    					<p id="picture3"> 사진3 : <input type="file" name="picture3" id="picture3"/>${placeInfo.picture3}</p>
-		    					<p id="picture4"> 사진4 : <input type="file" name="picture4" id="picture4"/>${placeInfo.picture4}</p>
-		    					<p id="picture5"> 사진5 : <input type="file" name="picture5" id="picture5"/>${placeInfo.picture5}</p>	
-	    					
-	    					<hr/>
+	   						<!-- 사진 등록하기 -->
+	   						<h4 style="font-weight: bold;">사진 등록하기</h4>
+		   						<p> 사진1 : <input type="file" name="picture1" id="picture1" /></p>
+		    					<p> 사진2 : <input type="file" name="picture2" id="picture2" /></p>
+		    					<p> 사진3 : <input type="file" name="picture3" id="picture3" /></p>
+		    					<p> 사진4 : <input type="file" name="picture4" id="picture4" /></p>
+		    					<p> 사진5 : <input type="file" name="picture5" id="picture5" /></p>
+							
+		    				<hr/>	
 	    					
 	    					<!-- 상세정보 -->
 	    					<p>&nbsp</p>
 	    					<h4 style="font-weight: bold;">상세정보</h4>
 	    					<p>
 	    						<textarea name="info" id="info" style="width: 730px;height: 200px;"
-	    								  placeholder="상제정보를 입력해주세요..">${placeInfo.info}</textarea>
-	    					
+	    								  placeholder="상제정보를 입력해주세요.."></textarea>
 	    					</p>
 	   						
 	   						<!-- 지도 -->
@@ -217,60 +183,56 @@
 	                			<div>
 									<p style="font: bold;">
 										위도	: <input type="text" name="latitude" id="latitude" class="location"
-													 value="${placeInfo.latitude}" placeholder="위도를 입력해주세요.."/>&nbsp&nbsp&nbsp&nbsp&nbsp
+													 placeholder="위도를 입력해주세요.."/>&nbsp&nbsp&nbsp&nbsp&nbsp
 										경도	: <input type="text" name="longitude" id="longitude" class="location"
-													 value="${placeInfo.longitude}" placeholder="경도를 입력해주세요.."/>
+													 placeholder="경도를 입력해주세요.."/>
 									</p>
 								</div>
 								<div>
 									<p style="font: bold;">
-										문의 및 안내	: <input type="text" name="tel" id="tel" value="${placeInfo.tel}" 
-														     placeholder="ex) 064-111-1234"/>
+										문의 및 안내	: <input type="text" name="tel" id="tel" placeholder="ex) 064-111-1234"/>
 									</p>
 								</div>
 								<div>
 									<p style="font: bold;">	
-										휴일	: <input type="text" name="holiday" id="holiday" value="${placeInfo.holiday}"
-													 placeholder="휴일 날짜를 넣어주세요.." />
+										휴일	: <input type="text" name="holiday" id="holiday" placeholder="휴일 날짜를 넣어주세요.." />
 									</p>
 								</div>
 								<div>
 									<p style="font: bold;">	
-										어른 입장료 : <input type="text" name="fee1" id="fee1" value="${placeInfo.fee1}" 
-													       placeholder="어른입장료를 입력해주세요.."/> 원&nbsp&nbsp&nbsp&nbsp&nbsp
-										아이 입장료 : <input type="text" name="fee2" id="fee2" value="${placeInfo.fee2}" 
+										어른 입장료 : <input type="text" name="fee1" id="fee1" 
+													       placeholder="어른입장료를 입력해주세요.."/> 원 &nbsp&nbsp&nbsp&nbsp&nbsp
+										아이 입장료 : <input type="text" name="fee2" id="fee2"
 														   placeholder="아이입장료를 입력해주세요.."/> 원
 									</p>
 								</div>
 								<div class="default-select" id="default-select">
 									주차	: <span style="float: right;width: 90%;">
 										  	<select name="parking" id="parking">
-												<option value="1" <c:if test="${placeInfo.parking eq '1'}">selected</c:if>>가능</option>
-												<option value="0" <c:if test="${placeInfo.parking eq '0'}">selected</c:if>>불가능</option>
+										  		<option value="select" selected>선택</option>
+												<option value="1">가능</option>
+												<option value="0">불가능</option>
 											</select>
 										  </span>			
 								</div>
 								<div>
 									<p style="font: bold;">	
-										오픈시간	: <input type="text" name="opening" id="opening" value="${placeInfo.opening}" 
-														 placeholder="ex) 9"/> 시
+										오픈시간	: <input type="text" name="opening" id="opening" placeholder="ex) 9"/> 시 
 									</p>
 								</div>
 								<div>					 
 									<p style="font: bold;">	
-										마감시간	: <input type="text" name="closing" id="closing" value="${placeInfo.closing}" 
-														 placeholder="ex) 22"/>	시
+										마감시간	: <input type="text" name="closing" id="closing" placeholder="ex) 22"/> 시	
 									</p>
 								</div>
 								
-								<input type="hidden" name="placeNum" id="placeNum" value="${placeInfo.index_num}" />
 								<p>&nbsp</p>
 								
                             	<button class="boxed-btn4" type="button" id="optionModifyBtn" 
                                         onclick="return cencel();" style="float: left;">취소</button>
                                 <button class="boxed-btn3" type="submit" id="optionModifyBtn" 
-                                        onclick="return placeUpdateChk();" 
-                                        style="float: right; width: 110px; height: 50px; padding: 13px 39px;">수정</button> 
+                                        onclick="return placeAddChk();" 
+                                        style="float: right; width: 110px; height: 50px; padding: 13px 39px;">등록</button> 
 							</div>
 	                    </div>
                     </form>
@@ -378,44 +340,15 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
     	}
     </script>
    
-   <!-- 사진 슬라이드쇼 script -->
-   <script type="text/javascript">
-   		var slideIndex = 1;
-   		showDivs(slideIndex);
-
-   		function plusDivs(n) {
-     		showDivs(slideIndex += n);
-   		}
-
-   		function showDivs(n) {
-     		var i;
-     		var x = document.getElementsByClassName("mySlides");
-     		
-     		if (n > x.length) {
-     			slideIndex = 1
-     		}
-     		
-     		if (n < 1) {
-     			slideIndex = x.length
-     		}
-     		
-     		for (i = 0; i < x.length; i++) {
-       			x[i].style.display = "none";  
-     		}
-     		
-     		x[slideIndex-1].style.display = "block";  
-   		}
-   </script>
-   
-   <!-- 지도 생성 및 장소 마크 -->
-   <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=fe4da653d661d051c0f1aed85923ec4c"></script>
-   <script>
+   <!-- 지도 기본값(제주도 위도, 경도) -->
+ 	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=fe4da653d661d051c0f1aed85923ec4c"></script>
+   	<script>
 		var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
     	mapOption = { 
-        	center: new kakao.maps.LatLng(${placeInfo.latitude}, ${placeInfo.longitude}), // 지도의 중심좌표(해당 장소 위도, 경도)
-        	level: 3 // 지도의 확대 레벨
+       		center: new kakao.maps.LatLng(33.3616837, 126.5204118), // 지도의 중심좌표(해당 장소 위도, 경도)
+       		level: 10 // 지도의 확대 레벨
     	};
-				
+			
 		var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
 		var marker = new kakao.maps.Marker();
 
@@ -464,10 +397,10 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 		});
 	</script>
 	
-	<!-- 여행지 정보 수정 취소 -->
+	<!-- 여행지 정보 등록 취소 -->
 	<script type="text/javascript">
 		function cencel(){
-			var result = confirm("여행지 정보 수정을 취소하시겠습니까?");
+			var result = confirm("여행지 정보 등록을 취소하시겠습니까?");
 			if(result){
 				window.location.href="/kanbu/admin/placeInfo.com";
 			}else{
@@ -476,14 +409,16 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 		}
 	</script>
 	
-	<!-- 여행지 정보 수정 유효성 검사 -->
+	<!-- 여행지 정보 등록 유효성 검사 -->
 	<script type="text/javascript">
-		function placeUpdateChk(){
+		function placeAddChk(){
 			var name = $('#name').val();
 			var addr = $('#addr').val();
 			var info = $('#info').val();
 			var latitude = $('#latitude').val();
-			var longitude = $('#longitude').val();	
+			var longitude = $('#longitude').val();
+			var target = document.getElementById("parking");
+  			var parking = target.options[target.selectedIndex].value;
 			
 			if(name == null || name == ""){
 				alert("장소를 입력해주세요.");
@@ -505,7 +440,10 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 				alert("경도를 입력해주세요.");
 				return false;
 			}
-			
+			if(parking == null || parking == "" || parking == "select"){
+				alert("주차 여부를 선택해주세요.");
+				return false;
+			}		
 		}
 	</script>
 

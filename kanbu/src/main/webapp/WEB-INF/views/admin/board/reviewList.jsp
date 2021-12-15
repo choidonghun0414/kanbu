@@ -63,7 +63,7 @@
               </a>
             </li>
             <li class="nav-item  d-none d-lg-flex">
-              <a class="nav-link active" href="#">
+              <a class="nav-link active" href="/kanbu/mapView.com">
                 일정만들기
               </a>
             </li>
@@ -112,7 +112,6 @@
             	</li>
             </c:if>
           </ul>
-          
           
           <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" data-toggle="offcanvas">
             <span class="typcn typcn-th-menu"></span>
@@ -209,7 +208,7 @@
             </a>
             <div class="collapse" id="charts">
               <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href="/kanbu/admin/board/reviewInfo.com">후기게시판</a></li>
+                <li class="nav-item"> <a class="nav-link" href="/kanbu/admin/board/reviewInfo.com">여행후기</a></li>
                 <li class="nav-item"> <a class="nav-link" href="/kanbu/board/noticeList.com">공지사항</a></li>
                 <li class="nav-item"> <a class="nav-link" href="/kanbu/admin/board/qaInfo.com">자주하는질문</a></li>
               </ul>
@@ -228,7 +227,7 @@
             <div class="col-lg-12 grid-margin stretch-card">
               <div class="card">
                 <div class="card-body">
-                  <h4 class="card-title">여행후기글 조회</h4>
+                  <h4 class="card-title">여행후기</h4>
                   <c:if test="${reviewCount == 0}">
                   		<p>등록된 후기가 없습니다.</p>
                   	</c:if>
@@ -348,8 +347,7 @@
 						<select name="thema" id="thema" class="form-control-sm">
 							<option value="select" selected>선택</option>
                   	   		<option value="p.title">제목</option>
-                  	   		<option value="m.nick">작성자</option>
-                  	   		<option value="t.tag">태그</option>
+                  	   		<option value="rm.nick">작성자</option>
                   	   	</select>
                   	   	<input type="text" name="keyword" id="keyword" class="form-control-sm"/>
                   	   	<button class="btn btn-sm btn-secondary" type="button" onclick="search();">검색</button>
@@ -361,8 +359,8 @@
         <!-- footer 영역 -->
         <footer class="footer">
             <div class="d-sm-flex justify-content-center justify-content-sm-between">
-              <span class="text-center text-sm-left d-block d-sm-inline-block">Copyright © <a href="https://www.bootstrapdash.com/" target="_blank">bootstrapdash.com</a> 2020</span>
-              <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center">Free <a href="https://www.bootstrapdash.com/" target="_blank">Bootstrap dashboard </a>templates from Bootstrapdash.com</span>
+              	<span class="text-center text-sm-left d-block d-sm-inline-block">Copyright © <script>document.write(new Date().getFullYear());</script></span>
+              	<span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center">All rights reserved | Kanbu Travel</span>
             </div>
           </footer>
         <!-- partial -->

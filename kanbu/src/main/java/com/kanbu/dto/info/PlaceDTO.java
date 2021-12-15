@@ -21,6 +21,7 @@ package com.kanbu.dto.info;
  * 	picture5 : 장소 사진5
  * 	views : 조회수
  *  good : 좋아요수
+ *  reviewcount : 댓글수
  *  startRow : 시작장소(페이징처리)
  *  endRow : 마지막장소(페이징처리)
  * 
@@ -48,6 +49,7 @@ public class PlaceDTO {
 	private String picture5;
 	private int views;
 	private int good;
+	private int reviewcount;
 	private int startRow;
 	private int endRow;
 	
@@ -190,6 +192,13 @@ public class PlaceDTO {
 	}
 	public void setGood(int good) {
 		this.good = good;
+	}
+	
+	public int getReviewcount() {
+		return reviewcount;
+	}
+	public void setReviewcount(int reviewcount) {
+		this.reviewcount = reviewcount;
 	}
 	
 	public int getStartRow() {
