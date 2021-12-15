@@ -9,7 +9,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>QUESTION</title>
+    <title>Q&A | 자주하는 질문</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -179,14 +179,14 @@
 			<tbody>
 				<tr class="table-active">
 					<th scope="row">공지</th>
-					<td>제 목</td>
+					<td><a href="/kanbu/board/qaDetail1.com">일정 등록은 어떻게 하나요?</a></td>
 					<td>깐부</td>
 					<td>2021.11.19</td>
 					<td>121</td>
 				</tr>
 				<tr class="table-active">
 					<th scope="row">공지</th>
-					<td>제 목</td>
+					<td><a href="/kanbu/board/qaDetail2.com">회원만 이용 가능한가요?</a></td>
 					<td>깐부</td>
 					<td>2021.11.19</td>
 					<td>59</td>
@@ -230,11 +230,13 @@
 		</table>
 		
 		<!-- ============글 등록 버튼 (( 관리자에게만 보이게 해야함...))============ -->
+		<c:if test="${sessionScope.status == 100}">
 		<div class="d-flex flex-row-reverse">
 			<span class="input-group-btn">
 				<a class="btn btn-secondary" href="/kanbu/board/qaWrite.com" role="button">등록</a>
 			</span>
 		</div>
+		</c:if>
 	
 		<!-- ============ 게시판 페이징 표시 ============ -->
 		<nav class="blog-pagination d-flex justify-content-center">

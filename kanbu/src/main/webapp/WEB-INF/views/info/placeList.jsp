@@ -35,7 +35,17 @@
 
     <link rel="stylesheet" href="resources/css/style.css">
     <!-- <link rel="stylesheet" href="css/responsive.css"> -->
+    
+<style>
+    
+    .submenu > li > a:hover{
+	  background-color: #D3D3D3;
+	}
+	
+</style>
 </head>
+
+
 
 <body>
     <!--[if lte IE 9]>
@@ -63,7 +73,6 @@
                                             <li><a class="active" href="/kanbu/main.com">home</a></li>
                                             <li><a href="/kanbu/list.com">일정만들기</a></li>
                                             <li><a href="/kanbu/place.com">여행지정보</a></li>
-                                            <li><a class="" href="travel_destination.html">여행지정보</a></li>
                                             <li><a href="/kanbu/board/reviewList.com">게시판 <i class="ti-angle-down"></i></a>
                                                 <ul class="submenu">
                                                         <li><a href="/kanbu/board/reviewList.com">여행공유</a></li>

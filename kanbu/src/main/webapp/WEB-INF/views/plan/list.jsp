@@ -74,6 +74,10 @@
 	.input-group-btn{
 		margin-left: 5px;
 	}
+    
+    .submenu > li > a:hover{
+	  background-color: #D3D3D3;
+	}
 	
 </style>
 </head>

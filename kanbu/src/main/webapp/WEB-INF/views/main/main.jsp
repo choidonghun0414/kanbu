@@ -42,6 +42,11 @@
 		font-family: 'Noto Sans KR', sans-serif;
 	}
 	
+    .submenu > li > a:hover{
+	  background-color: #D3D3D3;
+	}
+	
+	
 	</style>
 	
 </head>

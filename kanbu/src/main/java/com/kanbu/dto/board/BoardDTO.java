@@ -9,12 +9,13 @@ public class BoardDTO {
 	private int index_num;
 	private String title, content, nick, name;
 	private Date reg_date;
-	private int views, writer, tag;
+	private int views, writer, tag, review;
 	private String picture1, picture2, picture3, picture4, picture5;
 	private MultipartFile uploadFile;
 	private String filename;
 	private int startRow, endRow;		// 시작글, 마지막글(페이징 처리)
-
+	private String[] tagArr;
+	
 	public int getIndex_num() {
 		return index_num;
 	}
@@ -163,6 +164,22 @@ public class BoardDTO {
 
 	public void setEndRow(int endRow) {
 		this.endRow = endRow;
+	}
+
+	public String[] getTagArr() {
+		return tagArr;
+	}
+
+	public void setTagArr(String[] tagArr) {
+		this.tagArr = tagArr;
+	}
+
+	public int getReview() {
+		return review;
+	}
+
+	public void setReview(int review) {
+		this.review = review;
 	}
 	
 	

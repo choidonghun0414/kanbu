@@ -74,6 +74,9 @@
 		margin-top: auto;
 	}
 	
+	.submenu > li > a:hover{
+	  background-color: #D3D3D3;
+	}
 	
 </style>
 </head>
@@ -235,7 +238,7 @@
 	                        	</a>
 	                        </c:if>
 	                        <c:if test="${searchCount == 1}">
-	                        	<a href="/kanbu/board/notice/search.com?thema=${search.thema}&keyword=${search.keyword}&pageNum=${startPage-5}" 
+	                        	<a href="/kanbu/board/noticeSearch.com?thema=${thema}&keyword=${keyword}&pageNum=${startPage-5}" 
 	                    	   	   class="page-link" aria-label="Previous">
 	                        		<i class="ti-angle-left"></i>
 	                        	</a>
@@ -249,7 +252,7 @@
 	                    		<a href="/kanbu/board/noticeList.com?pageNum=${i}" class="page-link">${i}</a>
 	                    	</c:if>
 	                    	<c:if test="${searchCount == 1}">
-	                    		<a href="/kanbu/board/notice/search.com?thema=${search.thema}&keyword=${search.keyword}&pageNum=${i}" 
+	                    		<a href="/kanbu/board/noticeSearch.com?thema=${thema}&keyword=${keyword}&pageNum=${i}" 
 	                    		   class="page-link">${i}</a>
 	                    	</c:if>
 	                    </li>
@@ -264,7 +267,7 @@
 	                       	 	</a>
 	                       	</c:if>
 	                       	<c:if test="${searchCount == 1}">
-	                       		<a href="/kanbu/board/notice/search.com?thema=${search.thema}&keyword=${search.keyword}&pageNum=${startPage+5}" 
+	                       		<a href="/kanbu/board/noticeSearch.com?thema=${thema}&keyword=${keyword}&pageNum=${startPage+5}" 
 	                           	   class="page-link" aria-label="Next">
 	                        		<i class="ti-angle-right"></i>
 	                       	 	</a>
@@ -277,18 +280,16 @@
 		
 		<!-- ========게시판 검색창======== -->
 		<div class="search-form">
-			<div class="d-flex justify-content-center">
-				<div class="input-group-prepend">
-					<button class="btn btn-outline-secondary dropdown-toggle"
-						type="button" data-toggle="dropdown" aria-haspopup="true"
-						aria-expanded="false">제목</button>
-					<div class="dropdown-menu">
-						<a class="dropdown-item" href="#">작성자</a>
-					</div>
-				</div>
-				<input type="text" class="form-control" placeholder="검색어 입력">
+				<div class="d-flex justify-content-center">
+                    	<select name="thema" id="thema" class="form-control">
+							<!-- <option value="select" selected>선택</option> -->
+                  	   		<option value="n.title">제목</option>
+                  	   		<option value="rm.nick">작성자</option>
+                  	   	</select>
+				
+				<input type="text" class="form-control" name="keyword" id="keyword" placeholder="검색어 입력">
 				<span class="input-group-btn">
-					<button class="btn btn-secondary" type="button">검색</button>
+					<button class="btn btn-secondary" type="button" onclick="searchNotice();">검색</button>
 				</span>
 			</div>
 		</div>
@@ -488,6 +489,29 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 
         });
     </script>
+    
+    <!-- 공지 검색 유효성 검사 -->
+    <script type="text/javascript">
+    	function searchNotice(){
+    		var target = document.getElementById("thema");
+  			var thema = target.options[target.selectedIndex].value;
+  			var keyword = document.getElementById('keyword').value
+  			
+  			if(thema != null && thema != "" && thema !="select"){
+  				if(keyword != null && keyword != ""){
+  					window.location = '/kanbu/board/noticeSearch.com?thema='+thema+'&keyword='+keyword;
+  				}else{
+  					alert("검색어를 입력해주세요.");
+  					return false;
+  				}
+  			}else{
+  				alert("검색 테마를 선택해주세요.");
+  				return false;
+  			}			
+    	}
+    </script>
+    
+    
     </body>
     
     </html>

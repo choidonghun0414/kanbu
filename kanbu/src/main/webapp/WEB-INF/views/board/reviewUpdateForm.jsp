@@ -209,6 +209,19 @@
 						
 					});
 				</script>
+				
+			<legend class="mt-4">태그 선택</legend>
+			<div class="btn-group" role="group" aria-label="Basic checkbox toggle button group">
+				<c:forEach var="tag" items="${tagList}">
+					<input type="checkbox" class="btn-check" id="btncheck${tag.index_num}" 
+					       name="index_num[]" value="${tag.index_num}" 
+				  		   <c:forEach var="editTag" items="${editTagList}">
+				  		   		<c:if test="${tag.index_num == editTag.tag}">checked</c:if></c:forEach>/>
+				  	<label class="btn btn-outline-info" for="btncheck${tag.index_num}">#${tag.name}</label>
+				</c:forEach>
+			</div>
+				
+				
 				<!-- ============글 수정 완료 버튼 ============ -->
 			<div class="d-flex flex-row-reverse">
 				<span class="input-group-btn">		
@@ -413,6 +426,32 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 
         });
     </script>
+    
+    <script>
+	$(document).ready(function(){
+		$("#a_save_btn").on("click", function(){
+			if($("#title").val()==""){
+				alert("제목을 입력해주세요.");
+				$("#title").focus();
+				return false;
+			}
+			if($("#summernote").val()==""){
+				alert("내용을 입력해주세요.");
+				$("#summernote").focus();
+				return false;
+			}if(!$("input:checked[Name='index_num[]']").is(":checked")){
+				alert("태그는 하나 이상 선택해주세요.");
+				$("#index_num[]").focus();
+				return false;
+			}else{
+				var result = confirm("리뷰를 수정하시겠습니까?");
+				if(!result){
+					return false;
+				}
+			}
+		});
+	})
+	</script>
     
     	
     </body>

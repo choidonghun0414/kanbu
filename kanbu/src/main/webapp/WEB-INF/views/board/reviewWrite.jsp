@@ -95,6 +95,11 @@
 	.border {
 		width: 75%;
 	}
+	
+	.submenu > li > a:hover{
+	  background-color: #D3D3D3;
+	}
+	
 </style>
 
 
@@ -187,7 +192,7 @@
 	<!-- ================== 게시글 등록 폼 =================== -->
 	<!-- ================== 게시글 등록 폼 =================== -->
 	<div class="container">
-		<form action="/kanbu/board/reviewWritePro.com" name="reviewForm" method="post" enctype="multipart/form-data">
+		<form action="/kanbu/board/reviewWritePro.com" name="reviewForm" method="post">
 			<table class="table table-write" id="add_mt">
 				<colgroup>
 					<col style="width:120px" />
@@ -210,7 +215,15 @@
 						placeholder: "내용을 입력해주세요."
 					});
 				</script>
-				<input type="file" class="form-control" name="uploadFile">
+
+			<legend class="mt-4">태그 선택</legend>
+			<div class="btn-group" role="group" aria-label="Basic checkbox toggle button group">
+				<c:forEach var="tag" items="${tagList}">
+				  <input type="checkbox" class="btn-check" id="btncheck${tag.index_num}" name="index_num[]" value="${tag.index_num}">
+				  	<label class="btn btn-outline-info" for="btncheck${tag.index_num}">#${tag.name}</label>
+				</c:forEach>
+			</div>
+			
 				<!-- ============글 등록 버튼 (목록으로 돌아옴) ============ -->
 				<div class="d-flex flex-row-reverse">
 					<span class="input-group-btn">		
@@ -416,24 +429,42 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
         });
     </script>
     <script type="text/javascript">
-   /*  function sendFile(file, el) {
-        var form_data = new FormData();
-        form_data.append('file', file);
-        $.ajax({
-          data: form_data,
-          type: "POST",
-          url: '/image',
-          cache: false,
-          contentType: false,
-          enctype: 'multipart/form-data',
-          processData: false,
-          success: function(url) {
-            $(el).summernote('editor.insertImage', url);
-            $('#imageBoard > ul').append('<li><img src="'+url+'" width="480" height="auto"/></li>');
-          }
-        });
-      } */
+  
+    $("#a_save_btn").on('click',function(){
+    	var index_num = [];
+    	
+    	$("input[name=index_num[]]:checked").each(function(){
+    		index_num.push($(this.val());
+    	})
+    })
     </script>
+    
+    <!-- 유효성 검사 btncheck${tag.index_num} -->
+   	<script>
+	$(document).ready(function(){
+		$("#a_save_btn").on("click", function(){
+			if($("#title").val()==""){
+				alert("제목을 입력해주세요.");
+				$("#title").focus();
+				return false;
+			}
+			if($("#summernote").val()==""){
+				alert("내용을 입력해주세요.");
+				$("#summernote").focus();
+				return false;
+			}if(!$("input:checked[Name='index_num[]']").is(":checked")){
+				alert("태그는 하나 이상 선택해주세요.");
+				$("#index_num[]").focus();
+				return false;
+			}else{
+				var result = confirm("리뷰를 등록하시겠습니까?");
+				if(!result){
+					return false;
+				}
+			}
+		});
+	})
+	</script>
     
     	
     </body>

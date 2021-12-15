@@ -85,6 +85,11 @@
 		text-align: center;
 		padding: 30px;
 	}
+	
+	.submenu > li > a:hover{
+	  background-color: #D3D3D3;
+	}
+	
 </style>
 </head>
 
@@ -170,6 +175,7 @@
 						<col width= "80%" />
 					</colgroup>
 		        		<thead>
+		        			
 				        	<tr>
 				        		<td scope="col">제목</td>
 				        		<td scope="col" style="text-align: left;">&nbsp;&nbsp;&nbsp;${noticeDetail.title}</td>
@@ -179,6 +185,10 @@
 				        		<td scope="col" style="text-align: left;">&nbsp;&nbsp;&nbsp;${noticeDetail.nick}</td>
 				        	</tr>
 		        		</thead>
+		        			<tr>
+		        				<td colspan="2" scope="colgroup" style="text-align: left; font-size: 12px;">
+		        				&nbsp;&nbsp;조회수&nbsp;&nbsp;${noticeDetail.views} </td>
+		        			</tr>
 		        			<tr class="notice-contents">
 	        					<td colspan="2" scope="colgroup">${noticeDetail.content}</td>
 	        				</tr>
