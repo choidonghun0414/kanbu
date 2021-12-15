@@ -14,24 +14,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- <link rel="manifest" href="site.webmanifest"> -->
-    <link rel="shortcut icon" type="image/x-icon" href="/kanbu/resources/img/favicon.png">
+    <link rel="shortcut icon" type="image/x-icon" href="resources/img/favicon.png">
     <!-- Place favicon.ico in the root directory -->
 
     <!-- CSS here -->
-    <link rel="stylesheet" href="/kanbu/resources/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/kanbu/resources/css/owl.carousel.min.css">
-    <link rel="stylesheet" href="/kanbu/resources/css/magnific-popup.css">
-    <link rel="stylesheet" href="/kanbu/resources/css/font-awesome.min.css">
-    <link rel="stylesheet" href="/kanbu/resources/css/themify-icons.css">
-    <link rel="stylesheet" href="/kanbu/resources/css/nice-select.css">
-    <link rel="stylesheet" href="/kanbu/resources/css/flaticon.css">
-    <link rel="stylesheet" href="/kanbu/resources/css/gijgo.css">
-    <link rel="stylesheet" href="/kanbu/resources/css/animate.css">
-    <link rel="stylesheet" href="/kanbu/resources/css/slick.css">
-    <link rel="stylesheet" href="/kanbu/resources/css/slicknav.css">
+    <link rel="stylesheet" href="resources/css/bootstrap.min.css">
+    <link rel="stylesheet" href="resources/css/owl.carousel.min.css">
+    <link rel="stylesheet" href="resources/css/magnific-popup.css">
+    <link rel="stylesheet" href="resources/css/font-awesome.min.css">
+    <link rel="stylesheet" href="resources/css/themify-icons.css">
+    <link rel="stylesheet" href="resources/css/nice-select.css">
+    <link rel="stylesheet" href="resources/css/flaticon.css">
+    <link rel="stylesheet" href="resources/css/gijgo.css">
+    <link rel="stylesheet" href="resources/css/animate.css">
+    <link rel="stylesheet" href="resources/css/slick.css">
+    <link rel="stylesheet" href="resources/css/slicknav.css">
     <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/themes/smoothness/jquery-ui.css">
 
-    <link rel="stylesheet" href="/kanbu/resources/css/style.css">
+    <link rel="stylesheet" href="resources/css/style.css">
     <!-- <link rel="stylesheet" href="css/responsive.css"> -->
     
 	<link rel="preconnect" href="https://fonts.googleapis.com">
@@ -68,7 +68,7 @@
                             <div class="col-xl-2 col-lg-2">
                                 <div class="logo">
                                     <a href="/kanbu/main.com">
-                                        <img src="/kanbu/resources/img/kanbulogo.png" alt="">
+                                        <img src="resources/img/kanbulogo.png" alt="">
                                     </a>
                                 </div>
                             </div>
@@ -291,7 +291,7 @@
                 <div class="col-lg-4 col-md-6">
                     <div class="single_travel text-center">
                         <div class="icon">
-                            <img src="/kanbu/resources/img/svg_icon/map.png" alt="">
+                            <img src="resources/img/svg_icon/map.png" alt="">
                         </div>
                          <h3 style="font-weight: 600; font-size:large; color: black;">편리한 일정</h3>
                         <p>원하는 여행일정을 쉽고 간편하게 <br>기록할 수 있습니다.</p>
@@ -309,7 +309,7 @@
                 <div class="col-lg-4 col-md-6">
                     <div class="single_travel text-center">
                         <div class="icon">
-                            <img src="/kanbu/resources/img/svg_icon/1.svg" alt="">
+                            <img src="resources/img/svg_icon/1.svg" alt="">
                         </div>
                         <h3 style="font-weight: 600; font-size:large; color: black;">성공적인 여행</h3>
                         <p>탄탄한 계획과 정보로 <br>성공적인 여행이 가능합니다.</p>
@@ -361,7 +361,7 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
       <div class="modal-content">
         <div class="serch_form">
             <input type="text" name="keyword" id="keyword" placeholder="검색할 장소를 입력해주세요..." >
-            <button type="submit" onclick="return search();">search</button>
+            <button type="submit" onclick="search();">search</button>
         </div>
       </div>
     </div>
@@ -373,37 +373,37 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 
     <script src=" https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"> </script> -->
     <!-- JS here -->
-    <script src="/kanbu/resources/js/vendor/modernizr-3.5.0.min.js"></script>
-    <script src="/kanbu/resources/js/vendor/jquery-1.12.4.min.js"></script>
-    <script src="/kanbu/resources/js/popper.min.js"></script>
-    <script src="/kanbu/resources/js/bootstrap.min.js"></script>
-    <script src="/kanbu/resources/js/owl.carousel.min.js"></script>
-    <script src="/kanbu/resources/js/isotope.pkgd.min.js"></script>
-    <script src="/kanbu/resources/js/ajax-form.js"></script>
-    <script src="/kanbu/resources/js/waypoints.min.js"></script>
-    <script src="/kanbu/resources/js/jquery.counterup.min.js"></script>
-    <script src="/kanbu/resources/js/imagesloaded.pkgd.min.js"></script>
-    <script src="/kanbu/resources/js/scrollIt.js"></script>
-    <script src="/kanbu/resources/js/jquery.scrollUp.min.js"></script>
-    <script src="/kanbu/resources/js/wow.min.js"></script>
-    <script src="/kanbu/resources/js/nice-select.min.js"></script>
-    <script src="/kanbu/resources/js/jquery.slicknav.min.js"></script>
-    <script src="/kanbu/resources/js/jquery.magnific-popup.min.js"></script>
-    <script src="/kanbu/resources/js/plugins.js"></script>
-    <script src="/kanbu/resources/js/gijgo.min.js"></script>
-    <script src="/kanbu/resources/js/slick.min.js"></script>
+    <script src="resources/js/vendor/modernizr-3.5.0.min.js"></script>
+    <script src="resources/js/vendor/jquery-1.12.4.min.js"></script>
+    <script src="resources/js/popper.min.js"></script>
+    <script src="resources/js/bootstrap.min.js"></script>
+    <script src="resources/js/owl.carousel.min.js"></script>
+    <script src="resources/js/isotope.pkgd.min.js"></script>
+    <script src="resources/js/ajax-form.js"></script>
+    <script src="resources/js/waypoints.min.js"></script>
+    <script src="resources/js/jquery.counterup.min.js"></script>
+    <script src="resources/js/imagesloaded.pkgd.min.js"></script>
+    <script src="resources/js/scrollIt.js"></script>
+    <script src="resources/js/jquery.scrollUp.min.js"></script>
+    <script src="resources/js/wow.min.js"></script>
+    <script src="resources/js/nice-select.min.js"></script>
+    <script src="resources/js/jquery.slicknav.min.js"></script>
+    <script src="resources/js/jquery.magnific-popup.min.js"></script>
+    <script src="resources/js/plugins.js"></script>
+    <script src="resources/js/gijgo.min.js"></script>
+    <script src="resources/js/slick.min.js"></script>
    
 
     
     <!--contact js-->
-    <script src="/kanbu/resources/js/contact.js"></script>
-    <script src="/kanbu/resources/js/jquery.ajaxchimp.min.js"></script>
-    <script src="/kanbu/resources/js/jquery.form.js"></script>
-    <script src="/kanbu/resources/js/jquery.validate.min.js"></script>
-    <script src="/kanbu/resources/js/mail-script.js"></script>
+    <script src="resources/js/contact.js"></script>
+    <script src="resources/js/jquery.ajaxchimp.min.js"></script>
+    <script src="resources/js/jquery.form.js"></script>
+    <script src="resources/js/jquery.validate.min.js"></script>
+    <script src="resources/js/mail-script.js"></script>
 
 
-    <script src="/kanbu/resources/js/main.js"></script>
+    <script src="resources/js/main.js"></script>
     <script>
         $('#datepicker').datepicker({
             iconsLibrary: 'fontawesome',

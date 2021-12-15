@@ -167,6 +167,8 @@
 		<h3 class="md-30"> ${selectReview.nick}님의 여행 리뷰</h3>
 	</div>
 	
+	
+<<<<<<< HEAD
 	<!-- =================== 게시글 보기 =================== -->
 	<div class="container">
 		<form action="/kanbu/board/reviewDetailPro.com" name="reviewForm" method="post">
@@ -241,6 +243,79 @@
 	<!-- =================== 게시글 보기 끝 =================== -->
 	
 	<!-- 댓글 조회 영역 -->
+=======
+<!-- =================== 게시글 보기 =================== -->
+<div class="container">
+	<form action="/kanbu/board/reviewDetailPro.com" name="reviewForm" method="post">
+		<div class="row">
+			<div class="col-sm-12">
+        		<table class="table table-bordered table-condensed">
+		        	<colgroup>
+						<col width= "9%" />
+						<col width= "80%" />
+					</colgroup>
+		        		<thead>
+				        	<tr>
+				        		<td scope="col">제목</td>
+				        		<td scope="col" style="text-align: left;">&nbsp;&nbsp;&nbsp;${selectReview.title}</td>
+				        	</tr>
+				        	<tr>
+				        		<td scope="col">작성자</td>
+				        		<td scope="col" style="text-align: left;">&nbsp;&nbsp;&nbsp;${selectReview.nick}</td>
+				        	</tr>
+		        		</thead>
+		        			<tr>
+		        				<td colspan="2" scope="colgroup" style="text-align: left; font-size: 12px;">
+		        				&nbsp;&nbsp;조회수&nbsp;&nbsp;${selectReview.views} </td>
+		        			</tr>
+		        			<tr class="notice-contents">
+	        					<td colspan="2" scope="colgroup">
+	        						<c:if test="${!empty(selectReview.picture1)}">
+    									<img src="${uploadPath+=selectReview.picture1}"/>
+    								</c:if>
+    								<c:if test="${!empty(selectReview.picture2)}">
+    									<img src="${uploadPath+=selectReview.picture2}"/>
+    								</c:if>
+    								<c:if test="${!empty(selectReview.picture3)}">
+    									<img src="${uploadPath+=selectReview.picture3}"/>
+    								</c:if>
+    								<c:if test="${!empty(selectReview.picture4)}">
+    									<img src="${uploadPath+=selectReview.picture4}"/>
+    								</c:if>
+    								<c:if test="${!empty(selectReview.picture5)}">
+    									<img src="${uploadPath+=selectReview.picture5}"/>
+    								</c:if>
+	        						${selectReview.content}
+	        					</td>
+	        				</tr>
+	        				<tr>
+	        					<td colspan="2" style="text-align: left;">
+	        						<c:forEach var="tag" items="${tagList}">
+	        							<c:if test="${selectReview.index_num == tag.index_num}">
+	        								#${tag.name}&nbsp;
+	        							</c:if>
+	        						</c:forEach>
+	        					</td>
+	        				</tr>
+	    		</table>
+        	</div>
+        	<!-- ================== 목록, 수정 버튼 ================== -->
+        	<div class="d-flex flex-row-reverse">
+				<span class="input-group-btn">
+					<a class="btn btn-secondary" href="/kanbu/board/reviewList.com" role="button">목록</a>
+					<c:if test="${sessionScope.status == 1}">
+					<a class="btn btn-secondary" href="/kanbu/board/reviewUpdateForm.com?reviewNum=${selectReview.index_num}" role="button">수정</a>
+					<a class="btn btn btn-danger" href="/kanbu/board/reviewDeletePro.com?reviewNum=${selectReview.index_num}" role="button"
+						onclick="return deleteReview();">삭제</a>
+					</c:if>
+				</span>
+			</div>
+    	</div>
+    </form>  
+</div>
+<!-- =================== 게시글 보기 끝 =================== -->
+<!-- 댓글 조회 영역 -->
+>>>>>>> branch 'main' of https://github.com/choidonghun0414/kanbu.git
 				<div class="row justify-content-center">
 				<div class="col-lg-8 col-md-9">
                		<div class="comments-area">
@@ -382,6 +457,7 @@
 			</div>
 
 	<footer class="footer" style="height: 391px;">
+
         <div class="footer_top">
             <div class="container" align="center">
                 <div class="row">
@@ -518,6 +594,7 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
    		}
    </script>
    
+<<<<<<< HEAD
         <script type="text/javascript">
     	function logOut(){
     		alert("로그아웃 되었습니다.");
@@ -536,6 +613,8 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
     		}
     	}
     </script>
+=======
+>>>>>>> branch 'main' of https://github.com/choidonghun0414/kanbu.git
     
   
 </body>

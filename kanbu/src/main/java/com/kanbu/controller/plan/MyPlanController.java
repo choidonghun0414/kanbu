@@ -34,6 +34,9 @@ public class MyPlanController {
 
 	@Autowired
 	MyPlanDTO plan;
+	
+	// 업로드 저장 경로
+	private String uploadPath = "/kanbu/resources/img/place/"; 
 
 	@RequestMapping(value = "write.com", method = RequestMethod.GET)
 	public String write() { // 일정 작성 write.com
@@ -128,6 +131,7 @@ public class MyPlanController {
 		 model.addAttribute("placeList", placeList);
 		 model.addAttribute("placeCount", placeCount);
 		 model.addAttribute("plan", plan);
+		 model.addAttribute("uploadPath", uploadPath);
 		
 		return "plan/update";
 	}
@@ -184,6 +188,7 @@ public class MyPlanController {
 		
 		model.addAttribute("placeCount", placeCount);
 		model.addAttribute("placeList", placeList);
+		model.addAttribute("uploadPath", uploadPath);
 		
 		return "/plan/mapView";
 	}
@@ -201,6 +206,7 @@ public class MyPlanController {
 		
 		model.addAttribute("placeCount", placeCount);
 		model.addAttribute("placeList", placeList);
+		model.addAttribute("uploadPath", uploadPath);
 		
 		return "/plan/mapView";
 	}	

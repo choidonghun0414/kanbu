@@ -37,7 +37,15 @@
 			width: 140px;
 			height: 56px;
 		}
+
+	h3.md-30 {
+    text-align: center;
+    margin-top: 60px;
+    margin-bottom: 60px;
+    font-size: 60px;
+	}
 	
+<<<<<<< HEAD
 		/* 푸터 사이즈 조절, 컨텐츠와 간격 조절 */
 	    .footer .footer_top {
 	   		margin-top: 110px;
@@ -77,6 +85,43 @@
 	  background-color: #D3D3D3;
 		}
 	</style>
+=======
+	a {
+	    color: #007bff;
+	    text-decoration: none;
+	    background-color: transparent;
+	    -webkit-text-decoration-skip: objects;
+	    color: inherit;
+	}
+	
+	.search-form {
+		margin-top: 40px;
+	}
+	
+	/* 버튼 왼쪽의 여백 */
+	.input-group-btn{
+		margin-left: 5px;
+	}
+	
+	.blog-pagination{
+		margin-top: auto;
+	}
+	
+	.submenu > li > a:hover{
+	  background-color: #D3D3D3;
+	}
+	
+	/* 푸터 사이즈 조절, 컨텐츠와 간격 조절 */
+    .footer .footer_top {
+   		margin-top: 110px;
+   		padding-top: 50px;
+   		padding-bottom: 30px;
+	}
+	
+</style>
+
+
+>>>>>>> branch 'main' of https://github.com/choidonghun0414/kanbu.git
 </head>
 
 <body>
@@ -385,6 +430,7 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 
         });
     </script>
+<<<<<<< HEAD
     
     <!-- 공지 검색 유효성 검사 -->
     <script type="text/javascript">

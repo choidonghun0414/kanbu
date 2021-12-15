@@ -34,57 +34,63 @@
     <!-- <link rel="stylesheet" href="css/responsive.css"> -->
     
 	<style>
-		.logo {
-			width: 140px;
-			height: 56px;
-		}
+	.logo {
+		width: 140px;
+		height: 56px;
+	}
+		
+	a {
+	    color: #007bff;
+	    text-decoration: none;
+	    background-color: transparent;
+	    -webkit-text-decoration-skip: objects;
+	    color: inherit;
+		}	
 	
-	    a {
-		    color: #007bff;
-		    text-decoration: none;
-		    background-color: transparent;
-		    -webkit-text-decoration-skip: objects;
-		    color: inherit;
-		}
-		
-		h3.md-30 {
-		    text-align: center;
-		    margin-top: 60px;
-		    margin-bottom: 60px;
-		    font-size: 35px;
-		}
-		
-		.mb_70 {
-	    	margin-bottom: 30px;
-		}
-		
-		/* 검색 input창 서타일 */
-		input.form-control {
-			margin-bottom: 50px;
-			width: 300px;
-		}
-		
-		/* 버튼 왼쪽의 여백 */
-		.input-group-btn{
-			margin-left: 5px;
-		}
-		
-		/* 푸터 사이즈 조절, 컨텐츠와 간격 조절 */
-	    .footer .footer_top {
-	   		margin-top: 110px;
-	   		padding-top: 50px;
-	   		padding-bottom: 30px;
-		}
-		
-		.notice-contents{
-			height: 100%;
-		}
-		
-		.notice-contents > td{
-			text-align: center;
-			padding: 30px;
-		}
-	</style>
+	h3.md-30 {
+	    text-align: center;
+	    margin-top: 60px;
+	    margin-bottom: 60px;
+	    font-size: 35px;
+	}
+	
+	.mb_70 {
+    	margin-bottom: 30px;
+	}
+	
+	/* 검색 input창 서타일 */
+	input.form-control {
+		margin-bottom: 50px;
+		width: 300px;
+	}
+	
+	/* 버튼 왼쪽의 여백 */
+	.input-group-btn{
+		margin-left: 5px;
+	}
+	
+	/* 푸터 사이즈 조절, 컨텐츠와 간격 조절 */
+    .footer .footer_top {
+   		margin-top: 110px;
+   		padding-top: 50px;
+   		padding-bottom: 30px;
+	}
+	
+	.notice-contents{
+		height: 100%;
+	}
+	
+	.notice-contents > td{
+		text-align: center;
+		padding: 30px;
+	}
+	
+	.submenu > li > a:hover{
+	  background-color: #D3D3D3;
+	}
+	
+</style>
+
 </head>
 
 <body>

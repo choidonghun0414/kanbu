@@ -26,6 +26,7 @@
  		</where>
 	</select>
 	
+	
 	<!-- 관리자 고유번호 검색 -->
 	<select id="selectAdmin" resultType="int">
 		select index_num
@@ -46,6 +47,7 @@
  		values (NOTICE_SEQ.nextval, #{title}, #{writer}, #{content}, sysdate)
  	</insert>
 	
+	
 	<!-- 공지 상세보기 -->
 	<select id="selectNoticeDetail" parameterType="int" resultType="boardDTO">
 	 	select n.index_num, n.title, m.nick, n.content, n.views
@@ -53,6 +55,7 @@
 		where n.writer = m.index_num  
 		and n.index_num = #{index_num}
 	</select>
+	
 	
 	<!-- 공지 수정 -->
 	<update id="noticeUpdate">
@@ -153,6 +156,7 @@
 		and pt.tag = t.index_num
 	</select>
 	
+	
 	<!-- 여행 리뷰 상세 보기 -->
  	<select id="selectReviewDetail" parameterType="int" resultType="boardDTO">
 	 	select p.index_num, p.title, m.nick, p.content, p.views,
@@ -170,6 +174,7 @@
 		and pt.tag = t.index_num
 		and p.index_num = #{index_num}
 	</select>
+ 
  
  	<!-- 여행 리뷰 작성 -->
  	<insert id="insertReview" parameterType="boardDTO">
@@ -222,7 +227,7 @@
 		</where>
 	</select>
 	
-	<!-- 나의 여행 리뷰 태그 리스트 갯수 -->
+	<!-- 여행 리뷰 태그 리스트 갯수 -->
 	<select id="selectMyReviewTagCount" parameterType="int" resultType="int">
 		select count(*)
 		from plan_review p, plan_review_tag pt, tag t
@@ -231,7 +236,7 @@
 		and p.writer = #{value}
 	</select>
 	
-	<!-- 나의 여행 리뷰 태그 리스트 -->
+	<!-- 여행 리뷰 태그 리스트 -->
 	<select id="selectMyReviewTag" parameterType="int" resultType="boardDTO">
 		select p.index_num, p.title, t.name
 		from plan_review p, plan_review_tag pt, tag t
@@ -313,7 +318,7 @@
 		</where>
 	</select>
 	
-	<!-- 나의 여행 리뷰 태그 검색 리스트 갯수(제목) -->
+	<!-- 리뷰 태그 검색 리스트 갯수(제목) -->
 	<select id="searchTitleMyReviewTagCount" parameterType="searchDTO" resultType="int">
 		select count(*)
 		from plan_review p, plan_review_tag pt, tag t
@@ -323,7 +328,7 @@
 		and ${thema} like '%' || #{keyword} || '%'
 	</select>
 	
-	<!-- 나의 여행 리뷰 태그 검색 리스트(제목) -->
+	<!-- 리뷰 태그 검색 리스트(제목) -->
 	<select id="searchTitleMyReviewTag" parameterType="searchDTO" resultType="boardDTO">
 		select p.index_num, p.title, t.name
 		from plan_review p, plan_review_tag pt, tag t
@@ -363,7 +368,6 @@
 		where rt.tag = t.index_num
 		and rt.review = #{review}
 	</select>
-	
 	
  	<!-- 여행 리뷰 삭제 -->
 	<delete id="reviewDelete">
@@ -440,10 +444,6 @@
  			<if test="endRow > 0 and endRow > startRow"><![CDATA[and r <= #{endRow}]]></if>
 		</where>
 	</select>
-	
-	
-	
-	
 	
 	<!-- 내가 쓴 리뷰댓글 갯수 조회 -->
  	<select id="myReviewReplyCount" parameterType="int" resultType="int">

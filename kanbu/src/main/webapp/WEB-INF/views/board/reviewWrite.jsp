@@ -105,7 +105,11 @@
 		font-size: 15px;
 	}
 	
+<<<<<<< HEAD
 	</style>
+=======
+</style>
+>>>>>>> branch 'main' of https://github.com/choidonghun0414/kanbu.git
 
 </head>
 
@@ -234,6 +238,7 @@
 						lang : "ko-KR",
 						focus: true,
 						placeholder: "내용을 입력해주세요."
+						
 					});
 				</script>
 

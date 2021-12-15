@@ -356,6 +356,8 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 	})
 	</script>
     
+    	
+    </body>
     <script type="text/javascript">
     	function logOut(){
     		alert("로그아웃 되었습니다.");

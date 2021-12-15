@@ -110,7 +110,7 @@ public class MyPlanDAOImpl implements MyPlanDAO {
 	// 장소 전체 리스트
 	@Override
 	public List<PlaceDTO> selectPlace() throws Exception {
-		return mybatis.selectList("myPlan.selectPlace");
+	      return mybatis.selectList("myPlan.selectPlace");
 	}
 
 	//장소 검색 갯수

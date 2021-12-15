@@ -168,6 +168,7 @@
         </div>
     </div>
     
+    
     <!--======== 여행 리뷰 게시판 시작 ========  -->
  	<div class="popular_places_area">
         <div class="container">
@@ -404,6 +405,7 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
         });
     </script>
     
+<<<<<<< HEAD
       <!-- 리뷰 검색 유효성 검사 -->
     <script type="text/javascript">
     	function searchReview(){
@@ -453,6 +455,40 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
     		}
     	}
     </script>
+=======
+    <!-- 리뷰 검색 유효성 검사 -->
+    <script type="text/javascript">
+    	function searchReview(){
+    		var target = document.getElementById("thema");
+  			var thema = target.options[target.selectedIndex].value;
+  			var keyword = document.getElementById('keyword').value
+  			
+  			if(thema != null && thema != "" && thema !="select"){
+  				if(keyword != null && keyword != ""){
+  					window.location = '/kanbu/board/reviewSearch.com?thema='+thema+'&keyword='+keyword;
+  				}else{
+  					alert("검색어를 입력해주세요.");
+  					return false;
+  				}
+  			}else{
+  				alert("검색 테마를 선택해주세요.");
+  				return false;
+  			}			
+    	}
+    </script>
+    
+    <!-- 엔터로 검색 -->
+    <script>
+    $('#keyword').keypress(function(event){
+        if ( event.which == 13 ) {
+            $('#reviewSearch').click();
+            return false;
+        }
+   });
+    </script>
+
+    
+>>>>>>> branch 'main' of https://github.com/choidonghun0414/kanbu.git
     </body>
     
 </html>
