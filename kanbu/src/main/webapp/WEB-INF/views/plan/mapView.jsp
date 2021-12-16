@@ -179,10 +179,16 @@
 			// 날짜 차이 구하기
 			var diff = arrivalDate - startDate;
 			var currDay = 24 * 60 * 60 * 1000;	// 단위환산(시*분*초*밀리세컨)
-			var days = parseInt((diff/currDay)+1);
+			var days = 0;
 			
 			// 날짜 표현하기
-			$('.days').text("회원님의 여행기간은 "+days+" 일 입니다.");
+			if(isNaN(diff)){
+				$('.days').text("회원님의 여행기간은 "+days+" 일 입니다.");
+			}else{
+				days = parseInt((diff/currDay)+1);
+				$('.days').text("회원님의 여행기간은 "+days+" 일 입니다.");
+			}
+			
 			$('.Bigdays').text('<h3>'+days+'일차</h3>');
 			
 			// 여행 플랜 테이블 생성하기

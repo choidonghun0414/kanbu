@@ -146,10 +146,8 @@
                             <img src="/kanbu/resources/img/svg_icon/plan.svg" alt="">
                         </div>
                         <h3>나의 일정</h3>
-                        <p>일정 조회</p>
-                        <p>일정 추가</p>
-                        <p>일정 수정</p>
-                        <p>일정 삭제</p>
+                        <p onclick="location.href ='/kanbu/list.com'" style="cursor:pointer;">일정 조회/수정/삭제</p>
+                        <p onclick="location.href ='/kanbu/mapView.com'" style="cursor:pointer;">일정 추가</p>
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-6">

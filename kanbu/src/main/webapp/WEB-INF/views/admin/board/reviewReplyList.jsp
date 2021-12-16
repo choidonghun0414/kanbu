@@ -415,7 +415,7 @@
   	<!-- 댓글 삭제 -->
   	<script type="text/javascript">
   		function reviewReplyDelete(){
-  			var replyNum = document.getElementById('replyNum').value();
+  			var replyNum = $('#replyNum').val();
 			var result = confirm("해당 댓글을 삭제하시겠습니까?");
 			if(result){
 				window.location = '/kanbu/admin/board/reviewReply/delete.com?replyNum='+replyNum;

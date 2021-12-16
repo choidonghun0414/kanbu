@@ -86,13 +86,10 @@ public class BoardController {
 
 	// ====== 공지 작성
 	@RequestMapping(value = "/board/noticeWritePro.com", method = RequestMethod.POST)
-	public String noticeWritePro(MultipartHttpServletRequest ms, Model model,
-									HttpSession session, HttpServletRequest request) throws Exception {
+	public String noticeWritePro(HttpServletRequest request) throws Exception {
 		board.setTitle(request.getParameter("title"));
 		board.setContent(request.getParameter("content"));
 		board.setWriter(boardImpl.selectAdmin());
-		
-		
 		
 		boardImpl.insertBoard(board);
 

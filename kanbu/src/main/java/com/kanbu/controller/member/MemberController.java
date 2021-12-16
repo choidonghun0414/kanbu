@@ -44,6 +44,8 @@ public class MemberController {
 	private SearchDTO search;
 	@Autowired
 	private BoardDTO board;
+	// 업로드 저장 경로
+	private String uploadPath = "/kanbu/resources/img/review/";
 	
 	@RequestMapping(value ="join.com", method = RequestMethod.GET)
 	public String join() throws Exception{
@@ -371,6 +373,7 @@ public class MemberController {
 		model.addAttribute("myReviewTagCount", myReviewTagCount);
 		model.addAttribute("myReviewList", myReviewList);
 		model.addAttribute("myReviewTagList", myReviewTagList);
+		model.addAttribute("uploadPath;", uploadPath);
 		
 		return "/member/myReviewList";
 	}
@@ -429,6 +432,7 @@ public class MemberController {
 		model.addAttribute("myReviewTagCount", myReviewTagCount);
 		model.addAttribute("myReviewList", myReviewList);
 		model.addAttribute("myReviewTagList", myReviewTagList);
+		model.addAttribute("uploadPath;", uploadPath);
 		
 		return "/member/myReviewList";
 	}

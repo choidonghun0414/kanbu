@@ -172,9 +172,7 @@
                     </div>
                     <div class="d-flex justify-content-center">
                     	<select name="thema" id="thema">
-                    		<option value="select" selected>선택</option>
-                    		<option value="p.title">제목</option>
-                       <!-- <option value="t.name">태그</option>  -->
+                    		<option value="p.title" selected>제목</option>
                     	</select>
 						<input type="text" class="form-control" id="keyword"
 							   placeholder="검색어를 입력해주세요..">
@@ -193,11 +191,17 @@
             </c:if>
             <c:if test="${myReviewCount > 0}">
 	            <c:forEach var="myReview" items="${myReviewList}">
-	                <div class="col-lg-4 col-md-6" style="cursor: pointer;"
-	                	 onclick="window.location='/kanbu/board/reviewDetail.com?reviewNum=${myReview.index_num}'">
+	                <div class="col-lg-4 col-md-6">
 	                    <div class="single_place">
 	                        <div class="thumb">
-	                            <img src="/kanbu/resources/img/place/1.png" alt="">
+	                            <a href="/kanbu/board/reviewDetail.com?reviewNum=${myReview.index_num}">
+	                            	<c:if test="${!empty (myReview.picture1)}">
+	                            		<img src="${uploadPath+=myReview.picture1}" alt="" width="360px" height="200px">
+	                            	</c:if>
+	                            	<c:if test="${empty (myReview.picture1)}">
+	                            		<img src="/kanbu/resources/img/place/1.png" alt="" width="360px" height="200px">
+	                            	</c:if>
+	                            </a>
 	                            <a class="prise">${myReview.views}</a>
 	                        </div>
 	                        <div class="place_info">
@@ -415,7 +419,7 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
   			var thema = target.options[target.selectedIndex].value;
   			var keyword = document.getElementById('keyword').value;
   			
-  			if(thema != null && thema != "" && thema !="select"){
+  			if(thema != null && thema != ""){
   				if(keyword != null && keyword != ""){
   					window.location = '/kanbu/mypage/board/review/search.com?thema='+thema+'&keyword='+keyword;
   				}else{

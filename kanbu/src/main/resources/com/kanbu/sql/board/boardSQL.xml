@@ -305,8 +305,8 @@
 	<!-- 나의 여행 리뷰 검색 리스트(제목) -->
  	<select id="searchTitleMyReview" parameterType="searchDTO"  resultType="boardDTO">
 	 	select *
-		from (select index_num, title, nick, content, views, reg_date, rownum r         
-      		  from (select p.index_num, p.title, m.nick, p.content, p.views, p.reg_date
+		from (select index_num, title, nick, content, views, reg_date, picture1, rownum r         
+      		  from (select p.index_num, p.title, m.nick, p.content, p.views, p.reg_date, picture1
            			from plan_review p, member m
            			where m.index_num = p.writer and p.writer = #{writer}
            			and ${thema} like '%' || #{keyword} || '%'

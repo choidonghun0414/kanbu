@@ -178,7 +178,7 @@
 					<th width="60">No.</th>
 					<th width="100">작성일</th>
 					<th width="650">제목</th>
-					<th width="70">&nbsp</th>
+					<th width="70">삭제</th>
 				</tr>
 			</thead>
 			
@@ -196,11 +196,7 @@
 					<td align="center">
 						<a href="/kanbu/detail.com?index_num=${myPlan.index_num}">${myPlan.title}</a></td>
 					<td align="center">
-						<div class="d-flex flex-row-reverse">
-							<span class="input-group-btn">
-								<button type="button" id="btnDelete" onclick="delMyPlan();">삭제</button>
-							</span>
-						</div>
+						<i class="ti-trash" id="btnDelete" style="cursor: pointer;" onclick="delMyPlan();"></i>
 					</td>
 				</tr>
 			</tbody>
