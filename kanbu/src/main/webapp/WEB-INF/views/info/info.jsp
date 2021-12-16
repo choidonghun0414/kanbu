@@ -256,7 +256,7 @@
                                        						<fmt:formatDate value="${place_reply.reg_date}" pattern="yyyy-MM-dd"/> 
                                        					</p>
                                  					</div>
-                                 					<c:if test="${sessionScope.nick eq place_reply.nick}">
+                                 					<c:if test="${(sessionScope.nick eq place_reply.nick)}">
                                  						<c:if test="${!(place_reply.content eq '관리자에 의해 삭제된 댓글입니다.')}">
 	                                 						<div class="reply-btn" align="right">
 	                                    						<a href="/kanbu/info/replyDelete.com?placeNum=${place_reply.place}&replyNum=${place_reply.index_num}" 

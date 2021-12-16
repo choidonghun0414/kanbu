@@ -10,7 +10,7 @@
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <title>Review Administration</title>
+  <title>Plan Administration</title>
   <!-- base:css -->
   <link rel="stylesheet" href="/kanbu/resources/admin/vendors/typicons.font/font/typicons.css">
   <link rel="stylesheet" href="/kanbu/resources/admin/vendors/css/vendor.bundle.base.css">
@@ -226,9 +226,9 @@
             <div class="col-lg-12 grid-margin stretch-card">
               <div class="card">
                 <div class="card-body">
-                  <h4 class="card-title">여행후기</h4>
-                  <c:if test="${reviewCount == 0}">
-                  		<p>등록된 후기가 없습니다.</p>
+                  <h4 class="card-title">일정계획조회</h4>
+                  <c:if test="${planCount == 0}">
+                  		<p>등록된 일정계획이 없습니다.</p>
                   	</c:if>
                   <div class="table-responsive">
                     <table class="table table-hover">
@@ -237,36 +237,30 @@
                           <th>No.</th>
                           <th>제목</th>
                           <th>작성자</th>
-                          <th>태그</th>
-                          <th>댓글수</th>
-                          <th>조회수</th>                          
+                          <th>출발날짜</th>
+                          <th>도착날짜</th>
+                          <th>이동수단</th>                          
+                          <th>여행경비</th>
                           <th>작성시간</th>
                         </tr>
                       </thead>
                       <tbody align="center">
-                      	<c:if test="${reviewCount > 0}">
-                        	<c:forEach var="review" items="${reviewList}">
+                      	<c:if test="${planCount > 0}">
+                        	<c:forEach var="plan" items="${planList}">
                         		<tr>
-                          			<td>${review.index_num}</td>
+                          			<td>${plan.index_num}</td>
                           			<td>
                           				<button type="button" class="btn btn-link btn-fw" 
-                          					    onclick="location.href='/kanbu/board/reviewDetail.com?reviewNum=${review.index_num}'">
-                          					${review.title}
+                          					    onclick="location.href='/kanbu/detail.com?index_num=${plan.index_num}'">
+                          					${plan.title}
                           				</button>
                           			</td>
-                          			<td>${review.nick}</td>
-                          			<td>
-                          				<c:if test="${reviewTagCount > 0}">
-	                            			<c:forEach var="reviewTag" items="${reviewTagList}">
-	                            				<c:if test="${review.index_num == reviewTag.index_num}">
-	                            					#${reviewTag.name}&nbsp
-	                            				</c:if>
-	                            			</c:forEach>
-	                            		</c:if>
-                          			</td>
-                          			<td>${review.reviewcount}</td>
-                          			<td>${review.views}</td>
-                          			<td><fmt:formatDate value="${review.reg_date}" pattern="yyyy-MM-dd" /></td>
+                          			<td>${plan.nick}</td>
+                          			<td><fmt:formatDate value="${plan.startDay}" pattern="yyyy-MM-dd" /></td>
+                          			<td><fmt:formatDate value="${plan.arrivalDay}" pattern="yyyy-MM-dd" /></td>
+                          			<td>${plan.traffic}</td>
+                          			<td>${plan.expense}</td>
+                          			<td><fmt:formatDate value="${plan.reg_date}" pattern="yyyy-MM-dd" /></td>
                         		</tr>
                         	</c:forEach>
                         </c:if>
@@ -277,9 +271,9 @@
                 
                 
                 <!-- 페이지 번호 나타내기 -->
-				<c:if test="${reviewCount > 0}">
+				<c:if test="${planCount > 0}">
 					<fmt:parseNumber var="pageCount" 
-									 value="${reviewCount / pageSize + (reviewCount %  pageSize == 0 ? 0 : 1)}"
+									 value="${planCount / pageSize + (planCount %  pageSize == 0 ? 0 : 1)}"
 									 integerOnly="true" />
 					<c:set var="pageBlock" value="${5}" />
 					<fmt:parseNumber var="result" value="${currentPage/5}" integerOnly="true"/>
@@ -294,7 +288,7 @@
                     		<c:if test="${startPage > 5}">
                         		<li class="page-item">
                         			<c:if test="${searchCount != 1}">
-                            			<a href="/kanbu/admin/board/reviewInfo.com?pageNum=${startPage-5}" 
+                            			<a href="/kanbu/admin/planInfo.com?pageNum=${startPage-5}" 
                             			   class="page-link" aria-label="Previous">
                                 			<i class="mdi mdi-arrow-left"></i>
                                 		</a>
@@ -311,7 +305,7 @@
                         	<c:forEach var="i" begin="${startPage}" end="${endPage}">
                         		<li class="page-item">
                         			<c:if test="${searchCount != 1}">
-                            			<a href="/kanbu/admin/board/reviewInfo.com?pageNum=${i}" class="page-link">${i}</a>
+                            			<a href="/kanbu/admin/planInfo.com?pageNum=${i}" class="page-link">${i}</a>
                             		</c:if>
                             		<c:if test="${searchCount == 1}">
                             			<a href="/kanbu/admin/search.com?thema=${thema}&keyword=${keyword}&pageNum=${i}" 
@@ -323,7 +317,7 @@
                         	<c:if test="${endPage < pageCount}">
                         		<li class="page-item">
                         			<c:if test="${searchCount != 1}">
-                            			<a href="/kanbu/admin/board/reviewInfo.com?pageNum=${startPage+5}" class="page-link" aria-label="Next">
+                            			<a href="/kanbu/admin/planInfo.com?pageNum=${startPage+5}" class="page-link" aria-label="Next">
                              				<i class="mdi mdi-arrow-right"></i>
                                 		</a>
                                 	</c:if>
@@ -345,8 +339,9 @@
 					<div class="form-group">
 						<select name="thema" id="thema" class="form-control-sm">
 							<option value="select" selected>선택</option>
-                  	   		<option value="p.title">제목</option>
-                  	   		<option value="rm.nick">작성자</option>
+                  	   		<option value="mp.title">제목</option>
+                  	   		<option value="mb.nick">작성자</option>
+                  	   		<option value="mp.traffic">이동수단</option>
                   	   	</select>
                   	   	<input type="text" name="keyword" id="keyword" class="form-control-sm"/>
                   	   	<button class="btn btn-sm btn-secondary" type="button" onclick="search();">검색</button>

@@ -39,13 +39,24 @@
 	<div  id="fulldiv">
 		<div>
 			<span class="material-icons">info</span>
-			<p align="center">
-				당신의 ID는 ${id}입니다. 
-			</p>
-			<div id="button" align="center">
-				<button class="boxed-btn4" type="button" id="optionModifyBtn"
-					    onclick="location.href='/kanbu/login.com'">로그인</button>
+			<c:if test="${!empty (id)}">
+				<p align="center">
+					당신의 ID는 ${id}입니다. 
+				</p>
+				<div id="button" align="center">
+					<button class="boxed-btn4" type="button" id="optionModifyBtn"
+					    	onclick="location.href='/kanbu/login.com'">로그인</button>
 				</div>
+			</c:if>
+			<c:if test="${empty (id)}">
+				<p align="center">
+					잘못된 전화번호 또는 이메일입니다. 
+				</p>
+				<div id="button" align="center">
+					<button class="boxed-btn4" type="button" id="optionModifyBtn"
+					    	onclick="location.href='/kanbu/selectId.com'">확인</button>
+				</div>
+			</c:if>			
 		</div>
 	</div>
 </body>

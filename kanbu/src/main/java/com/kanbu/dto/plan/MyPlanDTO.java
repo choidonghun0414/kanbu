@@ -8,6 +8,7 @@ public class MyPlanDTO {
 	private int index_num;	// 인덱스 번호
 	private String title;	// 여행 일정 제목
 	private int writer;		// 작성자번호
+	private String nick;	// 작성자닉네임
 	private Date startDay;	// 여행 시작일
 	private Date arrivalDay;	// 여행 마지막일
 	private String traffic;	// 이동수단 (드롭박스 선택)
@@ -38,6 +39,12 @@ public class MyPlanDTO {
 	}
 	public void setWriter(int writer) {
 		this.writer = writer;
+	}
+	public String getNick() {
+		return nick;
+	}
+	public void setNick(String nick) {
+		this.nick = nick;
 	}
 	public Date getStartDay() {
 		return startDay;

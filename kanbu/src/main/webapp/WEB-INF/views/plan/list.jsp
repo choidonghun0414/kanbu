@@ -33,54 +33,59 @@
     <link rel="stylesheet" href="/kanbu/resources/css/slicknav.css">
     <link rel="stylesheet" href="/kanbu/resources/css/style.css">
     <!-- <link rel="stylesheet" href="css/responsive.css"> -->
-
-<style>
-     /* 푸터 사이즈 조절, 컨텐츠와 간격 조절 */
-    .footer .footer_top {
-   		margin-top: 110px;
-   		padding-top: 50px;
-   		padding-bottom: 30px;
-	}
-	
-	h3.md-30 {
-	    text-align: center;
-	    margin-top: 60px;
-	    margin-bottom: 60px;
-	    font-size: 60px;
-	}
-
-
-	.progress-table .country {
-	    width: 300;
-	}
-	
-	a {
-	    color: #007bff;
-	    text-decoration: none;
-	    background-color: transparent;
-	    -webkit-text-decoration-skip: objects;
-	    color: inherit;
-	}
-	
-	.blog-pagination{
-		margin-top: auto;
-	}
-	
-	.search-form {
-		margin-top: 50px;
-	}
-	
-	
-	/* 버튼 왼쪽의 여백 */
-	.input-group-btn{
-		margin-left: 5px;
-	}
     
-    .submenu > li > a:hover{
-	  background-color: #D3D3D3;
-	}
+    <c:if test="${empty (sessionScope.status)}">
+    	<script type="text/javascript">
+    		alert("로그인 후 이용가능합니다.");
+    		location.href = "/kanbu/login.com";
+    	</script>
+    </c:if>
+
+	<style>
+	     /* 푸터 사이즈 조절, 컨텐츠와 간격 조절 */
+	    .footer .footer_top {
+	   		margin-top: 110px;
+	   		padding-top: 50px;
+	   		padding-bottom: 30px;
+		}
+		
+		h3.md-30 {
+		    text-align: center;
+		    margin-top: 60px;
+		    margin-bottom: 60px;
+		    font-size: 60px;
+		}
 	
-</style>
+		.progress-table .country {
+		    width: 300;
+		}
+		
+		a {
+		    color: #007bff;
+		    text-decoration: none;
+		    background-color: transparent;
+		    -webkit-text-decoration-skip: objects;
+		    color: inherit;
+		}
+		
+		.blog-pagination{
+			margin-top: auto;
+		}
+		
+		.search-form {
+			margin-top: 50px;
+		}
+		
+		
+		/* 버튼 왼쪽의 여백 */
+		.input-group-btn{
+			margin-left: 5px;
+		}
+	    
+	    .submenu > li > a:hover{
+		  background-color: #D3D3D3;
+		}
+	</style>
 
 </head>
 
@@ -99,7 +104,7 @@
                             <div class="col-xl-2 col-lg-2">
                                 <div class="logo">
                                     <a href="/kanbu/main.com">
-                                        <img src="resources/img/logo.png" alt="">
+                                        <img src="resources/img/kanbulogo.png" alt="">
                                     </a>
                                 </div>
                             </div>
@@ -110,10 +115,10 @@
                                             <li><a class="active" href="/kanbu/main.com">home</a></li>
                                             <li><a href="/kanbu/mapView.com">일정만들기</a></li>
                                             <li><a href="/kanbu/place.com">여행지정보</a></li>
-                                            <li><a href="/kanbu/board/reviewList.com">게시판 <i class="ti-angle-down"></i></a>
+                               		 		<li><a href="/kanbu/board/reviewList.com">게시판 <i class="ti-angle-down"></i></a>
                                                 <ul class="submenu">
-                                                	<li><a href="/kanbu/board/reviewList.com">여행후기</a></li>
-                                                    <li><a href="/kanbu/board/noticeList.com">공지사항</a></li>
+                                                        <li><a href="/kanbu/board/reviewList.com">여행후기</a></li>
+                                                        <li><a href="/kanbu/board/noticeList.com">공지사항</a></li>
                                                 </ul>
                                             </li>
                                         </ul>
@@ -123,18 +128,20 @@
                             <div class="col-xl-4 col-lg-4 d-none d-lg-block">
                                 <div class="social_wrap d-flex align-items-center justify-content-end">
                                     <div class="social_links d-none d-xl-block">
-                                        <ul>
+                                        <ul>   
                                         	<c:if test="${sessionScope.status > 0}">
                                         		<li><p>${sessionScope.nick}님 환영합니다.</p></li>
-                                        	</c:if>
-                                            <li><a href="#"> <i class="fa fa-user"></i> </a></li>
-                                            <c:if test="${sessionScope.status > 0}">
-                                        		<li><a href="logout.com"> <i class="fa fa-unlock"></i> </a></li>
+                                        		<c:if test="${sessionScope.status == 1}">
+                                        			<li><a href="/kanbu/mypage.com"> <i class="fa fa-user"></i> </a></li>
+                                        		</c:if>
+                                        		<c:if test="${sessionScope.status == 100}">
+                                        			<li><a href="/kanbu/admin.com"> <i class="fa fa-dashboard"></i> </a></li>
+                                        		</c:if>
+                                        		<li><a href="/kanbu/logout.com"> <i class="fa fa-unlock"></i> </a></li>
                                         	</c:if>
                                         	<c:if test="${empty(sessionScope.status)}">
-                                        		<li><a href="login.com"> <i class="fa fa-lock"></i> </a></li>
-                                        	</c:if>
-                                            
+                                        		<li><a href="/kanbu/login.com"> <i class="fa fa-lock"></i> </a></li>
+                                        	</c:if>    
                                         </ul>
                                     </div>
                                 </div>
@@ -171,7 +178,7 @@
 <!--======== 나의 일정 관리 테이블 ========  -->
 <div class="container box_1170">
 	<c:if test="${count > 0}">
-	${count}개의 게시물이 있습니다.
+		${count}개의 게시물이 있습니다.
 		<table class="table table-hover">
 			<thead>
 				<tr>
@@ -182,12 +189,12 @@
 				</tr>
 			</thead>
 			
+			<c:set var="index" value="${count}" />
 			<c:forEach var="myPlan" items="${myPlanList}">
-			
 			<tbody>
 				<tr class="table-active">
 					<td align="center">
-						${myPlan.index_num}
+						${index}
 						<input type="hidden" name=myPlanNum id=myPlanNum value="${myPlan.index_num}" />
 					</td>
 					<td align="center">
@@ -196,16 +203,17 @@
 					<td align="center">
 						<a href="/kanbu/detail.com?index_num=${myPlan.index_num}">${myPlan.title}</a></td>
 					<td align="center">
-						<i class="ti-trash" id="btnDelete" style="cursor: pointer;" onclick="delMyPlan();"></i>
+						<i class="ti-trash" id="btnDelete" style="cursor: pointer;" onclick="delMyPlan(${myPlan.index_num});"></i>
 					</td>
 				</tr>
 			</tbody>
+				<c:set var="index" value="${index-1}" />
 			</c:forEach>	
 		</table>
 	</c:if>
 		
 	<c:if test="${count == 0}">
-		해당 목록이 없습니다.
+		<p>해당 목록이 없습니다.</p>
 	</c:if>	
 </div>
 
@@ -253,14 +261,49 @@
 				</c:if>
 			</ul>
 		</nav>
+<footer class="footer" style="height: 391px;">
+        <div class="footer_top">
+            <div class="container" align="center">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="footer_widget">
+                            <div class="footer_logo">
+								<img src="/kanbu/resources/img/footer_logo.png" alt="" style="float: left;">
+								<p>
+										it컴퓨터 학원 5층 FDX 자바 교육반 &nbsp;&nbsp;|&nbsp;&nbsp; 양재역 10분도보 
+                                		&nbsp;&nbsp;|&nbsp;&nbsp; +10 367 826 2567
+                                		&nbsp;&nbsp;|&nbsp;&nbsp; contact@kanbu.com
+                            	</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="copy-right_text">
+            <div class="container">
+                <div class="footer_border"></div>
+                <div class="row">
+                    <div class="col-xl-12">
+                        <p class="copy_right text-center">
+                            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | Kanbu Travel <i class="fa fa-heart-o" aria-hidden="true"></i> <a href="https://colorlib.com" target="_blank"></a>
+<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
 
+  <!-- 검색창 -->
   <!-- Modal -->
   <div class="modal fade custom_search_pop" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
       <div class="modal-content">
         <div class="serch_form">
-            <input type="text" placeholder="Search" >
-            <button type="submit">search</button>
+            <input type="text" name="keyword" id="keyword" placeholder="검색할 장소를 입력해주세요..." >
+            <button type="submit" onclick="return search();">search</button>
         </div>
       </div>
     </div>
@@ -292,8 +335,6 @@
     <script src="/kanbu/resources/js/gijgo.min.js"></script>
     <script src="/kanbu/resources/js/slick.min.js"></script>
    
-
-    
     <!--contact js-->
     <script src="resources/js/contact.js"></script>
     <script src="resources/js/jquery.ajaxchimp.min.js"></script>
@@ -311,30 +352,45 @@
          }
         });
     </script>
+    
+    <script type="text/javascript">
+    	function logOut(){
+    		alert("로그아웃 되었습니다.");
+    	}
+    </script>
+    
+    <script type="text/javascript">
+    	function search(){
+    		var place = document.getElementById('keyword').value
+    		
+    		if(place == null || place == ""){
+    			alert("검색할 장소를 입력해주세요.");
+    			return false;
+    		}else{
+    			window.location = '/kanbu/search.com?keyword='+place;
+    		}
+    	}
+    </script>
 
-
-
-
-
-<script type="text/javascript">
-	function delMyPlan(){
-		var index_num = document.getElementById("myPlanNum").value;
-		if(confirm("정말 삭제하시겠습니까?")){
-			location.replace("/kanbu/delete.com?index_num="+index_num);
- 		}else{
- 			return false;
+	<script type="text/javascript">
+		function delMyPlan(myPlanNum){
+			var index_num = myPlanNum;
+			console.log(index_num);
+			if(confirm("정말 삭제하시겠습니까?")){
+				location.replace("/kanbu/delete.com?index_num="+index_num);
+	 		}else{
+	 			return false;
+			}
 		}
-	}
-</script>
-
-
-<script>	
-	function list(page){
-		location.href="${path}/plan/list.com?curPage=" + page
-				+ "&search_option=${map.search_option}"
-				+ "&keyword=${map.keyoword}";
-	}
-</script>
+	</script>
+	
+	<script>	
+		function list(page){
+			location.href="${path}/plan/list.com?curPage=" + page
+					+ "&search_option=${map.search_option}"
+					+ "&keyword=${map.keyoword}";
+		}
+	</script>
 
 </body>
 </html>

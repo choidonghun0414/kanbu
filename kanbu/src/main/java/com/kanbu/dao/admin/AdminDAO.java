@@ -7,6 +7,7 @@ import com.kanbu.dto.board.BoardDTO;
 import com.kanbu.dto.info.PlaceDTO;
 import com.kanbu.dto.info.Place_ReplyDTO;
 import com.kanbu.dto.member.MemberDTO;
+import com.kanbu.dto.plan.MyPlanDTO;
 
 public interface AdminDAO {
 	
@@ -54,6 +55,18 @@ public interface AdminDAO {
 	
 	// 등록된 여행지 댓글 입력 검색
 	public List<Place_ReplyDTO> selectKeywordPlaceReply(SearchDTO search) throws Exception;
+	
+	// 등록된 일정계획 전체 갯수 검색
+	public int selectPlanCount() throws Exception;
+	
+	// 등록된 일정계획 전체 검색
+	public List<MyPlanDTO> selectPlan(MyPlanDTO plan) throws Exception;
+	
+	// 일정계획 검색 갯수(제목, 닉네임)
+	public int searchPlanCount(SearchDTO search) throws Exception;
+	
+	// 일정계획 검색 리스트(제목, 닉네임)
+	public List<MyPlanDTO> searchPlan(SearchDTO search) throws Exception; 
 	
 	// 등록된 여행후기 전체 갯수 검색
 	public int selectReviewCount() throws Exception;

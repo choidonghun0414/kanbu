@@ -72,44 +72,39 @@
 	    font-size: 60px;
 		}
 	
-	a {
-	    color: #007bff;
-	    text-decoration: none;
-	    background-color: transparent;
-	    -webkit-text-decoration-skip: objects;
-	    color: inherit;
-	}
-	
-	.search-form {
-		margin-top: 50px;
-	}
-	
-	
-	/* 버튼 왼쪽의 여백 */
-	.input-group-btn{
-		margin-top: 9px;
-		margin-left: 5px;
-	}
-	
-	.border {
-		width: 75%;
-	}
-	
-	.submenu > li > a:hover{
-	  background-color: #D3D3D3;
-	}
-	
-	/* 파일 박스 크기 조절 */
-	 p > .form-control{
-		height: 33px;
-		font-size: 15px;
-	}
-	
-<<<<<<< HEAD
+		a {
+		    color: #007bff;
+		    text-decoration: none;
+		    background-color: transparent;
+		    -webkit-text-decoration-skip: objects;
+		    color: inherit;
+		}
+		
+		.search-form {
+			margin-top: 50px;
+		}
+		
+		
+		/* 버튼 왼쪽의 여백 */
+		.input-group-btn{
+			margin-top: 9px;
+			margin-left: 5px;
+		}
+		
+		.border {
+			width: 75%;
+		}
+		
+		.submenu > li > a:hover{
+		  background-color: #D3D3D3;
+		}
+		
+		/* 파일 박스 크기 조절 */
+		 p > .form-control{
+			height: 33px;
+			font-size: 15px;
+		}
 	</style>
-=======
-</style>
->>>>>>> branch 'main' of https://github.com/choidonghun0414/kanbu.git
 
 </head>
 

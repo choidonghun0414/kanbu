@@ -226,10 +226,10 @@
         	<div class="d-flex flex-row-reverse">
 				<span class="input-group-btn">
 					<a class="btn btn-secondary" href="/kanbu/board/reviewList.com" role="button">목록</a>
-					<c:if test="${sessionScope.status == 1}">
-					<a class="btn btn-secondary" href="/kanbu/board/reviewUpdateForm.com?reviewNum=${selectReview.index_num}" role="button">수정</a>
-					<a class="btn btn btn-danger" href="/kanbu/board/reviewDeletePro.com?reviewNum=${selectReview.index_num}" role="button"
-						onclick="return deleteReview();">삭제</a>
+					<c:if test="${selectReview.writer == sessionScope.index_num}">
+						<a class="btn btn-secondary" href="/kanbu/board/reviewUpdateForm.com?reviewNum=${selectReview.index_num}" role="button">수정</a>
+						<a class="btn btn btn-danger" href="/kanbu/board/reviewDeletePro.com?reviewNum=${selectReview.index_num}" role="button"
+						   onclick="return deleteReview();">삭제</a>
 					</c:if>
 				</span>
 			</div>
@@ -276,7 +276,7 @@
                                        						<fmt:formatDate value="${review_reply.reg_date}" pattern="yyyy-MM-dd"/> 
                                        					</p>
                                  					</div>
-                                 					<c:if test="${sessionScope.nick eq review_reply.nick}">
+                                 					<c:if test="${(sessionScope.nick eq review_reply.nick)}">
                                  						<c:if test="${!(review_reply.content eq '관리자에 의해 삭제된 댓글입니다.')}">
 	                                 						<div class="reply-btn" align="right">
 	                                    						<a href="/kanbu/board/reviewReplyDelete.com?reviewNum=${review_reply.review}&replyNum=${review_reply.index_num}" 

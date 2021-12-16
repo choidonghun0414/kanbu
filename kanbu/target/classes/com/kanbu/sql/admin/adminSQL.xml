@@ -169,6 +169,53 @@
  			<if test="endRow > 0 and endRow > startRow"><![CDATA[and r <= #{endRow}]]></if>
  		</where>	  
  	</select>
+ 	
+ 	<!-- 일정 계획 리스트 갯수 -->
+ 	<select id="selectPlanCount" resultType="int">
+ 		select count(*) from myPlan_num
+ 	</select>
+ 	
+ 	<!-- 일정 계획 리스트 -->
+ 	<select id="selectPlan" parameterType="myPlanDTO" resultType="myPlanDTO">
+ 		select *
+		from (select index_num, title, writer, nick, startday, arrivalday, 
+             		 traffic, expense, reg_date, rownum r
+      		  from (select mp.index_num, mp.title, mp.writer, m.nick, 
+                   		   mp.startday, mp.arrivalday, mp.traffic, mp.expense, mp.reg_date 
+            		from myplan_num mp, member m
+            		where mp.writer = m.index_num
+            		order by mp.index_num desc)
+      		  order by index_num desc)
+      	<where>
+ 			<if test="startRow > 0"><![CDATA[r >= #{startRow}]]></if>
+ 			<if test="endRow > 0 and endRow > startRow"><![CDATA[and r <= #{endRow}]]></if>
+ 		</where>	  
+ 	</select>
+ 	
+ 	<!-- 일정 계획 리스트 갯수 -->
+ 	<select id="searchPlanCount" parameterType="searchDTO" resultType="int">
+ 		select count(*) from myplan_num mp, member mb
+        where mp.writer = mb.index_num
+        and ${thema} like '%' || #{keyword} || '%'
+ 	</select>
+ 	
+ 	<!-- 일정 계획 검색 리스트(제목, 닉네임) -->
+ 	<select id="searchPlan" parameterType="searchDTO" resultType="myPlanDTO">
+ 		select *
+		from (select index_num, title, writer, nick, startday, arrivalday, 
+             		 traffic, expense, reg_date, rownum r
+      		  from (select mp.index_num, mp.title, mp.writer, mb.nick, 
+                   		   mp.startday, mp.arrivalday, mp.traffic, mp.expense, mp.reg_date 
+            		from myplan_num mp, member mb
+            		where mp.writer = mb.index_num
+            		and ${thema} like '%' || #{keyword} || '%'
+            		order by mp.index_num desc)
+      		  order by index_num desc)
+      	<where>
+ 			<if test="startRow > 0"><![CDATA[r >= #{startRow}]]></if>
+ 			<if test="endRow > 0 and endRow > startRow"><![CDATA[and r <= #{endRow}]]></if>
+ 		</where>	  
+ 	</select>
  
  	<!-- 여행 리뷰 리스트 갯수 -->
 	<select id="selectReviewCount" resultType="int">
@@ -178,12 +225,18 @@
 	<!-- 여행 리뷰 리스트 -->
  	<select id="selectReview" parameterType="boardDTO" resultType="boardDTO">
 	 	select *
-		from (select index_num, title, nick, views, reg_date, rownum r
-      		  from (select p.index_num, p.title, m.nick, p.views, p.reg_date
-            		from plan_review p, member m
-            		where m.index_num = p.writer
-            		order by p.index_num desc)
-      		  order by index_num desc)
+		from (select index_num, title, nick, reviewcount, views, reg_date, rownum r
+      		  from (select pr.index_num, pr.title, m.nick, 
+                   		   case when prr.reviewcount is null then 0
+                   				else prr.reviewcount
+                   		   end reviewcount, pr.views, pr.reg_date     
+            		from plan_review pr, member m, (select review, count(*) reviewcount
+                                            		from plan_review_reply
+                                            		group by(review)) prr
+            		where pr.writer = m.index_num
+            		and pr.index_num = prr.review(+)
+            		order by pr.index_num desc)
+       		  order by index_num desc)
       	<where>
  			<if test="startRow > 0"><![CDATA[r >= #{startRow}]]></if>
  			<if test="endRow > 0 and endRow > startRow"><![CDATA[and r <= #{endRow}]]></if>

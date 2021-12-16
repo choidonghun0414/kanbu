@@ -82,16 +82,10 @@ public class MemberController {
 		int result3 = memberImpl.mailChk(member);	
 	
 		if(result == 1 || result2 ==1 || result3==1) {
-				System.out.println("아디있어");
-				System.out.println("닉넴있어");
-				System.out.println("이메일있어");
-				return "/member/joinForm ";
+			return "/member/joinForm ";
 				
 		}else if (result == 0 && result2 == 0 && result3 ==0) {
-				System.out.println("아디없어");
-				System.out.println("닉넴없어");
-				System.out.println("이메일없어");
-				memberImpl.insertMember(member);
+			memberImpl.insertMember(member);
 		}
 			 
 		return "redirect:/main.com";
@@ -373,7 +367,7 @@ public class MemberController {
 		model.addAttribute("myReviewTagCount", myReviewTagCount);
 		model.addAttribute("myReviewList", myReviewList);
 		model.addAttribute("myReviewTagList", myReviewTagList);
-		model.addAttribute("uploadPath;", uploadPath);
+		model.addAttribute("uploadPath", uploadPath);
 		
 		return "/member/myReviewList";
 	}
@@ -432,7 +426,7 @@ public class MemberController {
 		model.addAttribute("myReviewTagCount", myReviewTagCount);
 		model.addAttribute("myReviewList", myReviewList);
 		model.addAttribute("myReviewTagList", myReviewTagList);
-		model.addAttribute("uploadPath;", uploadPath);
+		model.addAttribute("uploadPath", uploadPath);
 		
 		return "/member/myReviewList";
 	}

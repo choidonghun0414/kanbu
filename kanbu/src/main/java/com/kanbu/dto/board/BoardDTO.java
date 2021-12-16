@@ -9,7 +9,7 @@ public class BoardDTO {
 	private int index_num;
 	private String title, content, nick, name;
 	private Date reg_date;
-	private int views, writer, tag, review;
+	private int views, writer, tag, review, reviewcount;
 	private String picture1, picture2, picture3, picture4, picture5;
 	private MultipartFile uploadFile;
 	private String filename;
@@ -181,7 +181,14 @@ public class BoardDTO {
 	public void setReview(int review) {
 		this.review = review;
 	}
-	
+
+	public int getReviewcount() {
+		return reviewcount;
+	}
+
+	public void setReviewcount(int reviewcount) {
+		this.reviewcount = reviewcount;
+	}
 	
 
 }

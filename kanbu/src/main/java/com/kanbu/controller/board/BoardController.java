@@ -86,10 +86,12 @@ public class BoardController {
 
 	// ====== 공지 작성
 	@RequestMapping(value = "/board/noticeWritePro.com", method = RequestMethod.POST)
-	public String noticeWritePro(HttpServletRequest request) throws Exception {
+	public String noticeWritePro(HttpSession session, HttpServletRequest request) throws Exception {
+		int writer = (Integer)session.getAttribute("index_num");	
+		
 		board.setTitle(request.getParameter("title"));
 		board.setContent(request.getParameter("content"));
-		board.setWriter(boardImpl.selectAdmin());
+		board.setWriter(writer);
 		
 		boardImpl.insertBoard(board);
 
@@ -115,16 +117,14 @@ public class BoardController {
 
 	// ====== 공지 수정 처리
 	@RequestMapping(value = "/board/noticeUpdatePro.com", method = RequestMethod.POST)
-	public String noticeUpdatePro(MultipartHttpServletRequest ms, Model model,
-								HttpSession session, HttpServletRequest request) throws Exception {
+	public String noticeUpdatePro(HttpSession session, HttpServletRequest request) throws Exception {
 		int index_num = Integer.parseInt(request.getParameter("noticeNum"));
+		int writer = (Integer)session.getAttribute("index_num");
+		
 		board.setTitle(request.getParameter("title"));
 		board.setContent(request.getParameter("content"));
-		board.setWriter(boardImpl.selectAdmin());
+		board.setWriter(writer);
 
-		
-		
-		
 		boardImpl.noticeUpdate(board);
 
 		return "redirect:/board/noticeDetail.com?noticeNum=" + index_num;

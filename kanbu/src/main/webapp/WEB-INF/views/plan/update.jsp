@@ -39,6 +39,13 @@
     <link rel="stylesheet" href="/kanbu/resources/css/style.css">
     <!-- <link rel="stylesheet" href="css/responsive.css"> -->
     
+    <c:if test="${empty (sessionScope.status)}">
+    	<script type="text/javascript">
+    		alert("로그인 후 이용가능합니다.");
+    		location.href = "/kanbu/login.com";
+    	</script>
+    </c:if>
+    
     <style>
 		.div1{
 			  width:22%;

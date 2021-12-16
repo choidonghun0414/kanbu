@@ -159,7 +159,7 @@
 	
 	<!-- 여행 리뷰 상세 보기 -->
  	<select id="selectReviewDetail" parameterType="int" resultType="boardDTO">
-	 	select p.index_num, p.title, m.nick, p.content, p.views,
+	 	select p.index_num, p.title, p.writer, m.nick, p.content, p.views,
 	 			p.picture1, p.picture2, p.picture3, p.picture4, p.picture5
 		from plan_review p, member m
 		where p.writer = m.index_num

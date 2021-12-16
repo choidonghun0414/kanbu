@@ -179,10 +179,8 @@
                     </div>
                     <div class="d-flex justify-content-center">
                     	<select name="thema" id="thema" class="form-control">
-							<!-- <option value="select" selected>선택</option> -->
                   	   		<option value="p.title">제목</option>
                   	   		<option value="rm.nick">작성자</option>
-                  	   		<option value="t.tag">태그</option>
                   	   	</select>
 						<input type="text" class="form-control" name="keyword" id="keyword" placeholder="검색어 입력">
 						<span class="input-group-btn">
@@ -405,8 +403,7 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
         });
     </script>
     
-<<<<<<< HEAD
-      <!-- 리뷰 검색 유효성 검사 -->
+    <!-- 리뷰 검색 유효성 검사 -->
     <script type="text/javascript">
     	function searchReview(){
     		var target = document.getElementById("thema");
@@ -455,40 +452,8 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
     		}
     	}
     </script>
-=======
-    <!-- 리뷰 검색 유효성 검사 -->
-    <script type="text/javascript">
-    	function searchReview(){
-    		var target = document.getElementById("thema");
-  			var thema = target.options[target.selectedIndex].value;
-  			var keyword = document.getElementById('keyword').value
-  			
-  			if(thema != null && thema != "" && thema !="select"){
-  				if(keyword != null && keyword != ""){
-  					window.location = '/kanbu/board/reviewSearch.com?thema='+thema+'&keyword='+keyword;
-  				}else{
-  					alert("검색어를 입력해주세요.");
-  					return false;
-  				}
-  			}else{
-  				alert("검색 테마를 선택해주세요.");
-  				return false;
-  			}			
-    	}
-    </script>
-    
-    <!-- 엔터로 검색 -->
-    <script>
-    $('#keyword').keypress(function(event){
-        if ( event.which == 13 ) {
-            $('#reviewSearch').click();
-            return false;
-        }
-   });
-    </script>
 
-    
->>>>>>> branch 'main' of https://github.com/choidonghun0414/kanbu.git
+
     </body>
     
 </html>

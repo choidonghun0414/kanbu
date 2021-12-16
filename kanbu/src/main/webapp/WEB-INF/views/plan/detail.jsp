@@ -13,8 +13,46 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.js"></script>
 	<script src='//code.jquery.com/jquery.min.js'></script>
-	<script src="/kanbu/resources/js/jquery.cookie.js" type="text/javascript"></script>
+	<script src="/kanbu/jquery.cookie.js" type="text/javascript"></script>
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+	
+	
+	<!-- <link rel="manifest" href="site.webmanifest"> -->
+    <link rel="shortcut icon" type="image/x-icon" href="/kanbu/resources/img/favicon.png">
+    <!-- Place favicon.ico in the root directory -->
+
+    <!-- CSS here -->
+    <link rel="stylesheet" href="/kanbu/resources/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/kanbu/resources/css/owl.carousel.min.css">
+    <link rel="stylesheet" href="/kanbu/resources/css/magnific-popup.css">
+    <link rel="stylesheet" href="/kanbu/resources/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/kanbu/resources/css/themify-icons.css">
+    <link rel="stylesheet" href="/kanbu/resources/css/nice-select.css">
+    <link rel="stylesheet" href="/kanbu/resources/css/flaticon.css">
+    <link rel="stylesheet" href="/kanbu/resources/css/gijgo.css">
+    <link rel="stylesheet" href="/kanbu/resources/css/animate.css">
+    <link rel="stylesheet" href="/kanbu/resources/css/slick.css">
+    <link rel="stylesheet" href="/kanbu/resources/css/slicknav.css">
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/themes/smoothness/jquery-ui.css">
+
+    <link rel="stylesheet" href="/kanbu/resources/css/style.css">
+    <!-- <link rel="stylesheet" href="css/responsive.css"> -->
+    
+    <c:if test="${empty (sessionScope.status)}">
+    	<script type="text/javascript">
+    		alert("로그인 후 이용가능합니다.");
+    		location.href = "/kanbu/login.com";
+    	</script>
+    </c:if>
+    
+	<style>
+		#t {
+			font:normal normal 28px/1.6  "나눔고딕";
+		  	color: #111111;
+		  	margin: 5px 0px 3px 0px;
+		}
+	</style>
 	
 	<script type="text/javascript">
 		$(document).ready(function() {
@@ -41,38 +79,7 @@
 			// 여행지 일정에 상세(디테일)에 보여주기
 			$("#cookie_list").html(htmlCookieList);
 		});
-	
 	</script>
-	
-	<!-- <link rel="manifest" href="site.webmanifest"> -->
-    <link rel="shortcut icon" type="image/x-icon" href="/kanbu/resources/img/favicon.png">
-    <!-- Place favicon.ico in the root directory -->
-
-    <!-- CSS here -->
-    <link rel="stylesheet" href="/kanbu/resources/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/kanbu/resources/css/owl.carousel.min.css">
-    <link rel="stylesheet" href="/kanbu/resources/css/magnific-popup.css">
-    <link rel="stylesheet" href="/kanbu/resources/css/font-awesome.min.css">
-    <link rel="stylesheet" href="/kanbu/resources/css/themify-icons.css">
-    <link rel="stylesheet" href="/kanbu/resources/css/nice-select.css">
-    <link rel="stylesheet" href="/kanbu/resources/css/flaticon.css">
-    <link rel="stylesheet" href="/kanbu/resources/css/gijgo.css">
-    <link rel="stylesheet" href="/kanbu/resources/css/animate.css">
-    <link rel="stylesheet" href="/kanbu/resources/css/slick.css">
-    <link rel="stylesheet" href="/kanbu/resources/css/slicknav.css">
-    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/themes/smoothness/jquery-ui.css">
-
-    <link rel="stylesheet" href="/kanbu/resources/css/style.css">
-    <!-- <link rel="stylesheet" href="css/responsive.css"> -->
-    
-<style>
-	#t {
-		font:normal normal 28px/1.6  "나눔고딕";
-	  	color: #111111;
-	  	margin: 5px 0px 3px 0px;
-	}
-	
-</style>
 	
 </head>
 <body>

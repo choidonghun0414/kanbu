@@ -12,6 +12,7 @@ import com.kanbu.dto.board.BoardDTO;
 import com.kanbu.dto.info.PlaceDTO;
 import com.kanbu.dto.info.Place_ReplyDTO;
 import com.kanbu.dto.member.MemberDTO;
+import com.kanbu.dto.plan.MyPlanDTO;
 
 @Repository
 public class AdminDAOImpl implements AdminDAO{
@@ -108,6 +109,30 @@ public class AdminDAOImpl implements AdminDAO{
 	public List<Place_ReplyDTO> selectKeywordPlaceReply(SearchDTO search) throws Exception {
 		return mybatis.selectList("admin.selectKeywordPlaceReply", search);
 	}
+	
+	// 등록된 일정계획 전체 갯수 검색
+	@Override
+	public int selectPlanCount() throws Exception {
+		return mybatis.selectOne("admin.selectPlanCount");
+	}
+
+	// 등록된 일정계획 전체 검색
+	@Override
+	public List<MyPlanDTO> selectPlan(MyPlanDTO plan) throws Exception {
+		return mybatis.selectList("admin.selectPlan", plan);
+	}
+	
+	// 일정계획 검색 갯수(제목, 닉네임)
+	@Override
+	public int searchPlanCount(SearchDTO search) throws Exception {
+		return mybatis.selectOne("admin.searchPlanCount", search);
+	}
+
+	// 일정계획 검색 리스트(제목, 닉네임)
+	@Override
+	public List<MyPlanDTO> searchPlan(SearchDTO search) throws Exception {
+		return mybatis.selectList("admin.searchPlan", search);
+	}
 
 	// 등록된 여행후기 전체 갯수 검색
 	@Override
@@ -174,6 +199,7 @@ public class AdminDAOImpl implements AdminDAO{
 	public void reviewReplyDeleteAdmin(int index_num) throws Exception {
 		mybatis.update("admin.reviewReplyDeleteAdmin", index_num);
 	}
+
 
 
 }

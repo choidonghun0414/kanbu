@@ -246,9 +246,7 @@
                       	<c:if test="${reviewReplyCount > 0}">
                         	<c:forEach var="reviewReply" items="${reviewReplyList}">
                         		<tr>
-                          			<td>${reviewReply.index_num}
-                          				<input type="hidden" id="replyNum" value="${reviewReply.index_num}"/>
-                          			</td>
+                          			<td>${reviewReply.index_num}</td>
                           			<td>
                           				<button type="button" class="btn btn-link btn-fw" 
                           					    onclick="location.href='/kanbu/board/reviewDetail.com?reviewNum=${reviewReply.review}'">
@@ -261,7 +259,7 @@
                          			<td>
                          				<c:if test="${!(reviewReply.content eq '관리자에 의해 삭제된 댓글입니다.')}">
 	                         				<button type="button" class="btn btn-inverse-danger btn-icon" 
-	                         					    onclick="return reviewReplyDelete();">
+	                         					    onclick="return reviewReplyDelete(${reviewReply.index_num});">
 	                        					<i class="typcn typcn-trash"></i>
 	                      					</button>
 	                      				</c:if>
@@ -414,8 +412,9 @@
   	
   	<!-- 댓글 삭제 -->
   	<script type="text/javascript">
-  		function reviewReplyDelete(){
-  			var replyNum = $('#replyNum').val();
+  		function reviewReplyDelete(replyNum){
+  			var replyNum = replyNum;
+  			console.log(replyNum);
 			var result = confirm("해당 댓글을 삭제하시겠습니까?");
 			if(result){
 				window.location = '/kanbu/admin/board/reviewReply/delete.com?replyNum='+replyNum;

@@ -247,7 +247,7 @@
                       	<c:if test="${placeReplyCount > 0}">
                         	<c:forEach var="placeReply" items="${placeReplyList}">
                         		<tr>
-                          			<td id="replyNum">${placeReply.index_num}</td>
+                          			<td>${placeReply.index_num}</td>
                           			<td>
                           				<button type="button" class="btn btn-link btn-fw" 
                           					    onclick="location.href='/kanbu/info.com?placeNum=${placeReply.place}'">
@@ -260,7 +260,7 @@
                          			<td>
                          				<c:if test="${!(placeReply.content eq '관리자에 의해 삭제된 댓글입니다.')}">
 	                         				<button type="button" class="btn btn-inverse-danger btn-icon" 
-	                         					    onclick="return placeReplyDelete();">
+	                         					    onclick="return placeReplyDelete(${placeReply.index_num});">
 	                        					<i class="typcn typcn-trash"></i>
 	                      					</button>
 	                      				</c:if>
@@ -413,8 +413,8 @@
   	
   	<!-- 댓글 삭제 -->
   	<script type="text/javascript">
-  		function placeReplyDelete() {
-  			var replyNum = $('#replyNum').text();
+  		function placeReplyDelete(replyNum) {
+  			var replyNum = replyNum;
 			var result = confirm("해당 댓글을 삭제하시겠습니까?");
 			if(result){
 				window.location = '/kanbu/admin/placeReply/delete.com?replyNum='+replyNum;

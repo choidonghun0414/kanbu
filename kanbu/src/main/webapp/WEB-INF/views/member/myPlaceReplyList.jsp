@@ -192,10 +192,9 @@
 							<td><fmt:formatDate value="${myPlaceReply.reg_date}" pattern="yyyy-MM-dd"/> </td>
 							<td>
 								<c:if test="${!(myPlaceReply.content eq '관리자에 의해 삭제된 댓글입니다.')}">
-									<i class="ti-trash" style="cursor: pointer;" onclick="return replyDelete();"></i>
-								</c:if>
-								<input type="hidden" id="replyNum" value="${myPlaceReply.index_num}" />
-								<input type="hidden" id="placeNum" value="${myPlaceReply.place}" />									
+									<i class="ti-trash" style="cursor: pointer;" 
+									   onclick="return replyDelete(${myPlaceReply.place}, ${myPlaceReply.index_num});"></i>
+								</c:if>								
 							</td>
 						</tr>
 						<c:set var="index" value="${index-1}" />
@@ -430,9 +429,9 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
     
     <!-- 댓글 삭제 유효성 검사 -->
     <script type="text/javascript">
-   		function replyDelete(){
-   			var placeNum = $('#placeNum').val();
-   			var replyNum = $('#replyNum').val();
+   		function replyDelete(placeNum, replyNum){
+   			var placeNum = placeNum;
+   			var replyNum = replyNum;
    			var result = confirm("댓글을 삭제하시겠습니까?");
    			if(result){
    				window.location = "/kanbu/info/replyDelete.com?placeNum="+placeNum+"&replyNum="+replyNum;
