@@ -24,4 +24,8 @@ public interface MyPlanService {
 	public List<PlaceDTO> selectPlace() throws Exception;	// 장소 전체 리스트
 	public int placeSearchCount(String keyword) throws Exception;	//장소 검색 갯수
 	public List<PlaceDTO> placeSearch(String keyword) throws Exception;			//장소 검색 결과 리스트
+	public int maxIndex() throws Exception;					// 일정리스트 마지막 번호
+	public void insertSchedule(List<SPlanDTO> splan) throws Exception;		// 일정스케쥴 추가
+	public int detailScheduleCount(int list_num) throws Exception;			// 상세화면 스케줄 갯수 조회
+	public List<SPlanDTO> detailSchedule(int list_num) throws Exception;	// 상세화면 스케줄 조회
 }

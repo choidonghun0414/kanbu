@@ -104,4 +104,28 @@ public class MyPlanServiceImpl implements MyPlanService {
 		return myPlanDao.placeSearch(keyword);
 	}
 
+	// 일정리스트 마지막 번호
+	@Override
+	public int maxIndex() throws Exception {
+		return myPlanDao.maxIndex();
+	}
+
+	// 일정스케쥴 추가
+	@Override
+	public void insertSchedule(List<SPlanDTO> splan) throws Exception {
+		myPlanDao.insertSchedule(splan);
+	}
+
+	// 상세화면 스케줄 갯수 조회
+	@Override
+	public int detailScheduleCount(int list_num) throws Exception {
+		return myPlanDao.detailScheduleCount(list_num);
+	}
+
+	// 상세화면 스케줄 조회
+	@Override
+	public List<SPlanDTO> detailSchedule(int list_num) throws Exception {
+		return myPlanDao.detailSchedule(list_num);
+	}
+
 }

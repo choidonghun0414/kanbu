@@ -3,7 +3,8 @@ package com.kanbu.dto.plan;
 public class SPlanDTO {
 	private int schedule;	// 찜 추가 목록
 	private int place;		// 찜 장소
-	private int list_num;	// index_num
+	private int list_num;	// index_numx
+	private String name;
 	
 	public int getSchedule() {
 		return schedule;
@@ -23,5 +24,12 @@ public class SPlanDTO {
 	public void setList_num(int list_num) {
 		this.list_num = list_num;
 	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	
 	
 }

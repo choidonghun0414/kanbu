@@ -49,6 +49,14 @@
 		from myplan_num
  	</select>
  	
+ 	<!-- 나의 일정 스케줄 추가 -->
+	<insert id="insertSchedule" parameterType="java.util.List">
+        <foreach collection="list" item="item" index="index" open="INSERT ALL " separator=" " close="SELECT * FROM DUAL">
+            into mySplan_num (list_num, schedule, place)
+            values (#{item.list_num}, #{item.schedule}, #{item.place})
+        </foreach>
+ 	</insert>
+ 	
  	<!-- 나의 일정 수정 sql -->
  	<update id="update" parameterType="myPlanDTO">
  		update myplan_num
@@ -67,6 +75,21 @@
  		select index_num, title, startDay, arrivalDay, traffic, expense
  		from myplan_num
  		where index_num=#{index_num}
+ 	</select>
+ 	
+ 	<!-- 나의 일정 스케줄 갯수 상세화면 조회 -->
+ 	<select id="detailScheduleCount" parameterType="int" resultType="int">
+ 		select count(*) from mysplan_num
+		<where>
+			<if test="list_num > 0">list_num = #{value}</if>
+		</where> 
+ 	</select>
+ 	
+ 	<!-- 나의 일정 스케줄 상세화면 조회 -->
+ 	<select id="detailSchedule" parameterType="int" resultType="mySPlanDTO">
+ 		select ms.list_num, ms.schedule, ms.place, p.name 
+		from mysplan_num ms, place p
+		where ms.place = p.index_num and ms.list_num = #{value}
  	</select>
  	
  	<!-- 레코드 갯수 계산(유효성 검사) -->

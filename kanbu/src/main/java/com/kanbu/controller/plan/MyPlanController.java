@@ -1,12 +1,17 @@
 package com.kanbu.controller.plan;
 
+import java.net.URLDecoder;
+import java.net.URLEncoder;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
 import javax.servlet.ServletRequest;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +24,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.kanbu.dto.board.BoardDTO;
 import com.kanbu.dto.info.PlaceDTO;
 import com.kanbu.dto.plan.MyPlanDTO;
 import com.kanbu.dto.plan.SPlanDTO;
@@ -43,17 +49,60 @@ public class MyPlanController {
 		return "/plan/write"; // write.jsp로 이동
 	}
 
-	@RequestMapping(value = "insert.com", method = RequestMethod.POST)
-	public String insert(HttpServletRequest request, Model model, HttpSession session) throws Exception {
-
+	@RequestMapping(value = "insert.com")
+	public String insert(HttpServletRequest request, HttpServletResponse response, Model model, 
+						 HttpSession session) throws Exception {
+		
+		// 일정 입력값 저장(myplan_num)
 		plan.setTitle(request.getParameter("title"));
 		plan.setStartDay(java.sql.Date.valueOf(request.getParameter("startDay")));
 		plan.setArrivalDay(java.sql.Date.valueOf(request.getParameter("arrivalDay")));
 		plan.setTraffic(request.getParameter("traffic"));
 		plan.setExpense(Integer.parseInt(request.getParameter("expense")));
 		plan.setWriter((Integer)session.getAttribute("index_num"));
-
+		
 		myPlanService.insert(plan); // 일정 등록
+		
+		// 세부일정 저장(mySplan_num)
+		int planNum = myPlanService.maxIndex();		// 일정리스트 마지막 번호
+		// 쿠키 저장
+		Cookie[] getCookie = request.getCookies();	 // 모든 쿠키 가져오기
+		Cookie c = null;			// 쿠키 객체
+		String name = null;			// 쿠키 이름
+		String value = null;		// 쿠키 값
+		List<SPlanDTO> splanList = new ArrayList<SPlanDTO>();
+		
+		if(getCookie != null){ 		
+			// 쿠기가 있으면 반복문으로 모든 쿠키 생성
+			for(int i=0; i <getCookie.length; i++) { 
+				c = getCookie[i]; // 객체 생성
+				name = URLDecoder.decode(c.getName());   // 쿠키 이름 가져오기
+				value = URLDecoder.decode(c.getValue()); // 쿠키 값 가져오기
+				System.out.println(name);
+				System.out.println(value); 
+			}
+			if(name.equals(plan.getWriter()+"_일정번호") && planNum > 0) {
+				String[] placeNum = value.split(",");
+				for(int j=0; j<placeNum.length; j++) {
+					SPlanDTO splan = new SPlanDTO();
+					int place = Integer.parseInt(placeNum[j]);
+					System.out.println(place);
+					splan.setPlace(place);
+					splan.setList_num(planNum);
+					splan.setSchedule(j+1);
+					splanList.add(splan);
+				}			
+				myPlanService.insertSchedule(splanList);
+			}
+		}	
+		
+		if(getCookie != null){ // 쿠키가 한개라도 있으면 실행
+			for(int i=0; i< getCookie.length; i++){
+				getCookie[i].setMaxAge(0); // 유효시간을 0으로 설정
+				response.addCookie(getCookie[i]); // 응답 헤더에 추가
+			}
+		}
+		
 		return "/plan/insert";
 	}
 
@@ -158,10 +207,23 @@ public class MyPlanController {
 	@RequestMapping(value = "detail.com")
 	public String getdetail(Model model, HttpServletRequest request) throws Exception {
 		int index_num = Integer.parseInt(request.getParameter("index_num"));
-		MyPlanDTO plan = myPlanService.detail(index_num);
+		MyPlanDTO plan = null;
+		int scheduleCount = 0;
+		List<SPlanDTO> scheduleList = null;
+		
+		if(index_num > 0) {
+			plan = myPlanService.detail(index_num);
+			scheduleCount = myPlanService.detailScheduleCount(index_num);
+		}
+		if(scheduleCount > 0) {
+			scheduleList = myPlanService.detailSchedule(index_num);
+		}
 		
 		model.addAttribute("index_num", index_num);
 		model.addAttribute("plan", plan);
+		model.addAttribute("scheduleCount", scheduleCount);
+		model.addAttribute("scheduleList", scheduleList);
+		
 		return "/plan/detail";
 	}
 	

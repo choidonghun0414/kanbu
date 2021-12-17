@@ -13,7 +13,7 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.js"></script>
 	<script src='//code.jquery.com/jquery.min.js'></script>
-	<script src="/kanbu/resources/js/jquery.cookie.js" type="text/javascript"></script>
+	<script src="/kanbu/jquery.cookie.js" type="text/javascript"></script>
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
 	
 	<!-- CSS here -->
@@ -230,25 +230,34 @@
  				document.mapView.expense.focus();
  				return false;
  			}
-
- 			document.mapView.submit();
  			
  			/* 쿠키저장 */
  			console.log("##쿠키에 저장됩니다.##");
 			var userId = $("#userId").val();
 			console.log("사용자ID::"+userId);
-			var title = $("#title").val();
-			console.log("일정제목::"+title);
+//			var title = $("#title").val();
+//			console.log("일정제목::"+title);
+			var Num = "일정번호";
+			console.log("일정번호::"+Num);
 			
-			var favorTitleList = "";
+//			var favorTitleList = "";
+			var favorNumList = "";
 			$("#fav_list #ddiv").each(function(index, element){
-				var favorTitle = $(element).find("p").text();
-				favorTitleList += favorTitle;
-				favorTitleList += "|";
+//				var favorTitle = $(element).find("p").text();
+				var favorNum = $(element).find("#placeNum").val();
+//				favorTitleList += favorTitle;
+//				favorTitleList += "|";
+				favorNumList += favorNum;
+				favorNumList += ",";
 			});
-			console.log("찜목록들::"+favorTitleList);
+//			console.log("찜목록들::"+favorTitleList);
+			console.log("찜번호들::"+favorNumList);
+			
 			//쿠키에 저장
-			$.cookie(userId+'_'+title, favorTitleList, {expires:30});
+//			$.cookie(userId+'_'+title, favorTitleList, {expires:30});
+			$.cookie(userId+'_'+Num, favorNumList, {expires:30});
+			
+			document.mapView.submit();
  		});
 	});
 
@@ -281,7 +290,7 @@
 					<font face="나눔고딕" size="4"><b>${sessionScope.nick}님의 여행일정</b></font>
 				</span>
 				<input name="title" id="title" size="80" placeholder="여행 제목을 입력하세요" style="font-size:15px;">
-				<input type="hidden" id="userId" value="${sessionScope.id}">
+				<input type="hidden" id="userId" value="${sessionScope.index_num}">
 			</div>
 			
 			<div class="div1">
@@ -361,7 +370,10 @@
 						 display:inline-block; text-overflow:ellipsis;">
 						 	<div id=ddiv>
 								<p class="p1" id="${status.index}" style="cursor: pointer;" 
-								   onclick="markMap(${status.index});"><b>${place.name}</b></p>
+								   onclick="markMap(${status.index});">
+								   <b>${place.name}</b>
+								   <input type="hidden" id="placeNum" value="${place.index_num}" />
+								</p>
 							</div>
 							<p class="pList" id="addr"><b>주소:</b> ${place.addr}</p>
 							<p class="pList" id="parking"><b>주차여부:</b> 

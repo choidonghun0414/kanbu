@@ -125,4 +125,31 @@ public class MyPlanDAOImpl implements MyPlanDAO {
 		return mybatis.selectList("myPlan.placeSearch", keyword);
 	}
 
+	// 일정리스트 마지막 번호
+	@Override
+	public int maxIndex() throws Exception {
+		return mybatis.selectOne("myPlan.maxIndex");
+	}
+
+	// 일정스케쥴 추가
+	@Override
+	public void insertSchedule(List<SPlanDTO> splan) throws Exception {
+		mybatis.insert("myPlan.insertSchedule", splan);
+	}
+	
+	// 상세화면 스케줄 갯수 조회
+	@Override
+	public int detailScheduleCount(int list_num) throws Exception {
+		return mybatis.selectOne("myPlan.detailScheduleCount", list_num);
+	}
+
+	// 상세화면 스케줄 조회
+	@Override
+	public List<SPlanDTO> detailSchedule(int list_num) throws Exception {
+		return mybatis.selectList("myPlan.detailSchedule", list_num);
+	}
+
+
+	
+
 }
